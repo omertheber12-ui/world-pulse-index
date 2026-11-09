@@ -65,3 +65,4 @@ Events sorted by close time; the last 30% are held back. All headline numbers us
 ## 8. Deviations (append only)
 
 (none yet)
+- D1 (2026-11-09 23:40 UTC, before any trade, odds or price data; metadata only). Three fixes to the event list, found by reading titles: (a) the word "strike" matched esports "Counter-Strike" matches, which are not news events: excluded; (b) the volume-sorted event listing stops at the API paging cap before reaching small court events, so court events were also pulled through the `courts` and `scotus` tags; (c) to keep small types in the sample, all qualifying court and shutdown events are kept and the remaining places up to 80 are filled by event volume. Tests, screen and decision bar unchanged.
