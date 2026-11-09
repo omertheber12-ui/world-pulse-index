@@ -58,6 +58,9 @@ def fetch_event_snapshot(spec, group_key):
         "polymarket_url": f"https://polymarket.com/event/{slug}" if slug else f"{B.GAMMA}/events/{eid}",
         "source_url": f"{B.GAMMA}/events/{eid}",
         "market_ids": wanted,
+        "plain": spec.get("plain") or spec.get("title_hint"),
+        "rate": spec.get("rate"),
+        "outcomes_plain": spec.get("outcomes") or {},
         "volume": vol,
         "markets": [trim_market(m) for m in use],
     }
@@ -108,6 +111,11 @@ def run_checks(snap, statuses):
         d = doms[p]
         add(f"{p}: nav + time line + 'Insights only, not advice'",
             ('class="tab' in d) and ("ures at" in d) and ("Insights only, not advice" in d))
+    import html as _h
+    hm = re.search(r'<h1[^>]*>(.*?)</h1>', doms.get("today.html", ""), re.S)
+    htxt = _h.unescape(re.sub(r"<[^>]+>", "", hm.group(1))).strip() if hm else ""
+    checks["headline"] = htxt
+    add("Today headline is 12 words or fewer", bool(htxt) and len(htxt.split()) <= 12, f"{len(htxt.split())} words: {htxt}")
     # every link between event and holding labeled Guess (rendered link rows)
     link_rows = 0
     unlabeled = 0
@@ -152,7 +160,7 @@ def run_checks(snap, statuses):
 
 def shots():
     out = []
-    for page in ["today", "events"]:
+    for page in ["today", "events", "portfolio"]:
         for w, h in [(390, 1400), (1280, 1100)]:
             path = SITE / "shots" / f"{page}-{w}.png"
             try:
@@ -189,7 +197,7 @@ def main():
                      "total": holdings["total"], "cash": holdings["cash"], "cash_weight": holdings["cash_weight"],
                      "rows": holdings["rows"]},
         "rules": {k: rules[k] for k in ["source", "holdings_sectors", "strength_levels", "group_strengths",
-                                          "scoring", "group_display", "gaps"]},
+                                          "scoring", "group_display", "gaps", "rate_wording"]},
         "links": {"architecture": "https://docs.google.com/document/d/1LXe3vWDLnm02pKvsWNFDbCpzQO7ObTqLVF9YM4VKEzA/edit",
                   "product_rules": rules["source"]["doc_url"]},
         "events": events,

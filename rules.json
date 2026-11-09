@@ -10,13 +10,41 @@
     "note": "Default scoring rules. Swap this file only to change strengths or formula."
   },
   "holdings_sectors": {
-    "INTC": {"sector": "chips", "label": "Guess", "sector_words": "Chips, technology"},
-    "BTC": {"sector": "crypto", "label": "Guess", "sector_words": "Crypto"},
-    "ETH": {"sector": "crypto", "label": "Guess", "sector_words": "Crypto"},
-    "SPY": {"sector": "broad_us_stocks", "label": "Guess", "sector_words": "Broad US stocks, heavy in big technology"},
-    "JPM": {"sector": "banks", "label": "Guess", "sector_words": "Banks"},
-    "BAC": {"sector": "banks", "label": "Guess", "sector_words": "Banks"},
-    "CASH": {"sector": "none", "label": "Fact", "sector_words": "No link"}
+    "INTC": {
+      "sector": "chips",
+      "label": "Guess",
+      "sector_words": "Chips, technology"
+    },
+    "BTC": {
+      "sector": "crypto",
+      "label": "Guess",
+      "sector_words": "Crypto"
+    },
+    "ETH": {
+      "sector": "crypto",
+      "label": "Guess",
+      "sector_words": "Crypto"
+    },
+    "SPY": {
+      "sector": "broad_us_stocks",
+      "label": "Guess",
+      "sector_words": "Broad US stocks, heavy in big technology"
+    },
+    "JPM": {
+      "sector": "banks",
+      "label": "Guess",
+      "sector_words": "Banks"
+    },
+    "BAC": {
+      "sector": "banks",
+      "label": "Guess",
+      "sector_words": "Banks"
+    },
+    "CASH": {
+      "sector": "none",
+      "label": "Fact",
+      "sector_words": "No link"
+    }
   },
   "strength_levels": {
     "strong": 1.0,
@@ -100,28 +128,227 @@
   },
   "events": {
     "central_bank_rates": [
-      {"event_id": "770450", "market_ids": ["3215008", "3215007", "3215009", "3215006", "3215005"], "strength_key": "central_bank_rates_fed", "title_hint": "Fed Decision in December", "label": "exact"},
-      {"event_id": "770451", "market_ids": [], "strength_key": "central_bank_rates_fed", "title_hint": "Fed Decision in January", "label": "exact"},
-      {"event_id": "1025305", "market_ids": ["4570943"], "strength_key": "central_bank_rates_ecb", "title_hint": "ECB Interest Rates December", "label": "exact"},
-      {"event_id": "1280521", "market_ids": ["6404226"], "strength_key": "central_bank_rates_ecb", "title_hint": "ECB Interest Rates February", "label": "exact"},
-      {"event_id": "1123963", "market_ids": ["5230123"], "strength_key": "central_bank_rates_china", "title_hint": "People's Bank of China rate change by December 31", "label": "exact"}
+      {
+        "event_id": "770450",
+        "market_ids": [
+          "3215008",
+          "3215007",
+          "3215009",
+          "3215006",
+          "3215005"
+        ],
+        "strength_key": "central_bank_rates_fed",
+        "title_hint": "Fed Decision in December",
+        "label": "exact",
+        "plain": "Fed rate decision in December",
+        "rate": {
+          "bank": "Fed",
+          "when": "in December"
+        }
+      },
+      {
+        "event_id": "770451",
+        "market_ids": [],
+        "strength_key": "central_bank_rates_fed",
+        "title_hint": "Fed Decision in January",
+        "label": "exact",
+        "plain": "Fed rate decision in January",
+        "rate": {
+          "bank": "Fed",
+          "when": "in January"
+        }
+      },
+      {
+        "event_id": "1025305",
+        "market_ids": [
+          "4570943"
+        ],
+        "strength_key": "central_bank_rates_ecb",
+        "title_hint": "ECB Interest Rates December",
+        "label": "exact",
+        "plain": "ECB rate decision in December",
+        "rate": {
+          "bank": "ECB",
+          "when": "in December"
+        }
+      },
+      {
+        "event_id": "1280521",
+        "market_ids": [
+          "6404226"
+        ],
+        "strength_key": "central_bank_rates_ecb",
+        "title_hint": "ECB Interest Rates February",
+        "label": "exact",
+        "plain": "ECB rate decision in February",
+        "rate": {
+          "bank": "ECB",
+          "when": "in February"
+        }
+      },
+      {
+        "event_id": "1123963",
+        "market_ids": [
+          "5230123"
+        ],
+        "strength_key": "central_bank_rates_china",
+        "title_hint": "People's Bank of China rate change by December 31",
+        "label": "exact",
+        "plain": "China central bank rate change by 31 December",
+        "outcomes": {
+          "No Change": "China holds rates through December",
+          "Yes": "China changes rates by 31 December"
+        }
+      }
     ],
     "big_company_events": [
-      {"event_id": "1194143", "market_ids": ["5730325"], "strength_key": "big_company_events", "title_hint": "Nvidia data center revenue", "label": "exact"},
-      {"event_id": "1194144", "market_ids": ["5730329"], "strength_key": "big_company_events", "title_hint": "Nvidia gross margin", "label": "exact"},
-      {"event_id": "800884", "market_ids": ["3358974"], "strength_key": "big_company_events", "title_hint": "Nvidia market value end of 2026", "label": "exact"}
+      {
+        "event_id": "1194143",
+        "market_ids": [
+          "5730325"
+        ],
+        "strength_key": "big_company_events",
+        "title_hint": "Nvidia data center revenue",
+        "label": "exact",
+        "plain": "Nvidia data center revenue this quarter",
+        "outcomes": {
+          "$100B": "Nvidia data center sales top $100B"
+        }
+      },
+      {
+        "event_id": "1194144",
+        "market_ids": [
+          "5730329"
+        ],
+        "strength_key": "big_company_events",
+        "title_hint": "Nvidia gross margin",
+        "label": "exact",
+        "plain": "Nvidia gross margin this quarter",
+        "outcomes": {
+          "<71%": "Nvidia gross margin under 71%"
+        }
+      },
+      {
+        "event_id": "800884",
+        "market_ids": [
+          "3358974"
+        ],
+        "strength_key": "big_company_events",
+        "title_hint": "Nvidia market value end of 2026",
+        "label": "exact",
+        "plain": "Nvidia market value at end of 2026",
+        "outcomes": {
+          "<$4.00T": "Nvidia ends 2026 under $4 trillion"
+        }
+      }
     ],
     "worldwide_elections": [
-      {"event_id": "1262243", "market_ids": ["6274257"], "strength_key": "worldwide_elections", "title_hint": "US Senate swing states", "label": "exact"},
-      {"event_id": "1304411", "market_ids": ["6612550"], "strength_key": "worldwide_elections", "title_hint": "Senate combo", "label": "exact"},
-      {"event_id": "1224132", "market_ids": ["5971438"], "strength_key": "worldwide_elections", "title_hint": "Senate combo", "label": "exact"}
+      {
+        "event_id": "1262243",
+        "market_ids": [
+          "6274257"
+        ],
+        "strength_key": "worldwide_elections",
+        "title_hint": "US Senate swing states",
+        "label": "exact",
+        "plain": "Senate swing states Republicans win",
+        "outcomes": {
+          "None": "Republicans win no Senate swing state"
+        }
+      },
+      {
+        "event_id": "1304411",
+        "market_ids": [
+          "6612550"
+        ],
+        "strength_key": "worldwide_elections",
+        "title_hint": "Senate combo",
+        "label": "exact",
+        "plain": "Senate races: Louisiana, Mississippi, Florida",
+        "outcomes": {
+          "Reps sweep": "Republicans sweep Louisiana, Mississippi, Florida Senate"
+        }
+      },
+      {
+        "event_id": "1224132",
+        "market_ids": [
+          "5971438"
+        ],
+        "strength_key": "worldwide_elections",
+        "title_hint": "Senate combo",
+        "label": "exact",
+        "plain": "Senate races: Mississippi, South Carolina, Montana",
+        "outcomes": {
+          "Reps MS & MT, Dems SC": "Republicans MS and MT, Democrats SC"
+        }
+      }
     ],
     "wars": [
-      {"event_id": "711714", "market_ids": ["3399468"], "strength_key": "wars", "title_hint": "Israel x Iran ceasefire", "label": "exact"},
-      {"event_id": "478472", "market_ids": ["2243897"], "strength_key": "wars", "title_hint": "Russia x Ukraine ceasefire", "label": "exact"},
-      {"event_id": "160366", "market_ids": ["1170144"], "strength_key": "wars", "title_hint": "US declares war on Iran", "label": "exact"},
-      {"event_id": "34044", "market_ids": ["567621"], "strength_key": "wars", "title_hint": "China invades Taiwan", "label": "exact"},
-      {"event_id": "1337182", "market_ids": ["6831494"], "strength_key": "wars", "title_hint": "US x Iran ceasefire", "label": "exact"}
+      {
+        "event_id": "711714",
+        "market_ids": [
+          "3399468"
+        ],
+        "strength_key": "wars",
+        "title_hint": "Israel x Iran ceasefire",
+        "label": "exact",
+        "plain": "Israel-Iran ceasefire holds",
+        "outcomes": {
+          "December 31": "Israel-Iran ceasefire holds through 31 December"
+        }
+      },
+      {
+        "event_id": "478472",
+        "market_ids": [
+          "2243897"
+        ],
+        "strength_key": "wars",
+        "title_hint": "Russia x Ukraine ceasefire",
+        "label": "exact",
+        "plain": "Russia-Ukraine ceasefire deal",
+        "outcomes": {
+          "December 31": "Russia-Ukraine ceasefire deal by 31 December"
+        }
+      },
+      {
+        "event_id": "160366",
+        "market_ids": [
+          "1170144"
+        ],
+        "strength_key": "wars",
+        "title_hint": "US declares war on Iran",
+        "label": "exact",
+        "plain": "US declares war on Iran",
+        "outcomes": {
+          "December 31": "US declares war on Iran by 31 December"
+        }
+      },
+      {
+        "event_id": "34044",
+        "market_ids": [
+          "567621"
+        ],
+        "strength_key": "wars",
+        "title_hint": "China invades Taiwan",
+        "label": "exact",
+        "plain": "China invades Taiwan in 2026",
+        "outcomes": {
+          "Will China invade Taiwan by end of 2026?": "China invades Taiwan by end of 2026"
+        }
+      },
+      {
+        "event_id": "1337182",
+        "market_ids": [
+          "6831494"
+        ],
+        "strength_key": "wars",
+        "title_hint": "US x Iran ceasefire",
+        "label": "exact",
+        "plain": "US-Iran ceasefire starts",
+        "outcomes": {
+          "November 15": "US-Iran ceasefire starts by 15 November"
+        }
+      }
     ]
   },
   "group_display": {
@@ -135,5 +362,12 @@
     "Only United States election races found; most look nearly settled.",
     "Strength numbers are untested starting Assumptions.",
     "Attention formula is a first Guess from Product."
-  ]
+  ],
+  "rate_wording": {
+    "No change": "{bank} holds rates {when}",
+    "25 bps increase": "{bank} raises 0.25 points {when}",
+    "50+ bps increase": "{bank} raises 0.5+ points {when}",
+    "25 bps decrease": "{bank} cuts 0.25 points {when}",
+    "50+ bps decrease": "{bank} cuts 0.5+ points {when}"
+  }
 }

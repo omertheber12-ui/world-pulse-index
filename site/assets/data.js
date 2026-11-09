@@ -35,6 +35,13 @@
     return out;
   };
 
+  /* Plain wording for an option (rules.json plain names); falls back to plain name + option */
+  W.plainOutcome = function (ev, label) {
+    if (ev.rate && S.rules.rate_wording && S.rules.rate_wording[label]) return S.rules.rate_wording[label].replace('{bank}', ev.rate.bank).replace('{when}', ev.rate.when);
+    if (ev.outcomes_plain && ev.outcomes_plain[label]) return ev.outcomes_plain[label];
+    return (ev.plain || ev.title) + ': ' + label;
+  };
+  W.name = function (ev) { return ev.plain || ev.title; };
   W.sector = function (t) { var h = S.rules.holdings_sectors[t]; return h ? h.sector : 'none'; };
   W.sectorWords = function (t) { var h = S.rules.holdings_sectors[t]; return h ? h.sector_words : 'No link'; };
   W.strengthWord = function (v) { return v >= 1 ? 'strong' : v >= 0.5 ? 'some' : v > 0 ? 'weak' : 'none'; };
@@ -59,7 +66,7 @@
     var why;
     if (meaningful) why = 'moved ' + Math.abs(move).toFixed(0) + ' points since yesterday';
     else if (p != null && p >= 0.4 && p <= 0.6) why = 'close to 50/50 (' + W.pct(lead.pct) + '%)';
-    else if (leaderChanged) why = 'leader changed';
+    else if (leaderChanged) why = 'leader changed since you opened the page';
     else why = 'highest attention today';
     var tr = Math.round(touch);
     return {
@@ -78,13 +85,12 @@
   W.headline = function () {
     var r = W.ranked(), mv = r.filter(function (x) { return x.meaningful; });
     if (mv.length) {
-      var t = mv[0];
-      return { top: t, text: words(words(t.ev.title, 5).replace(/…$/, '') + ': ' + t.lead.label, 8) + ' ' + (t.move > 0 ? 'up ' : 'down ') + Math.abs(t.move).toFixed(0) + ' points to ' + W.pct(t.lead.pct) + '%' };
+      var t = mv[0], o = W.plainOutcome(t.ev, t.lead.label).split(/\s+/).slice(0, 6).join(' ');
+      return { top: t, text: 'Odds ' + o + ' ' + (t.move > 0 ? 'rose ' : 'fell ') + Math.abs(t.move).toFixed(0) + ' points to ' + W.pct(t.lead.pct) + '%' };
     }
     var t0 = r[0];
-    return { top: t0, text: 'No big moves today', line: 'Top event: ' + t0.ev.title + ' (' + t0.lead.label + ' ' + W.pct(t0.lead.pct) + '%), could touch ' + Math.round(t0.touch) + '% of your portfolio (Guess).' };
+    return { top: t0, text: 'No big moves today', line: 'Top event: ' + W.plainOutcome(t0.ev, t0.lead.label) + ' at ' + W.pct(t0.lead.pct) + '%, could touch ' + Math.round(t0.touch) + '% of your portfolio (Guess).' };
   };
-
   /* Shared layout */
   W.shell = function (active) {
     var tabs = [['today', 'today.html', 'Today'], ['events', 'events.html', 'Events'], ['portfolio', 'portfolio.html', 'My portfolio']];
@@ -142,16 +148,16 @@
     W.shell(active);
     render();
     readGamma();
-    setInterval(function () { remember(); readGamma(); }, 60000);
+    setInterval(readGamma, 60000);
     setInterval(readMids, 20000);
   };
   W.rerender = function () { render(); };
   W.param = function (k) { return new URLSearchParams(location.search).get(k); };
   W.card = function (s) {
     return '<a class="card" href="event.html?id=' + s.ev.event_id + '">' +
-      '<div class="ctitle">' + esc(s.ev.title) + '</div>' +
+      '<div class="ctitle">' + esc(W.name(s.ev)) + '</div>' +
       '<div class="big">' + W.pct(s.lead ? s.lead.pct : null) + '%</div>' +
-      '<div class="opt">' + esc(s.lead ? s.lead.label : '') + ' · Polymarket</div>' +
+      '<div class="opt">Odds: ' + esc(s.lead ? W.plainOutcome(s.ev, s.lead.label) : '') + ' · Polymarket</div>' +
       '<div class="touch">Could touch ' + Math.round(s.touch) + '% of your portfolio' + (s.high ? ' <span class="flag">High effect</span>' : '') + ' <span class="guess">Guess</span></div>' +
       '<div class="why">Why: ' + esc(s.why) + '</div></a>';
   };
