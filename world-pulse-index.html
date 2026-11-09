@@ -1,0 +1,528 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>World Pulse Index · First version</title>
+<style>
+:root{--ink:#172f32;--muted:#526568;--line:#dce5e2;--green:#116c5b;--wash:#eef7f2;--paper:#f5f7f5;--sand:#fbfaf5;--amber:#7a5428}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.55 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+a{color:var(--green);text-underline-offset:3px}
+a:focus-visible,summary:focus-visible,.jump a:focus-visible{outline:3px solid #ba7623;outline-offset:4px}
+header{height:76px;border-bottom:1px solid var(--line);background:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 max(24px,calc((100vw - 1080px)/2));gap:16px}
+.brand{font-size:19px;font-weight:750;letter-spacing:-.6px}
+.brand span{color:var(--green);margin-right:10px}
+.header-note{font-size:13px;color:var(--muted)}
+main{max-width:920px;margin:auto;padding:36px 24px 56px}
+.jump{display:flex;flex-wrap:wrap;gap:10px 18px;margin:0 0 28px;font-size:13px}
+.jump a{color:var(--muted);text-decoration:none;border-bottom:1px solid transparent}
+.jump a:hover{color:var(--green);border-bottom-color:var(--green)}
+.tag{font-size:11px;font-weight:750;letter-spacing:.6px;text-transform:uppercase;color:var(--muted)}
+.tag.green{color:var(--green)}
+.tag.guess{color:var(--amber)}
+.tag.high{color:#8b1e1e;background:#fdecec;padding:2px 7px;border-radius:999px;margin-left:6px}
+#insight-block{background:#fff;border:1px solid var(--line);border-radius:16px;padding:36px 40px;margin-bottom:28px}
+#insight-block .tag{color:var(--green);display:inline-block;margin-bottom:14px}
+#insight-block .insight-text{font-size:clamp(22px,3.2vw,32px);font-weight:650;letter-spacing:-.9px;line-height:1.3;margin:0 0 14px;max-width:36ch}
+#insight-block .insight-note{margin:0 0 8px;color:var(--muted);font-size:14px;max-width:56ch}
+#insight-block .insight-meta{margin:16px 0 0;font-size:12px;color:var(--muted)}
+.section{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-bottom:20px}
+.section-head{padding:22px 28px;background:#f9fbf9;border-bottom:1px solid var(--line)}
+.section-head h2{font-size:20px;letter-spacing:-.5px;margin:6px 0 6px;line-height:1.35}
+.section-head p{margin:0;color:var(--muted);font-size:13px}
+.market-row{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:start;padding:16px 28px 8px;font-size:14px}
+.market-row .price{font-size:22px;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:-.5px;line-height:1.2}
+.market-row a{font-size:11px;display:inline-block;margin-top:4px;margin-right:8px}
+.muted{color:var(--muted);font-size:13px}
+.event{border-bottom:1px solid var(--line)}
+.event:last-child{border-bottom:0}
+.event-meta{padding:0 28px 18px;font-size:13px;color:var(--muted)}
+.event-meta p{margin:6px 0}
+.guess-line{color:var(--ink);font-size:14px}
+.holdings-list .row,.sector-list .row{display:grid;grid-template-columns:1fr auto auto;gap:16px;padding:12px 28px;border-bottom:1px solid var(--line);font-size:14px;align-items:baseline}
+.holdings-list .row:last-child,.sector-list .row:last-child{border-bottom:0}
+.units,.val{font-variant-numeric:tabular-nums;color:var(--muted);font-size:13px}
+.val{color:var(--ink);font-weight:650}
+.assumption{padding:18px 28px;border-top:1px solid var(--line);background:#f9fbf9;font-size:13px;color:var(--muted)}
+.assumption p{margin:6px 0}
+footer{margin-top:22px;color:var(--muted);font-size:12px;display:flex;gap:15px;justify-content:space-between;flex-wrap:wrap}
+#live-status{font-size:12px;color:var(--muted);margin:0 0 16px}
+.formula{padding:18px 28px;font-size:13px;color:var(--muted)}
+.formula code{font-size:12px;background:var(--wash);padding:1px 5px;border-radius:4px}
+@media(max-width:720px){
+header{height:64px;padding:0 18px}
+main{padding:24px 16px 40px}
+#insight-block{padding:24px 20px}
+.section-head,.market-row,.event-meta,.holdings-list .row,.sector-list .row,.assumption,.formula{padding-left:18px;padding-right:18px}
+.holdings-list .row,.sector-list .row{grid-template-columns:1fr;gap:2px}
+.market-row .price{font-size:18px}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand"><span aria-hidden="true">▥</span>World Pulse Index</div>
+  <div class="header-note">First version · Development task 6</div>
+</header>
+<main>
+<nav class="jump" aria-label="Jump to section">
+  <a href="#insight-block">Insight</a>
+  <a href="#portfolio">Portfolio effect</a>
+  <a href="#central_bank_rates">Rates</a>
+  <a href="#big_company_events">Companies</a>
+  <a href="#worldwide_elections">Elections</a>
+  <a href="#wars">Wars</a>
+  <a href="#formula">Formula</a>
+  <a href="#sources">Sources</a>
+</nav>
+<p id="live-status">Figures: built-in read at 9 November 2026, 17:58:37 Asia/Jerusalem · Holdings reused from Development task 5 (eToro read-only, 9 November 2026, 16:44:57 Asia/Jerusalem)</p>
+
+<section id="insight-block" aria-labelledby="insight-heading">
+  <span class="tag green" id="insight-heading">Insight · Not advice</span>
+  <p class="insight-text" data-insight-headline="true">Fed Decision in January? leads at 77.5%</p>
+  <p class="insight-note" data-insight-body="true">Fed Decision in January? leads at 77.5% (Polymarket public data, 9 November 2026, 17:58:37 Asia/Jerusalem). Guess: this could touch about 72% of the reported portfolio — high effect. Attention score 50.3%.</p>
+  <p class="insight-note"><strong>Insights only, not advice.</strong></p>
+  <p class="insight-meta" data-insight-meta="true">Rule: Product task 10 touch and attention. Receipt 9 November 2026, 17:58:37 Asia/Jerusalem. Scoring from Product task 10.</p>
+</section>
+
+<section class="section" id="portfolio" aria-labelledby="portfolio-heading">
+  <div class="section-head">
+    <span class="tag green">Fact · Holdings snapshot</span>
+    <h2 id="portfolio-heading">Portfolio and sector map</h2>
+    <p>Read-only eToro snapshot reused from Development task 5. Total $4,202.18. Sector links are labeled Guess. Strength numbers are Assumptions from Product task 10.</p>
+  </div>
+  <div class="holdings-list">
+    <div class="row"><div>Intel <span class="tag guess">Guess · sector</span></div><div class="units">23.1842 units</div><div class="val">$1,325.91 · 31.55%</div></div><div class="row"><div>Bitcoin <span class="tag guess">Guess · sector</span></div><div class="units">0.0137 units</div><div class="val">$1,017.32 · 24.21%</div></div><div class="row"><div>State Street SPDR S&amp;P 500 ETF <span class="tag guess">Guess · sector</span></div><div class="units">1.1798 units</div><div class="val">$880.96 · 20.96%</div></div><div class="row"><div>JPMorgan Chase &amp; Co <span class="tag guess">Guess · sector</span></div><div class="units">1.5495 units</div><div class="val">$522.82 · 12.44%</div></div><div class="row"><div>Bank of America Corp <span class="tag guess">Guess · sector</span></div><div class="units">9.0116 units</div><div class="val">$452.30 · 10.76%</div></div><div class="row"><div>Ethereum <span class="tag guess">Guess · sector</span></div><div class="units">0.0004 units</div><div class="val">$0.85 · 0.02%</div></div>
+    <div class="row"><div>Cash <span class="tag">Fact · no link</span></div><div class="units">—</div><div class="val">$2.02 · 0.05%</div></div>
+  </div>
+  <div class="section-head" style="border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+    <span class="tag guess">Guess · sectors</span>
+    <h2 style="font-size:17px;margin:6px 0">Sector shares of $4,202.18</h2>
+  </div>
+  <div class="sector-list">
+    <div class="row"><div>Chips / technology <span class="tag guess">Guess</span></div><div class="units">INTC</div><div class="val">$1,325.91 · 31.55%</div></div><div class="row"><div>Crypto <span class="tag guess">Guess</span></div><div class="units">BTC, ETH</div><div class="val">$1,018.17 · 24.23%</div></div><div class="row"><div>Broad US stocks <span class="tag guess">Guess</span></div><div class="units">SPY</div><div class="val">$880.96 · 20.96%</div></div><div class="row"><div>US banks <span class="tag guess">Guess</span></div><div class="units">JPM, BAC</div><div class="val">$975.12 · 23.21%</div></div>
+  </div>
+  <div class="assumption">
+    <p><strong>Assumption</strong> · Link strengths (strong 1.0, some 0.5, weak 0.25) come from Product task 10. They are starting choices, not measured effects.</p>
+    <p><strong>Fact</strong> · Holdings values and weights use the 16:44 Asia/Jerusalem read, not Product's 02:49 example weights.</p>
+  </div>
+</section>
+
+<section class="section" id="central_bank_rates" aria-labelledby="central_bank_rates-heading">
+  <div class="section-head">
+    <span class="tag green">Fact · Public figures</span>
+    <h2 id="central_bank_rates-heading">Central bank rate decisions</h2>
+    <p>Exact event ids from Product task 10. Leading outcome percentage from Gamma. Options of one event count as one event.</p>
+  </div>
+  <article class="event" data-event="770450" data-market="3215008" data-strength="central_bank_rates_fed">
+  <div class="market-row">
+    <div>
+      <strong>Fed Decision in December?</strong> <span class="tag high">High effect</span><br>
+      <span class="muted">Leading: 25 bps increase</span><br>
+      <a href="https://polymarket.com/event/fed-decision-in-december-20260729232808632" rel="noopener">Polymarket page</a>
+      · <a href="https://gamma-api.polymarket.com/events/770450" rel="noopener">Public source · 770450</a>
+    </div>
+    <div class="price" data-price-event="770450">80.5%</div>
+  </div>
+  <div class="event-meta">
+    <p><strong>Fact</strong> · Trading volume $17,355,444 · Received 9 November 2026, 17:58:37 Asia/Jerusalem · one-day change about 4 points</p>
+    <p><strong>Guess · portfolio effect</strong> · Could touch <strong>72%</strong> of your portfolio
+       · Uncertainty 63% of max
+       · Attention 45.2</p>
+    <p class="guess-line">If it happens (Guess): This could touch about 72% of your portfolio, mostly State Street SPDR S&amp;P 500 ETF, Intel; the bank effect is mixed.</p>
+    <p class="guess-line">If it does not happen (Guess): The other result would be the surprise against today&#x27;s leading figure, and could touch the same 72%.</p>
+  </div>
+</article><article class="event" data-event="770451" data-market="3215012" data-strength="central_bank_rates_fed">
+  <div class="market-row">
+    <div>
+      <strong>Fed Decision in January?</strong> <span class="tag high">High effect</span><br>
+      <span class="muted">Leading: No change</span><br>
+      <a href="https://polymarket.com/event/fed-decision-in-january-20260729233815502" rel="noopener">Polymarket page</a>
+      · <a href="https://gamma-api.polymarket.com/events/770451" rel="noopener">Public source · 770451</a>
+    </div>
+    <div class="price" data-price-event="770451">77.5%</div>
+  </div>
+  <div class="event-meta">
+    <p><strong>Fact</strong> · Trading volume $1,311,450 · Received 9 November 2026, 17:58:37 Asia/Jerusalem</p>
+    <p><strong>Guess · portfolio effect</strong> · Could touch <strong>72%</strong> of your portfolio
+       · Uncertainty 7% of max
+       · Attention 50.3</p>
+    <p class="guess-line">If it happens (Guess): This could touch about 72% of your portfolio, mostly State Street SPDR S&amp;P 500 ETF, Intel; the bank effect is mixed.</p>
+    <p class="guess-line">If it does not happen (Guess): The other result would be the surprise against today&#x27;s leading figure, and could touch the same 72%.</p>
+  </div>
+</article><article class="event" data-event="1025305" data-market="4570943" data-strength="central_bank_rates_ecb">
+  <div class="market-row">
+    <div>
+      <strong>ECB Interest Rates: December 2026</strong><br>
+      <span class="muted">Leading: 50+ bps decrease</span><br>
+      <a href="https://polymarket.com/event/ecb-interest-rates-december-2026" rel="noopener">Polymarket page</a>
+      · <a href="https://gamma-api.polymarket.com/events/1025305" rel="noopener">Public source · 1025305</a>
+    </div>
+    <div class="price" data-price-event="1025305">0.2%</div>
+  </div>
+  <div class="event-meta">
+    <p><strong>Fact</strong> · Trading volume $65,188 · Received 9 November 2026, 17:58:37 Asia/Jerusalem</p>
+    <p><strong>Guess · portfolio effect</strong> · Could touch <strong>25%</strong> of your portfolio
+       · Uncertainty 1% of max
+       · Attention 0.2</p>
+    <p class="guess-line">If it happens (Guess): This could touch about 25% of your portfolio, mostly Intel, Bitcoin; direction for each holding is a guess.</p>
+    <p class="guess-line">If it does not happen (Guess): The other result would be the surprise against today&#x27;s leading figure, and could touch the same 25%.</p>
+  </div>
+</article><article class="event" data-event="1280521" data-market="6404226" data-strength="central_bank_rates_ecb">
+  <div class="market-row">
+    <div>
+      <strong>ECB Interest Rates: February 2027</strong><br>
+      <span class="muted">Leading: 50+ bps decrease</span><br>
+      <a href="https://polymarket.com/event/ecb-interest-rates-february-2027" rel="noopener">Polymarket page</a>
+      · <a href="https://gamma-api.polymarket.com/events/1280521" rel="noopener">Public source · 1280521</a>
+    </div>
+    <div class="price" data-price-event="1280521">1.4%</div>
+  </div>
+  <div class="event-meta">
+    <p><strong>Fact</strong> · Trading volume $14,005 · Received 9 November 2026, 17:58:37 Asia/Jerusalem · one-day change about -2.1 points</p>
+    <p><strong>Guess · portfolio effect</strong> · Could touch <strong>25%</strong> of your portfolio
+       · Uncertainty 5% of max
+       · Attention 1.3</p>
+    <p class="guess-line">If it happens (Guess): This could touch about 25% of your portfolio, mostly Intel, Bitcoin; direction for each holding is a guess.</p>
+    <p class="guess-line">If it does not happen (Guess): The other result would be the surprise against today&#x27;s leading figure, and could touch the same 25%.</p>
+  </div>
+</article><article class="event" data-event="1123963" data-market="5230123" data-strength="central_bank_rates_china">
+  <div class="market-row">
+    <div>
+      <strong>People&#x27;s Bank of China rate change by December 31?</strong> <span class="tag high">High effect</span><br>
+      <span class="muted">Leading: No Change</span><br>
+      <a href="https://polymarket.com/event/peoples-bank-of-china-rate-change-by-december-31" rel="noopener">Polymarket page</a>
+      · <a href="https://gamma-api.polymarket.com/events/1123963" rel="noopener">Public source · 1123963</a>
+    </div>
+    <div class="price" data-price-event="1123963">90%</div>
+  </div>
+  <div class="event-meta">
+    <p><strong>Fact</strong> · Trading volume $19,012 · Received 9 November 2026, 17:58:37 Asia/Jerusalem · one-day change about -2 points</p>
+    <p><strong>Guess · portfolio effect</strong> · Could touch <strong>33%</strong> of your portfolio
+       · Uncertainty 36% of max
+       · Attention 11.8</p>
+    <p class="guess-line">If it happens (Guess): This could touch about 33% of your portfolio, mostly Intel, Bitcoin; direction for each holding is a guess.</p>
+    <p class="guess-line">If it does not happen (Guess): The other result would be the surprise against today&#x27;s leading figure, and could touch the same 33%.</p>
+  </div>
+</article>
+</section><section class="section" id="big_company_events" aria-labelledby="big_company_events-heading">
+  <div class="section-head">
+    <span class="tag green">Fact · Public figures</span>
+    <h2 id="big_company_events-heading">Big company events</h2>
+    <p>Exact event ids from Product task 10. Leading outcome percentage from Gamma. Options of one event count as one event.</p>
+  </div>
+  <article class="event" data-event="1194143" data-market="5730325" data-strength="big_company_events">
+  <div class="market-row">
+    <div>
+      <strong>Will NVIDIA (NVDA) Q3 Data Center Revenue be above __?</strong> <span class="tag high">High effect</span><br>
+      <span class="muted">Leading: $100B</span><br>
+      <a href="https://polymarket.com/event/will-nvidia-nvda-q3-data-center-revenue-be-above-20261008120135000" rel="noopener">Polymarket page</a>
+      · <a href="https://gamma-api.polymarket.com/events/1194143" rel="noopener">Public source · 1194143</a>
+    </div>
+    <div class="price" data-price-event="1194143">97.5%</div>
+  </div>
+  <div class="event-meta">
+    <p><strong>Fact</strong> · Trading volume $2,180 · Received 9 November 2026, 17:58:37 Asia/Jerusalem · one-day change about 13 points (meaningful move)</p>
+    <p><strong>Guess · portfolio effect</strong> · Could touch <strong>42%</strong> of your portfolio
+       · Uncertainty 1% of max
+       · Attention 25.2</p>
+    <p class="guess-line">If it happens (Guess): This could touch about 42% of your portfolio, mostly Intel, State Street SPDR S&amp;P 500 ETF; direction for each holding is a guess.</p>
+    <p class="guess-line">If it does not happen (Guess): The other result would be the surprise against today&#x27;s leading figure, and could touch the same 42%.</p>
+  </div>
+</article><article class="event" data-event="1194144" data-market="5730329" data-strength="big_company_events">
+  <div class="market-row">
+    <div>
+      <strong>NVIDIA (NVDA) Q3 adjusted gross margin (non-GAAP)?</strong> <span class="tag high">High effect</span><br>
+      <span class="muted">Leading: &lt;71%</span><br>
+      <a href="https://polymarket.com/event/nvidia-nvda-q3-adjusted-gross-margin-non-gaap-20261008120136000" rel="noopener">Polymarket page</a>
+      · <a href="https://gamma-api.polymarket.com/events/1194144" rel="noopener">Public source · 1194144</a>
+    </div>
+    <div class="price" data-price-event="1194144">2.9%</div>
+  </div>
+  <div class="event-meta">
+    <p><strong>Fact</strong> · Trading volume $7,405 · Received 9 November 2026, 17:58:37 Asia/Jerusalem</p>
+    <p><strong>Guess · portfolio effect</strong> · Could touch <strong>42%</strong> of your portfolio
+       · Uncertainty 11% of max
+       · Attention 4.7</p>
+    <p class="guess-line">If it happens (Guess): This could touch about 42% of your portfolio, mostly Intel, State Street SPDR S&amp;P 500 ETF; direction for each holding is a guess.</p>
+    <p class="guess-line">If it does not happen (Guess): The other result would be the surprise against today&#x27;s leading figure, and could touch the same 42%.</p>
+  </div>
+</article><article class="event" data-event="800884" data-market="3358974" data-strength="big_company_events">
+  <div class="market-row">
+    <div>
+      <strong>Nvidia’s Market Cap end of 2026?</strong> <span class="tag high">High effect</span><br>
+      <span class="muted">Leading: &lt;$4.00T</span><br>
+      <a href="https://polymarket.com/event/nvidias-market-cap-end-of-2026" rel="noopener">Polymarket page</a>
+      · <a href="https://gamma-api.polymarket.com/events/800884" rel="noopener">Public source · 800884</a>
+    </div>
+    <div class="price" data-price-event="800884">27.6%</div>
+  </div>
+  <div class="event-meta">
+    <p><strong>Fact</strong> · Trading volume $68,316 · Received 9 November 2026, 17:58:37 Asia/Jerusalem · one-day change about 13.3 points (meaningful move)</p>
+    <p><strong>Guess · portfolio effect</strong> · Could touch <strong>42%</strong> of your portfolio
+       · Uncertainty 8% of max
+       · Attention 42</p>
+    <p class="guess-line">If it happens (Guess): This could touch about 42% of your portfolio, mostly Intel, State Street SPDR S&amp;P 500 ETF; direction for each holding is a guess.</p>
+    <p class="guess-line">If it does not happen (Guess): The other result would be the surprise against today&#x27;s leading figure, and could touch the same 42%.</p>
+  </div>
+</article>
+</section><section class="section" id="worldwide_elections" aria-labelledby="worldwide_elections-heading">
+  <div class="section-head">
+    <span class="tag green">Fact · Public figures</span>
+    <h2 id="worldwide_elections-heading">Worldwide elections</h2>
+    <p>Exact event ids from Product task 10. Leading outcome percentage from Gamma. Options of one event count as one event.</p>
+  </div>
+  <article class="event" data-event="1262243" data-market="6274257" data-strength="worldwide_elections">
+  <div class="market-row">
+    <div>
+      <strong>Which Senate Swing States will Republicans win? (Build Your Map)</strong> <span class="tag high">High effect</span><br>
+      <span class="muted">Leading: None</span><br>
+      <a href="https://polymarket.com/event/which-tossup-senate-states-will-republicans-win-ak-ia-ks-me-mi-oh-tx" rel="noopener">Polymarket page</a>
+      · <a href="https://gamma-api.polymarket.com/events/1262243" rel="noopener">Public source · 1262243</a>
+    </div>
+    <div class="price" data-price-event="1262243">98.1%</div>
+  </div>
+  <div class="event-meta">
+    <p><strong>Fact</strong> · Trading volume $78,729,544 · Received 9 November 2026, 17:58:37 Asia/Jerusalem · one-day change about -0.4 points</p>
+    <p><strong>Guess · portfolio effect</strong> · Could touch <strong>36%</strong> of your portfolio
+       · Uncertainty 7% of max
+       · Attention 2.7</p>
+    <p class="guess-line">If it happens (Guess): This could touch about 36% of your portfolio, mostly State Street SPDR S&amp;P 500 ETF, Intel; direction for each holding is a guess.</p>
+    <p class="guess-line">If it does not happen (Guess): The other result would be the surprise against today&#x27;s leading figure, and could touch the same 36%.</p>
+  </div>
+</article><article class="event" data-event="1304411" data-market="6612550" data-strength="worldwide_elections">
+  <div class="market-row">
+    <div>
+      <strong>Senate Combo: Louisiana, Mississippi, Florida</strong> <span class="tag high">High effect</span><br>
+      <span class="muted">Leading: Reps sweep</span><br>
+      <a href="https://polymarket.com/event/senate-combo-louisiana-mississippi-florida" rel="noopener">Polymarket page</a>
+      · <a href="https://gamma-api.polymarket.com/events/1304411" rel="noopener">Public source · 1304411</a>
+    </div>
+    <div class="price" data-price-event="1304411">34.3%</div>
+  </div>
+  <div class="event-meta">
+    <p><strong>Fact</strong> · Trading volume $3,002 · Received 9 November 2026, 17:58:37 Asia/Jerusalem · one-day change about 33.1 points (meaningful move)</p>
+    <p><strong>Guess · portfolio effect</strong> · Could touch <strong>36%</strong> of your portfolio
+       · Uncertainty 9% of max
+       · Attention 36</p>
+    <p class="guess-line">If it happens (Guess): This could touch about 36% of your portfolio, mostly State Street SPDR S&amp;P 500 ETF, Intel; direction for each holding is a guess.</p>
+    <p class="guess-line">If it does not happen (Guess): The other result would be the surprise against today&#x27;s leading figure, and could touch the same 36%.</p>
+  </div>
+</article><article class="event" data-event="1224132" data-market="5971438" data-strength="worldwide_elections">
+  <div class="market-row">
+    <div>
+      <strong>Senate Combo: Mississippi, South Carolina, Montana</strong> <span class="tag high">High effect</span><br>
+      <span class="muted">Leading: Reps MS &amp; MT, Dems SC</span><br>
+      <a href="https://polymarket.com/event/senate-three-way-combo-mississippi-south-carolina-montana" rel="noopener">Polymarket page</a>
+      · <a href="https://gamma-api.polymarket.com/events/1224132" rel="noopener">Public source · 1224132</a>
+    </div>
+    <div class="price" data-price-event="1224132">12.9%</div>
+  </div>
+  <div class="event-meta">
+    <p><strong>Fact</strong> · Trading volume $15,721 · Received 9 November 2026, 17:58:37 Asia/Jerusalem · one-day change about 11.8 points (meaningful move)</p>
+    <p><strong>Guess · portfolio effect</strong> · Could touch <strong>36%</strong> of your portfolio
+       · Uncertainty 45% of max
+       · Attention 34.2</p>
+    <p class="guess-line">If it happens (Guess): This could touch about 36% of your portfolio, mostly State Street SPDR S&amp;P 500 ETF, Intel; direction for each holding is a guess.</p>
+    <p class="guess-line">If it does not happen (Guess): The other result would be the surprise against today&#x27;s leading figure, and could touch the same 36%.</p>
+  </div>
+</article>
+</section><section class="section" id="wars" aria-labelledby="wars-heading">
+  <div class="section-head">
+    <span class="tag green">Fact · Public figures</span>
+    <h2 id="wars-heading">Wars</h2>
+    <p>Exact event ids from Product task 10. Leading outcome percentage from Gamma. Options of one event count as one event.</p>
+  </div>
+  <article class="event" data-event="711714" data-market="3399468" data-strength="wars">
+  <div class="market-row">
+    <div>
+      <strong>Israel x Iran ceasefire continues through...?</strong> <span class="tag high">High effect</span><br>
+      <span class="muted">Leading: December 31</span><br>
+      <a href="https://polymarket.com/event/israel-x-iran-ceasefire-continues-throughptptpt-20260716224448963" rel="noopener">Polymarket page</a>
+      · <a href="https://gamma-api.polymarket.com/events/711714" rel="noopener">Public source · 711714</a>
+    </div>
+    <div class="price" data-price-event="711714">61.5%</div>
+  </div>
+  <div class="event-meta">
+    <p><strong>Fact</strong> · Trading volume $50,329,608 · Received 9 November 2026, 17:58:37 Asia/Jerusalem · one-day change about 3 points</p>
+    <p><strong>Guess · portfolio effect</strong> · Could touch <strong>38%</strong> of your portfolio
+       · Uncertainty 95% of max
+       · Attention 36.1</p>
+    <p class="guess-line">If it happens (Guess): This could touch about 38% of your portfolio, mostly Intel, State Street SPDR S&amp;P 500 ETF; links to chips rise if Taiwan or China keywords apply (already in group strengths).</p>
+    <p class="guess-line">If it does not happen (Guess): The other result would be the surprise against today&#x27;s leading figure, and could touch the same 38%.</p>
+  </div>
+</article><article class="event" data-event="478472" data-market="2243897" data-strength="wars">
+  <div class="market-row">
+    <div>
+      <strong>Russia x Ukraine ceasefire agreement by...?</strong> <span class="tag high">High effect</span><br>
+      <span class="muted">Leading: December 31</span><br>
+      <a href="https://polymarket.com/event/russia-x-ukraine-ceasefire-agreement-by" rel="noopener">Polymarket page</a>
+      · <a href="https://gamma-api.polymarket.com/events/478472" rel="noopener">Public source · 478472</a>
+    </div>
+    <div class="price" data-price-event="478472">14.5%</div>
+  </div>
+  <div class="event-meta">
+    <p><strong>Fact</strong> · Trading volume $10,635,403 · Received 9 November 2026, 17:58:37 Asia/Jerusalem · one-day change about -1 points</p>
+    <p><strong>Guess · portfolio effect</strong> · Could touch <strong>38%</strong> of your portfolio
+       · Uncertainty 5% of max
+       · Attention 18.9</p>
+    <p class="guess-line">If it happens (Guess): This could touch about 38% of your portfolio, mostly Intel, State Street SPDR S&amp;P 500 ETF; links to chips rise if Taiwan or China keywords apply (already in group strengths).</p>
+    <p class="guess-line">If it does not happen (Guess): The other result would be the surprise against today&#x27;s leading figure, and could touch the same 38%.</p>
+  </div>
+</article><article class="event" data-event="160366" data-market="1170144" data-strength="wars">
+  <div class="market-row">
+    <div>
+      <strong>Will the US officially declare war on Iran by...?</strong> <span class="tag high">High effect</span><br>
+      <span class="muted">Leading: December 31</span><br>
+      <a href="https://polymarket.com/event/will-the-us-officially-declare-war-on-iran-by" rel="noopener">Polymarket page</a>
+      · <a href="https://gamma-api.polymarket.com/events/160366" rel="noopener">Public source · 160366</a>
+    </div>
+    <div class="price" data-price-event="160366">1.9%</div>
+  </div>
+  <div class="event-meta">
+    <p><strong>Fact</strong> · Trading volume $7,873,699 · Received 9 November 2026, 17:58:37 Asia/Jerusalem · one-day change about -0.1 points</p>
+    <p><strong>Guess · portfolio effect</strong> · Could touch <strong>38%</strong> of your portfolio
+       · Uncertainty 8% of max
+       · Attention 2.9</p>
+    <p class="guess-line">If it happens (Guess): This could touch about 38% of your portfolio, mostly Intel, State Street SPDR S&amp;P 500 ETF; links to chips rise if Taiwan or China keywords apply (already in group strengths).</p>
+    <p class="guess-line">If it does not happen (Guess): The other result would be the surprise against today&#x27;s leading figure, and could touch the same 38%.</p>
+  </div>
+</article><article class="event" data-event="34044" data-market="567621" data-strength="wars">
+  <div class="market-row">
+    <div>
+      <strong>Will China invade Taiwan by end of 2026?</strong> <span class="tag high">High effect</span><br>
+      <span class="muted">Leading: Will China invade Taiwan by end of 2026?</span><br>
+      <a href="https://polymarket.com/event/will-china-invade-taiwan-before-2027" rel="noopener">Polymarket page</a>
+      · <a href="https://gamma-api.polymarket.com/events/34044" rel="noopener">Public source · 34044</a>
+    </div>
+    <div class="price" data-price-event="34044">1.8%</div>
+  </div>
+  <div class="event-meta">
+    <p><strong>Fact</strong> · Trading volume $46,019,903 · Received 9 November 2026, 17:58:37 Asia/Jerusalem · one-day change about 0.1 points</p>
+    <p><strong>Guess · portfolio effect</strong> · Could touch <strong>38%</strong> of your portfolio
+       · Uncertainty 7% of max
+       · Attention 2.6</p>
+    <p class="guess-line">If it happens (Guess): This could touch about 38% of your portfolio, mostly Intel, State Street SPDR S&amp;P 500 ETF; links to chips rise if Taiwan or China keywords apply (already in group strengths).</p>
+    <p class="guess-line">If it does not happen (Guess): The other result would be the surprise against today&#x27;s leading figure, and could touch the same 38%.</p>
+  </div>
+</article><article class="event" data-event="1337182" data-market="6831494" data-strength="wars">
+  <div class="market-row">
+    <div>
+      <strong>US x Iran Effective Ceasefire begins by...? (2 week pause)</strong> <span class="tag high">High effect</span><br>
+      <span class="muted">Leading: November 15</span><br>
+      <a href="https://polymarket.com/event/us-x-iran-effective-ceasefire-begins-by-2-week-pause-20261108" rel="noopener">Polymarket page</a>
+      · <a href="https://gamma-api.polymarket.com/events/1337182" rel="noopener">Public source · 1337182</a>
+    </div>
+    <div class="price" data-price-event="1337182">45%</div>
+  </div>
+  <div class="event-meta">
+    <p><strong>Fact</strong> · Trading volume $439,372 · Received 9 November 2026, 17:58:37 Asia/Jerusalem · one-day change about 3.5 points</p>
+    <p><strong>Guess · portfolio effect</strong> · Could touch <strong>38%</strong> of your portfolio
+       · Uncertainty 99% of max
+       · Attention 37.7</p>
+    <p class="guess-line">If it happens (Guess): This could touch about 38% of your portfolio, mostly Intel, State Street SPDR S&amp;P 500 ETF; links to chips rise if Taiwan or China keywords apply (already in group strengths).</p>
+    <p class="guess-line">If it does not happen (Guess): The other result would be the surprise against today&#x27;s leading figure, and could touch the same 38%.</p>
+  </div>
+</article>
+</section>
+
+<section class="section" id="formula" aria-labelledby="formula-heading">
+  <div class="section-head">
+    <span class="tag guess">Assumption · Product task 10</span>
+    <h2 id="formula-heading">How the portfolio effect is scored</h2>
+    <p>Input is Polymarket percentage movement, not news. The score updates when the figure moves, whether or not the event happens.</p>
+  </div>
+  <div class="formula">
+    <p><strong>Touch</strong> = sum over holdings of (holding weight × link strength). High effect when touch is above 30%.</p>
+    <p><strong>Uncertainty</strong> = 4 × p × (1 − p), where p is the leading option as a fraction from 0 to 1.</p>
+    <p><strong>Attention</strong> = touch × uncertainty, plus touch × 0.5 when there is a meaningful move (5 points or more versus about 24 hours earlier, lasting at least one hour). Capped at touch.</p>
+    <p>Every event-to-holding link is labeled <strong>Guess</strong>. Strength numbers are labeled <strong>Assumption</strong>.</p>
+    <p>Rules file: <code>rules.json</code> (swap to replace Product's map). Doc: <a href="https://docs.google.com/document/d/1XptYmlRKxo2JEUm15rodf9RoM8UeWegkX521kMa9Z30/edit">Product Rules · TP-010</a>.</p>
+  </div>
+</section>
+
+<section class="section" id="sources" aria-labelledby="sources-heading">
+  <div class="section-head">
+    <span class="tag green">Fact · Sources</span>
+    <h2 id="sources-heading">Where the figures came from</h2>
+  </div>
+  <div class="formula">
+    <p><strong>Public market figures</strong> · Gamma public data service (https://gamma-api.polymarket.com), received 9 November 2026, 17:58:37 Asia/Jerusalem. The page also re-reads leading market prices in the browser when opened; if that fails, built-in figures stay with their label and time.</p>
+    <p><strong>Holdings</strong> · eToro connector, read-only portfolio summary, 9 November 2026, 16:44:57 Asia/Jerusalem. Reused from Development task 5. No keys in this folder. Holdings refresh only when this page is rebuilt.</p>
+    <p><strong>Scoring rules</strong> · Product task 10, <a href="https://docs.google.com/document/d/1XptYmlRKxo2JEUm15rodf9RoM8UeWegkX521kMa9Z30/edit">Product Rules · TP-010 Portfolio Touch Score</a>, delivered 9 November 2026, 17:55 Asia/Jerusalem.</p>
+    <p><strong>Gaps noted by Product</strong> · No live earnings markets found for Apple, Microsoft, Alphabet, Amazon, Meta, Tesla or Intel at Product search time.; Only United States election races found; most look nearly settled.; Strength numbers are untested starting Assumptions.; Attention formula is a first Guess from Product.</p>
+  </div>
+</section>
+
+<footer>
+  <span>Insights only, not advice.</span>
+  <span>Development task 6 · local build · 9 November 2026, 17:58:37 Asia/Jerusalem</span>
+</footer>
+</main>
+<script id="wpi-bootstrap" type="application/json">{&quot;receipt_time&quot;: &quot;9 November 2026, 17:58:37 Asia/Jerusalem&quot;, &quot;events&quot;: [{&quot;event_id&quot;: &quot;770450&quot;, &quot;market_id&quot;: &quot;3215008&quot;, &quot;strength_key&quot;: &quot;central_bank_rates_fed&quot;, &quot;touch&quot;: 72.06069230732619, &quot;built_percent&quot;: 80.5, &quot;title&quot;: &quot;Fed Decision in December?&quot;}, {&quot;event_id&quot;: &quot;770451&quot;, &quot;market_id&quot;: &quot;3215012&quot;, &quot;strength_key&quot;: &quot;central_bank_rates_fed&quot;, &quot;touch&quot;: 72.06069230732619, &quot;built_percent&quot;: 77.5, &quot;title&quot;: &quot;Fed Decision in January?&quot;}, {&quot;event_id&quot;: &quot;1025305&quot;, &quot;market_id&quot;: &quot;4570943&quot;, &quot;strength_key&quot;: &quot;central_bank_rates_ecb&quot;, &quot;touch&quot;: 24.987982428168234, &quot;built_percent&quot;: 0.25, &quot;title&quot;: &quot;ECB Interest Rates: December 2026&quot;}, {&quot;event_id&quot;: &quot;1280521&quot;, &quot;market_id&quot;: &quot;6404226&quot;, &quot;strength_key&quot;: &quot;central_bank_rates_ecb&quot;, &quot;touch&quot;: 24.987982428168234, &quot;built_percent&quot;: 1.35, &quot;title&quot;: &quot;ECB Interest Rates: February 2027&quot;}, {&quot;event_id&quot;: &quot;1123963&quot;, &quot;market_id&quot;: &quot;5230123&quot;, &quot;strength_key&quot;: &quot;central_bank_rates_china&quot;, &quot;touch&quot;: 32.876209491264056, &quot;built_percent&quot;: 90.0, &quot;title&quot;: &quot;People&#x27;s Bank of China rate change by December 31?&quot;}, {&quot;event_id&quot;: &quot;1194143&quot;, &quot;market_id&quot;: &quot;5730325&quot;, &quot;strength_key&quot;: &quot;big_company_events&quot;, &quot;touch&quot;: 42.03508655031436, &quot;built_percent&quot;: 97.45, &quot;title&quot;: &quot;Will NVIDIA (NVDA) Q3 Data Center Revenue be above __?&quot;}, {&quot;event_id&quot;: &quot;1194144&quot;, &quot;market_id&quot;: &quot;5730329&quot;, &quot;strength_key&quot;: &quot;big_company_events&quot;, &quot;touch&quot;: 42.03508655031436, &quot;built_percent&quot;: 2.85, &quot;title&quot;: &quot;NVIDIA (NVDA) Q3 adjusted gross margin (non-GAAP)?&quot;}, {&quot;event_id&quot;: &quot;800884&quot;, &quot;market_id&quot;: &quot;3358974&quot;, &quot;strength_key&quot;: &quot;big_company_events&quot;, &quot;touch&quot;: 42.03508655031436, &quot;built_percent&quot;: 27.6, &quot;title&quot;: &quot;Nvidia\u2019s Market Cap end of 2026?&quot;}, {&quot;event_id&quot;: &quot;1262243&quot;, &quot;market_id&quot;: &quot;6274257&quot;, &quot;strength_key&quot;: &quot;worldwide_elections&quot;, &quot;touch&quot;: 36.030346153663096, &quot;built_percent&quot;: 98.1, &quot;title&quot;: &quot;Which Senate Swing States will Republicans win? (Build Your Map)&quot;}, {&quot;event_id&quot;: &quot;1304411&quot;, &quot;market_id&quot;: &quot;6612550&quot;, &quot;strength_key&quot;: &quot;worldwide_elections&quot;, &quot;touch&quot;: 36.030346153663096, &quot;built_percent&quot;: 34.300000000000004, &quot;title&quot;: &quot;Senate Combo: Louisiana, Mississippi, Florida&quot;}, {&quot;event_id&quot;: &quot;1224132&quot;, &quot;market_id&quot;: &quot;5971438&quot;, &quot;strength_key&quot;: &quot;worldwide_elections&quot;, &quot;touch&quot;: 36.030346153663096, &quot;built_percent&quot;: 12.9, &quot;title&quot;: &quot;Senate Combo: Mississippi, South Carolina, Montana&quot;}, {&quot;event_id&quot;: &quot;711714&quot;, &quot;market_id&quot;: &quot;3399468&quot;, &quot;strength_key&quot;: &quot;wars&quot;, &quot;touch&quot;: 38.1172986402296, &quot;built_percent&quot;: 61.5, &quot;title&quot;: &quot;Israel x Iran ceasefire continues through...?&quot;}, {&quot;event_id&quot;: &quot;478472&quot;, &quot;market_id&quot;: &quot;2243897&quot;, &quot;strength_key&quot;: &quot;wars&quot;, &quot;touch&quot;: 38.1172986402296, &quot;built_percent&quot;: 14.499999999999998, &quot;title&quot;: &quot;Russia x Ukraine ceasefire agreement by...?&quot;}, {&quot;event_id&quot;: &quot;160366&quot;, &quot;market_id&quot;: &quot;1170144&quot;, &quot;strength_key&quot;: &quot;wars&quot;, &quot;touch&quot;: 38.1172986402296, &quot;built_percent&quot;: 1.95, &quot;title&quot;: &quot;Will the US officially declare war on Iran by...?&quot;}, {&quot;event_id&quot;: &quot;34044&quot;, &quot;market_id&quot;: &quot;567621&quot;, &quot;strength_key&quot;: &quot;wars&quot;, &quot;touch&quot;: 38.1172986402296, &quot;built_percent&quot;: 1.7500000000000002, &quot;title&quot;: &quot;Will China invade Taiwan by end of 2026?&quot;}, {&quot;event_id&quot;: &quot;1337182&quot;, &quot;market_id&quot;: &quot;6831494&quot;, &quot;strength_key&quot;: &quot;wars&quot;, &quot;touch&quot;: 38.1172986402296, &quot;built_percent&quot;: 45.0, &quot;title&quot;: &quot;US x Iran Effective Ceasefire begins by...? (2 week pause)&quot;}], &quot;holdings_weights&quot;: {&quot;INTC&quot;: 31.55290825238329, &quot;BTC&quot;: 24.209338962157737, &quot;SPY&quot;: 20.964356595862146, &quot;JPM&quot;: 12.441637435807129, &quot;BAC&quot;: 10.763460870310173, &quot;ETH&quot;: 0.02022759615247324}, &quot;group_strengths&quot;: {&quot;central_bank_rates_fed&quot;: {&quot;group&quot;: &quot;central_bank_rates&quot;, &quot;subgroup&quot;: &quot;fed&quot;, &quot;chips&quot;: 0.5, &quot;crypto&quot;: 0.5, &quot;broad_us_stocks&quot;: 1.0, &quot;banks&quot;: 1.0, &quot;product_touch_ref&quot;: 71.9, &quot;note&quot;: &quot;Federal Reserve rates&quot;}, &quot;central_bank_rates_ecb&quot;: {&quot;group&quot;: &quot;central_bank_rates&quot;, &quot;subgroup&quot;: &quot;ecb&quot;, &quot;chips&quot;: 0.25, &quot;crypto&quot;: 0.25, &quot;broad_us_stocks&quot;: 0.25, &quot;banks&quot;: 0.25, &quot;product_touch_ref&quot;: 25.0, &quot;note&quot;: &quot;European Central Bank rates&quot;}, &quot;central_bank_rates_china&quot;: {&quot;group&quot;: &quot;central_bank_rates&quot;, &quot;subgroup&quot;: &quot;china&quot;, &quot;chips&quot;: 0.5, &quot;crypto&quot;: 0.25, &quot;broad_us_stocks&quot;: 0.25, &quot;banks&quot;: 0.25, &quot;product_touch_ref&quot;: 32.8, &quot;note&quot;: &quot;China&#x27;s central bank rates&quot;}, &quot;big_company_events&quot;: {&quot;group&quot;: &quot;big_company_events&quot;, &quot;chips&quot;: 1.0, &quot;crypto&quot;: 0, &quot;broad_us_stocks&quot;: 0.5, &quot;banks&quot;: 0, &quot;product_touch_ref&quot;: 41.8, &quot;note&quot;: &quot;Nvidia and big technology&quot;}, &quot;worldwide_elections&quot;: {&quot;group&quot;: &quot;worldwide_elections&quot;, &quot;chips&quot;: 0.25, &quot;crypto&quot;: 0.25, &quot;broad_us_stocks&quot;: 0.5, &quot;banks&quot;: 0.5, &quot;product_touch_ref&quot;: 36.0, &quot;note&quot;: &quot;US elections (only US races found in Product search)&quot;}, &quot;wars&quot;: {&quot;group&quot;: &quot;wars&quot;, &quot;chips&quot;: 0.5, &quot;crypto&quot;: 0.25, &quot;broad_us_stocks&quot;: 0.5, &quot;banks&quot;: 0.25, &quot;product_touch_ref&quot;: 38.0, &quot;note&quot;: &quot;Wars&quot;}}, &quot;holdings_sectors&quot;: {&quot;INTC&quot;: &quot;chips&quot;, &quot;BTC&quot;: &quot;crypto&quot;, &quot;ETH&quot;: &quot;crypto&quot;, &quot;SPY&quot;: &quot;broad_us_stocks&quot;, &quot;JPM&quot;: &quot;banks&quot;, &quot;BAC&quot;: &quot;banks&quot;, &quot;CASH&quot;: &quot;none&quot;}}</script>
+<script>
+(function(){
+  var boot = JSON.parse(document.getElementById('wpi-bootstrap').textContent);
+  var statusEl = document.getElementById('live-status');
+  function fmtPct(x){
+    if (x == null || isNaN(x)) return '—';
+    var n = Math.round(x * 10) / 10;
+    return (Math.abs(n - Math.round(n)) < 1e-9) ? String(Math.round(n)) : String(n);
+  }
+  function leadingFromMarkets(markets){
+    var best = null;
+    (markets || []).forEach(function(m){
+      if (m.closed) return;
+      var outcomes = m.outcomes; var prices = m.outcomePrices;
+      try { if (typeof outcomes === 'string') outcomes = JSON.parse(outcomes); } catch(e){ outcomes = []; }
+      try { if (typeof prices === 'string') prices = JSON.parse(prices); } catch(e){ prices = []; }
+      if (!prices || !prices.length) return;
+      for (var i = 0; i < prices.length; i++){
+        var label = (outcomes && outcomes[i]) ? outcomes[i] : ('Option ' + (i+1));
+        if (outcomes && outcomes.length === 2 && String(label).toLowerCase() === 'no') continue;
+        var p = parseFloat(prices[i]);
+        if (isNaN(p)) continue;
+        var display = m.groupItemTitle || m.question || label;
+        if (!best || p > best.p) best = {p:p, percent:p*100, market_id:String(m.id), label:display, oneDayPriceChange:m.oneDayPriceChange};
+      }
+    });
+    return best;
+  }
+  function refresh(){
+    var fetches = boot.events.map(function(e){
+      return fetch('https://gamma-api.polymarket.com/events/' + e.event_id, {headers:{'Accept':'application/json'}})
+        .then(function(r){ return r.ok ? r.json() : null; })
+        .then(function(ev){
+          if (!ev) return null;
+          var lead = leadingFromMarkets(ev.markets || []);
+          if (!lead) return null;
+          var el = document.querySelector('[data-price-event="' + e.event_id + '"]');
+          if (el) el.textContent = fmtPct(lead.percent) + '%';
+          return {id:e.event_id, percent:lead.percent};
+        })
+        .catch(function(){ return null; });
+    });
+    Promise.all(fetches).then(function(results){
+      var ok = results.filter(Boolean).length;
+      var now = new Date();
+      var stamp = now.toLocaleString('en-GB', {timeZone:'Asia/Jerusalem', hour12:false}) + ' Asia/Jerusalem';
+      if (ok > 0) {
+        statusEl.textContent = 'Figures: live browser refresh for ' + ok + ' events · ' + stamp + ' · Holdings still from built-in snapshot (' + "9 November 2026, 16:44:57 Asia/Jerusalem" + ')';
+      } else {
+        statusEl.textContent = 'Figures: built-in read (live refresh unavailable) · 9 November 2026, 17:58:37 Asia/Jerusalem · Holdings from Development task 5 (9 November 2026, 16:44:57 Asia/Jerusalem)';
+      }
+    });
+  }
+  if (location.protocol === 'file:') {
+    statusEl.textContent = 'Figures: built-in read (file open may block live refresh) · 9 November 2026, 17:58:37 Asia/Jerusalem · Holdings from Development task 5 (9 November 2026, 16:44:57 Asia/Jerusalem)';
+    // still try; Gamma sends Access-Control-Allow-Origin *
+    refresh();
+  } else {
+    refresh();
+  }
+})();
+</script>
+</body>
+</html>

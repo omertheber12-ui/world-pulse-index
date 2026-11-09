@@ -1,0 +1,5 @@
+*.png
+public-fetch.json
+holdings-live.json
+etoro-*
+__pycache__/

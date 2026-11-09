@@ -1,0 +1,139 @@
+{
+  "version": "1.0-product-tp010",
+  "source": {
+    "label": "Fact",
+    "product_task": "Product task 10",
+    "doc_id": "1XptYmlRKxo2JEUm15rodf9RoM8UeWegkX521kMa9Z30",
+    "doc_url": "https://docs.google.com/document/d/1XptYmlRKxo2JEUm15rodf9RoM8UeWegkX521kMa9Z30/edit",
+    "doc_title": "Product Rules · TP-010 Portfolio Touch Score",
+    "delivered_at": "9 November 2026, 17:55 Asia/Jerusalem",
+    "note": "Default scoring rules. Swap this file only to change strengths or formula."
+  },
+  "holdings_sectors": {
+    "INTC": {"sector": "chips", "label": "Guess", "sector_words": "Chips, technology"},
+    "BTC": {"sector": "crypto", "label": "Guess", "sector_words": "Crypto"},
+    "ETH": {"sector": "crypto", "label": "Guess", "sector_words": "Crypto"},
+    "SPY": {"sector": "broad_us_stocks", "label": "Guess", "sector_words": "Broad US stocks, heavy in big technology"},
+    "JPM": {"sector": "banks", "label": "Guess", "sector_words": "Banks"},
+    "BAC": {"sector": "banks", "label": "Guess", "sector_words": "Banks"},
+    "CASH": {"sector": "none", "label": "Fact", "sector_words": "No link"}
+  },
+  "strength_levels": {
+    "strong": 1.0,
+    "some": 0.5,
+    "weak": 0.25,
+    "none": 0,
+    "label": "Assumption"
+  },
+  "group_strengths": {
+    "central_bank_rates_fed": {
+      "group": "central_bank_rates",
+      "subgroup": "fed",
+      "chips": 0.5,
+      "crypto": 0.5,
+      "broad_us_stocks": 1.0,
+      "banks": 1.0,
+      "product_touch_ref": 71.9,
+      "note": "Federal Reserve rates"
+    },
+    "central_bank_rates_ecb": {
+      "group": "central_bank_rates",
+      "subgroup": "ecb",
+      "chips": 0.25,
+      "crypto": 0.25,
+      "broad_us_stocks": 0.25,
+      "banks": 0.25,
+      "product_touch_ref": 25.0,
+      "note": "European Central Bank rates"
+    },
+    "central_bank_rates_china": {
+      "group": "central_bank_rates",
+      "subgroup": "china",
+      "chips": 0.5,
+      "crypto": 0.25,
+      "broad_us_stocks": 0.25,
+      "banks": 0.25,
+      "product_touch_ref": 32.8,
+      "note": "China's central bank rates"
+    },
+    "big_company_events": {
+      "group": "big_company_events",
+      "chips": 1.0,
+      "crypto": 0,
+      "broad_us_stocks": 0.5,
+      "banks": 0,
+      "product_touch_ref": 41.8,
+      "note": "Nvidia and big technology"
+    },
+    "worldwide_elections": {
+      "group": "worldwide_elections",
+      "chips": 0.25,
+      "crypto": 0.25,
+      "broad_us_stocks": 0.5,
+      "banks": 0.5,
+      "product_touch_ref": 36.0,
+      "note": "US elections (only US races found in Product search)"
+    },
+    "wars": {
+      "group": "wars",
+      "chips": 0.5,
+      "crypto": 0.25,
+      "broad_us_stocks": 0.5,
+      "banks": 0.25,
+      "product_touch_ref": 38.0,
+      "note": "Wars"
+    }
+  },
+  "scoring": {
+    "touch": "sum over holdings of (holding_weight_percent × link_strength). Holding weight = holding dollar value / portfolio total × 100. Link strength from group_strengths by the holding's sector. Cash strength is always 0.",
+    "uncertainty": "4 × p × (1 − p), where p is the leading option figure as a fraction 0–1. Equals 1.0 at 50% and near 0 when one option is near 100%.",
+    "attention": "touch × uncertainty, plus touch × 0.5 when a meaningful move is present under Product task 7 (5 points or more versus about 24 hours earlier, lasting at least one hour). Cap at touch.",
+    "high_effect_threshold": 30,
+    "update_rule": "Scores update only when Polymarket percentages move. Not from news. Whether or not the event happens, the score follows the figure.",
+    "one_event_rule": "Related options in one event count as one event, not several.",
+    "every_link_label": "Guess",
+    "strength_label": "Assumption",
+    "insight_lines": {
+      "if_happens": "If it happens (Guess): This could touch about {touch_rounded}% of your portfolio, mostly {top_holdings}; {extra}.",
+      "if_not": "If it does not happen (Guess): The other result would be the surprise against today's leading figure, and could touch the same {touch_rounded}%."
+    }
+  },
+  "events": {
+    "central_bank_rates": [
+      {"event_id": "770450", "market_ids": ["3215008", "3215007", "3215009", "3215006", "3215005"], "strength_key": "central_bank_rates_fed", "title_hint": "Fed Decision in December", "label": "exact"},
+      {"event_id": "770451", "market_ids": [], "strength_key": "central_bank_rates_fed", "title_hint": "Fed Decision in January", "label": "exact"},
+      {"event_id": "1025305", "market_ids": ["4570943"], "strength_key": "central_bank_rates_ecb", "title_hint": "ECB Interest Rates December", "label": "exact"},
+      {"event_id": "1280521", "market_ids": ["6404226"], "strength_key": "central_bank_rates_ecb", "title_hint": "ECB Interest Rates February", "label": "exact"},
+      {"event_id": "1123963", "market_ids": ["5230123"], "strength_key": "central_bank_rates_china", "title_hint": "People's Bank of China rate change by December 31", "label": "exact"}
+    ],
+    "big_company_events": [
+      {"event_id": "1194143", "market_ids": ["5730325"], "strength_key": "big_company_events", "title_hint": "Nvidia data center revenue", "label": "exact"},
+      {"event_id": "1194144", "market_ids": ["5730329"], "strength_key": "big_company_events", "title_hint": "Nvidia gross margin", "label": "exact"},
+      {"event_id": "800884", "market_ids": ["3358974"], "strength_key": "big_company_events", "title_hint": "Nvidia market value end of 2026", "label": "exact"}
+    ],
+    "worldwide_elections": [
+      {"event_id": "1262243", "market_ids": ["6274257"], "strength_key": "worldwide_elections", "title_hint": "US Senate swing states", "label": "exact"},
+      {"event_id": "1304411", "market_ids": ["6612550"], "strength_key": "worldwide_elections", "title_hint": "Senate combo", "label": "exact"},
+      {"event_id": "1224132", "market_ids": ["5971438"], "strength_key": "worldwide_elections", "title_hint": "Senate combo", "label": "exact"}
+    ],
+    "wars": [
+      {"event_id": "711714", "market_ids": ["3399468"], "strength_key": "wars", "title_hint": "Israel x Iran ceasefire", "label": "exact"},
+      {"event_id": "478472", "market_ids": ["2243897"], "strength_key": "wars", "title_hint": "Russia x Ukraine ceasefire", "label": "exact"},
+      {"event_id": "160366", "market_ids": ["1170144"], "strength_key": "wars", "title_hint": "US declares war on Iran", "label": "exact"},
+      {"event_id": "34044", "market_ids": ["567621"], "strength_key": "wars", "title_hint": "China invades Taiwan", "label": "exact"},
+      {"event_id": "1337182", "market_ids": ["6831494"], "strength_key": "wars", "title_hint": "US x Iran ceasefire", "label": "exact"}
+    ]
+  },
+  "group_display": {
+    "central_bank_rates": "Central bank rate decisions",
+    "big_company_events": "Big company events",
+    "worldwide_elections": "Worldwide elections",
+    "wars": "Wars"
+  },
+  "gaps": [
+    "No live earnings markets found for Apple, Microsoft, Alphabet, Amazon, Meta, Tesla or Intel at Product search time.",
+    "Only United States election races found; most look nearly settled.",
+    "Strength numbers are untested starting Assumptions.",
+    "Attention formula is a first Guess from Product."
+  ]
+}

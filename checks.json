@@ -1,0 +1,95 @@
+{
+  "generated_at": "9 November 2026, 17:58:39 Asia/Jerusalem",
+  "all_pass": true,
+  "empty_groups": [],
+  "checks": [
+    {
+      "name": "gamma_fetch_http",
+      "pass": true,
+      "detail": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ]
+    },
+    {
+      "name": "group_central_bank_rates_has_events",
+      "pass": true,
+      "detail": "count=5"
+    },
+    {
+      "name": "group_big_company_events_has_events",
+      "pass": true,
+      "detail": "count=3"
+    },
+    {
+      "name": "group_worldwide_elections_has_events",
+      "pass": true,
+      "detail": "count=3"
+    },
+    {
+      "name": "group_wars_has_events",
+      "pass": true,
+      "detail": "count=5"
+    },
+    {
+      "name": "no_duplicate_events",
+      "pass": true,
+      "detail": "n=16 unique=16"
+    },
+    {
+      "name": "every_event_has_percentage_0_100",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "every_event_has_fetch_time",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "every_event_has_source_url",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "holdings_sum_matches_total",
+      "pass": true,
+      "detail": "sum=4202.18 total=4202.18"
+    },
+    {
+      "name": "links_labeled_guess",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "no_buy_sell_advice_wording",
+      "pass": true,
+      "detail": "scanned HTML for buy/sell words"
+    },
+    {
+      "name": "no_secrets_keys_in_files",
+      "pass": true,
+      "detail": ""
+    }
+  ],
+  "event_counts": {
+    "central_bank_rates": 5,
+    "big_company_events": 3,
+    "worldwide_elections": 3,
+    "wars": 5
+  }
+}
