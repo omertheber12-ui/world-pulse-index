@@ -49,6 +49,14 @@ export function weightText(w) {
   return (Math.round(w * 10) / 10).toFixed(1);
 }
 
+export function thinMarketNote(volume, liquidity) {
+  const vol = volume == null || volume === '' ? null : Number(volume);
+  const liq = liquidity == null || liquidity === '' ? null : Number(liquidity);
+  const thin = (vol != null && !Number.isNaN(vol) && vol < 50000)
+    || (liq != null && !Number.isNaN(liq) && liq < 10000);
+  return thin ? 'Thin market: few trades' : '';
+}
+
 export function clock(ms) {
   return new Intl.DateTimeFormat('en-GB', {
     timeZone: 'Asia/Jerusalem', hour: '2-digit', minute: '2-digit', hour12: false,
@@ -292,8 +300,17 @@ export function whyMatters(exposure) {
   if (hasD && hasF) return 'You hold ' + subject + ' directly and also through funds.';
   if (hasD) return 'You hold ' + subject + ' directly.';
   if (hasF) return 'You hold ' + (subject || 'the related asset') + ' through a fund.';
-  const names = est.slice(0, 2).map((r) => holdName(r.ticker, r.name)).join(' and ') || 'holdings you have';
-  return 'You hold no ' + (subject || 'matching asset') + '; this is an estimated link through ' + names + '.';
+  if (!est.length) return 'None of your holdings has a specific link to this event.';
+  if (exposure.total >= 90) {
+    return 'This can move most of what you hold. The links are estimates, not one asset you hold.';
+  }
+  const names = est.map((r) => holdName(r.ticker, r.name));
+  const list = names.length <= 1
+    ? (names[0] || 'holdings you have')
+    : names.length === 2
+      ? names[0] + ' and ' + names[1]
+      : names.slice(0, -1).join(', ') + ', and ' + names[names.length - 1];
+  return 'You hold no ' + (subject || 'company named in this bet') + '; this is an estimated link through ' + list + '.';
 }
 
 export function splitText(exposure) {

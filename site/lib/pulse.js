@@ -144,7 +144,7 @@ export function chartPath(hist, days = 7) {
   if (!(max > min)) { min -= 0.01; max += 0.01; }
   else if (max - min < 0.004) { min -= 0.008; max += 0.008; }
   const w = 640;
-  const h = 140;
+  const h = 80;
   const pad = 6;
   const t0 = Number(pts[0].t);
   let t1 = Number(pts[pts.length - 1].t);
