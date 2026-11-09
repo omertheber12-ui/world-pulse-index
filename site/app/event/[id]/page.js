@@ -1,9 +1,9 @@
 import { loadPulse, loadHistory, chartPath } from '../../../lib/pulse.js';
-import { eventName, fig, isClosed, mostly, optionLine } from '../../../lib/copy.js';
+import { fig, isClosed, optionLine } from '../../../lib/copy.js';
 import { scoreEvent } from '../../../lib/score.js';
-import { Footer, FigureNote, Guess } from '../../components/Footer.js';
-import { Move } from '../../components/EventRow.js';
+import { Footer, FigureNote } from '../../components/Footer.js';
 import { BackLink } from '../../components/Chrome.js';
+import { StoryCard } from '../../components/StoryCard.js';
 import { EventSkeleton } from '../../components/Skeletons.js';
 
 export const revalidate = 60;
@@ -18,8 +18,7 @@ export default async function EventPage({ params, searchParams }) {
   const sp = await searchParams;
   if (sp.state === 'loading') return <EventSkeleton />;
   const pulse = await loadPulse(sp.state === 'error' ? 'error' : 'live');
-  const base = pulse.events.find((s) => s.ev.event_id === String(id));
-  const raw = base ? base.ev : null;
+  const raw = (pulse.raw || []).find((e) => e.event_id === String(id));
   if (!raw) {
     return (
       <>
@@ -37,48 +36,32 @@ export default async function EventPage({ params, searchParams }) {
       <>
         <main>
           <BackLink />
-          <h1>{eventName(raw)}</h1>
           <p className="empty">We could not find this event.</p>
         </main>
         <Footer pulse={pulse} />
       </>
     );
   }
-  const lead = s.lead;
+  const hist = await loadHistory(s.lead.token, 7);
+  const chart = hist ? chartPath(hist, 7) : null;
+  const monthHist = await loadHistory(s.lead.token, 30);
+  const month = monthHist ? chartPath(monthHist, 30) : null;
   const rest = s.opts.filter((_, i) => s.opts.length === 1 || i > 0);
-  const parts = s.parts.filter((p) => p.strength > 0).sort((a, b) => b.contrib - a.contrib);
-  const line = mostly(s.parts);
-  const second = s.opts[1];
-  const other = second ? optionLine(s.ev, second.label, pulse.rules, false) : 'The other result';
-  const round = Math.round(s.touch);
-  const bit = line ? ', ' + line.charAt(0).toLowerCase() + line.slice(1) : '';
-  const hist = await loadHistory(lead.token);
-  const d = hist ? chartPath(hist) : null;
-  const holdNames = { INTC: 'Intel', BTC: 'Bitcoin', SPY: 'SPY', JPM: 'JPMorgan', BAC: 'Bank of America', ETH: 'Ethereum' };
   return (
     <>
       <main>
         <FigureNote pulse={pulse} />
         <BackLink />
-        <h1>{eventName(s.ev)}</h1>
         {isClosed(s.ev) ? <p className="closed">Closed</p> : null}
-        <p className="bignum">{fig(lead.pct)}%</p>
-        <p className="subline">
-          {optionLine(s.ev, lead.label, pulse.rules, false)}
-          {lead.move == null ? null : <> · <Move move={s.move} meaningful={s.meaningful} today /></>}
-        </p>
-        {d ? (
-          <div className="chart" role="img" aria-label="24 hour chart">
-            <svg className="spark" viewBox="0 0 640 140" preserveAspectRatio="none">
-              <path d={d} fill="none" stroke="#116C5B" strokeWidth="2" strokeLinejoin="round" strokeLinecap="round" vectorEffect="non-scaling-stroke" />
-            </svg>
-            <div className="chart-caps"><span>24 h ago</span><span>now</span></div>
-          </div>
-        ) : null}
+        <StoryCard s={s} pulse={pulse} chart={chart} heading="h1" open />
+        {month ? <div className="chart" role="img" aria-label="30 day chance chart"><svg viewBox="0 0 640 80" preserveAspectRatio="none"><path d={month.d} fill="none" stroke="#116C5B" strokeWidth="2" vectorEffect="non-scaling-stroke" /></svg><div className="chart-caps"><span>{month.start}</span><span>{month.end}</span></div></div> : null}
+        {s.lead.question ? <p className="cap">Contract rules, in the market's own words: {s.lead.question}</p> : null}
+        <p className="cap"><a href="/how#formula">How the ranking works</a></p>
+        <h2>Other chances</h2>
         {rest.map((o) => {
           const v = Math.max(0, Math.min(100, o.pct || 0));
           return (
-            <div className="optrow" key={o.market + o.label}>
+            <div className="optrow" key={String(o.market) + o.label}>
               <div className="optop">
                 <span className="oname">{optionLine(s.ev, o.label, pulse.rules, false)}</span>
                 <span className="opct">{fig(o.pct)}%</span>
@@ -87,26 +70,8 @@ export default async function EventPage({ params, searchParams }) {
             </div>
           );
         })}
-        <div className="linkrow touchblock">Could touch {round}% of your portfolio <Guess /></div>
-        {line ? <p className="mostly">{line}</p> : null}
-        <details className="hold">
-          <summary>Show holdings ›</summary>
-          <ul>
-            {parts.map((p) => (
-              <li key={p.ticker}><span>{holdNames[p.ticker] || p.name}</span><span className="contrib">{p.contrib.toFixed(1)}</span></li>
-            ))}
-          </ul>
-        </details>
-        <div className="linkrow lines">
-          <Guess />
-          <p>If it happens: could touch about {round}%{bit}.</p>
-          <p>If not: {other} would be the surprise against {fig(lead.pct)}%.</p>
-        </div>
       </main>
-      <Footer
-        pulse={pulse}
-        extra={<> · <a href={s.ev.polymarket_url} target="_blank" rel="noopener">Open on Polymarket ›</a></>}
-      />
+      <Footer pulse={pulse} />
     </>
   );
 }

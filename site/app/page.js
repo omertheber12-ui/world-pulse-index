@@ -1,7 +1,7 @@
-import { loadPulse } from '../lib/pulse.js';
-import { headline } from '../lib/copy.js';
-import { Footer, FigureNote, Guess } from './components/Footer.js';
-import { EventRow } from './components/EventRow.js';
+import { loadPulse, loadHistory, chartPath } from '../lib/pulse.js';
+import { homeEligible } from '../lib/score.js';
+import { Footer, FigureNote } from './components/Footer.js';
+import { StoryCard } from './components/StoryCard.js';
 import { TodaySkeleton } from './components/Skeletons.js';
 import Link from 'next/link';
 
@@ -32,23 +32,33 @@ export default async function TodayPage({ searchParams }) {
       </>
     );
   }
-  const h = headline(ranked, pulse.rules);
-  const t = h.top;
-  const line = t.ev.group === 'central_bank_rates'
-    ? 'of your portfolio could be touched by this decision'
-    : 'of your portfolio could be touched by this event';
-  const ranking = ranked.map((s) => s.ev.event_id + ':' + s.attention.toFixed(4)).join(',');
+  const home = ranked.filter((s) => homeEligible(s));
+  const top = home.slice(0, 3);
+  if (!top.length) {
+    return (
+      <>
+        <main>
+          <FigureNote pulse={pulse} />
+          <h1>Today's top 3 changes for your portfolio</h1>
+          <p className="empty">No events pass the ranking cutoff right now.</p>
+        </main>
+        <Footer pulse={pulse} />
+      </>
+    );
+  }
+  const charts = await Promise.all(top.map(async (s) => chartPath(await loadHistory(s.lead && s.lead.token, 7), 7)));
+  const ranking = home.map((s) => s.ev.event_id + ':' + s.score.toFixed(4)).join(',');
+  const today = new Intl.DateTimeFormat('en-GB', { timeZone: 'Asia/Jerusalem', day: 'numeric', month: 'long', year: 'numeric' }).format(new Date());
   return (
     <>
       <main>
         <FigureNote pulse={pulse} />
-        <h1>{h.text}</h1>
-        <p className="bignum">{Math.round(t.touch)}%</p>
-        <p className="touchline">{line} <Guess /></p>
-        <p className="insight">{h.insight}</p>
-        <h2>Top events</h2>
-        <div className="list" id="top5" data-ranking={ranking}>
-          {ranked.slice(0, 5).map((s) => <EventRow key={s.ev.event_id} s={s} rules={pulse.rules} id />)}
+        <p className="pagetitle">Today's top 3 changes for your portfolio</p>
+        <p className="cap">{today} · Sample portfolio. Not your live account. <span className="tag guess">Guess</span> ranking weights are a starting point to tune.</p>
+        <div className="list" id="top3" data-ranking={ranking}>
+          {top.map((s, i) => (
+            <StoryCard key={s.ev.event_id} s={s} pulse={pulse} chart={charts[i]} heading={i === 0 ? 'h1' : 'h2'} />
+          ))}
         </div>
         <p className="more"><Link href="/events">All events ›</Link></p>
       </main>

@@ -21,6 +21,9 @@ function trimMarket(m) {
     id: m.id,
     question: m.question,
     groupItemTitle: m.groupItemTitle,
+    endDate: m.endDate || null,
+    liquidityNum: m.liquidityNum == null ? null : Number(m.liquidityNum),
+    updatedAt: m.updatedAt || null,
     outcomes: m.outcomes,
     outcomePrices: m.outcomePrices,
     clobTokenIds: m.clobTokenIds,
@@ -65,6 +68,9 @@ async function fetchEvent(ev) {
     slug,
     polymarket_url: slug ? 'https://polymarket.com/event/' + slug : ev.polymarket_url,
     volume: Number(j.volume || ev.volume || 0),
+    liquidity: j.liquidity == null ? null : Number(j.liquidity),
+    endDate: j.endDate || (markets[0] && markets[0].endDate) || ev.endDate || null,
+    updatedAt: j.updatedAt || (markets[0] && markets[0].updatedAt) || null,
     markets,
     fallback: false,
   };
@@ -88,6 +94,7 @@ export const loadPulse = cache(async function loadPulse(mode) {
   if (!gammaAt) liveOk = false;
   return {
     events: rankOpen(events, ctx),
+    raw: events,
     liveOk,
     gammaAt,
     builtMs: fallback.built_ms,
@@ -97,14 +104,18 @@ export const loadPulse = cache(async function loadPulse(mode) {
   };
 });
 
-export async function loadHistory(token) {
+const BROWSER = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36';
+
+export const loadHistory = cache(async function loadHistory(token, days = 7) {
   if (!token) return null;
+  const start = Math.floor(Date.now() / 1000) - days * 86400;
+  const fidelity = days > 14 ? 720 : 60;
   try {
     const res = await fetch(
-      'https://clob.polymarket.com/prices-history?market=' + encodeURIComponent(token) + '&interval=1d&fidelity=30',
+      'https://clob.polymarket.com/prices-history?market=' + encodeURIComponent(token) + '&startTs=' + start + '&fidelity=' + fidelity,
       {
         next: { revalidate: 60 },
-        headers: { accept: 'application/json', 'user-agent': 'Mozilla/5.0 WorldPulseIndex' },
+        headers: { accept: 'application/json', 'user-agent': BROWSER },
         signal: AbortSignal.timeout(8000),
       },
     );
@@ -115,11 +126,12 @@ export async function loadHistory(token) {
   } catch {
     return null;
   }
-}
+});
 
-export function chartPath(hist) {
+export function chartPath(hist, days = 7) {
+  if (!hist) return null;
   const now = Date.now() / 1000;
-  let pts = hist.filter((p) => p && p.t >= now - 86400 && p.p != null && !Number.isNaN(Number(p.p)));
+  let pts = hist.filter((p) => p && p.t >= now - days * 86400 && p.p != null && !Number.isNaN(Number(p.p)));
   if (pts.length < 2) pts = hist.filter((p) => p && p.p != null && !Number.isNaN(Number(p.p)));
   if (pts.length < 2) return null;
   let min = Infinity;
@@ -143,5 +155,6 @@ export function chartPath(hist) {
     const y = pad + (h - pad * 2) * (1 - (Number(p.p) - min) / (max - min));
     d += (i ? 'L' : 'M') + x.toFixed(1) + ',' + y.toFixed(1);
   });
-  return d;
+  const pct = (v) => (Math.round(Number(v) * 1000) / 10).toFixed(1) + '%';
+  return { d, start: pct(pts[0].p), end: pct(pts[pts.length - 1].p) };
 }
