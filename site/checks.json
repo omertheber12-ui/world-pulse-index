@@ -1,5 +1,5 @@
 {
-  "run_at": "2026-11-09T22:49:26.806Z",
+  "run_at": "2026-11-09T22:55:22.171Z",
   "all_pass": true,
   "items": [
     {
@@ -31,6 +31,11 @@
       "check": "A rate decision does not count every holding as an estimated link",
       "pass": true,
       "detail": "44.2 SPY,JPM,BAC | You hold no company named in this bet; this is an estimated link through State Street fund, JPMorgan, and Bank of America."
+    },
+    {
+      "check": "Headlines use sentence case, not the market title case",
+      "pass": true,
+      "detail": "Chance that the US and Iran reach an effective ceasefire by 15 November 2026 rose"
     },
     {
       "check": "A move under 1 point reads held steady",
@@ -98,9 +103,14 @@
       "detail": "Chance that the Israel and Iran ceasefire continues through 31 December 2026 rose"
     },
     {
+      "check": "Live headlines have no mid-sentence Title Case words except proper nouns",
+      "pass": true,
+      "detail": "Chance that the Israel and Iran ceasefire continues through 31 December 2026 rose"
+    },
+    {
       "check": "Today top 3 cards are the first 3 of the personal ranking",
       "pass": true,
-      "detail": "rows=711714,1337182,770450 top=711714,1337182,770450"
+      "detail": "rows=711714,770450,1337182 top=711714,770450,1337182"
     },
     {
       "check": "Exposure text says this is not an expected loss",

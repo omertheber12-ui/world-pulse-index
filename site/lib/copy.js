@@ -194,6 +194,47 @@ function meetingPhrase(q) {
   return m ? m[0] : '';
 }
 
+/** Ordinary words a market may capitalize. These are not proper nouns. */
+const COMMON_WORDS = new Set(
+  'a an the of by on in at to for with from into over under and or its his her their our your this that these those not no yes will be is are was were do does did have has had end through before after between during until about next last first other another new old high low large small big more most point points meeting change changes rate rates interest increase decrease announce announces deposit facility decision revenue market value adjusted gross margin official officially declare declares war invade invades invasion continue continues hold holds reach reaches effective ceasefire data center centre presidential election elections prime minister agreement above below less greater than win wins won deal deals conflict wars stock stocks fund funds central quarter capitalization cap non pause week weeks begins begin starts start above below'.split(/\s+/),
+);
+
+export function sentenceCase(text) {
+  return String(text).split(/(\s+)/).map((tok) => {
+    if (!tok || /^\s+$/.test(tok)) return tok;
+    const m = tok.match(/^([^A-Za-z]*)([A-Za-z][A-Za-z']*)(.*)$/);
+    if (!m) return tok;
+    const pre = m[1];
+    const word = m[2];
+    const post = m[3];
+    if (/^[A-Z]{2,}$/.test(word) || /^Q[1-4]$/i.test(word)) return pre + (/^q/i.test(word) ? word.toUpperCase() : word) + post;
+    if (COMMON_WORDS.has(word.toLowerCase())) return pre + word.toLowerCase() + post;
+    if (/^[A-Z]/.test(word)) return pre + word[0].toUpperCase() + word.slice(1) + post;
+    return tok;
+  }).join('');
+}
+
+export function strayTitleCase(headline) {
+  const bad = [];
+  String(headline).split(/\s+/).forEach((tok, i) => {
+    if (i === 0) return;
+    const m = tok.match(/[A-Za-z][A-Za-z']*/);
+    if (!m) return;
+    const word = m[0];
+    if (/^[A-Z]{2,}$/.test(word) || /^Q[1-4]$/.test(word)) return;
+    if (/^[A-Z][a-z]/.test(word) && COMMON_WORDS.has(word.toLowerCase())) bad.push(word);
+  });
+  return bad;
+}
+
+function finishPhrase(phrase) {
+  let s = sentenceCase(phrase).replace(/\s+/g, ' ').trim();
+  if (/\beffective ceasefire\b/i.test(s) && !/\b(reach|reaches|reached|continue|continues|hold|holds|start|starts|begin|begins)\b/i.test(s)) {
+    s = s.replace(/\beffective ceasefire\b/i, 'reach an effective ceasefire');
+  }
+  return s;
+}
+
 export function chancePhrase(question, endDate) {
   let q = String(question || '').replace(/\u2019/g, "'").replace(/\u2018/g, "'").trim();
   q = q.replace(/\?+$/g, '').trim();
@@ -205,13 +246,13 @@ export function chancePhrase(question, endDate) {
   q = q.replace(/\sx\s/gi, ' and ');
   const meeting = meetingPhrase(q);
   const amount = /50\+|0\.50|50 bps/i.test(q) ? '0.50 points or more' : '0.25 points';
-  if (/no change in .*interest rates/i.test(q)) return 'the US central bank keeps rates unchanged at its ' + (meeting || 'next') + ' meeting';
-  if (/increase interest rates|raises rates/i.test(q)) return 'the US central bank raises rates by ' + amount + ' at its ' + (meeting || 'next') + ' meeting';
-  if (/decrease interest rates|cuts rates/i.test(q)) return 'the US central bank cuts rates by ' + amount + ' at its ' + (meeting || 'next') + ' meeting';
+  if (/no change in .*interest rates/i.test(q)) return finishPhrase('the US central bank keeps rates unchanged at its ' + (meeting || 'next') + ' meeting');
+  if (/increase interest rates|raises rates/i.test(q)) return finishPhrase('the US central bank raises rates by ' + amount + ' at its ' + (meeting || 'next') + ' meeting');
+  if (/decrease interest rates|cuts rates/i.test(q)) return finishPhrase('the US central bank cuts rates by ' + amount + ' at its ' + (meeting || 'next') + ' meeting');
   const cap = q.match(/market value is less than (\$[0-9.]+ trillion)/i) || q.match(/less than (\$[0-9.]+ trillion)/i);
   if (cap && /nvidia/i.test(q)) {
     const year = (q.match(/\b20\d\d\b/) || [''])[0];
-    return "Nvidia's market value is below " + cap[1] + (year ? ' at the end of ' + year : '');
+    return finishPhrase("Nvidia's market value is below " + cap[1] + (year ? ' at the end of ' + year : ''));
   }
   if (/ceasefire/i.test(q)) {
     let rest = q.replace(/^will\s+/i, '').replace(/\bbe\b/i, 'is').replace(/\s+/g, ' ').trim();
@@ -219,7 +260,7 @@ export function chancePhrase(question, endDate) {
     if (end && !/20\d\d/.test(rest)) rest = rest.replace(/(?:through|by)\s+.+$/i, (m) => m.split(' ')[0] + ' ' + end);
     if (!/^the\s/i.test(rest)) rest = 'the ' + rest;
     rest = rest.replace(/\bhold\b/i, 'holds').replace(/\bcontinue\b/i, 'continues');
-    return rest;
+    return finishPhrase(rest);
   }
   q = q.replace(/^will there be\b/i, 'there is');
   if (/^will (.+?) win\b/i.test(q)) q = q.replace(/^will (.+?) win\b/i, (_, who) => who + ' wins');
@@ -228,7 +269,7 @@ export function chancePhrase(question, endDate) {
   q = q.replace(/\bbps\b/gi, 'points');
   const end = endLabel(endDate);
   if (end && !/20\d\d/.test(q)) q = q + ' at ' + end;
-  return q.replace(/\s+/g, ' ').trim();
+  return finishPhrase(q);
 }
 
 export function changeVerb(move) {
