@@ -4,7 +4,7 @@ import { execSync, spawn, spawnSync } from 'node:child_process';
 import { readFileSync, readdirSync, statSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { chancePhrase, changeLine, changeVerb, thinMarketNote, whyMatters } from '../lib/copy.js';
+import { chancePhrase, changeLine, changeVerb, strayTitleCase, thinMarketNote, whyMatters } from '../lib/copy.js';
 import { homeEligible, moveScore, qualityScore, rankOpen } from '../lib/score.js';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -64,6 +64,21 @@ add('A rate decision does not count every holding as an estimated link',
   && fedTickers.includes('JPM') && fedTickers.includes('BAC')
   && whyMatters(fedScore.exposure).includes('estimated link through'),
   fedScore ? fedScore.exposure.total.toFixed(1) + ' ' + fedTickers.join(',') + ' | ' + whyMatters(fedScore.exposure) : 'missing');
+const ceaseHead = 'Chance that ' + chancePhrase('US x Iran Effective Ceasefire by November 15?', '2026-11-15T12:00:00Z') + ' rose';
+const caseHits = [];
+for (const e of fallback.events) {
+  const m = (e.markets || []).find((x) => !x.closed) || (e.markets || [])[0];
+  if (!m) continue;
+  const head = 'Chance that ' + chancePhrase(m.question, m.endDate) + ' rose';
+  const stray = strayTitleCase(head);
+  if (stray.length) caseHits.push(head + ' [' + stray.join(', ') + ']');
+}
+add('Headlines use sentence case, not the market title case',
+  ceaseHead === 'Chance that the US and Iran reach an effective ceasefire by 15 November 2026 rose'
+  && strayTitleCase(ceaseHead).length === 0
+  && caseHits.length === 0
+  && strayTitleCase('Chance that Nvidia Q3 Data Center revenue is above $100 billion rose').includes('Data'),
+  ceaseHead + (caseHits.length ? ' | ' + caseHits.join(' | ') : ''));
 add('A move under 1 point reads held steady',
   changeVerb(0.4) === 'held steady' && changeLine(80.5, 0.4) === 'at 80.5%, less than 1 point change in 24 hours' && changeVerb(-4) === 'fell');
 
@@ -188,6 +203,12 @@ if (base) {
   add('Today headline is built from the question, end date, and change',
     /^Chance that /.test(h1) && /(rose|fell|held steady)/.test(h1) && /20\d\d/.test(h1) && today.includes('in 24 hours'),
     h1);
+  const liveHeads = [...today.matchAll(/<h[12][^>]*>([\s\S]*?)<\/h[12]>/g)]
+    .map((m) => m[1].replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim())
+    .filter((t) => t.startsWith('Chance that '));
+  const liveStray = liveHeads.flatMap((t) => strayTitleCase(t).map((w) => t + ' [' + w + ']'));
+  add('Live headlines have no mid-sentence Title Case words except proper nouns',
+    liveHeads.length > 0 && liveStray.length === 0, liveStray.join(' | ') || liveHeads[0] || '');
   const rankAttr = (today.match(/data-ranking="([^"]*)"/) || [, ''])[1];
   const ranking = rankAttr ? rankAttr.split(',').map((x) => x.split(':')) : [];
   const rowIds = [...today.matchAll(/data-id="(\d+)"/g)].map((m) => m[1]);
