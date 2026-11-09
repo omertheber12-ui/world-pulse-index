@@ -1,8 +1,8 @@
 // Built by build_site.py. Public Polymarket figures + read-only holdings snapshot. No keys.
 window.WPI_SNAPSHOT = {
- "built_at": "9 November 2026, 18:16:33 Asia/Jerusalem",
- "built_iso": "2026-11-09T18:16:33.958741+02:00",
- "built_ms": 1794240993958,
+ "built_at": "9 November 2026, 18:17:13 Asia/Jerusalem",
+ "built_iso": "2026-11-09T18:17:13.258030+02:00",
+ "built_ms": 1794241033258,
  "group_order": [
   "central_bank_rates",
   "big_company_events",

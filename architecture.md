@@ -81,6 +81,20 @@ Weights on the page use the **16:44** Asia/Jerusalem read (Fact), not Product’
 - Insights only. The page never uses “buy” or “sell” as advice.
 - Holdings refresh only on rebuild from a known snapshot file.
 
+## Page structure (multi-page site, 9 Nov 2026 18:20)
+
+The one large page was split so each page has one job. All pages share one top bar (bottom tab bar on a phone), one time line ("Figures at HH:MM:SS · Holdings at 16:44 · Insights only, not advice · How it works") and one footer.
+
+- Today (`today.html`): a headline of 12 words or fewer from the top-ranked event (Product task 7 rule; "No big moves today" when no event moved 5 points or more in about 24 hours), then the top 3 events ranked by attention. Each card shows the Polymarket figure as the big number, "Could touch X% of your portfolio" second, a High effect flag above 30%, and one "why" line.
+- Events (`events.html`): four group tabs. Phone rows show name, figure, 24-hour move arrow and touch. Desktop adds leading option and traded amount.
+- Event detail (`event.html?id=`): all options, holdings it could touch with link strength (each a Guess), the two Guess lines, source link and fetch time, Back to Events.
+- My portfolio (`portfolio.html`): holdings by size with value and share and their top two events by attention; sector shares (Guess).
+- How it works (`how.html`): formula, sources, safety choices, links to this document and the Product task 10 rules.
+
+Shared code: `assets/data.js` (scoring, live reads, layout), `assets/layout.css` (phone first, readable at 390 and 1280 pixels), `assets/snapshot.js` (built-in figures, rules and holdings written by `build_site.py`, so pages work opened as files).
+
+Live updates: the browser re-reads Gamma `/events/{id}` every 60 seconds and the order book midpoint (`clob.polymarket.com/midpoint?token_id=`) of each leading option every 20 seconds, then re-scores, re-orders and updates the time line. If reads fail, the built-in figures stay and are labeled. `rebuild-loop.sh` is a backup that rebuilds every 60 seconds.
+
 ## What’s built
 
 - `rules.json` — Product task 10 strengths and event ids (swappable).

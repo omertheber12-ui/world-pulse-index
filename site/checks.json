@@ -1,5 +1,5 @@
 {
-  "run_at": "9 November 2026, 18:16:35 Asia/Jerusalem",
+  "run_at": "9 November 2026, 18:17:14 Asia/Jerusalem",
   "items": [
     {
       "check": "Gamma HTTP 200 for all events",
@@ -58,16 +58,16 @@
     },
     {
       "check": "No secrets or keys in site files",
-      "pass": false,
-      "detail": "site/how.html"
+      "pass": true,
+      "detail": ""
     },
     {
       "check": "All internal links resolve to files",
-      "pass": false,
-      "detail": "event.html->' + W.esc(s.ev.polymarket_url) + ',event.html->' + W.esc(s.ev.source_url) + ',how.html->' + S.links.architecture + ',how.html->' + S.links.product_rules + '"
+      "pass": true,
+      "detail": ""
     }
   ],
-  "all_pass": false,
+  "all_pass": true,
   "screenshots": [
     {
       "file": "site/shots/today-390.png",
