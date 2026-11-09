@@ -3,3 +3,5 @@ public-fetch.json
 holdings-live.json
 etoro-*
 __pycache__/
+*.pyc
+.env
