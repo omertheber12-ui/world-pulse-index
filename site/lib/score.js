@@ -100,11 +100,21 @@ export function subjectOf(ev, lead) {
   return SUBJECTS.find((s) => s.words.some((w) => blob.includes(w))) || null;
 }
 
-function guessReason(ticker, subject, ev) {
-  if (subject && subject.key === 'nvidia' && ticker === 'INTC') return 'Guess: we assume chip makers tend to move with news about Nvidia';
-  if (String(ev.strength_key || '').includes('central_bank') && (ticker === 'JPM' || ticker === 'BAC')) return 'Guess: we assume bank stocks tend to move with this rate decision';
-  if (ticker === 'SPY') return 'Guess: we assume this fund tends to move with ' + (subject ? subject.label : 'this event');
-  return 'Guess: we assume this holding tends to move with ' + (subject ? subject.label : 'this event');
+/** A stated reason, or '' when this holding should not be counted as an estimate. */
+export function specificEstimate(ticker, ev, lead, subject) {
+  const key = String(ev.strength_key || '');
+  const blob = ((ev.title || '') + ' ' + (ev.plain || '') + ' ' + ((lead && lead.question) || '')).toLowerCase();
+  if (key === 'central_bank_rates_fed') {
+    if (ticker === 'JPM' || ticker === 'BAC') return 'Guess: bank stocks tend to move when this rate decision changes borrowing costs';
+    if (ticker === 'SPY') return 'Guess: a broad US stock fund tends to move when the US central bank sets rates';
+  }
+  if (subject && subject.key === 'nvidia' && ticker === 'INTC') return 'Guess: chip makers tend to move with news about Nvidia';
+  if (key === 'election_israel' && ticker === 'INTC') return 'Guess: Intel has large operations in Israel, so this election can move that holding';
+  if (key === 'wars' && ticker === 'INTC' && blob.includes('israel')) return 'Guess: Intel has large operations in Israel, so this conflict can move that holding';
+  if (key === 'wars' && ticker === 'SPY') return 'Guess: a broad US stock fund can move when this conflict changes';
+  if (key === 'worldwide_elections' && ticker === 'SPY') return 'Guess: a broad US stock fund can move when this US election is decided';
+  if (key === 'worldwide_elections' && (ticker === 'JPM' || ticker === 'BAC')) return 'Guess: US bank stocks can move when this election changes policy';
+  return '';
 }
 
 export function exposureOf(ev, lead, holdings, rules) {
@@ -135,7 +145,9 @@ export function exposureOf(ev, lead, holdings, rules) {
     const sector = sectorOf(h.ticker, rules);
     const strength = Number(st[sector] || 0);
     if (strength < 0.5) continue;
-    rows.push({ kind: 'estimated', ticker: h.ticker, name: h.name, weight: h.weight, strength, reason: guessReason(h.ticker, subject, ev) });
+    const reason = specificEstimate(h.ticker, ev, lead, subject);
+    if (!reason) continue;
+    rows.push({ kind: 'estimated', ticker: h.ticker, name: h.name, weight: h.weight, strength, reason });
   }
   const sum = (k) => rows.filter((r) => r.kind === k).reduce((a, r) => a + r.weight, 0);
   const direct = sum('direct');

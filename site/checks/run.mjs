@@ -4,7 +4,7 @@ import { execSync, spawn, spawnSync } from 'node:child_process';
 import { readFileSync, readdirSync, statSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { chancePhrase, changeLine, changeVerb } from '../lib/copy.js';
+import { chancePhrase, changeLine, changeVerb, thinMarketNote, whyMatters } from '../lib/copy.js';
 import { homeEligible, moveScore, qualityScore, rankOpen } from '../lib/score.js';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -55,6 +55,15 @@ add('Headline is built from the question, end date, and change',
   && sampleHead.toLowerCase().includes('market value') && sampleHead.includes('$4 trillion')
   && sampleLine === 'from 13.3% to 25.7% in 24 hours, up 12.4 points',
   sampleHead + ' | ' + sampleLine);
+const fedEv = fallback.events.find((e) => e.strength_key === 'central_bank_rates_fed');
+const fedScore = fedEv ? rankOpen([fedEv], ctx)[0] : null;
+const fedTickers = fedScore ? fedScore.exposure.rows.map((r) => r.ticker) : [];
+add('A rate decision does not count every holding as an estimated link',
+  fedScore && fedScore.exposure.total < 90 && fedScore.exposure.total > 0
+  && !fedTickers.includes('BTC') && !fedTickers.includes('ETH') && !fedTickers.includes('INTC')
+  && fedTickers.includes('JPM') && fedTickers.includes('BAC')
+  && whyMatters(fedScore.exposure).includes('estimated link through'),
+  fedScore ? fedScore.exposure.total.toFixed(1) + ' ' + fedTickers.join(',') + ' | ' + whyMatters(fedScore.exposure) : 'missing');
 add('A move under 1 point reads held steady',
   changeVerb(0.4) === 'held steady' && changeLine(80.5, 0.4) === 'at 80.5%, less than 1 point change in 24 hours' && changeVerb(-4) === 'fell');
 
@@ -93,6 +102,23 @@ add('Inter font with tabular numbers', css.includes('INTER') && css.includes('TN
 
 const secretRe = /((api[_-]?key|secret|password|passwd|auth[_-]?token)\s*[:=]\s*['"]?\w{6,}|bearer\s+\w{10,}|ghp_\w{10,}|sk-[A-Za-z0-9]{10,})/i;
 const adviceRe = /\b(buy|sell|should (buy|sell|hold)|we recommend)\b/i;
+const bannedRe = /\b(edge|alpha|risk-free)\b/i;
+function visibleCopy(file, text) {
+  if (file.endsWith('.css')) return '';
+  let t = text.replace(/\/\*[\s\S]*?\*\//g, ' ').replace(/(^|[^:\\])\/\/.*$/gm, '$1');
+  t = t.replace(/\b(className|class)\s*=\s*(['"`])(?:\\.|(?!\2)[\s\S])*?\2/g, ' ');
+  if (/\.(js|mjs|py|json)$/.test(file)) {
+    const parts = [];
+    const re = /(['"`])((?:\\.|(?!\1)[\s\S])*)\1/g;
+    let m;
+    while ((m = re.exec(t))) parts.push(m[2]);
+    return parts.join('\n');
+  }
+  if (file.endsWith('.html')) {
+    return t.replace(/<script[\s\S]*?<\/script>/gi, ' ').replace(/<style[\s\S]*?<\/style>/gi, ' ').replace(/<[^>]+>/g, ' ');
+  }
+  return t;
+}
 function walk(dir, acc = []) {
   for (const name of readdirSync(dir)) {
     if (name === 'node_modules' || name === '.next' || name === 'shots' || name === 'checks.json') continue;
@@ -110,10 +136,10 @@ for (const f of files) {
   if (f.endsWith('run.mjs') || f.endsWith('rank.py')) continue;
   const t = readFileSync(f, 'utf8');
   if (secretRe.test(t)) secretHits.push(path.relative(root, f));
-  if (adviceRe.test(t) && !f.endsWith('run.mjs')) adviceHits.push(path.relative(root, f));
+  if ((adviceRe.test(t) || bannedRe.test(visibleCopy(f, t))) && !f.endsWith('run.mjs')) adviceHits.push(path.relative(root, f));
 }
 add('No secrets or keys in site files', secretHits.length === 0, secretHits.join(','));
-add('No buy/sell advice wording in source', adviceHits.length === 0, adviceHits.join(','));
+add('No buy/sell, edge, alpha, or risk-free wording in source', adviceHits.length === 0, adviceHits.join(','));
 
 let server;
 let base = process.env.BASE_URL || '';
@@ -185,6 +211,14 @@ if (base) {
   add('Event detail keeps the exposure breakdown and Polymarket link',
     ev.includes('Show holdings') && ev.includes('Share of your portfolio linked to this event. This is not an expected loss.')
     && ev.includes('Polymarket') && ev.includes('Guess') && ev.includes('% direct'));
+  const cardSrc = readFileSync(path.join(root, 'app/components/StoryCard.js'), 'utf8');
+  add('Event headline area shows the source, update time, and thin-market note',
+    cardSrc.includes('className="headmeta"') && cardSrc.includes('thinMarketNote')
+    && thinMarketNote(49999, 20000) === 'Thin market: few trades'
+    && thinMarketNote(80000, 9999) === 'Thin market: few trades'
+    && thinMarketNote(50000, 10000) === ''
+    && thinMarketNote(null, null) === ''
+    && /<h1[\s\S]*?<\/h1>[\s\S]*?class="headmeta"[\s\S]*?Polymarket[\s\S]*?updated /.test(ev));
   const how = doms['/how'].html;
   add('How it works states the score formula, caps, and exclusion rules',
     how.includes('Score = 0.5 × Move + 0.35 × Exposure + 0.15 × Quality')
@@ -216,9 +250,10 @@ if (base) {
     'portfolio ' + linkRows.length + ' event ' + evRows.length + ' unlabeled ' + (unlabeled.length + evUn.length));
   const advicePages = [];
   for (const [p, r] of Object.entries(doms)) {
-    if (adviceRe.test(textOf(r.html))) advicePages.push(p);
+    const visibleText = textOf(r.html);
+    if (adviceRe.test(visibleText) || bannedRe.test(visibleText)) advicePages.push(p);
   }
-  add('No buy/sell advice wording on pages', advicePages.length === 0, advicePages.join(','));
+  add('No buy/sell, edge, alpha, or risk-free wording on pages', advicePages.length === 0, advicePages.join(','));
   const redir = await fetch(base + '/today.html', { redirect: 'manual' });
   const loc = redir.headers.get('location') || '';
   add('today.html redirects to the Today page', (redir.status === 307 || redir.status === 308) && (loc === '/' || loc.endsWith('/')));

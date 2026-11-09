@@ -1,5 +1,5 @@
 import {
-  clock, holdName, moneyCompact, shortDate, splitText, storyOf, weightText, whyMatters,
+  clock, holdName, moneyCompact, shortDate, splitText, storyOf, thinMarketNote, weightText, whyMatters,
 } from '../../lib/copy.js';
 
 const KIND = { direct: 'Direct', fund: 'Through a fund', estimated: 'Estimated link' };
@@ -38,13 +38,13 @@ function Table({ s }) {
   );
 }
 
-export function StoryCard({ s, pulse, chart, heading = 'h2', open = false }) {
+export function StoryCard({ s, pulse, chart, heading = 'h2', open = false, meta = false }) {
   const story = storyOf(s);
   const Heading = heading;
   const when = pulse.liveOk && pulse.gammaAt ? clock(pulse.gammaAt) : clock(pulse.builtMs);
   const vol = s.lead && s.lead.volume24hr;
   const liq = (s.lead && s.lead.liquidity != null) ? s.lead.liquidity : s.ev.liquidity;
-  const thin = (vol != null && vol < 50000) || (liq != null && liq < 10000);
+  const thinNote = thinMarketNote(vol, liq);
   const updated = Date.parse((s.lead && s.lead.updatedAt) || s.ev.updatedAt || '');
   const stale = !Number.isNaN(updated) && (Date.now() - updated) > 60 * 60 * 1000;
   const pct = Math.round(s.exposure.total * 10) / 10;
@@ -54,17 +54,23 @@ export function StoryCard({ s, pulse, chart, heading = 'h2', open = false }) {
         <Heading>{story.headline}</Heading>
         <p className="change">{story.line}</p>
       </a>
-      <p className="expo">Your exposure: {pct}% of portfolio</p>
-      <p className="split">{splitText(s.exposure)}</p>
-      <p className="explabel">Share of your portfolio linked to this event. This is not an expected loss.</p>
+      {meta ? (
+        <p className="headmeta">
+          <a href={s.ev.polymarket_url} target="_blank" rel="noopener">Polymarket</a>
+          {' · updated '}{when}
+          {thinNote ? ' · ' + thinNote : ''}
+        </p>
+      ) : null}
       <details className="exposure" open={open || undefined}>
-        <summary>Show holdings</summary>
+        <summary>
+          <span className="expo">Your exposure: {pct}% of portfolio</span>
+          <span className="split">{splitText(s.exposure)}</span>
+          <span className="explabel">Share of your portfolio linked to this event. This is not an expected loss.</span>
+          <span className="sr-only">Show holdings</span>
+        </summary>
         <Table s={s} />
       </details>
       <p className="whyline">Why this matters to you: {whyMatters(s.exposure)}</p>
-      {s.exposure.rows.filter((r) => r.kind === 'estimated').slice(0, 1).map((r) => (
-        <p className="linkrow" key={r.ticker}>{r.reason}.</p>
-      ))}
       <Chart path={chart} />
       <p className="source">
         <a href={s.ev.polymarket_url} target="_blank" rel="noopener">Polymarket</a>
@@ -73,7 +79,7 @@ export function StoryCard({ s, pulse, chart, heading = 'h2', open = false }) {
         {vol != null ? ' · volume ' + moneyCompact(vol) : ''}
         {liq != null ? ' · liquidity ' + moneyCompact(liq) : ''}
       </p>
-      {thin ? <p className="thinflag">Thin market</p> : null}
+      {thinNote && !meta ? <p className="thinflag">{thinNote}</p> : null}
       {stale ? <p className="thinflag">Not updated recently</p> : null}
     </article>
   );
