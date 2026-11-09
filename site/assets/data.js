@@ -154,10 +154,11 @@
   };
   W.rerender = function () { render(); };
   W.param = function (k) { return new URLSearchParams(location.search).get(k); };
+  W.bar = function (v) { var w = v == null || isNaN(v) ? 0 : Math.max(0, Math.min(100, v)); return '<span class="bar" aria-hidden="true"><i style="width:' + w.toFixed(1) + '%"></i></span>'; };
   W.card = function (s) {
     return '<a class="card" href="event.html?id=' + s.ev.event_id + '">' +
       '<div class="ctitle">' + esc(W.name(s.ev)) + '</div>' +
-      '<div class="big">' + W.pct(s.lead ? s.lead.pct : null) + '%</div>' +
+      '<div class="big">' + W.pct(s.lead ? s.lead.pct : null) + '%</div>' + W.bar(s.lead ? s.lead.pct : null) +
       '<div class="opt">Odds: ' + esc(s.lead ? W.plainOutcome(s.ev, s.lead.label) : '') + ' · Polymarket</div>' +
       '<div class="touch">Could touch ' + Math.round(s.touch) + '% of your portfolio' + (s.high ? ' <span class="flag">High effect</span>' : '') + ' <span class="guess">Guess</span></div>' +
       '<div class="why">Why: ' + esc(s.why) + '</div></a>';
