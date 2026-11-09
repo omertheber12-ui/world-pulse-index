@@ -100,7 +100,7 @@
       "broad_us_stocks": 0.5,
       "banks": 0.5,
       "product_touch_ref": 36.0,
-      "note": "US elections (only US races found in Product search)"
+      "note": "US elections (2028 presidential winner); Product task 10 strengths"
     },
     "wars": {
       "group": "wars",
@@ -110,6 +110,28 @@
       "banks": 0.25,
       "product_touch_ref": 38.0,
       "note": "Wars"
+    },
+    "election_france": {
+      "group": "worldwide_elections",
+      "subgroup": "france",
+      "chips": 0.25,
+      "crypto": 0.25,
+      "broad_us_stocks": 0.25,
+      "banks": 0.25,
+      "label": "Guess, Assumption",
+      "author": "Development's own guess, pending Product",
+      "note": "French election: European risk, weak links to SPY, banks, Bitcoin and Intel"
+    },
+    "election_israel": {
+      "group": "worldwide_elections",
+      "subgroup": "israel",
+      "chips": 0.5,
+      "crypto": 0.25,
+      "broad_us_stocks": 0.25,
+      "banks": 0.25,
+      "label": "Guess, Assumption",
+      "author": "Development's own guess, pending Product",
+      "note": "Israel prime minister: some link to Intel (large Israel operations), weak to others"
     }
   },
   "scoring": {
@@ -244,43 +266,34 @@
     ],
     "worldwide_elections": [
       {
-        "event_id": "1262243",
-        "market_ids": [
-          "6274257"
-        ],
-        "strength_key": "worldwide_elections",
-        "title_hint": "US Senate swing states",
+        "event_id": "79987",
+        "market_ids": [],
+        "top_n": 8,
+        "strength_key": "election_france",
+        "title_hint": "Next French Presidential Election",
         "label": "exact",
-        "plain": "Senate swing states Republicans win",
-        "outcomes": {
-          "None": "Republicans win no Senate swing state"
-        }
+        "plain": "French presidential election 2027",
+        "outcome_template": "{label} wins"
       },
       {
-        "event_id": "1304411",
-        "market_ids": [
-          "6612550"
-        ],
-        "strength_key": "worldwide_elections",
-        "title_hint": "Senate combo",
+        "event_id": "81557",
+        "market_ids": [],
+        "top_n": 8,
+        "strength_key": "election_israel",
+        "title_hint": "Prime Minister of Israel after the next election?",
         "label": "exact",
-        "plain": "Senate races: Louisiana, Mississippi, Florida",
-        "outcomes": {
-          "Reps sweep": "Republicans sweep Louisiana, Mississippi, Florida Senate"
-        }
+        "plain": "Israel next prime minister",
+        "outcome_template": "{label} becomes prime minister"
       },
       {
-        "event_id": "1224132",
-        "market_ids": [
-          "5971438"
-        ],
+        "event_id": "31552",
+        "market_ids": [],
+        "top_n": 8,
         "strength_key": "worldwide_elections",
-        "title_hint": "Senate combo",
+        "title_hint": "Presidential Election Winner 2028",
         "label": "exact",
-        "plain": "Senate races: Mississippi, South Carolina, Montana",
-        "outcomes": {
-          "Reps MS & MT, Dems SC": "Republicans MS and MT, Democrats SC"
-        }
+        "plain": "US presidential election 2028",
+        "outcome_template": "{label} wins"
       }
     ],
     "wars": [
@@ -359,9 +372,9 @@
   },
   "gaps": [
     "No live earnings markets found for Apple, Microsoft, Alphabet, Amazon, Meta, Tesla or Intel at Product search time.",
-    "Only United States election races found; most look nearly settled.",
     "Strength numbers are untested starting Assumptions.",
-    "Attention formula is a first Guess from Product."
+    "Attention formula is a first Guess from Product.",
+    "Election strengths for France and Israel are Development's own Guess, pending Product."
   ],
   "rate_wording": {
     "No change": "{bank} holds rates {when}",

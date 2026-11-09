@@ -47,6 +47,11 @@ def fetch_event_snapshot(spec, group_key):
             use = markets
     else:
         use = markets
+    if spec.get("top_n"):
+        priced = [m for m in use if not m.get("closed") and B.parse_json_list(m.get("outcomePrices"))]
+        priced.sort(key=lambda m: -float(B.parse_json_list(m.get("outcomePrices"))[0]))
+        use = priced[: int(spec["top_n"])]
+        wanted = [str(m.get("id")) for m in use]
     vol = float(ev.get("volume") or 0) or sum(float(m.get("volumeNum") or 0) for m in use)
     slug = ev.get("slug") or ""
     return status, {
@@ -61,6 +66,7 @@ def fetch_event_snapshot(spec, group_key):
         "plain": spec.get("plain") or spec.get("title_hint"),
         "rate": spec.get("rate"),
         "outcomes_plain": spec.get("outcomes") or {},
+        "outcome_template": spec.get("outcome_template"),
         "volume": vol,
         "markets": [trim_market(m) for m in use],
     }

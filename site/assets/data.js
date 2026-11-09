@@ -19,7 +19,7 @@
   W.options = function (ev) {
     var out = [];
     ev.markets.forEach(function (m) {
-      if (m.closed) return;
+      if (m.closed || !m.outcomePrices) return;
       var oc = parse(m.outcomes), pr = parse(m.outcomePrices).map(Number), tk = parse(m.clobTokenIds);
       var odc = m.oneDayPriceChange == null ? null : Number(m.oneDayPriceChange) * 100;
       if (oc.length === 2 && String(oc[0]).toLowerCase() === 'yes') {
@@ -39,6 +39,7 @@
   W.plainOutcome = function (ev, label) {
     if (ev.rate && S.rules.rate_wording && S.rules.rate_wording[label]) return S.rules.rate_wording[label].replace('{bank}', ev.rate.bank).replace('{when}', ev.rate.when);
     if (ev.outcomes_plain && ev.outcomes_plain[label]) return ev.outcomes_plain[label];
+    if (ev.outcome_template) return ev.outcome_template.replace('{label}', label);
     return (ev.plain || ev.title) + ': ' + label;
   };
   W.name = function (ev) { return ev.plain || ev.title; };

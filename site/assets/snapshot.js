@@ -1,8 +1,8 @@
 // Built by build_site.py. Public Polymarket figures + read-only holdings snapshot. No keys.
 window.WPI_SNAPSHOT = {
- "built_at": "9 November 2026, 18:19:30 Asia/Jerusalem",
- "built_iso": "2026-11-09T18:19:30.028351+02:00",
- "built_ms": 1794241170028,
+ "built_at": "9 November 2026, 18:22:29 Asia/Jerusalem",
+ "built_iso": "2026-11-09T18:22:29.578247+02:00",
+ "built_ms": 1794241349578,
  "group_order": [
   "central_bank_rates",
   "big_company_events",
@@ -168,7 +168,7 @@ window.WPI_SNAPSHOT = {
     "broad_us_stocks": 0.5,
     "banks": 0.5,
     "product_touch_ref": 36.0,
-    "note": "US elections (only US races found in Product search)"
+    "note": "US elections (2028 presidential winner); Product task 10 strengths"
    },
    "wars": {
     "group": "wars",
@@ -178,6 +178,28 @@ window.WPI_SNAPSHOT = {
     "banks": 0.25,
     "product_touch_ref": 38.0,
     "note": "Wars"
+   },
+   "election_france": {
+    "group": "worldwide_elections",
+    "subgroup": "france",
+    "chips": 0.25,
+    "crypto": 0.25,
+    "broad_us_stocks": 0.25,
+    "banks": 0.25,
+    "label": "Guess, Assumption",
+    "author": "Development's own guess, pending Product",
+    "note": "French election: European risk, weak links to SPY, banks, Bitcoin and Intel"
+   },
+   "election_israel": {
+    "group": "worldwide_elections",
+    "subgroup": "israel",
+    "chips": 0.5,
+    "crypto": 0.25,
+    "broad_us_stocks": 0.25,
+    "banks": 0.25,
+    "label": "Guess, Assumption",
+    "author": "Development's own guess, pending Product",
+    "note": "Israel prime minister: some link to Intel (large Israel operations), weak to others"
    }
   },
   "scoring": {
@@ -202,9 +224,9 @@ window.WPI_SNAPSHOT = {
   },
   "gaps": [
    "No live earnings markets found for Apple, Microsoft, Alphabet, Amazon, Meta, Tesla or Intel at Product search time.",
-   "Only United States election races found; most look nearly settled.",
    "Strength numbers are untested starting Assumptions.",
-   "Attention formula is a first Guess from Product."
+   "Attention formula is a first Guess from Product.",
+   "Election strengths for France and Israel are Development's own Guess, pending Product."
   ],
   "rate_wording": {
    "No change": "{bank} holds rates {when}",
@@ -240,6 +262,7 @@ window.WPI_SNAPSHOT = {
     "when": "in December"
    },
    "outcomes_plain": {},
+   "outcome_template": null,
    "volume": 17387051.012682,
    "markets": [
     {
@@ -295,9 +318,9 @@ window.WPI_SNAPSHOT = {
      "question": "Will the Fed decrease interest rates by 50+ bps after the December 2026 meeting?",
      "groupItemTitle": "50+ bps decrease",
      "outcomes": "[\"Yes\", \"No\"]",
-     "outcomePrices": "[\"0.0045\", \"0.9955\"]",
+     "outcomePrices": "[\"0.006\", \"0.994\"]",
      "clobTokenIds": "[\"17640596861394454242836532536014033416733783473450136742726948856144855149507\", \"104236736263775307891497202874191911203963566711959725788584750440530976742193\"]",
-     "oneDayPriceChange": -0.001,
+     "oneDayPriceChange": 0.0005,
      "volumeNum": 3091795.753367,
      "closed": false,
      "slug": "will-the-fed-decrease-interest-rates-by-50-bps-after-the-december-2026-meeting-20260729232808633"
@@ -319,6 +342,7 @@ window.WPI_SNAPSHOT = {
     "when": "in January"
    },
    "outcomes_plain": {},
+   "outcome_template": null,
    "volume": 1311450.4495239998,
    "markets": [
     {
@@ -400,6 +424,7 @@ window.WPI_SNAPSHOT = {
     "when": "in December"
    },
    "outcomes_plain": {},
+   "outcome_template": null,
    "volume": 65187.529856,
    "markets": [
     {
@@ -433,6 +458,7 @@ window.WPI_SNAPSHOT = {
     "when": "in February"
    },
    "outcomes_plain": {},
+   "outcome_template": null,
    "volume": 14004.826258,
    "markets": [
     {
@@ -466,6 +492,7 @@ window.WPI_SNAPSHOT = {
     "No Change": "China holds rates through December",
     "Yes": "China changes rates by 31 December"
    },
+   "outcome_template": null,
    "volume": 19012.311774,
    "markets": [
     {
@@ -498,6 +525,7 @@ window.WPI_SNAPSHOT = {
    "outcomes_plain": {
     "$100B": "Nvidia data center sales top $100B"
    },
+   "outcome_template": null,
    "volume": 2179.820335,
    "markets": [
     {
@@ -530,6 +558,7 @@ window.WPI_SNAPSHOT = {
    "outcomes_plain": {
     "<71%": "Nvidia gross margin under 71%"
    },
+   "outcome_template": null,
    "volume": 7404.988247000001,
    "markets": [
     {
@@ -562,6 +591,7 @@ window.WPI_SNAPSHOT = {
    "outcomes_plain": {
     "<$4.00T": "Nvidia ends 2026 under $4 trillion"
    },
+   "outcome_template": null,
    "volume": 68316.444538,
    "markets": [
     {
@@ -579,98 +609,368 @@ window.WPI_SNAPSHOT = {
    ]
   },
   {
-   "event_id": "1262243",
+   "event_id": "79987",
    "group": "worldwide_elections",
-   "strength_key": "worldwide_elections",
-   "title": "Which Senate Swing States will Republicans win? (Build Your Map)",
-   "slug": "which-tossup-senate-states-will-republicans-win-ak-ia-ks-me-mi-oh-tx",
-   "polymarket_url": "https://polymarket.com/event/which-tossup-senate-states-will-republicans-win-ak-ia-ks-me-mi-oh-tx",
-   "source_url": "https://gamma-api.polymarket.com/events/1262243",
+   "strength_key": "election_france",
+   "title": "Next French Presidential Election",
+   "slug": "next-french-presidential-election",
+   "polymarket_url": "https://polymarket.com/event/next-french-presidential-election",
+   "source_url": "https://gamma-api.polymarket.com/events/79987",
    "market_ids": [
-    "6274257"
+    "679018",
+    "679064",
+    "679030",
+    "679022",
+    "679021",
+    "679060",
+    "679029",
+    "679034"
    ],
-   "plain": "Senate swing states Republicans win",
+   "plain": "French presidential election 2027",
    "rate": null,
-   "outcomes_plain": {
-    "None": "Republicans win no Senate swing state"
-   },
-   "volume": 78729544.01457301,
+   "outcomes_plain": {},
+   "outcome_template": "{label} wins",
+   "volume": 169364301.062319,
    "markets": [
     {
-     "id": "6274257",
-     "question": "Will Republicans lose the Alaska, Iowa, Kansas, Maine, Michigan, Ohio, and Texas Senate seats?",
-     "groupItemTitle": "None",
+     "id": "679018",
+     "question": "Will Marine Le Pen win the 2027 French presidential election?",
+     "groupItemTitle": "Marine Le Pen",
      "outcomes": "[\"Yes\", \"No\"]",
-     "outcomePrices": "[\"0.9825\", \"0.0175\"]",
-     "clobTokenIds": "[\"13535941900723044344907002451427688051727855016747811259193368015899108383450\", \"80727480162707694817992062873857913056698208056368499870278974630056151503113\"]",
+     "outcomePrices": "[\"0.4505\", \"0.5495\"]",
+     "clobTokenIds": "[\"55764212211467781322980371912612507865974994976253196346176314491480419639168\", \"5649717099758674861276159343380402289083378331461490840325685141994171250523\"]",
+     "oneDayPriceChange": null,
+     "volumeNum": 5264282.706934,
+     "closed": false,
+     "slug": "will-marine-le-pen-win-the-2027-french-presidential-election"
+    },
+    {
+     "id": "679064",
+     "question": "Will Teddy Riner win the 2027 French presidential election?",
+     "groupItemTitle": "Teddy Riner",
+     "outcomes": "[\"Yes\", \"No\"]",
+     "outcomePrices": "[\"0.1845\", \"0.8155\"]",
+     "clobTokenIds": "[\"5484359180643998833429212063323989217966527556579338887565291075146224382196\", \"38487328584338975336631272662082357710888040951341541748452771296940469992311\"]",
+     "oneDayPriceChange": null,
+     "volumeNum": 49756.993751,
+     "closed": false,
+     "slug": "will-teddy-riner-win-the-2027-french-presidential-election"
+    },
+    {
+     "id": "679030",
+     "question": "Will Jean-Luc M\u00e9lenchon win the 2027 French presidential election?",
+     "groupItemTitle": "Jean-Luc M\u00e9lenchon",
+     "outcomes": "[\"Yes\", \"No\"]",
+     "outcomePrices": "[\"0.135\", \"0.865\"]",
+     "clobTokenIds": "[\"88550326946437280548248031502775629664259630024343210447063397951616199975032\", \"78935030613038194779147226463048913187247425461933527083007539809178403199936\"]",
+     "oneDayPriceChange": null,
+     "volumeNum": 3567885.7974659996,
+     "closed": false,
+     "slug": "will-jean-luc-mlenchon-win-the-2027-french-presidential-election"
+    },
+    {
+     "id": "679022",
+     "question": "Will David Lisnard win the 2027 French presidential election?",
+     "groupItemTitle": "David Lisnard",
+     "outcomes": "[\"Yes\", \"No\"]",
+     "outcomePrices": "[\"0.1295\", \"0.8705\"]",
+     "clobTokenIds": "[\"55404192439775628931124671719520886657525387168536821457706619003199189099864\", \"79358475953126059185096320578578995575874288599466094920037110232928386404141\"]",
+     "oneDayPriceChange": -0.019,
+     "volumeNum": 6925218.9355770005,
+     "closed": false,
+     "slug": "will-david-lisnard-win-the-2027-french-presidential-election"
+    },
+    {
+     "id": "679021",
+     "question": "Will \u00c9douard Philippe win the 2027 French presidential election?",
+     "groupItemTitle": "\u00c9douard Philippe",
+     "outcomes": "[\"Yes\", \"No\"]",
+     "outcomePrices": "[\"0.075\", \"0.925\"]",
+     "clobTokenIds": "[\"84846382165343032223975853870946110241285484772019446686866815597350660955868\", \"80456575204440643570499123641511043765364487572502085512858581574010154701650\"]",
+     "oneDayPriceChange": -0.02,
+     "volumeNum": 3156941.879523,
+     "closed": false,
+     "slug": "will-douard-philippe-win-the-2027-french-presidential-election"
+    },
+    {
+     "id": "679060",
+     "question": "Will Christine Lagarde win the 2027 French presidential election?",
+     "groupItemTitle": "Christine Lagarde",
+     "outcomes": "[\"Yes\", \"No\"]",
+     "outcomePrices": "[\"0.0575\", \"0.9425\"]",
+     "clobTokenIds": "[\"99240068351455574729467629800805892674088563638353047506523604209057843144195\", \"58754901030958194596958074489255728955620849812430285036092529343781637878128\"]",
+     "oneDayPriceChange": -0.009,
+     "volumeNum": 2856194.836313,
+     "closed": false,
+     "slug": "will-christine-lagarde-win-the-2027-french-presidential-election"
+    },
+    {
+     "id": "679029",
+     "question": "Will Rapha\u00ebl Glucksmann win the 2027 French presidential election?",
+     "groupItemTitle": "Rapha\u00ebl Glucksmann",
+     "outcomes": "[\"Yes\", \"No\"]",
+     "outcomePrices": "[\"0.0225\", \"0.9775\"]",
+     "clobTokenIds": "[\"97531408855841405410232789703119036119573635076996943730887685044477538494161\", \"91614037901759358822201019738747890245698909012092657780820261729371244775376\"]",
+     "oneDayPriceChange": -0.005,
+     "volumeNum": 3572384.5832,
+     "closed": false,
+     "slug": "will-raphal-glucksmann-win-the-2027-french-presidential-election"
+    },
+    {
+     "id": "679034",
+     "question": "Will Dominique de Villepin win the 2027 French presidential election?",
+     "groupItemTitle": "Dominique de Villepin",
+     "outcomes": "[\"Yes\", \"No\"]",
+     "outcomePrices": "[\"0.0185\", \"0.9815\"]",
+     "clobTokenIds": "[\"94391324985187701312427605791553049327097814064787849723991205429060004737042\", \"26890459666562518130876295284144647143504759262811197504274347102239033858901\"]",
+     "oneDayPriceChange": -0.001,
+     "volumeNum": 3579668.1527790003,
+     "closed": false,
+     "slug": "will-dominique-de-villepin-win-the-2027-french-presidential-election"
+    }
+   ]
+  },
+  {
+   "event_id": "81557",
+   "group": "worldwide_elections",
+   "strength_key": "election_israel",
+   "title": "Prime Minister of Israel after the next election?",
+   "slug": "who-will-be-the-next-prime-minister-of-israel-after-the-next-election",
+   "polymarket_url": "https://polymarket.com/event/who-will-be-the-next-prime-minister-of-israel-after-the-next-election",
+   "source_url": "https://gamma-api.polymarket.com/events/81557",
+   "market_ids": [
+    "682708",
+    "682705",
+    "682710",
+    "682706",
+    "682711",
+    "682712",
+    "682714",
+    "682719"
+   ],
+   "plain": "Israel next prime minister",
+   "rate": null,
+   "outcomes_plain": {},
+   "outcome_template": "{label} becomes prime minister",
+   "volume": 90634924.085552,
+   "markets": [
+    {
+     "id": "682708",
+     "question": "Will Gadi Eizenkot be the next Prime Minister of Israel?",
+     "groupItemTitle": "Gadi Eizenkot",
+     "outcomes": "[\"Yes\", \"No\"]",
+     "outcomePrices": "[\"0.608\", \"0.392\"]",
+     "clobTokenIds": "[\"52487256270918227930942830546248720603566203568229607048093730748840489555808\", \"1507744758511144558263623459899956467548763419522526462308518027912401299177\"]",
+     "oneDayPriceChange": -0.0645,
+     "volumeNum": 9834171.917501,
+     "closed": false,
+     "slug": "will-gadi-eizenkot-be-the-next-prime-minister-of-israel"
+    },
+    {
+     "id": "682705",
+     "question": "Will Benjamin Netanyahu be the next Prime Minister of Israel?",
+     "groupItemTitle": "Benjamin Netanyahu",
+     "outcomes": "[\"Yes\", \"No\"]",
+     "outcomePrices": "[\"0.264\", \"0.736\"]",
+     "clobTokenIds": "[\"20006732765674855733524007935991362439352594042415161039767275461950712817548\", \"54533569528927082430133047556849600511985191158927477533124630301934489498530\"]",
+     "oneDayPriceChange": 0.077,
+     "volumeNum": 34743120.484285004,
+     "closed": false,
+     "slug": "will-benjamin-netanyahu-be-the-next-prime-minister-of-israel"
+    },
+    {
+     "id": "682710",
+     "question": "Will Avigdor Lieberman be the next Prime Minister of Israel?",
+     "groupItemTitle": "Avigdor Lieberman",
+     "outcomes": "[\"Yes\", \"No\"]",
+     "outcomePrices": "[\"0.0675\", \"0.9325\"]",
+     "clobTokenIds": "[\"105057524965982907913786325697426001538810836564004836999292309706852745390829\", \"13887896800265966487014179943559375403384011039339488276489274832989862323735\"]",
      "oneDayPriceChange": -0.002,
-     "volumeNum": 10638907.821615001,
+     "volumeNum": 5426683.198829999,
      "closed": false,
-     "slug": "2026-senate-map-r-none"
+     "slug": "will-avigdor-lieberman-be-the-next-prime-minister-of-israel"
+    },
+    {
+     "id": "682706",
+     "question": "Will Naftali Bennett be the next Prime Minister of Israel?",
+     "groupItemTitle": "Naftali Bennett",
+     "outcomes": "[\"Yes\", \"No\"]",
+     "outcomePrices": "[\"0.034\", \"0.966\"]",
+     "clobTokenIds": "[\"58945936829392654397399777214757608864525173988558750256164021442231118224154\", \"39409206330527880169507414405291721950884951005340760541937649898052386499519\"]",
+     "oneDayPriceChange": 0.0075,
+     "volumeNum": 5854080.501469001,
+     "closed": false,
+     "slug": "will-naftali-bennett-be-the-next-prime-minister-of-israel"
+    },
+    {
+     "id": "682711",
+     "question": "Will Yossi Cohen be the next Prime Minister of Israel?",
+     "groupItemTitle": "Yossi Cohen",
+     "outcomes": "[\"Yes\", \"No\"]",
+     "outcomePrices": "[\"0.0015\", \"0.9985\"]",
+     "clobTokenIds": "[\"80908635602471552886049573110321791161186841957249509900771759394573505359926\", \"279135026232966548267372221910300904521833390614952028405533756942338898146\"]",
+     "oneDayPriceChange": null,
+     "volumeNum": 4624725.50969,
+     "closed": false,
+     "slug": "will-yossi-cohen-be-the-next-prime-minister-of-israel"
+    },
+    {
+     "id": "682712",
+     "question": "Will Yair Golan be the next Prime Minister of Israel?",
+     "groupItemTitle": "Yair Golan",
+     "outcomes": "[\"Yes\", \"No\"]",
+     "outcomePrices": "[\"0.0015\", \"0.9985\"]",
+     "clobTokenIds": "[\"38003127295883228185689665963602138176190384641897237734105806870773590495970\", \"43581484654171741412819396053420951222941194520459214805405618926172095980803\"]",
+     "oneDayPriceChange": 0.0005,
+     "volumeNum": 3008197.3360289996,
+     "closed": false,
+     "slug": "will-yair-golan-be-the-next-prime-minister-of-israel"
+    },
+    {
+     "id": "682714",
+     "question": "Will Gideon Sa\u2019ar be the next Prime Minister of Israel?",
+     "groupItemTitle": "Gideon Sa\u2019ar",
+     "outcomes": "[\"Yes\", \"No\"]",
+     "outcomePrices": "[\"0.0015\", \"0.9985\"]",
+     "clobTokenIds": "[\"113523109301381527088718768250912137532200947193534063249121987336101159734964\", \"81875811432969830460135158317591338081684626327054488810775527982906009292091\"]",
+     "oneDayPriceChange": null,
+     "volumeNum": 2598873.263076999,
+     "closed": false,
+     "slug": "will-gideon-saar-be-the-next-prime-minister-of-israel"
+    },
+    {
+     "id": "682719",
+     "question": "Will Israel Katz be the next Prime Minister of Israel?",
+     "groupItemTitle": "Israel Katz",
+     "outcomes": "[\"Yes\", \"No\"]",
+     "outcomePrices": "[\"0.0015\", \"0.9985\"]",
+     "clobTokenIds": "[\"49071939739791449726827416712265617396930502300780957239086018273026268436098\", \"19043464432761022117798242943058502377099044437371801839246425042395638016765\"]",
+     "oneDayPriceChange": null,
+     "volumeNum": 1679285.049765,
+     "closed": false,
+     "slug": "will-israel-katz-be-the-next-prime-minister-of-israel"
     }
    ]
   },
   {
-   "event_id": "1304411",
+   "event_id": "31552",
    "group": "worldwide_elections",
    "strength_key": "worldwide_elections",
-   "title": "Senate Combo: Louisiana, Mississippi, Florida",
-   "slug": "senate-combo-louisiana-mississippi-florida",
-   "polymarket_url": "https://polymarket.com/event/senate-combo-louisiana-mississippi-florida",
-   "source_url": "https://gamma-api.polymarket.com/events/1304411",
+   "title": "Presidential Election Winner 2028",
+   "slug": "presidential-election-winner-2028",
+   "polymarket_url": "https://polymarket.com/event/presidential-election-winner-2028",
+   "source_url": "https://gamma-api.polymarket.com/events/31552",
    "market_ids": [
-    "6612550"
+    "561261",
+    "561229",
+    "561231",
+    "561234",
+    "561230",
+    "561246",
+    "561239",
+    "561232"
    ],
-   "plain": "Senate races: Louisiana, Mississippi, Florida",
+   "plain": "US presidential election 2028",
    "rate": null,
-   "outcomes_plain": {
-    "Reps sweep": "Republicans sweep Louisiana, Mississippi, Florida Senate"
-   },
-   "volume": 3002.4979829999997,
+   "outcomes_plain": {},
+   "outcome_template": "{label} wins",
+   "volume": 736903451.792976,
    "markets": [
     {
-     "id": "6612550",
-     "question": "Will Republicans win the Louisiana, Mississippi, and Florida Senate seats?",
-     "groupItemTitle": "Reps sweep",
+     "id": "561261",
+     "question": "Will Jon Ossoff win the 2028 US Presidential Election?",
+     "groupItemTitle": "Jon Ossoff",
      "outcomes": "[\"Yes\", \"No\"]",
-     "outcomePrices": "[\"0.3245\", \"0.6755\"]",
-     "clobTokenIds": "[\"43940531322901107468025282861695842774781409824444430254983886576593249911353\", \"75147850967389311097723504135931248592782759879610657370689972984494233270383\"]",
-     "oneDayPriceChange": 0.3125,
-     "volumeNum": 766.5568549999999,
+     "outcomePrices": "[\"0.1885\", \"0.8115\"]",
+     "clobTokenIds": "[\"110102705199530588976777616718115948005824665233400132417374621750887344831757\", \"98394838816403247684221016468696784125095120854407803889228262583112436699261\"]",
+     "oneDayPriceChange": 0.015,
+     "volumeNum": 6985244.528896,
      "closed": false,
-     "slug": "will-republicans-win-the-louisiana-mississippi-and-florida-senate-seats"
-    }
-   ]
-  },
-  {
-   "event_id": "1224132",
-   "group": "worldwide_elections",
-   "strength_key": "worldwide_elections",
-   "title": "Senate Combo: Mississippi, South Carolina, Montana",
-   "slug": "senate-three-way-combo-mississippi-south-carolina-montana",
-   "polymarket_url": "https://polymarket.com/event/senate-three-way-combo-mississippi-south-carolina-montana",
-   "source_url": "https://gamma-api.polymarket.com/events/1224132",
-   "market_ids": [
-    "5971438"
-   ],
-   "plain": "Senate races: Mississippi, South Carolina, Montana",
-   "rate": null,
-   "outcomes_plain": {
-    "Reps MS & MT, Dems SC": "Republicans MS and MT, Democrats SC"
-   },
-   "volume": 15721.4879,
-   "markets": [
+     "slug": "will-jon-ossoff-win-the-2028-us-presidential-election"
+    },
     {
-     "id": "5971438",
-     "question": "Will Republicans win the Mississippi and Montana Senate seats, and Democrats win South Carolina?",
-     "groupItemTitle": "Reps MS & MT, Dems SC",
+     "id": "561229",
+     "question": "Will JD Vance win the 2028 US Presidential Election?",
+     "groupItemTitle": "JD Vance",
      "outcomes": "[\"Yes\", \"No\"]",
-     "outcomePrices": "[\"0.137\", \"0.863\"]",
-     "clobTokenIds": "[\"9167006927021919176346100216115255120760758621254693980968420456591891174956\", \"92339640466783597011203690800664032768718976926565675276142200328553224556132\"]",
-     "oneDayPriceChange": 0.1255,
-     "volumeNum": 2448.050112,
+     "outcomePrices": "[\"0.1755\", \"0.8245\"]",
+     "clobTokenIds": "[\"16040015440196279900485035793550429453516625694844857319147506590755961451627\", \"94476829201604408463453426454480212459887267917122244941405244686637914508323\"]",
+     "oneDayPriceChange": -0.002,
+     "volumeNum": 18854450.434423998,
      "closed": false,
-     "slug": "will-republicans-win-the-mississippi-and-montana-senate-seats-and-democrats-win-south-carolina"
+     "slug": "will-jd-vance-win-the-2028-us-presidential-election"
+    },
+    {
+     "id": "561231",
+     "question": "Will Alexandria Ocasio-Cortez win the 2028 US Presidential Election?",
+     "groupItemTitle": "Alexandria Ocasio-Cortez",
+     "outcomes": "[\"Yes\", \"No\"]",
+     "outcomePrices": "[\"0.1185\", \"0.8815\"]",
+     "clobTokenIds": "[\"8113830512143065501177519557124858581375945005490796772950589720955457782465\", \"11493926619286817179231142642565394485790380952577225820901334479399429951651\"]",
+     "oneDayPriceChange": -0.002,
+     "volumeNum": 14411469.661399001,
+     "closed": false,
+     "slug": "will-alexandria-ocasio-cortez-win-the-2028-us-presidential-election"
+    },
+    {
+     "id": "561234",
+     "question": "Will Marco Rubio win the 2028 US Presidential Election?",
+     "groupItemTitle": "Marco Rubio",
+     "outcomes": "[\"Yes\", \"No\"]",
+     "outcomePrices": "[\"0.0955\", \"0.9045\"]",
+     "clobTokenIds": "[\"11171618905857319805355893398009978356002287408842633593535559412449299952250\", \"65892530750232246342273648992064742042382898919201083513241874070914353628268\"]",
+     "oneDayPriceChange": null,
+     "volumeNum": 13481446.805038001,
+     "closed": false,
+     "slug": "will-marco-rubio-win-the-2028-us-presidential-election"
+    },
+    {
+     "id": "561230",
+     "question": "Will Gavin Newsom win the 2028 US Presidential Election?",
+     "groupItemTitle": "Gavin Newsom",
+     "outcomes": "[\"Yes\", \"No\"]",
+     "outcomePrices": "[\"0.0765\", \"0.9235\"]",
+     "clobTokenIds": "[\"98250445447699368679516529207365255018790721464590833209064266254238063117329\", \"18823838997443878656879952590502524526556504037944392973476854588563571859850\"]",
+     "oneDayPriceChange": 0.006,
+     "volumeNum": 19130626.334713005,
+     "closed": false,
+     "slug": "will-gavin-newsom-win-the-2028-us-presidential-election"
+    },
+    {
+     "id": "561246",
+     "question": "Will Ron DeSantis win the 2028 US Presidential Election?",
+     "groupItemTitle": "Ron DeSantis",
+     "outcomes": "[\"Yes\", \"No\"]",
+     "outcomePrices": "[\"0.0555\", \"0.9445\"]",
+     "clobTokenIds": "[\"104480514270625615787868282411330496385404675495672110015326625654626015018993\", \"65724430065358897810064400118831287249960059855415477063660293398018349529272\"]",
+     "oneDayPriceChange": -0.001,
+     "volumeNum": 12988292.146252997,
+     "closed": false,
+     "slug": "will-ron-desantis-win-the-2028-us-presidential-election"
+    },
+    {
+     "id": "561239",
+     "question": "Will Kamala Harris win the 2028 US Presidential Election?",
+     "groupItemTitle": "Kamala Harris",
+     "outcomes": "[\"Yes\", \"No\"]",
+     "outcomePrices": "[\"0.0325\", \"0.9675\"]",
+     "clobTokenIds": "[\"70663352401606372246362604193214664065595751757222752105245221905399175050480\", \"4988819538339626436114997160558538168652916536529198363646261454228218983102\"]",
+     "oneDayPriceChange": -0.003,
+     "volumeNum": 9756414.300219996,
+     "closed": false,
+     "slug": "will-kamala-harris-win-the-2028-us-presidential-election"
+    },
+    {
+     "id": "561232",
+     "question": "Will Pete Buttigieg win the 2028 US Presidential Election?",
+     "groupItemTitle": "Pete Buttigieg",
+     "outcomes": "[\"Yes\", \"No\"]",
+     "outcomePrices": "[\"0.0265\", \"0.9735\"]",
+     "clobTokenIds": "[\"35629456194498013232473191985311930903993567273832459837879398120893197410860\", \"26087406687932108531005204502244492184534000122992461059156880611150953145122\"]",
+     "oneDayPriceChange": 0.002,
+     "volumeNum": 8727790.428483997,
+     "closed": false,
+     "slug": "will-pete-buttigieg-win-the-2028-us-presidential-election"
     }
    ]
   },
@@ -690,6 +990,7 @@ window.WPI_SNAPSHOT = {
    "outcomes_plain": {
     "December 31": "Israel-Iran ceasefire holds through 31 December"
    },
+   "outcome_template": null,
    "volume": 50332537.870677,
    "markets": [
     {
@@ -722,6 +1023,7 @@ window.WPI_SNAPSHOT = {
    "outcomes_plain": {
     "December 31": "Russia-Ukraine ceasefire deal by 31 December"
    },
+   "outcome_template": null,
    "volume": 10635545.837024001,
    "markets": [
     {
@@ -754,6 +1056,7 @@ window.WPI_SNAPSHOT = {
    "outcomes_plain": {
     "December 31": "US declares war on Iran by 31 December"
    },
+   "outcome_template": null,
    "volume": 7873698.511402987,
    "markets": [
     {
@@ -786,6 +1089,7 @@ window.WPI_SNAPSHOT = {
    "outcomes_plain": {
     "Will China invade Taiwan by end of 2026?": "China invades Taiwan by end of 2026"
    },
+   "outcome_template": null,
    "volume": 46019902.515467,
    "markets": [
     {
@@ -818,6 +1122,7 @@ window.WPI_SNAPSHOT = {
    "outcomes_plain": {
     "November 15": "US-Iran ceasefire starts by 15 November"
    },
+   "outcome_template": null,
    "volume": 441164.813465,
    "markets": [
     {

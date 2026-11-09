@@ -16,6 +16,7 @@ WPI.start('', function () {
       return '<tr><td>' + W.esc(W.plainOutcome(s.ev, o.label)) + '</td><td class="num">' + W.pct1(o.pct) + '%</td><td class="num">' + (o.move == null ? '—' : (o.move > 0 ? '+' : '') + o.move.toFixed(1)) + '</td></tr>'; }).join('') + '</table>' +
     '<h2>Holdings it could touch</h2><ul class="plain">' + st.map(function (p) {
       return '<li class="linkrow">' + W.esc(p.name) + ' · ' + p.weight.toFixed(1) + '% of portfolio · ' + W.strengthWord(p.strength) + ' link (' + p.strength + ') → ' + p.contrib.toFixed(1) + ' points <span class="guess">Guess</span></li>'; }).join('') + '</ul>' +
+    (W.S.rules.group_strengths[s.ev.strength_key].author ? '<p class="small">Link strengths here are ' + W.esc(W.S.rules.group_strengths[s.ev.strength_key].author) + ' (Guess, Assumption).</p>' : '') +
     '<h2>What it could mean</h2><div class="box">' + W.esc(s.ifHappens) + '</div><div class="box">' + W.esc(s.ifNot) + '</div>' +
     '<p class="small">Source: <a href="' + W.esc(s.ev.polymarket_url) + '" target="_blank" rel="noopener">Polymarket event</a> · <a href="' + W.esc(s.ev.source_url) + '" target="_blank" rel="noopener">Gamma data</a> · fetched ' + W.esc(W.live.gammaOk ? W.time(W.live.gammaAt, true) + ' (live)' : W.S.built_at + ' (built-in)') + '</p>' +
     '<p><a href="events.html#' + s.ev.group + '">← Back to Events</a></p>';
