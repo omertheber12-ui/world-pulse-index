@@ -1,0 +1,368 @@
+{
+ "preregistered": {
+  "bitcoin": "fewer than 100 usable step-pairs after pre-registered filters",
+  "fed": {
+   "odds_lead_asset": {
+    "n": 631,
+    "F_p": 0.4980185958944132,
+    "sum_coef": -0.08027934052511385,
+    "sum_coef_ci95": [
+     -0.23563053697086697,
+     0.07507185592063928
+    ],
+    "lag1_corr": -0.05174400821843821,
+    "lag1_corr_ci95": [
+     -0.12927531494431507,
+     0.026416104543200737
+    ]
+   },
+   "asset_lead_odds": {
+    "n": 623,
+    "F_p": 0.011343230249144683,
+    "sum_coef": 0.1278297868548583,
+    "lag1_corr": 0.09492310624331853
+   },
+   "events": {
+    "n_events": 42,
+    "post": -0.9090476190476219,
+    "pre": 0.6469047619047642,
+    "same": 1.9411904761904766,
+    "abs_post": 3.7942857142857145,
+    "base_abs": 3.2632564450474906,
+    "post_p": 0.29,
+    "pre_p": 0.477,
+    "abs_post_placebo_mean": 3.2243396428571436,
+    "abs_post_p": 0.023,
+    "abs_post_ratio": 1.1767636584722607
+   },
+   "holdout_ols": {
+    "n": 114,
+    "F_p": 0.3297597382070496,
+    "sum_coef": -0.15954005154323755
+   },
+   "holdout_events": {
+    "n_events": 4,
+    "post": -1.0000000000000009,
+    "pre": 3.292499999999989,
+    "same": 2.499999999999991,
+    "abs_post": 6.25,
+    "base_abs": 3.9514220183486226,
+    "post_p": 0.565,
+    "pre_p": 0.435,
+    "abs_post_placebo_mean": 4.0173299999999985,
+    "abs_post_p": 0.021,
+    "abs_post_ratio": 1.5557596712244208
+   },
+   "logodds": {
+    "n": 631,
+    "F_p": 0.3458615275373173,
+    "sum_coef": -1.0227714858429244
+   },
+   "ccf": {
+    "-4": 0.038,
+    "-3": -0.015,
+    "-2": 0.004,
+    "-1": 0.096,
+    "0": 0.26,
+    "1": -0.051,
+    "2": -0.05,
+    "3": 0.0,
+    "4": -0.083
+   }
+  }
+ },
+ "fed_kre_exploratory": {
+  "odds_lead_asset": {
+   "n": 630,
+   "F_p": 0.013157197187031176,
+   "sum_coef": 0.03743143405889427,
+   "sum_coef_ci95": [
+    -0.014370936364442997,
+    0.08923380448223153
+   ],
+   "lag1_corr": 0.10464854223922765,
+   "lag1_corr_ci95": [
+    0.0267518405584214,
+    0.1812820120644834
+   ]
+  },
+  "asset_lead_odds": {
+   "n": 622,
+   "F_p": 0.48947748705207667,
+   "sum_coef": -0.0020908089409980984,
+   "lag1_corr": -0.03654743626675971
+  },
+  "events": {
+   "n_events": 43,
+   "post": -0.11317093883886103,
+   "pre": -0.3722655667344967,
+   "same": 0.04237522355763406,
+   "abs_post": 1.0982042816451412,
+   "base_abs": 1.0238393315461503,
+   "post_p": 0.727,
+   "pre_p": 0.229,
+   "abs_post_placebo_mean": 1.0319881194281715,
+   "abs_post_p": 0.266,
+   "abs_post_ratio": 1.064163686548698
+  },
+  "holdout_ols": {
+   "n": 113,
+   "F_p": 0.36916495687009965,
+   "sum_coef": -0.0031949056025958184
+  },
+  "holdout_events": {
+   "n_events": 4,
+   "post": -1.0263274389522348,
+   "pre": 0.21806670467545364,
+   "same": 0.2884166725459991,
+   "abs_post": 0.9081576911051492,
+   "base_abs": 1.003156815321134,
+   "post_p": 0.265,
+   "pre_p": 0.777,
+   "abs_post_placebo_mean": 1.022869813964472,
+   "abs_post_p": 0.639,
+   "abs_post_ratio": 0.8878526658102092
+  },
+  "logodds": {
+   "n": 630,
+   "F_p": 0.010445683495307825,
+   "sum_coef": 0.3750432427225384
+  },
+  "ccf": {
+   "-4": 0.042,
+   "-3": -0.081,
+   "-2": 0.03,
+   "-1": -0.031,
+   "0": 0.017,
+   "1": 0.105,
+   "2": -0.03,
+   "3": 0.02,
+   "4": 0.003
+  }
+ },
+ "deviations": {
+  "D1_bitcoin_hourly_relaxed_stale": {
+   "odds_lead_asset": {
+    "n": 29426,
+    "F_p": 0.2619321065181574,
+    "sum_coef": 0.01092954561832429,
+    "sum_coef_ci95": [
+     -0.017479077100961596,
+     0.039338168337610176
+    ],
+    "lag1_corr": 0.0061246170602550455,
+    "lag1_corr_ci95": [
+     -0.005301740146524574,
+     0.01754937515078575
+    ]
+   },
+   "asset_lead_odds": {
+    "n": 29335,
+    "F_p": 2.1885589957746887e-167,
+    "sum_coef": 0.34595596510690935,
+    "lag1_corr": 0.18531226365670533
+   },
+   "events": {
+    "n_events": 0,
+    "post": NaN,
+    "pre": NaN,
+    "same": NaN,
+    "abs_post": NaN,
+    "base_abs": 0.2959280325491341,
+    "post_p": NaN,
+    "pre_p": NaN,
+    "abs_post_p": NaN,
+    "abs_post_placebo_mean": NaN,
+    "abs_post_ratio": NaN
+   },
+   "holdout_ols": {
+    "n": 4224,
+    "F_p": 0.4806844250942063,
+    "sum_coef": -0.012807193427522097
+   },
+   "holdout_events": null,
+   "logodds": {
+    "n": 29426,
+    "F_p": 0.41720103753657245,
+    "sum_coef": 0.1647150013062367
+   },
+   "ccf": {
+    "-4": 0.01,
+    "-3": 0.021,
+    "-2": 0.052,
+    "-1": 0.184,
+    "0": -0.013,
+    "1": 0.006,
+    "2": 0.005,
+    "3": 0.006,
+    "4": -0.009
+   }
+  },
+  "D2_bitcoin_daily": {
+   "odds_lead_asset": {
+    "n": 1201,
+    "F_p": 0.6480008764819148,
+    "sum_coef": 0.0035124478798588127,
+    "sum_coef_ci95": [
+     -0.12645027439002127,
+     0.13347517014973886
+    ],
+    "lag1_corr": -0.005580200447119052,
+    "lag1_corr_ci95": [
+     -0.06212767395103654,
+     0.05100298339023635
+    ]
+   },
+   "asset_lead_odds": {
+    "n": 1187,
+    "F_p": 1.98848649823374e-09,
+    "sum_coef": 0.2108331141017908,
+    "lag1_corr": 0.06323998334006423
+   },
+   "events": {
+    "n_events": 18,
+    "post": -0.27276538186749655,
+    "pre": 1.416170597249427,
+    "same": 3.458194411668312,
+    "abs_post": 1.7888479365917536,
+    "base_abs": 1.5446370846546007,
+    "post_p": 0.688,
+    "pre_p": 0.05,
+    "abs_post_placebo_mean": 1.5629037144994145,
+    "abs_post_p": 0.173,
+    "abs_post_ratio": 1.144566949324007
+   },
+   "holdout_ols": {
+    "n": 172,
+    "F_p": 0.2681636018990082,
+    "sum_coef": -0.2794974363246271
+   },
+   "holdout_events": null,
+   "logodds": {
+    "n": 1201,
+    "F_p": 0.5757107792767229,
+    "sum_coef": 0.2711856228654113
+   },
+   "ccf": {
+    "-4": 0.005,
+    "-3": 0.044,
+    "-2": 0.028,
+    "-1": 0.064,
+    "0": 0.374,
+    "1": -0.006,
+    "2": -0.022,
+    "3": 0.01,
+    "4": 0.002
+   }
+  },
+  "D3_fed_relaxed_stale": {
+   "odds_lead_asset": {
+    "n": 631,
+    "F_p": 0.4980185958944132,
+    "sum_coef": -0.08027934052511385,
+    "sum_coef_ci95": [
+     -0.23563053697086697,
+     0.07507185592063928
+    ],
+    "lag1_corr": -0.05174400821843821,
+    "lag1_corr_ci95": [
+     -0.12927531494431507,
+     0.026416104543200737
+    ]
+   },
+   "asset_lead_odds": {
+    "n": 623,
+    "F_p": 0.011343230249144683,
+    "sum_coef": 0.1278297868548583,
+    "lag1_corr": 0.09492310624331853
+   },
+   "events": {
+    "n_events": 42,
+    "post": -0.9090476190476219,
+    "pre": 0.6469047619047642,
+    "same": 1.9411904761904766,
+    "abs_post": 3.7942857142857145,
+    "base_abs": 3.2632564450474906,
+    "post_p": 0.3,
+    "pre_p": 0.453,
+    "abs_post_placebo_mean": 3.2167629761904775,
+    "abs_post_p": 0.021,
+    "abs_post_ratio": 1.1795353721644675
+   },
+   "holdout_ols": {
+    "n": 114,
+    "F_p": 0.3297597382070496,
+    "sum_coef": -0.15954005154323755
+   },
+   "holdout_events": {
+    "n_events": 4,
+    "post": -1.0000000000000009,
+    "pre": 3.292499999999989,
+    "same": 2.499999999999991,
+    "abs_post": 6.25,
+    "base_abs": 3.9514220183486226,
+    "post_p": 0.611,
+    "pre_p": 0.451,
+    "abs_post_placebo_mean": 3.997097499999998,
+    "abs_post_p": 0.021,
+    "abs_post_ratio": 1.5636346123655986
+   },
+   "logodds": {
+    "n": 631,
+    "F_p": 0.3458615275373173,
+    "sum_coef": -1.0227714858429244
+   },
+   "ccf": {
+    "-4": 0.038,
+    "-3": -0.015,
+    "-2": 0.004,
+    "-1": 0.096,
+    "0": 0.26,
+    "1": -0.051,
+    "2": -0.05,
+    "3": 0.0,
+    "4": -0.083
+   }
+  }
+ },
+ "p_raw": {
+  "fed:1_odds_lead_asset": 0.4980185958944132,
+  "fed:2_asset_lead_odds": 0.011343230249144683,
+  "fed:3_event_post": 0.29,
+  "fed:4_attention": 0.023
+ },
+ "p_holm": {
+  "fed:1_odds_lead_asset": 1,
+  "fed:2_asset_lead_odds": 0.09074584199315747,
+  "fed:3_event_post": 1,
+  "fed:4_attention": 0.161
+ },
+ "dev_p_raw": {
+  "D1_bitcoin_hourly_relaxed_stale:1_odds_lead_asset": 0.2619321065181574,
+  "D1_bitcoin_hourly_relaxed_stale:2_asset_lead_odds": 2.1885589957746887e-167,
+  "D1_bitcoin_hourly_relaxed_stale:3_event_post": NaN,
+  "D1_bitcoin_hourly_relaxed_stale:4_attention": NaN,
+  "D2_bitcoin_daily:1_odds_lead_asset": 0.6480008764819148,
+  "D2_bitcoin_daily:2_asset_lead_odds": 1.98848649823374e-09,
+  "D2_bitcoin_daily:3_event_post": 0.688,
+  "D2_bitcoin_daily:4_attention": 0.173,
+  "D3_fed_relaxed_stale:1_odds_lead_asset": 0.4980185958944132,
+  "D3_fed_relaxed_stale:2_asset_lead_odds": 0.011343230249144683,
+  "D3_fed_relaxed_stale:3_event_post": 0.3,
+  "D3_fed_relaxed_stale:4_attention": 0.021
+ },
+ "dev_p_holm": {
+  "D2_bitcoin_daily:2_asset_lead_odds": 2.386183797880488e-08,
+  "D1_bitcoin_hourly_relaxed_stale:2_asset_lead_odds": 2.386183797880488e-08,
+  "D1_bitcoin_hourly_relaxed_stale:3_event_post": 1,
+  "D1_bitcoin_hourly_relaxed_stale:4_attention": 1,
+  "D3_fed_relaxed_stale:2_asset_lead_odds": 1,
+  "D3_fed_relaxed_stale:4_attention": 1,
+  "D2_bitcoin_daily:4_attention": 1,
+  "D2_bitcoin_daily:1_odds_lead_asset": 1,
+  "D1_bitcoin_hourly_relaxed_stale:1_odds_lead_asset": 1,
+  "D3_fed_relaxed_stale:3_event_post": 1,
+  "D3_fed_relaxed_stale:1_odds_lead_asset": 1,
+  "D2_bitcoin_daily:3_event_post": 1
+ }
+}
