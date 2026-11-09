@@ -9,9 +9,10 @@ WPI.start('portfolio', function () {
   document.getElementById('main').innerHTML = '<h1>My portfolio</h1><p class="sub">Read-only eToro read, ' + W.esc(S.holdings.fetched_at) + '. Total ' + W.usd(S.holdings.total) + '. Refreshes only on rebuild.</p><ul class="plain">' +
     rows.map(function (r) {
       var ev = all.map(function (s) { var p = s.parts.filter(function (x) { return x.ticker === r.ticker; })[0]; return { s: s, p: p }; })
-        .filter(function (x) { return x.p && x.p.strength > 0; }).sort(function (a, b) { return b.s.attention - a.s.attention || b.p.strength - a.p.strength; }).slice(0, 2);
+        .filter(function (x) { return x.p && x.p.strength > 0; }).sort(function (a, b) { return b.s.attention * b.p.strength - a.s.attention * a.p.strength; })
+        .filter(function (x, i, arr) { return arr.findIndex(function (y) { return y.s.ev.event_id === x.s.ev.event_id; }) === i; }).slice(0, 2);
       return '<li><b>' + W.esc(r.name) + '</b> (' + W.esc(r.ticker) + ') · ' + W.usd(r.value) + ' · ' + r.weight.toFixed(1) + '%' +
-        (ev.length ? '<div class="small">Top events by attention:</div>' + ev.map(function (x) { return '<div class="linkrow small">→ <a href="event.html?id=' + x.s.ev.event_id + '">' + W.esc(x.s.ev.title) + '</a> ' + W.pct(x.s.lead && x.s.lead.pct) + '% · ' + W.strengthWord(x.p.strength) + ' link <span class="guess">Guess</span></div>'; }).join('') : '<div class="small">No tracked event links (too small or no sector link).</div>') + '</li>';
+        (ev.length ? '<div class="small">Top events (attention × link strength):</div>' + ev.map(function (x) { return '<div class="linkrow small">→ <a href="event.html?id=' + x.s.ev.event_id + '">' + W.esc(W.name(x.s.ev)) + '</a> ' + W.pct(x.s.lead && x.s.lead.pct) + '% · ' + W.strengthWord(x.p.strength) + ' link <span class="guess">Guess</span></div>'; }).join('') : '<div class="small">No tracked event links (too small or no sector link).</div>') + '</li>';
     }).join('') + '<li>Cash · ' + W.usd(S.holdings.cash) + ' · ' + S.holdings.cash_weight.toFixed(2) + '% · no link</li></ul>' +
     '<h2>Sector shares <span class="guess">Guess</span></h2><table><tr><th>Sector (Guess)</th><th class="num">Share</th></tr>' + Object.keys(sec).sort(function (a, b) { return sec[b] - sec[a]; }).map(function (k) { return '<tr><td>' + W.esc(k) + '</td><td class="num">' + sec[k].toFixed(1) + '%</td></tr>'; }).join('') + '</table>';
 });
