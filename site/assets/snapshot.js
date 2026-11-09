@@ -1,8 +1,8 @@
 // Built by build_site.py. Public Polymarket figures + read-only holdings snapshot. No keys.
 window.WPI_SNAPSHOT = {
- "built_at": "9 November 2026, 18:17:13 Asia/Jerusalem",
- "built_iso": "2026-11-09T18:17:13.258030+02:00",
- "built_ms": 1794241033258,
+ "built_at": "9 November 2026, 18:19:30 Asia/Jerusalem",
+ "built_iso": "2026-11-09T18:19:30.028351+02:00",
+ "built_ms": 1794241170028,
  "group_order": [
   "central_bank_rates",
   "big_company_events",
@@ -205,7 +205,14 @@ window.WPI_SNAPSHOT = {
    "Only United States election races found; most look nearly settled.",
    "Strength numbers are untested starting Assumptions.",
    "Attention formula is a first Guess from Product."
-  ]
+  ],
+  "rate_wording": {
+   "No change": "{bank} holds rates {when}",
+   "25 bps increase": "{bank} raises 0.25 points {when}",
+   "50+ bps increase": "{bank} raises 0.5+ points {when}",
+   "25 bps decrease": "{bank} cuts 0.25 points {when}",
+   "50+ bps decrease": "{bank} cuts 0.5+ points {when}"
+  }
  },
  "links": {
   "architecture": "https://docs.google.com/document/d/1LXe3vWDLnm02pKvsWNFDbCpzQO7ObTqLVF9YM4VKEzA/edit",
@@ -227,6 +234,12 @@ window.WPI_SNAPSHOT = {
     "3215006",
     "3215005"
    ],
+   "plain": "Fed rate decision in December",
+   "rate": {
+    "bank": "Fed",
+    "when": "in December"
+   },
+   "outcomes_plain": {},
    "volume": 17387051.012682,
    "markets": [
     {
@@ -300,6 +313,12 @@ window.WPI_SNAPSHOT = {
    "polymarket_url": "https://polymarket.com/event/fed-decision-in-january-20260729233815502",
    "source_url": "https://gamma-api.polymarket.com/events/770451",
    "market_ids": [],
+   "plain": "Fed rate decision in January",
+   "rate": {
+    "bank": "Fed",
+    "when": "in January"
+   },
+   "outcomes_plain": {},
    "volume": 1311450.4495239998,
    "markets": [
     {
@@ -375,6 +394,12 @@ window.WPI_SNAPSHOT = {
    "market_ids": [
     "4570943"
    ],
+   "plain": "ECB rate decision in December",
+   "rate": {
+    "bank": "ECB",
+    "when": "in December"
+   },
+   "outcomes_plain": {},
    "volume": 65187.529856,
    "markets": [
     {
@@ -402,6 +427,12 @@ window.WPI_SNAPSHOT = {
    "market_ids": [
     "6404226"
    ],
+   "plain": "ECB rate decision in February",
+   "rate": {
+    "bank": "ECB",
+    "when": "in February"
+   },
+   "outcomes_plain": {},
    "volume": 14004.826258,
    "markets": [
     {
@@ -429,6 +460,12 @@ window.WPI_SNAPSHOT = {
    "market_ids": [
     "5230123"
    ],
+   "plain": "China central bank rate change by 31 December",
+   "rate": null,
+   "outcomes_plain": {
+    "No Change": "China holds rates through December",
+    "Yes": "China changes rates by 31 December"
+   },
    "volume": 19012.311774,
    "markets": [
     {
@@ -456,6 +493,11 @@ window.WPI_SNAPSHOT = {
    "market_ids": [
     "5730325"
    ],
+   "plain": "Nvidia data center revenue this quarter",
+   "rate": null,
+   "outcomes_plain": {
+    "$100B": "Nvidia data center sales top $100B"
+   },
    "volume": 2179.820335,
    "markets": [
     {
@@ -483,6 +525,11 @@ window.WPI_SNAPSHOT = {
    "market_ids": [
     "5730329"
    ],
+   "plain": "Nvidia gross margin this quarter",
+   "rate": null,
+   "outcomes_plain": {
+    "<71%": "Nvidia gross margin under 71%"
+   },
    "volume": 7404.988247000001,
    "markets": [
     {
@@ -510,6 +557,11 @@ window.WPI_SNAPSHOT = {
    "market_ids": [
     "3358974"
    ],
+   "plain": "Nvidia market value at end of 2026",
+   "rate": null,
+   "outcomes_plain": {
+    "<$4.00T": "Nvidia ends 2026 under $4 trillion"
+   },
    "volume": 68316.444538,
    "markets": [
     {
@@ -537,6 +589,11 @@ window.WPI_SNAPSHOT = {
    "market_ids": [
     "6274257"
    ],
+   "plain": "Senate swing states Republicans win",
+   "rate": null,
+   "outcomes_plain": {
+    "None": "Republicans win no Senate swing state"
+   },
    "volume": 78729544.01457301,
    "markets": [
     {
@@ -544,9 +601,9 @@ window.WPI_SNAPSHOT = {
      "question": "Will Republicans lose the Alaska, Iowa, Kansas, Maine, Michigan, Ohio, and Texas Senate seats?",
      "groupItemTitle": "None",
      "outcomes": "[\"Yes\", \"No\"]",
-     "outcomePrices": "[\"0.981\", \"0.019\"]",
+     "outcomePrices": "[\"0.9825\", \"0.0175\"]",
      "clobTokenIds": "[\"13535941900723044344907002451427688051727855016747811259193368015899108383450\", \"80727480162707694817992062873857913056698208056368499870278974630056151503113\"]",
-     "oneDayPriceChange": -0.0035,
+     "oneDayPriceChange": -0.002,
      "volumeNum": 10638907.821615001,
      "closed": false,
      "slug": "2026-senate-map-r-none"
@@ -564,6 +621,11 @@ window.WPI_SNAPSHOT = {
    "market_ids": [
     "6612550"
    ],
+   "plain": "Senate races: Louisiana, Mississippi, Florida",
+   "rate": null,
+   "outcomes_plain": {
+    "Reps sweep": "Republicans sweep Louisiana, Mississippi, Florida Senate"
+   },
    "volume": 3002.4979829999997,
    "markets": [
     {
@@ -591,6 +653,11 @@ window.WPI_SNAPSHOT = {
    "market_ids": [
     "5971438"
    ],
+   "plain": "Senate races: Mississippi, South Carolina, Montana",
+   "rate": null,
+   "outcomes_plain": {
+    "Reps MS & MT, Dems SC": "Republicans MS and MT, Democrats SC"
+   },
    "volume": 15721.4879,
    "markets": [
     {
@@ -618,6 +685,11 @@ window.WPI_SNAPSHOT = {
    "market_ids": [
     "3399468"
    ],
+   "plain": "Israel-Iran ceasefire holds",
+   "rate": null,
+   "outcomes_plain": {
+    "December 31": "Israel-Iran ceasefire holds through 31 December"
+   },
    "volume": 50332537.870677,
    "markets": [
     {
@@ -645,6 +717,11 @@ window.WPI_SNAPSHOT = {
    "market_ids": [
     "2243897"
    ],
+   "plain": "Russia-Ukraine ceasefire deal",
+   "rate": null,
+   "outcomes_plain": {
+    "December 31": "Russia-Ukraine ceasefire deal by 31 December"
+   },
    "volume": 10635545.837024001,
    "markets": [
     {
@@ -672,6 +749,11 @@ window.WPI_SNAPSHOT = {
    "market_ids": [
     "1170144"
    ],
+   "plain": "US declares war on Iran",
+   "rate": null,
+   "outcomes_plain": {
+    "December 31": "US declares war on Iran by 31 December"
+   },
    "volume": 7873698.511402987,
    "markets": [
     {
@@ -699,6 +781,11 @@ window.WPI_SNAPSHOT = {
    "market_ids": [
     "567621"
    ],
+   "plain": "China invades Taiwan in 2026",
+   "rate": null,
+   "outcomes_plain": {
+    "Will China invade Taiwan by end of 2026?": "China invades Taiwan by end of 2026"
+   },
    "volume": 46019902.515467,
    "markets": [
     {
@@ -726,6 +813,11 @@ window.WPI_SNAPSHOT = {
    "market_ids": [
     "6831494"
    ],
+   "plain": "US-Iran ceasefire starts",
+   "rate": null,
+   "outcomes_plain": {
+    "November 15": "US-Iran ceasefire starts by 15 November"
+   },
    "volume": 441164.813465,
    "markets": [
     {

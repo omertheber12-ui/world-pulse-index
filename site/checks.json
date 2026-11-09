@@ -1,5 +1,5 @@
 {
-  "run_at": "9 November 2026, 18:17:14 Asia/Jerusalem",
+  "run_at": "9 November 2026, 18:19:30 Asia/Jerusalem",
   "items": [
     {
       "check": "Gamma HTTP 200 for all events",
@@ -47,6 +47,11 @@
       "detail": ""
     },
     {
+      "check": "Today headline is 12 words or fewer",
+      "pass": true,
+      "detail": "12 words: Odds Nvidia ends 2026 under $4 trillion rose 13 points to 27%"
+    },
+    {
       "check": "Every event-to-holding link labeled Guess",
       "pass": true,
       "detail": "20 link rows, 0 without Guess"
@@ -67,6 +72,7 @@
       "detail": ""
     }
   ],
+  "headline": "Odds Nvidia ends 2026 under $4 trillion rose 13 points to 27%",
   "all_pass": true,
   "screenshots": [
     {
@@ -83,6 +89,14 @@
     },
     {
       "file": "site/shots/events-1280.png",
+      "exists": true
+    },
+    {
+      "file": "site/shots/portfolio-390.png",
+      "exists": true
+    },
+    {
+      "file": "site/shots/portfolio-1280.png",
       "exists": true
     }
   ]
