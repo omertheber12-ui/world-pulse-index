@@ -1,0 +1,138 @@
+{
+  "run_at": "9 November 2026, 18:35:03 Asia/Jerusalem",
+  "items": [
+    {
+      "check": "Gamma HTTP 200 for all events",
+      "pass": true,
+      "detail": "770450:200, 770451:200, 1025305:200, 1280521:200, 1123963:200, 1194143:200, 1194144:200, 800884:200, 79987:200, 81557:200, 31552:200, 711714:200, 478472:200, 160366:200, 34044:200, 1337182:200"
+    },
+    {
+      "check": "Each of four groups has at least one event",
+      "pass": true,
+      "detail": "{\"central_bank_rates\": 5, \"big_company_events\": 3, \"worldwide_elections\": 3, \"wars\": 5}"
+    },
+    {
+      "check": "No duplicate events",
+      "pass": true,
+      "detail": "16 events"
+    },
+    {
+      "check": "All percentages between 0 and 100",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "today.html: nav + time line + 'Insights only, not advice'",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "events.html: nav + time line + 'Insights only, not advice'",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "event.html: nav + time line + 'Insights only, not advice'",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "portfolio.html: nav + time line + 'Insights only, not advice'",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "how.html: nav + time line + 'Insights only, not advice'",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "Today headline is 12 words or fewer",
+      "pass": true,
+      "detail": "12 words: Odds Nvidia ends 2026 under $4 trillion rose 12 points to 26%"
+    },
+    {
+      "check": "Today top 3 cards are the first 3 of the attention ranking",
+      "pass": true,
+      "detail": "cards=['770451', '770450', '800884'] ranking_top=['770451', '770450', '800884']"
+    },
+    {
+      "check": "Built-in ranking matches Python recompute of Product task 10 scoring",
+      "pass": true,
+      "detail": "js=['770451', '770450', '800884'] py=['770451', '770450', '800884']"
+    },
+    {
+      "check": "Error state shows error card and keeps figures",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "Loading state shows skeletons",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "Empty state shows 'No events to show right now'",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "Spec colors present in layout.css",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "Inter font with tabular numbers",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "Every event-to-holding link labeled Guess",
+      "pass": true,
+      "detail": "20 link rows, 0 without Guess"
+    },
+    {
+      "check": "No buy/sell advice wording on pages",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "No secrets or keys in site files",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "All internal links resolve to files",
+      "pass": true,
+      "detail": ""
+    }
+  ],
+  "headline": "Odds Nvidia ends 2026 under $4 trillion rose 12 points to 26%",
+  "all_pass": true,
+  "screenshots": [
+    {
+      "file": "site/shots/today-390.png",
+      "exists": true
+    },
+    {
+      "file": "site/shots/today-1280.png",
+      "exists": true
+    },
+    {
+      "file": "site/shots/events-390.png",
+      "exists": true
+    },
+    {
+      "file": "site/shots/events-1280.png",
+      "exists": true
+    },
+    {
+      "file": "site/shots/portfolio-390.png",
+      "exists": true
+    },
+    {
+      "file": "site/shots/portfolio-1280.png",
+      "exists": true
+    }
+  ]
+}

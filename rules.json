@@ -1,0 +1,386 @@
+{
+  "version": "1.0-product-tp010",
+  "source": {
+    "label": "Fact",
+    "product_task": "Product task 10",
+    "doc_id": "1XptYmlRKxo2JEUm15rodf9RoM8UeWegkX521kMa9Z30",
+    "doc_url": "https://docs.google.com/document/d/1XptYmlRKxo2JEUm15rodf9RoM8UeWegkX521kMa9Z30/edit",
+    "doc_title": "Product Rules · TP-010 Portfolio Touch Score",
+    "delivered_at": "9 November 2026, 17:55 Asia/Jerusalem",
+    "note": "Default scoring rules. Swap this file only to change strengths or formula."
+  },
+  "holdings_sectors": {
+    "INTC": {
+      "sector": "chips",
+      "label": "Guess",
+      "sector_words": "Chips, technology"
+    },
+    "BTC": {
+      "sector": "crypto",
+      "label": "Guess",
+      "sector_words": "Crypto"
+    },
+    "ETH": {
+      "sector": "crypto",
+      "label": "Guess",
+      "sector_words": "Crypto"
+    },
+    "SPY": {
+      "sector": "broad_us_stocks",
+      "label": "Guess",
+      "sector_words": "Broad US stocks, heavy in big technology"
+    },
+    "JPM": {
+      "sector": "banks",
+      "label": "Guess",
+      "sector_words": "Banks"
+    },
+    "BAC": {
+      "sector": "banks",
+      "label": "Guess",
+      "sector_words": "Banks"
+    },
+    "CASH": {
+      "sector": "none",
+      "label": "Fact",
+      "sector_words": "No link"
+    }
+  },
+  "strength_levels": {
+    "strong": 1.0,
+    "some": 0.5,
+    "weak": 0.25,
+    "none": 0,
+    "label": "Assumption"
+  },
+  "group_strengths": {
+    "central_bank_rates_fed": {
+      "group": "central_bank_rates",
+      "subgroup": "fed",
+      "chips": 0.5,
+      "crypto": 0.5,
+      "broad_us_stocks": 1.0,
+      "banks": 1.0,
+      "product_touch_ref": 71.9,
+      "note": "Federal Reserve rates"
+    },
+    "central_bank_rates_ecb": {
+      "group": "central_bank_rates",
+      "subgroup": "ecb",
+      "chips": 0.25,
+      "crypto": 0.25,
+      "broad_us_stocks": 0.25,
+      "banks": 0.25,
+      "product_touch_ref": 25.0,
+      "note": "European Central Bank rates"
+    },
+    "central_bank_rates_china": {
+      "group": "central_bank_rates",
+      "subgroup": "china",
+      "chips": 0.5,
+      "crypto": 0.25,
+      "broad_us_stocks": 0.25,
+      "banks": 0.25,
+      "product_touch_ref": 32.8,
+      "note": "China's central bank rates"
+    },
+    "big_company_events": {
+      "group": "big_company_events",
+      "chips": 1.0,
+      "crypto": 0,
+      "broad_us_stocks": 0.5,
+      "banks": 0,
+      "product_touch_ref": 41.8,
+      "note": "Nvidia and big technology"
+    },
+    "worldwide_elections": {
+      "group": "worldwide_elections",
+      "chips": 0.25,
+      "crypto": 0.25,
+      "broad_us_stocks": 0.5,
+      "banks": 0.5,
+      "product_touch_ref": 36.0,
+      "note": "US elections (2028 presidential winner); Product task 10 strengths"
+    },
+    "wars": {
+      "group": "wars",
+      "chips": 0.5,
+      "crypto": 0.25,
+      "broad_us_stocks": 0.5,
+      "banks": 0.25,
+      "product_touch_ref": 38.0,
+      "note": "Wars"
+    },
+    "election_france": {
+      "group": "worldwide_elections",
+      "subgroup": "france",
+      "chips": 0.25,
+      "crypto": 0.25,
+      "broad_us_stocks": 0.25,
+      "banks": 0.25,
+      "label": "Guess, Assumption",
+      "author": "Development's own guess, pending Product",
+      "note": "French election: European risk, weak links to SPY, banks, Bitcoin and Intel"
+    },
+    "election_israel": {
+      "group": "worldwide_elections",
+      "subgroup": "israel",
+      "chips": 0.5,
+      "crypto": 0.25,
+      "broad_us_stocks": 0.25,
+      "banks": 0.25,
+      "label": "Guess, Assumption",
+      "author": "Development's own guess, pending Product",
+      "note": "Israel prime minister: some link to Intel (large Israel operations), weak to others"
+    }
+  },
+  "scoring": {
+    "touch": "sum over holdings of (holding_weight_percent × link_strength). Holding weight = holding dollar value / portfolio total × 100. Link strength from group_strengths by the holding's sector. Cash strength is always 0.",
+    "uncertainty": "4 × p × (1 − p), where p is the leading option figure as a fraction 0–1. Equals 1.0 at 50% and near 0 when one option is near 100%.",
+    "attention": "touch × uncertainty, plus touch × 0.5 when a meaningful move is present under Product task 7 (5 points or more versus about 24 hours earlier, lasting at least one hour). Cap at touch.",
+    "high_effect_threshold": 30,
+    "update_rule": "Scores update only when Polymarket percentages move. Not from news. Whether or not the event happens, the score follows the figure.",
+    "one_event_rule": "Related options in one event count as one event, not several.",
+    "every_link_label": "Guess",
+    "strength_label": "Assumption",
+    "insight_lines": {
+      "if_happens": "If it happens (Guess): This could touch about {touch_rounded}% of your portfolio, mostly {top_holdings}; {extra}.",
+      "if_not": "If it does not happen (Guess): The other result would be the surprise against today's leading figure, and could touch the same {touch_rounded}%."
+    }
+  },
+  "events": {
+    "central_bank_rates": [
+      {
+        "event_id": "770450",
+        "market_ids": [
+          "3215008",
+          "3215007",
+          "3215009",
+          "3215006",
+          "3215005"
+        ],
+        "strength_key": "central_bank_rates_fed",
+        "title_hint": "Fed Decision in December",
+        "label": "exact",
+        "plain": "Fed rate decision in December",
+        "rate": {
+          "bank": "Fed",
+          "when": "in December"
+        }
+      },
+      {
+        "event_id": "770451",
+        "market_ids": [],
+        "strength_key": "central_bank_rates_fed",
+        "title_hint": "Fed Decision in January",
+        "label": "exact",
+        "plain": "Fed rate decision in January",
+        "rate": {
+          "bank": "Fed",
+          "when": "in January"
+        }
+      },
+      {
+        "event_id": "1025305",
+        "market_ids": [
+          "4570943"
+        ],
+        "strength_key": "central_bank_rates_ecb",
+        "title_hint": "ECB Interest Rates December",
+        "label": "exact",
+        "plain": "ECB rate decision in December",
+        "rate": {
+          "bank": "ECB",
+          "when": "in December"
+        }
+      },
+      {
+        "event_id": "1280521",
+        "market_ids": [
+          "6404226"
+        ],
+        "strength_key": "central_bank_rates_ecb",
+        "title_hint": "ECB Interest Rates February",
+        "label": "exact",
+        "plain": "ECB rate decision in February",
+        "rate": {
+          "bank": "ECB",
+          "when": "in February"
+        }
+      },
+      {
+        "event_id": "1123963",
+        "market_ids": [
+          "5230123"
+        ],
+        "strength_key": "central_bank_rates_china",
+        "title_hint": "People's Bank of China rate change by December 31",
+        "label": "exact",
+        "plain": "China central bank rate change by 31 December",
+        "outcomes": {
+          "No Change": "China holds rates through December",
+          "Yes": "China changes rates by 31 December"
+        }
+      }
+    ],
+    "big_company_events": [
+      {
+        "event_id": "1194143",
+        "market_ids": [
+          "5730325"
+        ],
+        "strength_key": "big_company_events",
+        "title_hint": "Nvidia data center revenue",
+        "label": "exact",
+        "plain": "Nvidia data center revenue this quarter",
+        "outcomes": {
+          "$100B": "Nvidia data center sales top $100B"
+        }
+      },
+      {
+        "event_id": "1194144",
+        "market_ids": [
+          "5730329"
+        ],
+        "strength_key": "big_company_events",
+        "title_hint": "Nvidia gross margin",
+        "label": "exact",
+        "plain": "Nvidia gross margin this quarter",
+        "outcomes": {
+          "<71%": "Nvidia gross margin under 71%"
+        }
+      },
+      {
+        "event_id": "800884",
+        "market_ids": [
+          "3358974"
+        ],
+        "strength_key": "big_company_events",
+        "title_hint": "Nvidia market value end of 2026",
+        "label": "exact",
+        "plain": "Nvidia market value at end of 2026",
+        "outcomes": {
+          "<$4.00T": "Nvidia ends 2026 under $4 trillion"
+        }
+      }
+    ],
+    "worldwide_elections": [
+      {
+        "event_id": "79987",
+        "market_ids": [],
+        "top_n": 8,
+        "strength_key": "election_france",
+        "title_hint": "Next French Presidential Election",
+        "label": "exact",
+        "plain": "French presidential election 2027",
+        "outcome_template": "{label} wins"
+      },
+      {
+        "event_id": "81557",
+        "market_ids": [],
+        "top_n": 8,
+        "strength_key": "election_israel",
+        "title_hint": "Prime Minister of Israel after the next election?",
+        "label": "exact",
+        "plain": "Israel next prime minister",
+        "outcome_template": "{label} becomes prime minister"
+      },
+      {
+        "event_id": "31552",
+        "market_ids": [],
+        "top_n": 8,
+        "strength_key": "worldwide_elections",
+        "title_hint": "Presidential Election Winner 2028",
+        "label": "exact",
+        "plain": "US presidential election 2028",
+        "outcome_template": "{label} wins"
+      }
+    ],
+    "wars": [
+      {
+        "event_id": "711714",
+        "market_ids": [
+          "3399468"
+        ],
+        "strength_key": "wars",
+        "title_hint": "Israel x Iran ceasefire",
+        "label": "exact",
+        "plain": "Israel-Iran ceasefire holds",
+        "outcomes": {
+          "December 31": "Israel-Iran ceasefire holds through 31 December"
+        }
+      },
+      {
+        "event_id": "478472",
+        "market_ids": [
+          "2243897"
+        ],
+        "strength_key": "wars",
+        "title_hint": "Russia x Ukraine ceasefire",
+        "label": "exact",
+        "plain": "Russia-Ukraine ceasefire deal",
+        "outcomes": {
+          "December 31": "Russia-Ukraine ceasefire deal by 31 December"
+        }
+      },
+      {
+        "event_id": "160366",
+        "market_ids": [
+          "1170144"
+        ],
+        "strength_key": "wars",
+        "title_hint": "US declares war on Iran",
+        "label": "exact",
+        "plain": "US declares war on Iran",
+        "outcomes": {
+          "December 31": "US declares war on Iran by 31 December"
+        }
+      },
+      {
+        "event_id": "34044",
+        "market_ids": [
+          "567621"
+        ],
+        "strength_key": "wars",
+        "title_hint": "China invades Taiwan",
+        "label": "exact",
+        "plain": "China invades Taiwan in 2026",
+        "outcomes": {
+          "Will China invade Taiwan by end of 2026?": "China invades Taiwan by end of 2026"
+        }
+      },
+      {
+        "event_id": "1337182",
+        "market_ids": [
+          "6831494"
+        ],
+        "strength_key": "wars",
+        "title_hint": "US x Iran ceasefire",
+        "label": "exact",
+        "plain": "US-Iran ceasefire starts",
+        "outcomes": {
+          "November 15": "US-Iran ceasefire starts by 15 November"
+        }
+      }
+    ]
+  },
+  "group_display": {
+    "central_bank_rates": "Central bank rate decisions",
+    "big_company_events": "Big company events",
+    "worldwide_elections": "Worldwide elections",
+    "wars": "Wars"
+  },
+  "gaps": [
+    "No live earnings markets found for Apple, Microsoft, Alphabet, Amazon, Meta, Tesla or Intel at Product search time.",
+    "Strength numbers are untested starting Assumptions.",
+    "Attention formula is a first Guess from Product.",
+    "Election strengths for France and Israel are Development's own Guess, pending Product."
+  ],
+  "rate_wording": {
+    "No change": "{bank} holds rates {when}",
+    "25 bps increase": "{bank} raises 0.25 points {when}",
+    "50+ bps increase": "{bank} raises 0.5+ points {when}",
+    "25 bps decrease": "{bank} cuts 0.25 points {when}",
+    "50+ bps decrease": "{bank} cuts 0.5+ points {when}"
+  }
+}
