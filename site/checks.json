@@ -1,5 +1,5 @@
 {
-  "run_at": "9 November 2026, 18:23:14 Asia/Jerusalem",
+  "run_at": "9 November 2026, 18:35:03 Asia/Jerusalem",
   "items": [
     {
       "check": "Gamma HTTP 200 for all events",
@@ -49,7 +49,42 @@
     {
       "check": "Today headline is 12 words or fewer",
       "pass": true,
-      "detail": "12 words: Odds Nvidia ends 2026 under $4 trillion rose 13 points to 26%"
+      "detail": "12 words: Odds Nvidia ends 2026 under $4 trillion rose 12 points to 26%"
+    },
+    {
+      "check": "Today top 3 cards are the first 3 of the attention ranking",
+      "pass": true,
+      "detail": "cards=['770451', '770450', '800884'] ranking_top=['770451', '770450', '800884']"
+    },
+    {
+      "check": "Built-in ranking matches Python recompute of Product task 10 scoring",
+      "pass": true,
+      "detail": "js=['770451', '770450', '800884'] py=['770451', '770450', '800884']"
+    },
+    {
+      "check": "Error state shows error card and keeps figures",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "Loading state shows skeletons",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "Empty state shows 'No events to show right now'",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "Spec colors present in layout.css",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "Inter font with tabular numbers",
+      "pass": true,
+      "detail": ""
     },
     {
       "check": "Every event-to-holding link labeled Guess",
@@ -72,7 +107,7 @@
       "detail": ""
     }
   ],
-  "headline": "Odds Nvidia ends 2026 under $4 trillion rose 13 points to 26%",
+  "headline": "Odds Nvidia ends 2026 under $4 trillion rose 12 points to 26%",
   "all_pass": true,
   "screenshots": [
     {

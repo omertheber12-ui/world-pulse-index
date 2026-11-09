@@ -18,7 +18,7 @@ import build as B  # shared helpers from the single-page build
 DIR = Path(__file__).resolve().parent
 SITE = DIR / "site"
 KEEP = ["id", "question", "groupItemTitle", "outcomes", "outcomePrices", "clobTokenIds",
-        "oneDayPriceChange", "volumeNum", "closed", "slug"]
+        "oneDayPriceChange", "volumeNum", "volume24hr", "bestBid", "bestAsk", "spread", "closed", "slug"]
 
 
 def trim_market(m):
@@ -122,6 +122,37 @@ def run_checks(snap, statuses):
     htxt = _h.unescape(re.sub(r"<[^>]+>", "", hm.group(1))).strip() if hm else ""
     checks["headline"] = htxt
     add("Today headline is 12 words or fewer", bool(htxt) and len(htxt.split()) <= 12, f"{len(htxt.split())} words: {htxt}")
+    # Today top 3 come from the live attention ranking
+    d = doms.get("today.html", "")
+    rk = re.search(r'id="top3" data-ranking="([^"]*)"', d)
+    ranking = [x.split(":") for x in rk.group(1).split(",")] if rk else []
+    card_ids = re.findall(r'class="card link" data-id="(\d+)"', d)
+    att = [float(a) for _, a in ranking]
+    add("Today top 3 cards are the first 3 of the attention ranking",
+        bool(ranking) and card_ids == [i for i, _ in ranking[:3]] and all(att[i] >= att[i + 1] - 1e-9 for i in range(len(att) - 1)),
+        f"cards={card_ids} ranking_top={[i for i, _ in ranking[:3]]}")
+    # Same ranking recomputed in Python from the built-in snapshot (error state = built-in figures)
+    try:
+        de = chrome(["--dump-dom", (SITE / "today.html").as_uri() + "?state=error"]).stdout
+        doms["today-error"] = de
+        rk2 = re.search(r'id="top3" data-ranking="([^"]*)"', de)
+        js_ids = [x.split(":")[0] for x in rk2.group(1).split(",")] if rk2 else []
+        py_ids = [x[0] for x in py_ranking(snap)]
+        add("Built-in ranking matches Python recompute of Product task 10 scoring", js_ids[:3] == py_ids[:3] and bool(js_ids),
+            f"js={js_ids[:3]} py={py_ids[:3]}")
+        add("Error state shows error card and keeps figures", "We could not read live figures" in de and 'class="card link" data-id' in de)
+        dl = chrome(["--dump-dom", (SITE / "today.html").as_uri() + "?state=loading"]).stdout
+        add("Loading state shows skeletons", dl.count('class="sk"') >= 6)
+        dm = chrome(["--dump-dom", (SITE / "today.html").as_uri() + "?state=empty"]).stdout
+        add("Empty state shows 'No events to show right now'", "No events to show right now" in dm and "No meaningful move to report yet" in dm)
+    except Exception as ex:
+        add("State checks ran", False, str(ex))
+    css = (SITE / "assets" / "layout.css").read_text().upper()
+    spec = ["#172F32", "#116C5B", "#E8F3F0", "#CFE6DF", "#F7F9F9", "#FFFFFF", "#E3E8E8", "#6B7C7E", "#3E5254",
+            "#B4532A", "#8A5A00", "#FFF4DB", "#5B4B8A", "#EFEBFA", "#A3262A", "#FDECEC"]
+    miss = [c for c in spec if c not in css]
+    add("Spec colors present in layout.css", not miss, ",".join(miss))
+    add("Inter font with tabular numbers", "INTER" in css and "TNUM" in css)
     # every link between event and holding labeled Guess (rendered link rows)
     link_rows = 0
     unlabeled = 0
@@ -164,10 +195,39 @@ def run_checks(snap, statuses):
     return checks
 
 
+def py_ranking(snap):
+    """Product task 10 attention ranking, recomputed from the snapshot (mirror of data.js)."""
+    rules, hold = snap["rules"], snap["holdings"]
+    out = []
+    for ev in snap["events"]:
+        opts = []
+        for m in ev["markets"]:
+            if m.get("closed") or not m.get("outcomePrices"):
+                continue
+            oc = B.parse_json_list(m.get("outcomes")); pr = [float(x) for x in B.parse_json_list(m.get("outcomePrices"))]
+            odc = None if m.get("oneDayPriceChange") is None else float(m["oneDayPriceChange"]) * 100
+            if len(oc) == 2 and str(oc[0]).lower() == "yes":
+                opts.append((pr[0] * 100, odc))
+            else:
+                for i, _ in enumerate(oc):
+                    opts.append((pr[i] * 100, None if odc is None else (odc if i == 0 else -odc)))
+        if not opts:
+            continue
+        opts.sort(key=lambda x: -x[0])
+        pct, mv = opts[0]
+        st = rules["group_strengths"][ev["strength_key"]]
+        touch = sum(r["weight"] * float(st.get(rules["holdings_sectors"].get(r["ticker"], {}).get("sector", "none"), 0) or 0) for r in hold["rows"])
+        p = pct / 100
+        att = min(touch * 4 * p * (1 - p) + (touch * 0.5 if mv is not None and abs(mv) >= 5 else 0), touch)
+        out.append((ev["event_id"], att, touch))
+    out.sort(key=lambda x: (-x[1], -x[2]))
+    return out
+
+
 def shots():
     out = []
     for page in ["today", "events", "portfolio"]:
-        for w, h in [(390, 1400), (1280, 1100)]:
+        for w, h in [(390, 2600), (1280, 1500)]:
             path = SITE / "shots" / f"{page}-{w}.png"
             try:
                 chrome([f"--screenshot={path}", f"--window-size={w},{h}", (SITE / f"{page}.html").as_uri()])

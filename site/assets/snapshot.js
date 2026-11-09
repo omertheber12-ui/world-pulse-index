@@ -1,8 +1,8 @@
 // Built by build_site.py. Public Polymarket figures + read-only holdings snapshot. No keys.
 window.WPI_SNAPSHOT = {
- "built_at": "9 November 2026, 18:23:14 Asia/Jerusalem",
- "built_iso": "2026-11-09T18:23:14.236873+02:00",
- "built_ms": 1794241394236,
+ "built_at": "9 November 2026, 18:35:02 Asia/Jerusalem",
+ "built_iso": "2026-11-09T18:35:02.433268+02:00",
+ "built_ms": 1794242102433,
  "group_order": [
   "central_bank_rates",
   "big_company_events",
@@ -263,7 +263,7 @@ window.WPI_SNAPSHOT = {
    },
    "outcomes_plain": {},
    "outcome_template": null,
-   "volume": 17387051.012682,
+   "volume": 17395975.381078,
    "markets": [
     {
      "id": "3215008",
@@ -273,7 +273,11 @@ window.WPI_SNAPSHOT = {
      "outcomePrices": "[\"0.805\", \"0.195\"]",
      "clobTokenIds": "[\"111662129652828266889360374468657435151479595863413519836161861837506140152890\", \"94483965432909797688470702512207472940215538148754820061518518664128018848687\"]",
      "oneDayPriceChange": 0.04,
-     "volumeNum": 5111256.082467999,
+     "volumeNum": 5111750.560864,
+     "volume24hr": 64426.843409,
+     "bestBid": 0.8,
+     "bestAsk": 0.81,
+     "spread": 0.01,
      "closed": false,
      "slug": "will-the-fed-increase-interest-rates-by-25-bps-after-the-december-2026-meeting-20260729232808636"
     },
@@ -285,7 +289,11 @@ window.WPI_SNAPSHOT = {
      "outcomePrices": "[\"0.195\", \"0.805\"]",
      "clobTokenIds": "[\"42865728742506860386768556888821101266630139112044622335353850919229585308601\", \"8077351031134730167836761678618167504307708651130165095377248922919635337796\"]",
      "oneDayPriceChange": -0.02,
-     "volumeNum": 4047040.113297,
+     "volumeNum": 4053693.773297,
+     "volume24hr": 252587.74655799996,
+     "bestBid": 0.19,
+     "bestAsk": 0.2,
+     "spread": 0.01,
      "closed": false,
      "slug": "will-there-be-no-change-in-fed-interest-rates-after-the-december-2026-meeting-20260729232808635"
     },
@@ -298,6 +306,10 @@ window.WPI_SNAPSHOT = {
      "clobTokenIds": "[\"35090254409399344650860070211816464534198960801264823587796928404808383727584\", \"17037715451587457598270390992151934195448806241696976473961259598235638233970\"]",
      "oneDayPriceChange": null,
      "volumeNum": 2111980.518305,
+     "volume24hr": 44198.695262,
+     "bestBid": 0.005,
+     "bestAsk": 0.006,
+     "spread": 0.001,
      "closed": false,
      "slug": "will-the-fed-increase-interest-rates-by-50-bps-after-the-december-2026-meeting-20260729232808637"
     },
@@ -309,7 +321,11 @@ window.WPI_SNAPSHOT = {
      "outcomePrices": "[\"0.0065\", \"0.9935\"]",
      "clobTokenIds": "[\"77367448845023382525249480243608609306658725883285195065573683809293972009019\", \"23677896678650147625251750117853328843601853501710889530409633595389256242910\"]",
      "oneDayPriceChange": null,
-     "volumeNum": 3024978.545245,
+     "volumeNum": 3026125.415245,
+     "volume24hr": 30247.844922,
+     "bestBid": 0.006,
+     "bestAsk": 0.007,
+     "spread": 0.001,
      "closed": false,
      "slug": "will-the-fed-decrease-interest-rates-by-25-bps-after-the-december-2026-meeting-20260729232808634"
     },
@@ -321,7 +337,11 @@ window.WPI_SNAPSHOT = {
      "outcomePrices": "[\"0.006\", \"0.994\"]",
      "clobTokenIds": "[\"17640596861394454242836532536014033416733783473450136742726948856144855149507\", \"104236736263775307891497202874191911203963566711959725788584750440530976742193\"]",
      "oneDayPriceChange": 0.0005,
-     "volumeNum": 3091795.753367,
+     "volumeNum": 3092425.1133669997,
+     "volume24hr": 330487.62425000005,
+     "bestBid": 0.005,
+     "bestAsk": 0.007,
+     "spread": 0.002,
      "closed": false,
      "slug": "will-the-fed-decrease-interest-rates-by-50-bps-after-the-december-2026-meeting-20260729232808633"
     }
@@ -343,7 +363,7 @@ window.WPI_SNAPSHOT = {
    },
    "outcomes_plain": {},
    "outcome_template": null,
-   "volume": 1311450.4495239998,
+   "volume": 1312508.449524,
    "markets": [
     {
      "id": "3215010",
@@ -353,7 +373,11 @@ window.WPI_SNAPSHOT = {
      "outcomePrices": "[\"0.0085\", \"0.9915\"]",
      "clobTokenIds": "[\"45053521911672808043600263178798111402897730682087979734684574823004307023433\", \"54892629532396715672060844552184409083592827625930470370999146720346626910259\"]",
      "oneDayPriceChange": null,
-     "volumeNum": 207442.88863699997,
+     "volumeNum": 207442.888637,
+     "volume24hr": 587.34125,
+     "bestBid": 0.008,
+     "bestAsk": 0.009,
+     "spread": 0.001,
      "closed": false,
      "slug": "will-the-fed-decrease-interest-rates-by-50-bps-after-the-january-2027-meeting-20260729233815503"
     },
@@ -365,7 +389,11 @@ window.WPI_SNAPSHOT = {
      "outcomePrices": "[\"0.034\", \"0.966\"]",
      "clobTokenIds": "[\"55531205670373260499988385930313327116586167390725681551489621136380793885916\", \"109592678904810057002493483716660995296395997473352977641574408716547799045975\"]",
      "oneDayPriceChange": -0.0025,
-     "volumeNum": 190279.99350599997,
+     "volumeNum": 190279.993506,
+     "volume24hr": 870.265716,
+     "bestBid": 0.033,
+     "bestAsk": 0.035,
+     "spread": 0.002,
      "closed": false,
      "slug": "will-the-fed-decrease-interest-rates-by-25-bps-after-the-january-2027-meeting-20260729233815504"
     },
@@ -377,7 +405,11 @@ window.WPI_SNAPSHOT = {
      "outcomePrices": "[\"0.775\", \"0.225\"]",
      "clobTokenIds": "[\"63563009510989471204377539732457086916124654411092982704760023438039220215330\", \"36342864926284644003283595741257595655709757799681943153551982143131732331338\"]",
      "oneDayPriceChange": null,
-     "volumeNum": 355626.307374,
+     "volumeNum": 356684.30737399997,
+     "volume24hr": 3881.198111,
+     "bestBid": 0.77,
+     "bestAsk": 0.78,
+     "spread": 0.01,
      "closed": false,
      "slug": "will-there-be-no-change-in-fed-interest-rates-after-the-january-2027-meeting-20260729233815505"
     },
@@ -389,7 +421,11 @@ window.WPI_SNAPSHOT = {
      "outcomePrices": "[\"0.185\", \"0.815\"]",
      "clobTokenIds": "[\"58421987972100586826330616250690474504359298033602990223828098109695719571344\", \"63396423986062034636625373404202970920080078602349826866595954726582462497358\"]",
      "oneDayPriceChange": null,
-     "volumeNum": 427988.61530099995,
+     "volumeNum": 427988.615301,
+     "volume24hr": 778.1899999999999,
+     "bestBid": 0.18,
+     "bestAsk": 0.19,
+     "spread": 0.01,
      "closed": false,
      "slug": "will-the-fed-increase-interest-rates-by-25-bps-after-the-january-2027-meeting-20260729233815506"
     },
@@ -401,7 +437,11 @@ window.WPI_SNAPSHOT = {
      "outcomePrices": "[\"0.0075\", \"0.9925\"]",
      "clobTokenIds": "[\"42452047366442275682382090045397807109079755041679563479952649068752467853296\", \"98510419442387454895805766707264980500719881328500989992133076060209252362108\"]",
      "oneDayPriceChange": 0.001,
-     "volumeNum": 130112.64470600002,
+     "volumeNum": 130112.644706,
+     "volume24hr": 844.61,
+     "bestBid": 0.006,
+     "bestAsk": 0.009,
+     "spread": 0.003,
      "closed": false,
      "slug": "will-the-fed-increase-interest-rates-by-50-bps-after-the-january-2027-meeting-20260729233815507"
     }
@@ -436,6 +476,10 @@ window.WPI_SNAPSHOT = {
      "clobTokenIds": "[\"52440441184411582649360692926952533217058683048104189135288649923889579160011\", \"90125527067668279619131650087807057831782717691641752501181466242134384963092\"]",
      "oneDayPriceChange": null,
      "volumeNum": 5443.280698999999,
+     "volume24hr": 20,
+     "bestBid": 0.002,
+     "bestAsk": 0.003,
+     "spread": 0.001,
      "closed": false,
      "slug": "will-the-ecb-announce-a-50-bps-decrease-at-the-december-2026-meeting"
     }
@@ -466,10 +510,14 @@ window.WPI_SNAPSHOT = {
      "question": "Will the ECB decrease the deposit facility rate by 50+ bps at the February meeting?",
      "groupItemTitle": "50+ bps decrease",
      "outcomes": "[\"Yes\", \"No\"]",
-     "outcomePrices": "[\"0.0135\", \"0.9865\"]",
+     "outcomePrices": "[\"0.0145\", \"0.9855\"]",
      "clobTokenIds": "[\"47729335837260894555857342426493062947123429108786003219890616472642736070690\", \"77180322010419069505506022259531084130575776193598003852134459012475806487646\"]",
-     "oneDayPriceChange": -0.0225,
+     "oneDayPriceChange": -0.0215,
      "volumeNum": 2382.446766,
+     "volume24hr": 879.9902200000001,
+     "bestBid": 0.01,
+     "bestAsk": 0.019,
+     "spread": 0.009,
      "closed": false,
      "slug": "will-the-ecb-decrease-the-deposit-facility-rate-by-50-bps-at-the-february-2027-meeting"
     }
@@ -493,7 +541,7 @@ window.WPI_SNAPSHOT = {
     "Yes": "China changes rates by 31 December"
    },
    "outcome_template": null,
-   "volume": 19012.311774,
+   "volume": 19012.311773999998,
    "markets": [
     {
      "id": "5230123",
@@ -503,7 +551,11 @@ window.WPI_SNAPSHOT = {
      "outcomePrices": "[\"0.9\", \"0.1\"]",
      "clobTokenIds": "[\"72508137872945643796815081900363361565570754660360557133294357942107098746316\", \"12290475821459530102114962465464727132252537955390306741619256988402794595640\"]",
      "oneDayPriceChange": -0.02,
-     "volumeNum": 9761.897815,
+     "volumeNum": 9761.897814999998,
+     "volume24hr": 429.877154,
+     "bestBid": 0.89,
+     "bestAsk": 0.91,
+     "spread": 0.02,
      "closed": false,
      "slug": "will-the-peoples-bank-of-china-not-change-rates-by-december-31"
     }
@@ -535,8 +587,12 @@ window.WPI_SNAPSHOT = {
      "outcomes": "[\"Yes\", \"No\"]",
      "outcomePrices": "[\"0.975\", \"0.025\"]",
      "clobTokenIds": "[\"63173682896024371821969300433849199302022010142516011383337930374434659807252\", \"32781327044453127187684041249429081969173019873817364967908010370511243705911\"]",
-     "oneDayPriceChange": 0.13,
+     "oneDayPriceChange": 0.125,
      "volumeNum": 453.990954,
+     "volume24hr": null,
+     "bestBid": 0.96,
+     "bestAsk": 0.99,
+     "spread": 0.03,
      "closed": false,
      "slug": "will-nvidia-nvda-q3-data-center-revenue-be-above-20261008120135000-100b"
     }
@@ -570,6 +626,10 @@ window.WPI_SNAPSHOT = {
      "clobTokenIds": "[\"63752781868424102384492401978216600032322688971706824046658879805832674590222\", \"14313137827136881755848648464718437523794085386778494019567947934277996341978\"]",
      "oneDayPriceChange": null,
      "volumeNum": 662.6629440000002,
+     "volume24hr": null,
+     "bestBid": 0.008,
+     "bestAsk": 0.049,
+     "spread": 0.041,
      "closed": false,
      "slug": "nvidia-nvda-q3-adjusted-gross-margin-non-gaap-20261008120136000-less-than-71"
     }
@@ -599,10 +659,14 @@ window.WPI_SNAPSHOT = {
      "question": "Will Nvidia\u2019s market capitalization be less than $4.00T at the end of 2026?",
      "groupItemTitle": "<$4.00T",
      "outcomes": "[\"Yes\", \"No\"]",
-     "outcomePrices": "[\"0.2645\", \"0.7355\"]",
+     "outcomePrices": "[\"0.2625\", \"0.7375\"]",
      "clobTokenIds": "[\"75184185460235875385343932552601861806273235321353622101075745551195596449064\", \"34018603004196992445593398920516394351314045267655138524671675534959894093072\"]",
-     "oneDayPriceChange": 0.125,
-     "volumeNum": 8924.707029999998,
+     "oneDayPriceChange": 0.123,
+     "volumeNum": 8924.70703,
+     "volume24hr": 711.003305,
+     "bestBid": 0.134,
+     "bestAsk": 0.391,
+     "spread": 0.257,
      "closed": false,
      "slug": "will-nvidias-market-capitalization-be-less-than-3pt50t-at-the-end-of-2026-1785882876109"
     }
@@ -618,10 +682,10 @@ window.WPI_SNAPSHOT = {
    "source_url": "https://gamma-api.polymarket.com/events/79987",
    "market_ids": [
     "679018",
-    "679064",
     "679030",
     "679022",
     "679021",
+    "679064",
     "679060",
     "679029",
     "679034"
@@ -630,31 +694,23 @@ window.WPI_SNAPSHOT = {
    "rate": null,
    "outcomes_plain": {},
    "outcome_template": "{label} wins",
-   "volume": 169364301.062319,
+   "volume": 169725641.065889,
    "markets": [
     {
      "id": "679018",
      "question": "Will Marine Le Pen win the 2027 French presidential election?",
      "groupItemTitle": "Marine Le Pen",
      "outcomes": "[\"Yes\", \"No\"]",
-     "outcomePrices": "[\"0.4505\", \"0.5495\"]",
+     "outcomePrices": "[\"0.4495\", \"0.5505\"]",
      "clobTokenIds": "[\"55764212211467781322980371912612507865974994976253196346176314491480419639168\", \"5649717099758674861276159343380402289083378331461490840325685141994171250523\"]",
-     "oneDayPriceChange": null,
-     "volumeNum": 5264282.706934,
+     "oneDayPriceChange": -0.001,
+     "volumeNum": 5280110.7673430005,
+     "volume24hr": 105688.91946499997,
+     "bestBid": 0.449,
+     "bestAsk": 0.45,
+     "spread": 0.001,
      "closed": false,
      "slug": "will-marine-le-pen-win-the-2027-french-presidential-election"
-    },
-    {
-     "id": "679064",
-     "question": "Will Teddy Riner win the 2027 French presidential election?",
-     "groupItemTitle": "Teddy Riner",
-     "outcomes": "[\"Yes\", \"No\"]",
-     "outcomePrices": "[\"0.1845\", \"0.8155\"]",
-     "clobTokenIds": "[\"5484359180643998833429212063323989217966527556579338887565291075146224382196\", \"38487328584338975336631272662082357710888040951341541748452771296940469992311\"]",
-     "oneDayPriceChange": null,
-     "volumeNum": 49756.993751,
-     "closed": false,
-     "slug": "will-teddy-riner-win-the-2027-french-presidential-election"
     },
     {
      "id": "679030",
@@ -664,7 +720,11 @@ window.WPI_SNAPSHOT = {
      "outcomePrices": "[\"0.135\", \"0.865\"]",
      "clobTokenIds": "[\"88550326946437280548248031502775629664259630024343210447063397951616199975032\", \"78935030613038194779147226463048913187247425461933527083007539809178403199936\"]",
      "oneDayPriceChange": null,
-     "volumeNum": 3567885.7974659996,
+     "volumeNum": 3583359.9225310003,
+     "volume24hr": 42239.55898199999,
+     "bestBid": 0.13,
+     "bestAsk": 0.14,
+     "spread": 0.01,
      "closed": false,
      "slug": "will-jean-luc-mlenchon-win-the-2027-french-presidential-election"
     },
@@ -676,7 +736,11 @@ window.WPI_SNAPSHOT = {
      "outcomePrices": "[\"0.1295\", \"0.8705\"]",
      "clobTokenIds": "[\"55404192439775628931124671719520886657525387168536821457706619003199189099864\", \"79358475953126059185096320578578995575874288599466094920037110232928386404141\"]",
      "oneDayPriceChange": -0.019,
-     "volumeNum": 6925218.9355770005,
+     "volumeNum": 7058889.184357,
+     "volume24hr": 227250.37985299996,
+     "bestBid": 0.129,
+     "bestAsk": 0.13,
+     "spread": 0.001,
      "closed": false,
      "slug": "will-david-lisnard-win-the-2027-french-presidential-election"
     },
@@ -688,19 +752,43 @@ window.WPI_SNAPSHOT = {
      "outcomePrices": "[\"0.075\", \"0.925\"]",
      "clobTokenIds": "[\"84846382165343032223975853870946110241285484772019446686866815597350660955868\", \"80456575204440643570499123641511043765364487572502085512858581574010154701650\"]",
      "oneDayPriceChange": -0.02,
-     "volumeNum": 3156941.879523,
+     "volumeNum": 3172415.912862001,
+     "volume24hr": 108102.75858400001,
+     "bestBid": 0.07,
+     "bestAsk": 0.08,
+     "spread": 0.01,
      "closed": false,
      "slug": "will-douard-philippe-win-the-2027-french-presidential-election"
+    },
+    {
+     "id": "679064",
+     "question": "Will Teddy Riner win the 2027 French presidential election?",
+     "groupItemTitle": "Teddy Riner",
+     "outcomes": "[\"Yes\", \"No\"]",
+     "outcomePrices": "[\"0.066\", \"0.934\"]",
+     "clobTokenIds": "[\"5484359180643998833429212063323989217966527556579338887565291075146224382196\", \"38487328584338975336631272662082357710888040951341541748452771296940469992311\"]",
+     "oneDayPriceChange": null,
+     "volumeNum": 89270.38535600001,
+     "volume24hr": 105282.002375,
+     "bestBid": 0.041,
+     "bestAsk": 0.091,
+     "spread": 0.05,
+     "closed": false,
+     "slug": "will-teddy-riner-win-the-2027-french-presidential-election"
     },
     {
      "id": "679060",
      "question": "Will Christine Lagarde win the 2027 French presidential election?",
      "groupItemTitle": "Christine Lagarde",
      "outcomes": "[\"Yes\", \"No\"]",
-     "outcomePrices": "[\"0.0575\", \"0.9425\"]",
+     "outcomePrices": "[\"0.0585\", \"0.9415\"]",
      "clobTokenIds": "[\"99240068351455574729467629800805892674088563638353047506523604209057843144195\", \"58754901030958194596958074489255728955620849812430285036092529343781637878128\"]",
-     "oneDayPriceChange": -0.009,
-     "volumeNum": 2856194.836313,
+     "oneDayPriceChange": -0.008,
+     "volumeNum": 2871316.762674,
+     "volume24hr": 106799.68945899997,
+     "bestBid": 0.058,
+     "bestAsk": 0.059,
+     "spread": 0.001,
      "closed": false,
      "slug": "will-christine-lagarde-win-the-2027-french-presidential-election"
     },
@@ -709,10 +797,14 @@ window.WPI_SNAPSHOT = {
      "question": "Will Rapha\u00ebl Glucksmann win the 2027 French presidential election?",
      "groupItemTitle": "Rapha\u00ebl Glucksmann",
      "outcomes": "[\"Yes\", \"No\"]",
-     "outcomePrices": "[\"0.0225\", \"0.9775\"]",
+     "outcomePrices": "[\"0.0215\", \"0.9785\"]",
      "clobTokenIds": "[\"97531408855841405410232789703119036119573635076996943730887685044477538494161\", \"91614037901759358822201019738747890245698909012092657780820261729371244775376\"]",
-     "oneDayPriceChange": -0.005,
-     "volumeNum": 3572384.5832,
+     "oneDayPriceChange": -0.006,
+     "volumeNum": 3587271.7447809996,
+     "volume24hr": 117960.211746,
+     "bestBid": 0.021,
+     "bestAsk": 0.022,
+     "spread": 0.001,
      "closed": false,
      "slug": "will-raphal-glucksmann-win-the-2027-french-presidential-election"
     },
@@ -724,7 +816,11 @@ window.WPI_SNAPSHOT = {
      "outcomePrices": "[\"0.0185\", \"0.9815\"]",
      "clobTokenIds": "[\"94391324985187701312427605791553049327097814064787849723991205429060004737042\", \"26890459666562518130876295284144647143504759262811197504274347102239033858901\"]",
      "oneDayPriceChange": -0.001,
-     "volumeNum": 3579668.1527790003,
+     "volumeNum": 3594225.1504359995,
+     "volume24hr": 61149.308311,
+     "bestBid": 0.018,
+     "bestAsk": 0.019,
+     "spread": 0.001,
      "closed": false,
      "slug": "will-dominique-de-villepin-win-the-2027-french-presidential-election"
     }
@@ -752,17 +848,21 @@ window.WPI_SNAPSHOT = {
    "rate": null,
    "outcomes_plain": {},
    "outcome_template": "{label} becomes prime minister",
-   "volume": 90634924.085552,
+   "volume": 90639916.296345,
    "markets": [
     {
      "id": "682708",
      "question": "Will Gadi Eizenkot be the next Prime Minister of Israel?",
      "groupItemTitle": "Gadi Eizenkot",
      "outcomes": "[\"Yes\", \"No\"]",
-     "outcomePrices": "[\"0.608\", \"0.392\"]",
+     "outcomePrices": "[\"0.6105\", \"0.3895\"]",
      "clobTokenIds": "[\"52487256270918227930942830546248720603566203568229607048093730748840489555808\", \"1507744758511144558263623459899956467548763419522526462308518027912401299177\"]",
-     "oneDayPriceChange": -0.0645,
-     "volumeNum": 9834171.917501,
+     "oneDayPriceChange": -0.062,
+     "volumeNum": 9836062.497598002,
+     "volume24hr": 142814.45293300002,
+     "bestBid": 0.6,
+     "bestAsk": 0.621,
+     "spread": 0.021,
      "closed": false,
      "slug": "will-gadi-eizenkot-be-the-next-prime-minister-of-israel"
     },
@@ -771,10 +871,14 @@ window.WPI_SNAPSHOT = {
      "question": "Will Benjamin Netanyahu be the next Prime Minister of Israel?",
      "groupItemTitle": "Benjamin Netanyahu",
      "outcomes": "[\"Yes\", \"No\"]",
-     "outcomePrices": "[\"0.264\", \"0.736\"]",
+     "outcomePrices": "[\"0.242\", \"0.758\"]",
      "clobTokenIds": "[\"20006732765674855733524007935991362439352594042415161039767275461950712817548\", \"54533569528927082430133047556849600511985191158927477533124630301934489498530\"]",
-     "oneDayPriceChange": 0.077,
-     "volumeNum": 34743120.484285004,
+     "oneDayPriceChange": 0.055,
+     "volumeNum": 34744812.114981,
+     "volume24hr": 169734.70948699996,
+     "bestBid": 0.235,
+     "bestAsk": 0.249,
+     "spread": 0.014,
      "closed": false,
      "slug": "will-benjamin-netanyahu-be-the-next-prime-minister-of-israel"
     },
@@ -787,6 +891,10 @@ window.WPI_SNAPSHOT = {
      "clobTokenIds": "[\"105057524965982907913786325697426001538810836564004836999292309706852745390829\", \"13887896800265966487014179943559375403384011039339488276489274832989862323735\"]",
      "oneDayPriceChange": -0.002,
      "volumeNum": 5426683.198829999,
+     "volume24hr": 56075.147287,
+     "bestBid": 0.062,
+     "bestAsk": 0.073,
+     "spread": 0.011,
      "closed": false,
      "slug": "will-avigdor-lieberman-be-the-next-prime-minister-of-israel"
     },
@@ -798,7 +906,11 @@ window.WPI_SNAPSHOT = {
      "outcomePrices": "[\"0.034\", \"0.966\"]",
      "clobTokenIds": "[\"58945936829392654397399777214757608864525173988558750256164021442231118224154\", \"39409206330527880169507414405291721950884951005340760541937649898052386499519\"]",
      "oneDayPriceChange": 0.0075,
-     "volumeNum": 5854080.501469001,
+     "volumeNum": 5854080.501468999,
+     "volume24hr": 35921.04433599999,
+     "bestBid": 0.03,
+     "bestAsk": 0.038,
+     "spread": 0.008,
      "closed": false,
      "slug": "will-naftali-bennett-be-the-next-prime-minister-of-israel"
     },
@@ -810,7 +922,11 @@ window.WPI_SNAPSHOT = {
      "outcomePrices": "[\"0.0015\", \"0.9985\"]",
      "clobTokenIds": "[\"80908635602471552886049573110321791161186841957249509900771759394573505359926\", \"279135026232966548267372221910300904521833390614952028405533756942338898146\"]",
      "oneDayPriceChange": null,
-     "volumeNum": 4624725.50969,
+     "volumeNum": 4624725.509690001,
+     "volume24hr": 1115.485,
+     "bestBid": 0.001,
+     "bestAsk": 0.002,
+     "spread": 0.001,
      "closed": false,
      "slug": "will-yossi-cohen-be-the-next-prime-minister-of-israel"
     },
@@ -822,7 +938,11 @@ window.WPI_SNAPSHOT = {
      "outcomePrices": "[\"0.0015\", \"0.9985\"]",
      "clobTokenIds": "[\"38003127295883228185689665963602138176190384641897237734105806870773590495970\", \"43581484654171741412819396053420951222941194520459214805405618926172095980803\"]",
      "oneDayPriceChange": 0.0005,
-     "volumeNum": 3008197.3360289996,
+     "volumeNum": 3008197.336029,
+     "volume24hr": 16106.262,
+     "bestBid": 0.001,
+     "bestAsk": 0.002,
+     "spread": 0.001,
      "closed": false,
      "slug": "will-yair-golan-be-the-next-prime-minister-of-israel"
     },
@@ -834,7 +954,11 @@ window.WPI_SNAPSHOT = {
      "outcomePrices": "[\"0.0015\", \"0.9985\"]",
      "clobTokenIds": "[\"113523109301381527088718768250912137532200947193534063249121987336101159734964\", \"81875811432969830460135158317591338081684626327054488810775527982906009292091\"]",
      "oneDayPriceChange": null,
-     "volumeNum": 2598873.263076999,
+     "volumeNum": 2598873.263077,
+     "volume24hr": 9691.091,
+     "bestBid": 0.001,
+     "bestAsk": 0.002,
+     "spread": 0.001,
      "closed": false,
      "slug": "will-gideon-saar-be-the-next-prime-minister-of-israel"
     },
@@ -847,6 +971,10 @@ window.WPI_SNAPSHOT = {
      "clobTokenIds": "[\"49071939739791449726827416712265617396930502300780957239086018273026268436098\", \"19043464432761022117798242943058502377099044437371801839246425042395638016765\"]",
      "oneDayPriceChange": null,
      "volumeNum": 1679285.049765,
+     "volume24hr": 277.93,
+     "bestBid": 0.001,
+     "bestAsk": 0.002,
+     "spread": 0.001,
      "closed": false,
      "slug": "will-israel-katz-be-the-next-prime-minister-of-israel"
     }
@@ -874,7 +1002,7 @@ window.WPI_SNAPSHOT = {
    "rate": null,
    "outcomes_plain": {},
    "outcome_template": "{label} wins",
-   "volume": 736903451.792976,
+   "volume": 736905534.075701,
    "markets": [
     {
      "id": "561261",
@@ -884,7 +1012,11 @@ window.WPI_SNAPSHOT = {
      "outcomePrices": "[\"0.1885\", \"0.8115\"]",
      "clobTokenIds": "[\"110102705199530588976777616718115948005824665233400132417374621750887344831757\", \"98394838816403247684221016468696784125095120854407803889228262583112436699261\"]",
      "oneDayPriceChange": 0.015,
-     "volumeNum": 6985244.528896,
+     "volumeNum": 6985244.528896001,
+     "volume24hr": 98850.55655500002,
+     "bestBid": 0.188,
+     "bestAsk": 0.189,
+     "spread": 0.001,
      "closed": false,
      "slug": "will-jon-ossoff-win-the-2028-us-presidential-election"
     },
@@ -896,7 +1028,11 @@ window.WPI_SNAPSHOT = {
      "outcomePrices": "[\"0.1755\", \"0.8245\"]",
      "clobTokenIds": "[\"16040015440196279900485035793550429453516625694844857319147506590755961451627\", \"94476829201604408463453426454480212459887267917122244941405244686637914508323\"]",
      "oneDayPriceChange": -0.002,
-     "volumeNum": 18854450.434423998,
+     "volumeNum": 18854457.707149,
+     "volume24hr": 5394.511737999999,
+     "bestBid": 0.175,
+     "bestAsk": 0.176,
+     "spread": 0.001,
      "closed": false,
      "slug": "will-jd-vance-win-the-2028-us-presidential-election"
     },
@@ -908,7 +1044,11 @@ window.WPI_SNAPSHOT = {
      "outcomePrices": "[\"0.1185\", \"0.8815\"]",
      "clobTokenIds": "[\"8113830512143065501177519557124858581375945005490796772950589720955457782465\", \"11493926619286817179231142642565394485790380952577225820901334479399429951651\"]",
      "oneDayPriceChange": -0.002,
-     "volumeNum": 14411469.661399001,
+     "volumeNum": 14411669.661399001,
+     "volume24hr": 13793.989611,
+     "bestBid": 0.118,
+     "bestAsk": 0.119,
+     "spread": 0.001,
      "closed": false,
      "slug": "will-alexandria-ocasio-cortez-win-the-2028-us-presidential-election"
     },
@@ -919,8 +1059,12 @@ window.WPI_SNAPSHOT = {
      "outcomes": "[\"Yes\", \"No\"]",
      "outcomePrices": "[\"0.0955\", \"0.9045\"]",
      "clobTokenIds": "[\"11171618905857319805355893398009978356002287408842633593535559412449299952250\", \"65892530750232246342273648992064742042382898919201083513241874070914353628268\"]",
-     "oneDayPriceChange": null,
-     "volumeNum": 13481446.805038001,
+     "oneDayPriceChange": 0.001,
+     "volumeNum": 13481846.805038001,
+     "volume24hr": 10944.16865,
+     "bestBid": 0.095,
+     "bestAsk": 0.096,
+     "spread": 0.001,
      "closed": false,
      "slug": "will-marco-rubio-win-the-2028-us-presidential-election"
     },
@@ -931,8 +1075,12 @@ window.WPI_SNAPSHOT = {
      "outcomes": "[\"Yes\", \"No\"]",
      "outcomePrices": "[\"0.0765\", \"0.9235\"]",
      "clobTokenIds": "[\"98250445447699368679516529207365255018790721464590833209064266254238063117329\", \"18823838997443878656879952590502524526556504037944392973476854588563571859850\"]",
-     "oneDayPriceChange": 0.006,
-     "volumeNum": 19130626.334713005,
+     "oneDayPriceChange": 0.004,
+     "volumeNum": 19130626.33471301,
+     "volume24hr": 20276.582084000005,
+     "bestBid": 0.076,
+     "bestAsk": 0.077,
+     "spread": 0.001,
      "closed": false,
      "slug": "will-gavin-newsom-win-the-2028-us-presidential-election"
     },
@@ -945,6 +1093,10 @@ window.WPI_SNAPSHOT = {
      "clobTokenIds": "[\"104480514270625615787868282411330496385404675495672110015326625654626015018993\", \"65724430065358897810064400118831287249960059855415477063660293398018349529272\"]",
      "oneDayPriceChange": -0.001,
      "volumeNum": 12988292.146252997,
+     "volume24hr": 66944.79329900001,
+     "bestBid": 0.055,
+     "bestAsk": 0.056,
+     "spread": 0.001,
      "closed": false,
      "slug": "will-ron-desantis-win-the-2028-us-presidential-election"
     },
@@ -956,7 +1108,11 @@ window.WPI_SNAPSHOT = {
      "outcomePrices": "[\"0.0325\", \"0.9675\"]",
      "clobTokenIds": "[\"70663352401606372246362604193214664065595751757222752105245221905399175050480\", \"4988819538339626436114997160558538168652916536529198363646261454228218983102\"]",
      "oneDayPriceChange": -0.003,
-     "volumeNum": 9756414.300219996,
+     "volumeNum": 9756414.30022,
+     "volume24hr": 12477.188548,
+     "bestBid": 0.032,
+     "bestAsk": 0.033,
+     "spread": 0.001,
      "closed": false,
      "slug": "will-kamala-harris-win-the-2028-us-presidential-election"
     },
@@ -969,6 +1125,10 @@ window.WPI_SNAPSHOT = {
      "clobTokenIds": "[\"35629456194498013232473191985311930903993567273832459837879398120893197410860\", \"26087406687932108531005204502244492184534000122992461059156880611150953145122\"]",
      "oneDayPriceChange": 0.002,
      "volumeNum": 8727790.428483997,
+     "volume24hr": 31944.66661,
+     "bestBid": 0.026,
+     "bestAsk": 0.027,
+     "spread": 0.001,
      "closed": false,
      "slug": "will-pete-buttigieg-win-the-2028-us-presidential-election"
     }
@@ -991,17 +1151,21 @@ window.WPI_SNAPSHOT = {
     "December 31": "Israel-Iran ceasefire holds through 31 December"
    },
    "outcome_template": null,
-   "volume": 50332537.870677,
+   "volume": 50338253.016255006,
    "markets": [
     {
      "id": "3399468",
      "question": "Israel x Iran ceasefire continues through December 31?",
      "groupItemTitle": "December 31",
      "outcomes": "[\"Yes\", \"No\"]",
-     "outcomePrices": "[\"0.61\", \"0.39\"]",
+     "outcomePrices": "[\"0.605\", \"0.395\"]",
      "clobTokenIds": "[\"34732988886981510167874389845708832808627284379840131351229635795767825787404\", \"63915287271940688064870172991436489775587541335457370355314489349033951709373\"]",
-     "oneDayPriceChange": 0.03,
-     "volumeNum": 2221855.2074370002,
+     "oneDayPriceChange": 0.025,
+     "volumeNum": 2221995.947437,
+     "volume24hr": 115573.254482,
+     "bestBid": 0.6,
+     "bestAsk": 0.61,
+     "spread": 0.01,
      "closed": false,
      "slug": "israel-x-iran-ceasefire-continues-through-december-31-415"
     }
@@ -1024,7 +1188,7 @@ window.WPI_SNAPSHOT = {
     "December 31": "Russia-Ukraine ceasefire deal by 31 December"
    },
    "outcome_template": null,
-   "volume": 10635545.837024001,
+   "volume": 10635645.827024003,
    "markets": [
     {
      "id": "2243897",
@@ -1034,7 +1198,11 @@ window.WPI_SNAPSHOT = {
      "outcomePrices": "[\"0.145\", \"0.855\"]",
      "clobTokenIds": "[\"99878393523957043401217108863095556720659532630565063651671026144852955005052\", \"69565284411089708271128692790745152090129066525382935764397092493923596997488\"]",
      "oneDayPriceChange": -0.01,
-     "volumeNum": 3308089.343211,
+     "volumeNum": 3308089.343211001,
+     "volume24hr": 9256.555762,
+     "bestBid": 0.14,
+     "bestAsk": 0.15,
+     "spread": 0.01,
      "closed": false,
      "slug": "russia-x-ukraine-ceasefire-agreement-by-december-31-2026"
     }
@@ -1057,7 +1225,7 @@ window.WPI_SNAPSHOT = {
     "December 31": "US declares war on Iran by 31 December"
    },
    "outcome_template": null,
-   "volume": 7873698.511402987,
+   "volume": 7873698.511402988,
    "markets": [
     {
      "id": "1170144",
@@ -1067,7 +1235,11 @@ window.WPI_SNAPSHOT = {
      "outcomePrices": "[\"0.0195\", \"0.9805\"]",
      "clobTokenIds": "[\"7557290671053949208699445220310834898387867585937374554219472108856099537227\", \"83652999054281077992136893356670906681712967148078791434355880630259935043726\"]",
      "oneDayPriceChange": -0.0005,
-     "volumeNum": 901064.273507,
+     "volumeNum": 901064.2735070001,
+     "volume24hr": 258.772728,
+     "bestBid": 0.018,
+     "bestAsk": 0.021,
+     "spread": 0.003,
      "closed": false,
      "slug": "will-the-us-officially-declare-war-on-iran-by-december-31-2026-746"
     }
@@ -1090,7 +1262,7 @@ window.WPI_SNAPSHOT = {
     "Will China invade Taiwan by end of 2026?": "China invades Taiwan by end of 2026"
    },
    "outcome_template": null,
-   "volume": 46019902.515467,
+   "volume": 46019902.51546701,
    "markets": [
     {
      "id": "567621",
@@ -1100,7 +1272,11 @@ window.WPI_SNAPSHOT = {
      "outcomePrices": "[\"0.0175\", \"0.9825\"]",
      "clobTokenIds": "[\"94559586571241563470235664821564670251180951772614764383113614156422396181162\", \"90772332434487149264114862115632028379978765245278600275169585501290867536237\"]",
      "oneDayPriceChange": 0.001,
-     "volumeNum": 46019902.515467,
+     "volumeNum": 46019902.51546701,
+     "volume24hr": 79826.754543,
+     "bestBid": 0.017,
+     "bestAsk": 0.018,
+     "spread": 0.001,
      "closed": false,
      "slug": "will-china-invade-taiwan-before-2027"
     }
@@ -1123,17 +1299,21 @@ window.WPI_SNAPSHOT = {
     "November 15": "US-Iran ceasefire starts by 15 November"
    },
    "outcome_template": null,
-   "volume": 441164.813465,
+   "volume": 443285.283465,
    "markets": [
     {
      "id": "6831494",
      "question": "US x Iran Effective Ceasefire by November 15?",
      "groupItemTitle": "November 15",
      "outcomes": "[\"Yes\", \"No\"]",
-     "outcomePrices": "[\"0.45\", \"0.55\"]",
+     "outcomePrices": "[\"0.455\", \"0.545\"]",
      "clobTokenIds": "[\"6097871914367610284582440381544005482777665716584926016321254901654860681152\", \"48094359207016110356802741009227133669406414283907907434349128209323981054413\"]",
-     "oneDayPriceChange": 0.09,
-     "volumeNum": 93176.195015,
+     "oneDayPriceChange": 0.095,
+     "volumeNum": 93176.19501499999,
+     "volume24hr": 76602.77670599999,
+     "bestBid": 0.45,
+     "bestAsk": 0.46,
+     "spread": 0.01,
      "closed": false,
      "slug": "us-x-iran-effective-ceasefire-by-november-15-20261108"
     }

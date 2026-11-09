@@ -22,11 +22,13 @@
       if (m.closed || !m.outcomePrices) return;
       var oc = parse(m.outcomes), pr = parse(m.outcomePrices).map(Number), tk = parse(m.clobTokenIds);
       var odc = m.oneDayPriceChange == null ? null : Number(m.oneDayPriceChange) * 100;
+      var spread = m.spread != null ? Number(m.spread) : (m.bestBid != null && m.bestAsk != null ? Number(m.bestAsk) - Number(m.bestBid) : null);
+      var thin = (m.volume24hr != null && Number(m.volume24hr) < 10000) || (spread != null && spread > 0.03);
       if (oc.length === 2 && String(oc[0]).toLowerCase() === 'yes') {
-        out.push({ label: m.groupItemTitle || m.question || 'Yes', pct: pr[0] * 100, move: odc, token: tk[0], market: m.id, volume: Number(m.volumeNum || 0) });
+        out.push({ label: m.groupItemTitle || m.question || 'Yes', pct: pr[0] * 100, move: odc, token: tk[0], market: m.id, volume: Number(m.volumeNum || 0), thin: thin });
       } else {
         oc.forEach(function (o, i) {
-          out.push({ label: (m.groupItemTitle ? m.groupItemTitle + ': ' : '') + o, pct: pr[i] * 100, move: odc == null ? null : (i === 0 ? odc : -odc), token: tk[i], market: m.id, volume: Number(m.volumeNum || 0) });
+          out.push({ label: (m.groupItemTitle ? m.groupItemTitle + ': ' : '') + o, pct: pr[i] * 100, move: odc == null ? null : (i === 0 ? odc : -odc), token: tk[i], market: m.id, volume: Number(m.volumeNum || 0), thin: thin });
         });
       }
     });
@@ -93,35 +95,43 @@
     return { top: t0, text: 'No big moves today', line: 'Top event: ' + W.plainOutcome(t0.ev, t0.lead.label) + ' at ' + W.pct(t0.lead.pct) + '%, could touch ' + Math.round(t0.touch) + '% of your portfolio (Guess).' };
   };
   /* Shared layout */
+  var ICON = {
+    today: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3 2"/></svg>',
+    events: '<svg viewBox="0 0 24 24"><path d="M5 7h14M5 12h14M5 17h9"/></svg>',
+    portfolio: '<svg viewBox="0 0 24 24"><path d="M12 4a8 8 0 1 0 8 8h-8z"/><path d="M14 2.5A8 8 0 0 1 21.5 10H14z"/></svg>'
+  };
   W.shell = function (active) {
     var tabs = [['today', 'today.html', 'Today'], ['events', 'events.html', 'Events'], ['portfolio', 'portfolio.html', 'My portfolio']];
-    var nav = '<a class="brand" href="today.html">World Pulse Index</a><nav id="tabs">' + tabs.map(function (t) {
-      return '<a class="tab' + (t[0] === active ? ' on' : '') + '" href="' + t[1] + '">' + t[2] + '</a>';
+    document.getElementById('top').innerHTML = '<a class="brand" href="today.html">World Pulse Index</a><nav id="tabs">' + tabs.map(function (t) {
+      return '<a class="tab' + (t[0] === active ? ' on' : '') + '" href="' + t[1] + '">' + ICON[t[0]] + '<span>' + t[2] + '</span></a>';
     }).join('') + '</nav>';
-    document.getElementById('top').innerHTML = nav;
-    document.getElementById('footer').innerHTML = 'Insights only, not advice. Figures: Polymarket public data (no key). Holdings: read-only eToro read, ' + esc(S.holdings.fetched_at) + '. Every event-to-holding link is a Guess. · <a href="how.html">How it works</a>';
+    document.getElementById('footer').innerHTML = '<a href="how.html">How it works</a> · Insights only, not advice. · Polymarket, public data. Holdings: reported eToro read, ' + esc(S.holdings.time) + ' Asia/Jerusalem. Every event-to-holding link is a Guess.';
     W.timeline();
   };
+  W.figTime = function () { return W.live.gammaOk ? W.time(W.live.midAt && W.live.midAt > W.live.gammaAt ? W.live.midAt : W.live.gammaAt, true) : W.time(new Date(S.built_ms), false); };
   W.timeline = function () {
     var el = document.getElementById('timeline'); if (!el) return;
-    var f = W.live.gammaOk ? 'Figures at ' + W.time(W.live.midAt && W.live.midAt > W.live.gammaAt ? W.live.midAt : W.live.gammaAt, true) + ' (live)'
-      : 'Figures at ' + W.time(new Date(S.built_ms), true) + ' · built-in figures at ' + W.time(new Date(S.built_ms), false);
     el.className = 'timeline';
-    el.innerHTML = esc(f) + ' · Holdings at ' + esc(S.holdings.time) + ' · Insights only, not advice · <a href="how.html">How it works</a>';
+    var f = W.live.gammaOk ? 'Figures at ' + W.figTime() + ' Asia/Jerusalem · refreshes every minute'
+      : (W.live.error ? '<span class="warn"></span>Figures at ' + W.figTime() + ' (built-in figures from ' + W.figTime() + ' · live read failed)' : 'Figures at ' + W.figTime() + ' (built-in) · reading live figures…');
+    el.innerHTML = f + ' · Holdings at ' + esc(S.holdings.time) + ' · Insights only, not advice · <a href="how.html">How it works</a>';
   };
-
+  W.src = function (ev) {
+    return '<div class="caption src"><a href="' + esc(ev.polymarket_url) + '" target="_blank" rel="noopener">Polymarket</a>, public data · ' + (W.live.gammaOk ? 'as of ' + W.figTime() : 'built-in figures from ' + W.figTime()) + '</div>';
+  };
   /* Live reads: Gamma every 60 s, order book midpoint every 20 s. Failures keep the built-in snapshot. */
   var render = function () {};
   function remember() { W.all().forEach(function (s) { if (s.lead) W.prevLead[s.ev.event_id] = s.lead.label; }); }
   function readGamma() {
     return Promise.all(S.events.map(function (ev) {
-      return fetch('https://gamma-api.polymarket.com/events/' + ev.event_id).then(function (r) { if (!r.ok) throw r.status; return r.json(); }).then(function (j) {
+      var ac = window.AbortController ? new AbortController() : null; if (ac) setTimeout(function () { ac.abort(); }, 8000);
+      return fetch('https://gamma-api.polymarket.com/events/' + ev.event_id, ac ? { signal: ac.signal } : {}).then(function (r) { if (!r.ok) throw r.status; return r.json(); }).then(function (j) {
         var ms = j.markets || [];
         if (ev.market_ids && ev.market_ids.length) {
           var keep = ev.markets.map(function (old) { return ms.filter(function (m) { return String(m.id) === String(old.id); })[0] || old; });
           ms = keep;
         }
-        ev.markets = ms.map(function (m) { return { id: m.id, question: m.question, groupItemTitle: m.groupItemTitle, outcomes: m.outcomes, outcomePrices: m.outcomePrices, clobTokenIds: m.clobTokenIds, oneDayPriceChange: m.oneDayPriceChange, volumeNum: m.volumeNum, closed: m.closed }; });
+        ev.markets = ms.map(function (m) { return { id: m.id, question: m.question, groupItemTitle: m.groupItemTitle, outcomes: m.outcomes, outcomePrices: m.outcomePrices, clobTokenIds: m.clobTokenIds, oneDayPriceChange: m.oneDayPriceChange, volumeNum: m.volumeNum, volume24hr: m.volume24hr, bestBid: m.bestBid, bestAsk: m.bestAsk, spread: m.spread, closed: m.closed }; });
         if (j.volume) ev.volume = Number(j.volume);
         return true;
       }).catch(function () { return false; });
@@ -143,24 +153,52 @@
       if (res.filter(Boolean).length) { W.live.midAt = new Date(); render(); W.timeline(); }
     }).catch(function () {});
   }
-  W.start = function (active, fn) {
+  W.state = function () { return W.param('state'); };   // preview: loading | error | empty
+  W.start = function (active, fn, opts) {
+    opts = opts || {};
     render = function () { try { fn(); } catch (e) { console.error(e); } };
     remember();
     W.shell(active);
-    render();
-    readGamma();
+    var st = W.state();
+    if (st === 'empty') S.events = [];
+    if (st === 'error') { W.live.error = true; render(); W.timeline(); return; }
+    if (st === 'loading') { W.loading = true; render(); return; }
+    if (opts.waitLive) { W.loading = true; render(); W.loading = false; } else render();
+    readGamma().then(function () { if (!W.live.gammaOk) { W.live.error = true; render(); W.timeline(); } });
     setInterval(readGamma, 60000);
     setInterval(readMids, 20000);
   };
+  W.retry = function () { W.live.error = false; W.timeline(); readGamma().then(function () { if (!W.live.gammaOk) { W.live.error = true; render(); W.timeline(); } }); return false; };
   W.rerender = function () { render(); };
   W.param = function (k) { return new URLSearchParams(location.search).get(k); };
-  W.bar = function (v) { var w = v == null || isNaN(v) ? 0 : Math.max(0, Math.min(100, v)); return '<span class="bar" aria-hidden="true"><i style="width:' + w.toFixed(1) + '%"></i></span>'; };
-  W.card = function (s) {
-    return '<a class="card" href="event.html?id=' + s.ev.event_id + '">' +
-      '<div class="ctitle">' + esc(W.name(s.ev)) + '</div>' +
-      '<div class="big">' + W.pct(s.lead ? s.lead.pct : null) + '%</div>' + W.bar(s.lead ? s.lead.pct : null) +
-      '<div class="opt">Odds: ' + esc(s.lead ? W.plainOutcome(s.ev, s.lead.label) : '') + ' · Polymarket</div>' +
-      '<div class="touch">Could touch ' + Math.round(s.touch) + '% of your portfolio' + (s.high ? ' <span class="flag">High effect</span>' : '') + ' <span class="guess">Guess</span></div>' +
-      '<div class="why">Why: ' + esc(s.why) + '</div></a>';
+  W.moveText = function (m) {
+    if (m == null) return '<div class="move">no 24 h change data</div>';
+    var a = Math.abs(m), big = a >= 5;
+    if (a < 0.05) return '<div class="move">→ flat in 24 h · no meaningful move</div>';
+    var up = m > 0;
+    return '<div class="move' + (big ? (up ? ' up' : ' down') : '') + '">' + (up ? '▲ up ' : '▼ down ') + a.toFixed(1) + ' pts in 24 h · ' + (big ? 'meaningful move' : 'no meaningful move') + '</div>';
   };
+  /* one bar per option; tick at the figure about 24 h earlier; striped when trading is thin */
+  W.bar = function (o, isLead, sm, caption) {
+    if (o == null || typeof o !== 'object') o = { pct: o };
+    var v = o.pct == null || isNaN(o.pct) ? 0 : Math.max(0, Math.min(100, o.pct));
+    var prev = o.move != null ? Math.max(0, Math.min(100, o.pct - o.move)) : null;
+    return '<div class="barwrap"><span class="bar' + (sm ? ' sm' : '') + (isLead ? ' lead' : '') + (o.thin ? ' thin' : '') + '" role="img" aria-label="' + W.pct1(o.pct) + '%"><i style="width:' + v.toFixed(1) + '%"></i>' + (prev != null ? '<b style="left:' + prev.toFixed(1) + '%" title="24 h ago ' + W.pct1(prev) + '%"></b>' : '') + '</span>' + (sm ? '' : '<span class="bar-val">' + W.pct1(o.pct) + '%</span>') + '</div>' +
+      (caption && prev != null ? '<div class="tick-cap">24 h ago ' + W.pct1(prev) + '%</div>' : '') +
+      (caption && o.thin ? '<div class="thin-cap">Thin trading, read as rough</div>' : '');
+  };
+  W.card = function (s) {
+    var l = s.lead;
+    return '<div class="card link" data-id="' + s.ev.event_id + '" tabindex="0" role="link" onclick="if(!event.target.closest(\'a\'))location.href=\'event.html?id=' + s.ev.event_id + '\'" onkeydown="if(event.key===\'Enter\')location.href=\'event.html?id=' + s.ev.event_id + '\'">' +
+      '<div class="labels"><span class="chip">' + esc(S.group_short[s.ev.group]) + '</span>' + (s.high ? '<span class="flag">High</span>' : '') + (s.meaningful ? '<span class="chip moved">Moved</span>' : '') + '</div>' +
+      '<div class="ctitle"><a class="plainlink" href="event.html?id=' + s.ev.event_id + '">' + esc(W.name(s.ev)) + '</a></div>' +
+      '<div class="opt">' + esc(l ? W.plainOutcome(s.ev, l.label) : '') + '</div>' +
+      '<div class="big">' + W.pct(l ? l.pct : null) + '%</div>' + W.bar(l, true, false, true) + W.moveText(s.move) +
+      '<div class="divider"></div><div class="pair"><div><div class="caption">Touch <span class="guess">Guess</span></div><div class="nm">' + Math.round(s.touch) + '%</div></div>' +
+      '<div><div class="caption">Attention <span class="guess">Guess</span></div><div class="nm">' + Math.round(s.attention) + '%</div></div></div>' +
+      '<div class="caption" style="margin-top:8px">Why on Today: ' + esc(s.why) + '</div>' + W.src(s.ev) + '</div>';
+  };
+  W.skeletonCard = function () { return '<div class="card"><div class="sk" style="width:60%;height:18px"></div><div class="sk" style="width:96px;height:40px"></div><div class="sk" style="width:100%;height:8px"></div></div>'; };
+  W.emptyState = function () { return '<div class="card state"><div class="icon"></div><div class="ctitle" style="-webkit-line-clamp:unset">No events to show right now</div><p class="sub">We could not find open events in these groups. Figures come back when Polymarket lists them.</p><a class="btn secondary" href="how.html">How it works</a></div>'; };
+  W.errorCard = function () { return '<div class="error" role="alert"><div class="t">We could not read live figures</div><div class="b">Showing built-in figures from ' + W.time(new Date(S.built_ms), false) + ' Asia/Jerusalem.</div><a href="#" onclick="return WPI.retry()">Try again</a></div>'; };
 })();
