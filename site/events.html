@@ -1,0 +1,17 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Events · World Pulse Index</title><link rel="stylesheet" href="assets/layout.css"></head><body>
+<header id="top"></header><div id="timeline" class="timeline"></div><main id="main"></main><footer id="footer"></footer>
+<script src="assets/snapshot.js"></script><script src="assets/data.js"></script>
+<script>
+WPI.start('events', function () {
+  var W = WPI, S = W.S, g = W.param('g') || (location.hash || '').slice(1) || S.group_order[0];
+  if (S.group_order.indexOf(g) < 0) g = S.group_order[0];
+  var rows = W.all().filter(function (s) { return s.ev.group === g; }).sort(function (a, b) { return b.attention - a.attention; });
+  function arrow(m) { if (m == null || Math.abs(m) < 0.5) return '<span class="flat">→ flat</span>'; return m > 0 ? '<span class="up">▲ ' + m.toFixed(1) + '</span>' : '<span class="down">▼ ' + Math.abs(m).toFixed(1) + '</span>'; }
+  document.getElementById('main').innerHTML = '<h1>Events</h1><div class="gtabs">' + S.group_order.map(function (k) {
+    return '<button class="' + (k === g ? 'on' : '') + '" onclick="location.hash=\'' + k + '\';WPI.rerender()">' + W.esc(S.group_short[k]) + '</button>'; }).join('') + '</div>' +
+    '<p class="small">' + W.esc(S.rules.group_display[g]) + '. Move is versus about 24 hours earlier. <a href="how.html#attention">Ranked by attention</a>.</p>' +
+    '<table><tr><th>Event</th><th class="num">Figure</th><th class="num">24h</th><th class="num">Could touch</th><th class="wide">Leading option</th><th class="wide num">Traded</th></tr>' +
+    rows.map(function (s) { return '<tr class="row" onclick="location.href=\'event.html?id=' + s.ev.event_id + '\'"><td><a href="event.html?id=' + s.ev.event_id + '">' + W.esc(s.ev.title) + '</a></td><td class="num"><b>' + W.pct(s.lead && s.lead.pct) + '%</b></td><td class="num">' + arrow(s.move) + '</td><td class="num">' + Math.round(s.touch) + '%' + (s.high ? ' <span class="flag">High</span>' : '') + '</td><td class="wide">' + W.esc(s.lead ? s.lead.label : '') + '</td><td class="wide num">' + W.money(s.ev.volume) + '</td></tr>'; }).join('') + '</table>';
+});
+window.addEventListener('hashchange', function () { WPI.rerender(); });
+</script></body></html>

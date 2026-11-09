@@ -1,0 +1,13 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Today · World Pulse Index</title><link rel="stylesheet" href="assets/layout.css"></head><body>
+<header id="top"></header><div id="timeline" class="timeline"></div><main id="main"></main><footer id="footer"></footer>
+<script src="assets/snapshot.js"></script><script src="assets/data.js"></script>
+<script>
+WPI.start('today', function () {
+  var W = WPI, h = W.headline(), r = W.ranked().slice(0, 3);
+  document.getElementById('main').innerHTML =
+    '<div class="headline"><h1>' + W.esc(h.text) + '</h1>' + (h.line ? '<p class="sub">' + W.esc(h.line) + '</p>' : '<p class="sub">Could touch ' + Math.round(h.top.touch) + '% of your portfolio (Guess).</p>') + '</div>' +
+    '<h2>Top 3 events now</h2><p class="rank">Big number = Polymarket figure for the leading option. <a href="how.html#attention">Ranked by attention</a>.</p>' +
+    '<div class="cards">' + r.map(W.card).join('') + '</div>' +
+    '<div class="more"><a href="events.html">See all events</a><a href="portfolio.html">See my portfolio</a></div>';
+});
+</script></body></html>

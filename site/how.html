@@ -1,0 +1,14 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>How it works · World Pulse Index</title><link rel="stylesheet" href="assets/layout.css"></head><body>
+<header id="top"></header><div id="timeline" class="timeline"></div><main id="main"></main><footer id="footer"></footer>
+<script src="assets/snapshot.js"></script><script src="assets/data.js"></script>
+<script>
+WPI.start('', function () {
+  var W = WPI, S = W.S;
+  document.getElementById('main').innerHTML = '<h1>How it works</h1>' +
+  '<div class="box"><h2>Sources</h2><p>Event figures come from Polymarket\'s free public data (Gamma <code>/events/{id}</code>, re-read every 60 seconds; order book midpoints from <code>clob.polymarket.com/midpoint</code>, every 20 seconds when reachable). No key, no account. If live reads fail, the page keeps the built-in figures from the last build (' + W.esc(S.built_at) + ').</p><p>Holdings come from one read-only eToro read (' + W.esc(S.holdings.fetched_at) + '). They refresh only when the site is rebuilt.</p></div>' +
+  '<div class="box" id="attention"><h2>Scoring (Product task 10)</h2><p><b>Could touch</b> = add up, for each holding, its share of the portfolio × link strength (strong 1, some 0.5, weak 0.25). Above 30% is flagged <b>High effect</b>.</p><p><b>Uncertainty</b> = 4 × p × (1 − p), where p is the leading option\'s figure. It is highest at 50/50.</p><p><b>Attention</b> = could touch × uncertainty, plus could touch × 0.5 when there is a meaningful move (5 points or more versus about 24 hours earlier), never more than could touch. Attention sets the order on Today and Events; the big number is always the Polymarket figure.</p><p>Scores change only when the figures move, never from news. All options of one event count as one event. Every link between an event and a holding is a <span class="guess">Guess</span>; strengths are untested assumptions.</p></div>' +
+  '<div class="box"><h2>Safety choices</h2><p>Holdings are read-only. No keys, tokens or passwords in any file. No trading actions anywhere. Insights only, not advice.</p></div>' +
+  '<div class="box"><h2>Known gaps</h2><ul>' + S.rules.gaps.map(function (g) { return '<li>' + W.esc(g) + '</li>'; }).join('') + '</ul></div>' +
+  '<p><a href="' + S.links.architecture + '" target="_blank" rel="noopener">Architecture document</a> · <a href="' + S.links.product_rules + '" target="_blank" rel="noopener">Product task 10 scoring rules</a></p>';
+});
+</script></body></html>

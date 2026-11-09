@@ -1,0 +1,89 @@
+{
+  "run_at": "9 November 2026, 18:16:35 Asia/Jerusalem",
+  "items": [
+    {
+      "check": "Gamma HTTP 200 for all events",
+      "pass": true,
+      "detail": "770450:200, 770451:200, 1025305:200, 1280521:200, 1123963:200, 1194143:200, 1194144:200, 800884:200, 1262243:200, 1304411:200, 1224132:200, 711714:200, 478472:200, 160366:200, 34044:200, 1337182:200"
+    },
+    {
+      "check": "Each of four groups has at least one event",
+      "pass": true,
+      "detail": "{\"central_bank_rates\": 5, \"big_company_events\": 3, \"worldwide_elections\": 3, \"wars\": 5}"
+    },
+    {
+      "check": "No duplicate events",
+      "pass": true,
+      "detail": "16 events"
+    },
+    {
+      "check": "All percentages between 0 and 100",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "today.html: nav + time line + 'Insights only, not advice'",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "events.html: nav + time line + 'Insights only, not advice'",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "event.html: nav + time line + 'Insights only, not advice'",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "portfolio.html: nav + time line + 'Insights only, not advice'",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "how.html: nav + time line + 'Insights only, not advice'",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "Every event-to-holding link labeled Guess",
+      "pass": true,
+      "detail": "20 link rows, 0 without Guess"
+    },
+    {
+      "check": "No buy/sell advice wording on pages",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "No secrets or keys in site files",
+      "pass": false,
+      "detail": "site/how.html"
+    },
+    {
+      "check": "All internal links resolve to files",
+      "pass": false,
+      "detail": "event.html->' + W.esc(s.ev.polymarket_url) + ',event.html->' + W.esc(s.ev.source_url) + ',how.html->' + S.links.architecture + ',how.html->' + S.links.product_rules + '"
+    }
+  ],
+  "all_pass": false,
+  "screenshots": [
+    {
+      "file": "site/shots/today-390.png",
+      "exists": true
+    },
+    {
+      "file": "site/shots/today-1280.png",
+      "exists": true
+    },
+    {
+      "file": "site/shots/events-390.png",
+      "exists": true
+    },
+    {
+      "file": "site/shots/events-1280.png",
+      "exists": true
+    }
+  ]
+}

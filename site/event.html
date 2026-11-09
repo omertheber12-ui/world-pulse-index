@@ -1,0 +1,23 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Event · World Pulse Index</title><link rel="stylesheet" href="assets/layout.css"></head><body>
+<header id="top"></header><div id="timeline" class="timeline"></div><main id="main"></main><footer id="footer"></footer>
+<script src="assets/snapshot.js"></script><script src="assets/data.js"></script>
+<script>
+WPI.start('', function () {
+  var W = WPI, s = W.byId(W.param('id'));
+  var m = document.getElementById('main');
+  if (!s) { m.innerHTML = '<p><a href="events.html">← Back to Events</a></p><h1>Event not found</h1>'; return; }
+  var st = s.parts.filter(function (p) { return p.strength > 0; }).sort(function (a, b) { return b.contrib - a.contrib; });
+  m.innerHTML = '<p><a href="events.html#' + s.ev.group + '">← Back to Events</a></p><h1>' + W.esc(s.ev.title) + '</h1>' +
+    '<p class="sub">' + W.esc(W.S.rules.group_display[s.ev.group]) + ' · traded ' + W.money(s.ev.volume) + '</p>' +
+    '<div class="box"><div class="big">' + W.pct(s.lead && s.lead.pct) + '%</div><div class="opt">' + W.esc(s.lead ? s.lead.label : '') + ' leads · Polymarket</div>' +
+    '<div class="touch">Could touch ' + Math.round(s.touch) + '% of your portfolio' + (s.high ? ' <span class="flag">High effect</span>' : '') + ' <span class="guess">Guess</span></div>' +
+    '<div class="small">Attention ' + s.attention.toFixed(1) + '% · uncertainty ' + s.unc.toFixed(2) + ' · <a href="how.html#attention">how this is scored</a></div></div>' +
+    '<h2>All options</h2><table><tr><th>Option</th><th class="num">Figure</th><th class="num">24h move</th></tr>' + s.opts.map(function (o) {
+      return '<tr><td>' + W.esc(o.label) + '</td><td class="num">' + W.pct1(o.pct) + '%</td><td class="num">' + (o.move == null ? '—' : (o.move > 0 ? '+' : '') + o.move.toFixed(1)) + '</td></tr>'; }).join('') + '</table>' +
+    '<h2>Holdings it could touch</h2><ul class="plain">' + st.map(function (p) {
+      return '<li class="linkrow">' + W.esc(p.name) + ' · ' + p.weight.toFixed(1) + '% of portfolio · ' + W.strengthWord(p.strength) + ' link (' + p.strength + ') → ' + p.contrib.toFixed(1) + ' points <span class="guess">Guess</span></li>'; }).join('') + '</ul>' +
+    '<h2>What it could mean</h2><div class="box">' + W.esc(s.ifHappens) + '</div><div class="box">' + W.esc(s.ifNot) + '</div>' +
+    '<p class="small">Source: <a href="' + W.esc(s.ev.polymarket_url) + '" target="_blank" rel="noopener">Polymarket event</a> · <a href="' + W.esc(s.ev.source_url) + '" target="_blank" rel="noopener">Gamma data</a> · fetched ' + W.esc(W.live.gammaOk ? W.time(W.live.gammaAt, true) + ' (live)' : W.S.built_at + ' (built-in)') + '</p>' +
+    '<p><a href="events.html#' + s.ev.group + '">← Back to Events</a></p>';
+});
+</script></body></html>
