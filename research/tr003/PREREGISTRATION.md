@@ -80,4 +80,13 @@ Held-out slice: the last 30% of calendar time (by hour) across the sample, repor
   or fewer than 500 usable hour-pairs.
 
 ## Deviations (append only)
-(none yet)
+- D1, 2026-11-10 00:49 Israel time, after the first run. Polymarket prices-history points are
+  stamped a few seconds after each hour (all at minute 0, median 9 seconds past). The locked rule
+  "value at hour H = last point at or before H" therefore assigns the 10:00:07 snapshot to 11:00,
+  an artificial one-hour delay (first run: same-hour correlation of odds and Bitcoin 0.006,
+  next-hour 0.77). Fix: a point within the first 60 seconds after the hour is treated as the value
+  at that hour. Both versions are reported; the fixed version is the headline. Look-ahead from the
+  fix is at most 59 seconds.
+- Implementation details not specified in advance: odds and model probabilities for "dip"
+  contracts are sign-flipped so that up = bullish; the realized-volatility version is a robustness
+  check, not counted.
