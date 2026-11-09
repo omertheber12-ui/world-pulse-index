@@ -1,5 +1,5 @@
 {
-  "run_at": "2026-11-09T17:33:31.526Z",
+  "run_at": "2026-11-09T22:40:51.832Z",
   "all_pass": true,
   "items": [
     {
@@ -20,12 +20,17 @@
     {
       "check": "Built-in ranking matches Python recompute of Product task 10 scoring",
       "pass": true,
-      "detail": "js=770451,770450,800884,1337182,711714 py=770451,770450,800884,1337182,711714"
+      "detail": "js=1194143,1337182,770450,800884,81557 py=1194143,1337182,770450,800884,81557"
     },
     {
-      "check": "Fallback headline is 12 words or fewer",
+      "check": "Headline is built from the question, end date, and change",
       "pass": true,
-      "detail": "Nvidia value figures moved 12.3 points to 26.3%."
+      "detail": "Chance that Nvidia's market value is below $4 trillion at the end of 2026 rose | from 13.3% to 25.7% in 24 hours, up 12.4 points"
+    },
+    {
+      "check": "A move under 1 point reads held steady",
+      "pass": true,
+      "detail": ""
     },
     {
       "check": "Gamma HTTP 200 for all events",
@@ -49,6 +54,11 @@
     },
     {
       "check": "No buy/sell advice wording in source",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "Next server started",
       "pass": true,
       "detail": ""
     },
@@ -78,17 +88,22 @@
       "detail": ""
     },
     {
-      "check": "Today headline is 12 words or fewer",
+      "check": "Today headline is built from the question, end date, and change",
       "pass": true,
-      "detail": "Nvidia value figures moved 12.3 points to 25.8%."
+      "detail": "Chance that israel and Iran ceasefire continues through 31 December 2026 rose"
     },
     {
-      "check": "Today top 5 rows are the first 5 of the attention ranking",
+      "check": "Today top 3 cards are the first 3 of the personal ranking",
       "pass": true,
-      "detail": "rows=770451,770450,800884,1337182,711714 top=770451,770450,800884,1337182,711714"
+      "detail": "rows=711714,1337182,770450 top=711714,1337182,770450"
     },
     {
-      "check": "Today shows the touch line and All events link",
+      "check": "Exposure text says this is not an expected loss",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "Breakdown groups are present",
       "pass": true,
       "detail": ""
     },
@@ -108,7 +123,27 @@
       "detail": ""
     },
     {
-      "check": "Event detail keeps the figure, holdings fold, and Polymarket link",
+      "check": "Event detail keeps the exposure breakdown and Polymarket link",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "How it works states the score formula, caps, and exclusion rules",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "Move score is capped at 20 points",
+      "pass": true,
+      "detail": "62"
+    },
+    {
+      "check": "Quality is 50 when the market is thin and 100 otherwise",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "Events under $10k volume, with no linked holdings, or past their end date are left out",
       "pass": true,
       "detail": ""
     },
@@ -125,7 +160,7 @@
     {
       "check": "Every event-to-holding link labeled Guess",
       "pass": true,
-      "detail": "portfolio 12 event 2 unlabeled 0"
+      "detail": "portfolio 12 event 1 unlabeled 0"
     },
     {
       "check": "No buy/sell advice wording on pages",

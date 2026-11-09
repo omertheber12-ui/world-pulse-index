@@ -1,5 +1,5 @@
 import { loadPulse } from '../../lib/pulse.js';
-import { eventName, fig, forHolding, holdName, usd, weightText } from '../../lib/copy.js';
+import { eventName, fig, forHolding, guessWords, holdName, usd, weightText } from '../../lib/copy.js';
 import { Footer, FigureNote } from '../components/Footer.js';
 import { Holdings } from '../components/Chrome.js';
 import { PortfolioSkeleton } from '../components/Skeletons.js';
@@ -29,6 +29,7 @@ export default async function PortfolioPage({ searchParams }) {
       id: x.s.ev.event_id,
       name: eventName(x.s.ev),
       fig: fig(x.s.lead && x.s.lead.pct),
+      guess: guessWords(r.ticker, x.s.ev),
     })),
   }));
   const note = sp.state === 'error'
@@ -39,7 +40,7 @@ export default async function PortfolioPage({ searchParams }) {
       <main>
         {note}
         <h1 className="bignum">{usd(pulse.holdings.total)}</h1>
-        <p className="cap">Reported holdings, {pulse.holdings.time} Asia/Jerusalem</p>
+        <p className="cap">Sample portfolio, not your live account. Saved read at {pulse.holdings.time} Asia/Jerusalem.</p>
         <Holdings rows={rows} />
       </main>
       <Footer pulse={pulse} />

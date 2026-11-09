@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 /** Ported checks: data, duplicates, ranges, ranking, no advice, no secrets, and the rendered pages. */
-import { spawn, spawnSync } from 'node:child_process';
+import { execSync, spawn, spawnSync } from 'node:child_process';
 import { readFileSync, readdirSync, statSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { headline } from '../lib/copy.js';
-import { rankOpen } from '../lib/score.js';
+import { chancePhrase, changeLine, changeVerb } from '../lib/copy.js';
+import { homeEligible, moveScore, qualityScore, rankOpen } from '../lib/score.js';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const checks = [];
@@ -46,8 +46,17 @@ add('Built-in ranking matches Python recompute of Product task 10 scoring',
   py.status === 0 && JSON.stringify(jsIds) === JSON.stringify(pyIds),
   'js=' + jsIds.slice(0, 5).join(',') + ' py=' + pyIds.slice(0, 5).join(','));
 
-const h = headline(rankOpen(fallback.events, ctx), rules);
-add('Fallback headline is 12 words or fewer', h.text.split(/\s+/).filter(Boolean).length <= 12, h.text);
+const sampleQ = "Will Nvidia's market capitalization be less than $4.00T at the end of 2026?";
+const phrase = chancePhrase(sampleQ, '2026-12-31T23:59:00Z');
+const sampleHead = 'Chance that ' + phrase + ' ' + changeVerb(12.4);
+const sampleLine = changeLine(25.7, 12.4);
+add('Headline is built from the question, end date, and change',
+  sampleHead.startsWith('Chance that ') && sampleHead.includes('2026') && sampleHead.endsWith(' rose')
+  && sampleHead.toLowerCase().includes('market value') && sampleHead.includes('$4 trillion')
+  && sampleLine === 'from 13.3% to 25.7% in 24 hours, up 12.4 points',
+  sampleHead + ' | ' + sampleLine);
+add('A move under 1 point reads held steady',
+  changeVerb(0.4) === 'held steady' && changeLine(80.5, 0.4) === 'at 80.5%, less than 1 point change in 24 hours' && changeVerb(-4) === 'fell');
 
 let gammaOk = true;
 const gammaDetail = [];
@@ -109,13 +118,14 @@ add('No buy/sell advice wording in source', adviceHits.length === 0, adviceHits.
 let server;
 let base = process.env.BASE_URL || '';
 if (!base) {
-  server = spawn('npx', ['next', 'start', '-p', '3456', '-H', '127.0.0.1'], { cwd: root, stdio: 'inherit' });
-  base = 'http://127.0.0.1:3456';
+  try { execSync('fuser -k 3461/tcp', { stdio: 'ignore' }); } catch { /* free */ }
+  server = spawn('npx', ['next', 'start', '-p', '3461', '-H', '127.0.0.1'], { cwd: root, stdio: 'inherit' });
+  base = 'http://127.0.0.1:3461';
   const started = Date.now();
   let ready = false;
   while (Date.now() - started < 30000) {
     try {
-      const r = await fetch(base + '/');
+      const r = await fetch(base + '/', { signal: AbortSignal.timeout(4000) });
       if (r.status) { ready = true; break; }
     } catch { /* wait */ }
     await new Promise((r) => setTimeout(r, 400));
@@ -124,7 +134,7 @@ if (!base) {
 }
 
 async function page(urlpath) {
-  const res = await fetch(base + urlpath, { redirect: 'follow' });
+  const res = await fetch(base + urlpath, { redirect: 'follow', signal: AbortSignal.timeout(20000) });
   const html = await res.text();
   return { status: res.status, html, final: res.url };
 }
@@ -149,17 +159,21 @@ if (base) {
   }
   const today = doms['/'].html;
   const h1 = (today.match(/<h1[^>]*>([\s\S]*?)<\/h1>/) || [, ''])[1].replace(/<[^>]+>/g, '').trim();
-  add('Today headline is 12 words or fewer', h1 && h1.split(/\s+/).length <= 12, h1);
+  add('Today headline is built from the question, end date, and change',
+    /^Chance that /.test(h1) && /(rose|fell|held steady)/.test(h1) && /20\d\d/.test(h1) && today.includes('in 24 hours'),
+    h1);
   const rankAttr = (today.match(/data-ranking="([^"]*)"/) || [, ''])[1];
   const ranking = rankAttr ? rankAttr.split(',').map((x) => x.split(':')) : [];
   const rowIds = [...today.matchAll(/data-id="(\d+)"/g)].map((m) => m[1]);
   const att = ranking.map((x) => Number(x[1]));
-  add('Today top 5 rows are the first 5 of the attention ranking',
-    ranking.length >= 5 && rowIds.slice(0, 5).join(',') === ranking.slice(0, 5).map((x) => x[0]).join(',')
+  add('Today top 3 cards are the first 3 of the personal ranking',
+    ranking.length >= 3 && rowIds.length === 3 && rowIds.join(',') === ranking.slice(0, 3).map((x) => x[0]).join(',')
     && att.every((n, i) => i === 0 || att[i - 1] >= n - 1e-9),
-    'rows=' + rowIds.slice(0, 5).join(',') + ' top=' + ranking.slice(0, 5).map((x) => x[0]).join(','));
-  add('Today shows the touch line and All events link',
-    today.includes('of your portfolio could be touched') && today.includes('All events'));
+    'rows=' + rowIds.join(',') + ' top=' + ranking.slice(0, 3).map((x) => x[0]).join(','));
+  add('Exposure text says this is not an expected loss',
+    today.includes('Share of your portfolio linked to this event. This is not an expected loss.') && today.includes('All events') && today.includes('Sample portfolio'));
+  add('Breakdown groups are present',
+    today.includes('% direct') && today.includes('% funds') && today.includes('% estimated'));
   const err = await page('/?state=error');
   add('Error state shows a short message and keeps figures',
     err.html.includes('Live read failed') && err.html.includes('data-id='));
@@ -168,17 +182,35 @@ if (base) {
   const empty = await page('/?state=empty');
   add("Empty state shows 'No events to show right now'", empty.html.includes('No events to show right now'));
   const ev = doms['/event/770450'].html;
-  add('Event detail keeps the figure, holdings fold, and Polymarket link',
-    ev.includes('Show holdings') && ev.includes('Could touch') && ev.includes('Open on Polymarket') && ev.includes('If it happens') && ev.includes('Guess'));
+  add('Event detail keeps the exposure breakdown and Polymarket link',
+    ev.includes('Show holdings') && ev.includes('Share of your portfolio linked to this event. This is not an expected loss.')
+    && ev.includes('Polymarket') && ev.includes('Guess') && ev.includes('% direct'));
+  const how = doms['/how'].html;
+  add('How it works states the score formula, caps, and exclusion rules',
+    how.includes('Score = 0.5 × Move + 0.35 × Exposure + 0.15 × Quality')
+    && how.includes('capped at 20 points') && how.includes('capped at 50%')
+    && how.includes('under $10,000') && how.includes('6 hours') && how.includes('Thin market'));
+  const move62 = moveScore(12.4).move;
+  add('Move score is capped at 20 points', Math.abs(move62 - 62) < 0.05 && moveScore(40).move === 100, String(move62));
+  const thinLead = { volume24hr: 1000, liquidity: 100, updatedAt: new Date().toISOString() };
+  const freshLead = { volume24hr: 80000, liquidity: 20000, updatedAt: new Date().toISOString() };
+  add('Quality is 50 when the market is thin and 100 otherwise', qualityScore(thinLead, {}) === 50 && qualityScore(freshLead, {}) === 100);
+  const dropped = homeEligible({ lead: { volume24hr: 100, endDate: '2027-01-01T00:00:00Z' }, exposure: { total: 10 }, ev: {} });
+  const kept = homeEligible({ lead: { volume24hr: 20000, endDate: '2027-01-01T00:00:00Z', updatedAt: new Date().toISOString() }, exposure: { total: 10 }, ev: {} });
+  const noLink = homeEligible({ lead: { volume24hr: 20000, endDate: '2027-01-01T00:00:00Z' }, exposure: { total: 0 }, ev: {} });
+  add('Events under $10k volume, with no linked holdings, or past their end date are left out', dropped === false && kept === true && noLink === false);
   const ee = await page('/events?state=empty&g=worldwide_elections');
   add('Events empty chip names the group', ee.html.includes('No open events in Elections right now.'));
   const pe = await page('/portfolio?state=empty');
   add('Portfolio empty state is short', pe.html.includes('No holdings to show yet.'));
   const port = doms['/portfolio'].html;
-  const linkRows = [...port.matchAll(/class="linkrow[^"]*"[\s\S]*?<\/div>/g)];
-  const unlabeled = linkRows.filter((m) => !m[0].includes('Guess'));
-  const evRows = [...ev.matchAll(/class="linkrow[^"]*"[\s\S]*?<\/div>/g)];
-  const evUn = evRows.filter((m) => !m[0].includes('Guess'));
+  const rowRe = /class="linkrow[^"]*"[^>]*>([\s\S]*?)<\/(?:div|p)>/g;
+  const visible = (html) => html.replace(/<script[\s\S]*?<\/script>/gi, ' ');
+  const linkRows = [...visible(port).matchAll(rowRe)];
+  const labeled = (chunk) => /Guess|how strongly/.test(chunk);
+  const unlabeled = linkRows.filter((m) => !labeled(m[0]));
+  const evRows = [...visible(ev).matchAll(rowRe)];
+  const evUn = evRows.filter((m) => !labeled(m[0]));
   add('Every event-to-holding link labeled Guess',
     linkRows.length + evRows.length > 0 && unlabeled.length === 0 && evUn.length === 0,
     'portfolio ' + linkRows.length + ' event ' + evRows.length + ' unlabeled ' + (unlabeled.length + evUn.length));

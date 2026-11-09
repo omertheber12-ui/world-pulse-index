@@ -100,11 +100,10 @@ export function Holdings({ rows }) {
         <div className="hfold" hidden={!isOpen}>
           <p className="hval">{r.valueText}</p>
           {r.events.map((ev) => (
-            <div className="linkrow" key={ev.id}>
+            <p className="linkrow" key={ev.id}>
               <RowLink className="rowlink" href={'/event/' + ev.id}>{ev.name} {ev.fig}%</RowLink>
-              {' '}
-              <span className="guess">Guess</span>
-            </div>
+              {' '}<span className="tag guess">Guess</span> {ev.guess}.
+            </p>
           ))}
         </div>
       </div>
