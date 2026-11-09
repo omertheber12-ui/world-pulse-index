@@ -7,7 +7,7 @@ WPI.start('', function () {
   var m = document.getElementById('main');
   if (!s) { m.innerHTML = '<p><a href="events.html">← Back to Events</a></p><h1>Event not found</h1>'; return; }
   var st = s.parts.filter(function (p) { return p.strength > 0; }).sort(function (a, b) { return b.contrib - a.contrib; });
-  m.innerHTML = '<p><a href="events.html#' + s.ev.group + '">← Back to Events</a></p><h1>' + W.esc(s.ev.title) + '</h1>' +
+  m.innerHTML = '<p><a href="events.html#' + s.ev.group + '">← Back to Events</a></p><h1>' + W.esc(W.name(s.ev)) + '</h1><p class="small">Polymarket title: ' + W.esc(s.ev.title) + '</p>' +
     '<p class="sub">' + W.esc(W.S.rules.group_display[s.ev.group]) + ' · traded ' + W.money(s.ev.volume) + '</p>' +
     '<div class="box"><div class="big">' + W.pct(s.lead && s.lead.pct) + '%</div><div class="opt">' + 'Odds: ' + W.esc(s.lead ? W.plainOutcome(s.ev, s.lead.label) : '') + ' · leading option · Polymarket</div>' +
     '<div class="touch">Could touch ' + Math.round(s.touch) + '% of your portfolio' + (s.high ? ' <span class="flag">High effect</span>' : '') + ' <span class="guess">Guess</span></div>' +
