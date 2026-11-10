@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 const TABS = [
   ['/', 'Today', '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3 2"/></svg>'],
   ['/events', 'Events', '<svg viewBox="0 0 24 24"><path d="M5 7h14M5 12h14M5 17h9"/></svg>'],
+  ['/connections', 'Connections', '<svg viewBox="0 0 24 24"><circle cx="7" cy="12" r="2.5"/><circle cx="17" cy="12" r="2.5"/><path d="M9.5 12h5"/></svg>'],
   ['/portfolio', 'Portfolio', '<svg viewBox="0 0 24 24"><path d="M12 4a8 8 0 1 0 8 8h-8z"/><path d="M14 2.5A8 8 0 0 1 21.5 10H14z"/></svg>'],
 ];
 

@@ -5,6 +5,7 @@ import { readFileSync, readdirSync, statSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { chancePhrase, changeLine, changeVerb, strayTitleCase, thinMarketNote, whyMatters } from '../lib/copy.js';
+import { runConnectionChecks, connectionPageChecks } from './connectionsCheck.mjs';
 import { homeEligible, moveScore, qualityScore, rankOpen } from '../lib/score.js';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -81,6 +82,8 @@ add('Headlines use sentence case, not the market title case',
   ceaseHead + (caseHits.length ? ' | ' + caseHits.join(' | ') : ''));
 add('A move under 1 point reads held steady',
   changeVerb(0.4) === 'held steady' && changeLine(80.5, 0.4) === 'at 80.5%, less than 1 point change in 24 hours' && changeVerb(-4) === 'fell');
+
+runConnectionChecks(add);
 
 let gammaOk = true;
 const gammaDetail = [];
@@ -275,6 +278,7 @@ if (base) {
     if (adviceRe.test(visibleText) || bannedRe.test(visibleText)) advicePages.push(p);
   }
   add('No buy/sell, edge, alpha, or risk-free wording on pages', advicePages.length === 0, advicePages.join(','));
+  await connectionPageChecks(add, page);
   const redir = await fetch(base + '/today.html', { redirect: 'manual' });
   const loc = redir.headers.get('location') || '';
   add('today.html redirects to the Today page', (redir.status === 307 || redir.status === 308) && (loc === '/' || loc.endsWith('/')));

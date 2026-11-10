@@ -1,5 +1,5 @@
 {
-  "run_at": "2026-11-09T22:55:22.171Z",
+  "run_at": "2026-11-10T15:13:23.018Z",
   "all_pass": true,
   "items": [
     {
@@ -39,6 +39,211 @@
     },
     {
       "check": "A move under 1 point reads held steady",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "visible cards are chosen in one helper",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "loader keeps pairs that are not yes_first_look",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "not_enough_history stays off the cards",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "no results file shows the empty state",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "unreadable file uses the could-not-read copy",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "a previous readable file stays on screen",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "zero visible pairs use the empty page and the check date",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "a zero is not accepted where a score was not measured",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "null scores on not_enough_history are allowed",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "a described pair with stronger_connection false is still a card",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "hit rate must equal 100 × n / m",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "the hit line uses the counts, not a rounded percent",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "stronger_connection true is only accepted with yes_first_look",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "a yes_first_look pair that misses the locked bar fails the file check",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "many-pair false still validates and shows the card",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "detail shows the luck percent, the real firing count, and the oil note",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "oil with numbers uses the delayed-print sentence when the note is empty",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "the oil note is not shown on Bitcoin",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "an unclear card says this reading is unclear once",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "a same-day card shows with an empty extra average",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "a same-day card without sentences does not invent one",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "a described card prefers the insight sentence and does not stack another",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "a next-session card falls back to the measured-pattern sentence",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "the grouped quiet line is for missing history only, and only beside a card",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "checked_no_pattern is a card without strength tags, numbers, or the oil note",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "checked_no_pattern uses the insight sentence when the fact is missing",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "checked_no_pattern still shows a card when both sentences are missing",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "verdict no with checked_no_pattern does not show a numeric fact",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "the sparse banner shows for 1, 2, or 3 visible cards and hides at 4",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "the all filter names the asset with no card",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "a single-asset filter with no cards shows that quiet line and not the empty page",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "both assets with cards do not get an asset quiet line",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "loading keeps the title and does not use the empty headline",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "duplicate pairs fail the file check",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "events must come from the frozen app list",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "the method fingerprint must match the lock",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "wallet fields fail the file check",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "an empty pair map is allowed",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "a detail link does not invent a result when nothing has been checked",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "the shipped empty copy does not say nothing passed",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "live source has no example layout, thin-history tag, or old same-day sentence",
       "pass": true,
       "detail": ""
     },
@@ -100,17 +305,17 @@
     {
       "check": "Today headline is built from the question, end date, and change",
       "pass": true,
-      "detail": "Chance that the Israel and Iran ceasefire continues through 31 December 2026 rose"
+      "detail": "Chance that the US central bank keeps rates unchanged at its January 2027 meeting fell"
     },
     {
       "check": "Live headlines have no mid-sentence Title Case words except proper nouns",
       "pass": true,
-      "detail": "Chance that the Israel and Iran ceasefire continues through 31 December 2026 rose"
+      "detail": "Chance that the US central bank keeps rates unchanged at its January 2027 meeting fell"
     },
     {
       "check": "Today top 3 cards are the first 3 of the personal ranking",
       "pass": true,
-      "detail": "rows=711714,770450,1337182 top=711714,770450,1337182"
+      "detail": "rows=770451,711714,770450 top=770451,711714,770450"
     },
     {
       "check": "Exposure text says this is not an expected loss",
@@ -184,6 +389,51 @@
     },
     {
       "check": "No buy/sell, edge, alpha, or risk-free wording on pages",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "Connections page is served with the tab and the insights line",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "live Connections page shows the results file",
+      "pass": true,
+      "detail": "cards 3 mode list"
+    },
+    {
+      "check": "live page does not add strength tags the file did not earn",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "oil delay note is absent when no oil card has numbers",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "detail oil-79987-679018 shows the file sentence only",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "detail oil-34044-567621 shows the file sentence only",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "detail bitcoin-34044-567621 shows the file sentence only",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "asset filters follow the same results file",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "Connections loading does not flash the empty headline",
       "pass": true,
       "detail": ""
     },
