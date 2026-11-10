@@ -1,5 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  outputFileTracingIncludes: {
+    '/connections': ['./data/connections/**/*', './data/fallback.json'],
+    '/connections/[pair_id]': ['./data/connections/**/*', './data/fallback.json'],
+  },
   async redirects() {
     return [
       { source: '/today.html', destination: '/', permanent: false },

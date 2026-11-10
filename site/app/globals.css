@@ -173,3 +173,42 @@ details.exposure summary::-webkit-details-marker{display:none}
   .story{padding:16px}
   .story h1,.story h2{font-size:17px;line-height:22px;margin-top:0}
 }
+/* Connections */
+.checking{margin:28px 0;color:var(--neutral-700);font-size:16px;line-height:24px}
+.conn-banner{margin:0 0 12px;padding:12px 14px;border-radius:12px}
+.conn-banner p{margin:0}
+.conn-banner.first{background:var(--flag-bg);color:var(--flag-ink)}
+.conn-banner.sparse{background:var(--green-50);color:var(--green-800)}
+.conn-helper{margin-top:4px !important;color:var(--neutral-700);font-size:14px;line-height:20px}
+.conn-card{display:block;background:var(--neutral-0);border:1px solid var(--neutral-100);border-radius:16px;padding:16px;margin:0 0 12px;box-shadow:0 1px 2px rgba(23,47,50,.06),0 1px 1px rgba(23,47,50,.04);color:inherit;font-weight:400;text-decoration:none}
+.conn-card:hover{text-decoration:none}
+.conn-tags{margin:0 0 8px}
+.conn-event{margin:0 0 4px;font-size:17px;line-height:22px;font-weight:600;letter-spacing:0;overflow-wrap:break-word;word-break:normal}
+.conn-card .conn-event{min-height:66px}
+.conn-asset{margin:0;color:var(--neutral-700);font-size:14px;line-height:20px;font-weight:600}
+.conn-odds{margin:8px 0 0;font-size:16px;line-height:24px}
+.conn-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:16px 0 0}
+.conn-stat{margin:0}
+.conn-stat b{display:block;font-size:20px;line-height:24px;font-weight:600;font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1}
+.conn-stat span{display:block;margin-top:2px;color:var(--neutral-500);font-size:12px;line-height:16px;font-weight:500;letter-spacing:.01em}
+.conn-obar{margin-top:12px}
+.conn-sentence{margin:12px 0 0}
+.conn-oil{margin:12px 0 0;color:var(--neutral-700);font-size:14px;line-height:20px}
+.conn-how{margin:12px 0 0;color:var(--neutral-700)}
+.conn-meta{margin:12px 0 0;color:var(--neutral-500);font-size:12px;line-height:16px;font-weight:500;letter-spacing:.01em}
+.conn-quiet{margin:8px 0;padding:12px 0;border-top:1px solid var(--neutral-100);color:var(--neutral-700)}
+.tag.conn-first{background:var(--flag-bg);color:var(--flag-ink)}
+.tag.conn-strong{background:var(--green-50);color:var(--green-700)}
+.tag.conn-moved{background:var(--fact-bg);color:var(--fact-ink)}
+.tag.conn-window{background:var(--neutral-50);color:var(--neutral-700)}
+.conn-rows{margin:16px 0 0}
+.conn-rows div{padding:10px 0;border-bottom:1px solid var(--neutral-100)}
+.conn-rows dt{font-size:12px;line-height:16px;font-weight:600;letter-spacing:.01em;color:var(--neutral-500)}
+.conn-rows dd{margin:2px 0 0;font-size:16px;line-height:24px}
+.conn-sources{margin-top:16px}
+.conn-sources h2{margin:0 0 8px;font-size:16px;line-height:22px}
+.conn-sources p{margin:0 0 8px}
+@media(min-width:600px){
+  .conn-card .conn-event{font-size:20px;line-height:26px;min-height:78px}
+  .conn-stat b{font-size:22px;line-height:28px}
+}
