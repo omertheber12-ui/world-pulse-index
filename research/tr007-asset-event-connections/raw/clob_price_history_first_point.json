@@ -1,0 +1,98 @@
+{
+ "3215008": {
+  "status": 200,
+  "n_points": 99,
+  "first_price_point_utc": "2026-07-31 00:00:21",
+  "first_trade_utc": "2026-07-30 02:41:30"
+ },
+ "3215012": {
+  "status": 200,
+  "n_points": 94,
+  "first_price_point_utc": "2026-07-31 00:00:23",
+  "first_trade_utc": "2026-07-30 14:42:00"
+ },
+ "4570943": {
+  "status": 200,
+  "n_points": 54,
+  "first_price_point_utc": "2026-09-15 00:00:14",
+  "first_trade_utc": "2026-09-15 00:00:00"
+ },
+ "6404226": {
+  "status": 200,
+  "n_points": 10,
+  "first_price_point_utc": "2026-11-02 00:00:47",
+  "first_trade_utc": "2026-10-30 10:43:33"
+ },
+ "5230123": {
+  "status": 200,
+  "n_points": 34,
+  "first_price_point_utc": "2026-10-04 00:00:19",
+  "first_trade_utc": "2026-10-03 12:45:50"
+ },
+ "5730325": {
+  "status": 200,
+  "n_points": 23,
+  "first_price_point_utc": "2026-10-16 00:00:29",
+  "first_trade_utc": "2026-10-15 14:21:19"
+ },
+ "5730329": {
+  "status": 200,
+  "n_points": 18,
+  "first_price_point_utc": "2026-10-16 00:00:47",
+  "first_trade_utc": "2026-10-16 12:46:03"
+ },
+ "3358974": {
+  "status": 200,
+  "n_points": 94,
+  "first_price_point_utc": "2026-08-06 00:00:11",
+  "first_trade_utc": "2026-08-05 14:25:30"
+ },
+ "679018": {
+  "status": 200,
+  "n_points": 333,
+  "first_price_point_utc": "2025-11-14 00:00:13",
+  "first_trade_utc": "2025-11-14 02:17:58"
+ },
+ "682708": {
+  "status": 200,
+  "n_points": 351,
+  "first_price_point_utc": "2025-11-16 00:00:08",
+  "first_trade_utc": "2025-11-15 04:01:34"
+ },
+ "561261": {
+  "status": 200,
+  "n_points": 238,
+  "first_price_point_utc": "2026-02-12 00:00:32",
+  "first_trade_utc": "2026-02-11 20:28:09"
+ },
+ "3399468": {
+  "status": 200,
+  "n_points": 89,
+  "first_price_point_utc": "2026-08-08 00:00:17",
+  "first_trade_utc": "2026-08-07 20:35:09"
+ },
+ "2243897": {
+  "status": 200,
+  "n_points": 176,
+  "first_price_point_utc": "2026-05-14 00:00:16",
+  "first_trade_utc": "2026-05-13 04:44:19"
+ },
+ "1170144": {
+  "status": 200,
+  "n_points": 258,
+  "first_price_point_utc": "2026-01-13 00:00:25",
+  "first_trade_utc": "2026-01-13 01:05:19"
+ },
+ "567621": {
+  "status": 200,
+  "n_points": 450,
+  "first_price_point_utc": "2025-07-25 00:00:09",
+  "first_trade_utc": "2025-07-25 01:01:10"
+ },
+ "6831494": {
+  "status": 200,
+  "n_points": 3,
+  "first_price_point_utc": "2026-11-09 00:00:47",
+  "first_trade_utc": "2026-11-08 03:32:09"
+ }
+}
