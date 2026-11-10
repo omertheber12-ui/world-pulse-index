@@ -1,0 +1,99 @@
+{
+ "locked_pick": {
+  "locked_at": "2026-11-10 14:32:53.808800+02:00",
+  "oil_info": {
+   "n_big": 433,
+   "n_disc_big": 303,
+   "n_conf_big": 130,
+   "last_disc_big": "2026-03-03",
+   "first_conf_big": "2026-03-05",
+   "first_oil": "2024-01-02",
+   "last_oil": "2026-11-03"
+  },
+  "event_id": "81557",
+  "event_title": "Prime Minister of Israel after the next election?",
+  "market_id": "682705",
+  "question": "Will Benjamin Netanyahu be the next Prime Minister of Israel?",
+  "window": "week_before",
+  "winning_direction": "up",
+  "score_points": 3.0,
+  "same_day_only": false,
+  "best_day_before_score": 1.0,
+  "best_week_before_score": 3.0,
+  "up_change": -2.0,
+  "down_change": 0.0,
+  "ordinary_change": 1.0,
+  "median_level_up": 53.0,
+  "median_level_down": 52.0,
+  "median_level_ordinary": 53.0,
+  "modal_band_up": "50-55",
+  "modal_band_down": "50-55",
+  "modal_band_ordinary": "50-55",
+  "n_up": 3,
+  "n_down": 7,
+  "n_ordinary": 26,
+  "discovery_gap_up": -3.0,
+  "discovery_gap_down": -1.0,
+  "search_size": "16 events x 3 windows x 2 directions = 96",
+  "cells_with_score": 15
+ },
+ "same_day_only": false,
+ "reverse_check": {
+  "up": {
+   "n": 13,
+   "median_level": 33.0,
+   "modal_band": "25-30",
+   "median_change": -2.0
+  },
+  "down": {
+   "n": 15,
+   "median_level": 35.0,
+   "modal_band": "30-35",
+   "median_change": 0.0
+  },
+  "ordinary": {
+   "n": 40,
+   "median_level": 34.99999959,
+   "modal_band": "30-35",
+   "median_change": -0.9999989150000026
+  },
+  "gap_up_vs_ordinary": -1.0000010849999974,
+  "gap_down_vs_ordinary": 0.9999989150000026,
+  "winning_direction": "up",
+  "discovery_gap": -3.0,
+  "confirmation_gap": -1.0000010849999974,
+  "same_sign": true,
+  "near_zero": false,
+  "n_big_raw_confirmation": 130,
+  "n_big_nonoverlap_confirmation": 28
+ },
+ "forward_check": {
+  "n_evaluable_days": 170,
+  "n_fire": 44,
+  "n_fire_up": 0,
+  "n_fire_down": 44,
+  "n_no_fire": 66,
+  "n_conflict_dropped": 60,
+  "extra_average_pct_points": 0.4296431461394977,
+  "likely_range_95": [
+   -0.9449407832552954,
+   1.9772285232000968
+  ],
+  "mean_signed_return_fire": 0.06674445044305632,
+  "hit_rate_1pct_fire": 0.36363636363636365,
+  "hit_rate_1pct_nofire_same_mix": 0.3484848484848485,
+  "placebo_share_below_real": 0.738,
+  "placebo_beats_95": false
+ },
+ "oil_first_check": {
+  "direction": "up",
+  "before_gap": -1.0000010849999974,
+  "n_before": 13,
+  "after_gap": -1.5614999991697687e-05,
+  "n_after": 13,
+  "oil_first_stronger": false
+ },
+ "verdict": "UNCLEAR",
+ "n_big_raw_confirmation": 130,
+ "seed": 20261110
+}
