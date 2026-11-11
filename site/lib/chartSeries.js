@@ -152,6 +152,8 @@ function geometry(series, eventFamily, assetId) {
     assetAxis: assetAxis(assetId, asset, size),
     oddsName: size ? 'Odds swing' : 'Odds',
     assetName: MOVE_NAME[assetId] || 'Asset',
+    assetUnit: LEVEL_UNIT[assetId] || asset.unit || '',
+    source: asset.source || '',
   };
 }
 
@@ -166,6 +168,42 @@ export function chartModel(row) {
   if (!geom) return null;
   const lead = row.timingGroup && row.timingGroup !== 'same_day' ? leadChartNote(row.lag) : '';
   return { ...geom, leadNote: lead };
+}
+
+function rollingAverage(values, width) {
+  const out = [];
+  const window = [];
+  let sum = 0;
+  for (let i = 0; i < values.length; i++) {
+    const value = values[i];
+    if (typeof value !== 'number') {
+      out.push(null);
+      continue;
+    }
+    window.push(value);
+    sum += value;
+    if (window.length > width) sum -= window.shift();
+    out.push(sum / window.length);
+  }
+  return out;
+}
+
+function sampleIndexes(length, count) {
+  if (length <= count) return Array.from({ length }, (_, index) => index);
+  const indexes = [];
+  for (let i = 0; i < count; i++) indexes.push(Math.round((i * (length - 1)) / (count - 1)));
+  return indexes;
+}
+
+/** Drawing only: a 10-day average, then enough points to read at spark size. */
+export function sparkSeries(model) {
+  if (!model || !model.points) return [];
+  const odds = rollingAverage(model.points.map((point) => point.odds), 10);
+  const asset = rollingAverage(model.points.map((point) => point.asset), 10);
+  return sampleIndexes(model.points.length, 44).map((index) => ({
+    odds: odds[index],
+    asset: asset[index],
+  }));
 }
 
 export function hasBothLines(model) {

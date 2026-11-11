@@ -1,7 +1,9 @@
-import { buildListState, loadConnections, loadingState } from '../../lib/connections.js';
-import { buildPageState, loadCorrelations } from '../../lib/correlations.js';
+import { loadConnections } from '../../lib/connections.js';
+import { loadHome } from '../../lib/linkScreen.js';
+import { ConnectionsHome } from '../components/connections/ConnectionsHome.js';
+import { ConnectionsLoading } from '../components/connections/ConnectionsLoading.js';
 import { EarlierChecks } from '../components/ConnectionsView.js';
-import { StrongestLinksScreen } from '../components/StrongestLinksView.js';
+import { buildListState, loadingState } from '../../lib/connections.js';
 
 export const metadata = {
   title: 'Connections · World Pulse Index',
@@ -10,12 +12,8 @@ export const metadata = {
 
 export default async function ConnectionsPage({ searchParams }) {
   const sp = await searchParams;
+  if (sp.state === 'loading') return <ConnectionsLoading />;
   const filter = sp.asset === 'oil' || sp.asset === 'bitcoin' ? sp.asset : 'all';
-  const earlier = sp.state === 'loading' ? loadingState(filter) : buildListState(loadConnections(), filter);
-  return (
-    <StrongestLinksScreen
-      state={buildPageState(loadCorrelations())}
-      earlier={<EarlierChecks state={earlier} />}
-    />
-  );
+  const earlier = buildListState(loadConnections(), filter);
+  return <ConnectionsHome state={loadHome()} earlier={<EarlierChecks state={earlier} />} />;
 }

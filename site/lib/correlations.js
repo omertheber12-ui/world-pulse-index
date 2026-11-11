@@ -6,7 +6,6 @@
 import { existsSync, readdirSync, readFileSync } from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { brandHeadline } from './brandHeadlines.js';
 import { textProblem } from './connections.js';
 
 export const SCHEMA_VERSION = 'correlations-1';
@@ -106,7 +105,7 @@ function clean(value) {
   return value.trim();
 }
 
-function formatDay(value) {
+export function formatDay(value) {
   const text = clean(value);
   const day = text.slice(0, 10);
   if (!/^\d{4}-\d{2}-\d{2}$/.test(day)) return text || COPY.notAvailable;
@@ -176,7 +175,7 @@ export function timingGroup(row) {
   return 'lead';
 }
 
-function beatsFlag(row) {
+export function beatsFlag(row) {
   if (!row) return null;
   if (typeof row.beats_pick_line === 'boolean') return row.beats_pick_line;
   if (typeof row.beats_best_of_many === 'boolean') return row.beats_best_of_many;
@@ -296,28 +295,95 @@ function dayPhrase(days) {
   return 'the recorded lead';
 }
 
-function sentenceCase(text) {
-  if (!text) return text;
-  return text.charAt(0).toUpperCase() + text.slice(1);
+export function isSizeRow(row) {
+  if (row && row.odds_measure === 'size') return true;
+  return String((row && row.event_family) || '').endsWith('/size');
+}
+
+function eventPhrase(row) {
+  const text = clean(row && row.event_label);
+  const size = isSizeRow(row);
+  if (text.includes('Federal Reserve')) return size ? 'Fed rate-decision odds' : 'Fed rate-cut odds';
+  if (text.includes('Other central bank')) return size ? 'other central-bank rate-decision odds' : 'other central-bank rate-cut odds';
+  if (text.includes('National elections')) return 'national-election odds';
+  if (text.includes('Wars and ceasefires')) return 'war and ceasefire odds';
+  if (text.toLowerCase().includes('inflation report')) return size ? 'US monthly inflation-report odds' : 'inflation-report odds';
+  return shortEvent(text);
+}
+
+function assetPhrase(row, page) {
+  const text = clean(row && row.asset_label);
+  if (text.includes('2-year')) return page ? 'US 2-year yield' : 'the 2-year yield';
+  if (text.includes('10-year government')) return 'the 10-year yield';
+  if (text.includes('3-month')) return 'the 3-month bill rate';
+  if (text.includes('5 years')) return '5-year expected inflation';
+  if (text.includes('10 years')) return '10-year expected inflation';
+  if (text.includes('Bitcoin')) return 'the Bitcoin price';
+  if (text.includes('oil')) return 'oil';
+  if (text.includes('Gold')) return 'gold';
+  if (text.includes('S&P 500')) return 'the S&P 500';
+  if (text.includes('Nasdaq')) return 'the Nasdaq 100';
+  if (text.includes('yen')) return 'the US dollar against the Japanese yen';
+  if (text.includes('shekel')) return 'the US dollar against the Israeli shekel';
+  return shortAsset(text);
+}
+
+function whenPhrase(row) {
+  const days = leadDays(row);
+  if (days === 1) return 'the next day';
+  if (days === 5) return 'over the next week';
+  return 'over the recorded lead';
 }
 
 export function buildHeadline(row) {
   const item = row || {};
-  const event = shortEvent(item.event_label);
-  const asset = shortAsset(item.asset_label);
-  const opposite = numeric(item.spearman) != null && numeric(item.spearman) < 0;
-  let line;
+  const event = eventPhrase(item);
+  const asset = assetPhrase(item, false);
+  const sign = numeric(item.spearman);
+  const negative = sign != null && sign < 0;
+  const size = isSizeRow(item);
+  const when = whenPhrase(item);
   if (timingGroup(item) === 'same_day') {
-    line = event + ' and ' + asset + (opposite ? ' move opposite ways on the same day' : ' move together on the same day');
-  } else {
-    const within = ' within ' + dayPhrase(leadDays(item));
-    if (oddsMovedFirst(item)) {
-      line = event + ' move first, ' + asset + (opposite ? ' moves the other way' : ' follows') + within;
-    } else {
-      line = asset + ' moves first, ' + event + (opposite ? ' move the other way' : ' follow') + within;
+    if (size) {
+      return 'Bigger swings in ' + event + ' often lined up with ' + (negative ? 'smaller' : 'bigger') + ' moves in ' + asset + '.';
     }
+    return 'A rise in ' + event + ' often lined up with a ' + (negative ? 'fall' : 'rise') + ' in ' + asset + '.';
   }
-  return sentenceCase(line);
+  if (size && oddsMovedFirst(item)) {
+    return 'A bigger swing in ' + event + ' often lined up with a ' + (negative ? 'smaller' : 'bigger') + ' move in ' + asset + ' ' + when + '.';
+  }
+  if (size) {
+    return 'A bigger move in ' + asset + ' often lined up with ' + (negative ? 'a smaller swing' : 'a bigger swing') + ' in ' + event + ' ' + when + '.';
+  }
+  if (oddsMovedFirst(item)) {
+    return 'A rise in ' + event + ' often lined up with a ' + (negative ? 'fall' : 'rise') + ' in ' + asset + ' ' + when + '.';
+  }
+  return 'A move in ' + asset + ' often lined up with a ' + (negative ? 'opposite' : 'same-way') + ' move in ' + event + ' ' + when + '.';
+}
+
+/** The first-screen sentence. A negative same-day direction link uses the spec's rise/fall form. */
+export function pageHeadline(row) {
+  const item = row || {};
+  const sign = numeric(item.spearman);
+  if (!isSizeRow(item) && sign != null && sign < 0 && timingGroup(item) === 'same_day') {
+    return 'On the same day, a rise in ' + eventPhrase(item) + ' often lined up with a fall in the ' + assetPhrase(item, true) + '.';
+  }
+  if (timingGroup(item) === 'same_day') return 'On the same day, ' + buildHeadline(item).charAt(0).toLowerCase() + buildHeadline(item).slice(1);
+  return buildHeadline(item);
+}
+
+export function linkId(row) {
+  const family = String((row && row.event_family) || '').replace(/\//g, '-');
+  const asset = String((row && row.asset) || '');
+  const lag = String((row && row.lag) || 'same_day');
+  return 'link-' + family + '-' + asset + '-' + lag;
+}
+
+export function parseLinkId(id) {
+  const match = /^link-(.+)-([a-z0-9_]+)-(same_day|odds_lead_1d|odds_lead_5d|asset_lead_1d|asset_lead_5d)$/.exec(String(id || ''));
+  if (!match) return null;
+  const family = match[1].replace(/-(direction|size)$/, '/$1');
+  return { event_family: family, asset: match[2], lag: match[3] };
 }
 
 export function linkTier(row) {
@@ -448,7 +514,7 @@ export function buildChartCard(row, section) {
   const episodes = numeric(item.independent_episodes);
   return {
     section,
-    headline: brandHeadline(section, clean(item.event_family), clean(item.asset)) || buildHeadline(item),
+    headline: buildHeadline(item),
     tier,
     tierLabel: TIER_LABEL[tier],
     strength: formatTwo(item.spearman),
@@ -530,7 +596,7 @@ export function buildPageState(loaded) {
     sameDay: ordered.filter((card) => card.timingGroup === 'same_day'),
     lead: ordered.filter((card) => card.timingGroup !== 'same_day'),
     chartCards,
-    mainChart: mainIndex >= 0 ? chartCards[mainIndex] : null,
+    mainChart: mainIndex >= 0 ? { ...chartCards[mainIndex], headline: pageHeadline(mainRow) } : null,
     otherPicks: chartCards.filter((_, index) => index !== mainIndex),
     allLinks: buildAllLinks(file),
     footer: footerLine(file),

@@ -522,7 +522,8 @@ export async function connectionPageChecks(add, page) {
   const loading = await page('/connections?state=loading');
   add('Connections loading does not flash the empty headline',
     loading.status === 200
-    && loading.html.includes(COPY.loading)
+    && loading.html.includes('data-loading="1"')
     && loading.html.includes('Connections')
-    && !loading.html.includes(COPY.emptyHeadline));
+    && !loading.html.includes(COPY.emptyHeadline)
+    && !loading.html.includes('No results yet.'));
 }

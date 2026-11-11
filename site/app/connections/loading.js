@@ -1,6 +1,5 @@
-import { loadingState } from '../../lib/connections.js';
-import { ConnectionsScreen } from '../components/ConnectionsView.js';
+import { ConnectionsLoading } from '../components/connections/ConnectionsLoading.js';
 
 export default function Loading() {
-  return <ConnectionsScreen state={loadingState('all')} />;
+  return <ConnectionsLoading />;
 }

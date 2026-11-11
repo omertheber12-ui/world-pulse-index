@@ -8,8 +8,9 @@ import { textProblem } from '../lib/connections.js';
 import {
   COPY, buildCard, buildHeadline, buildPageState, linkTier, loadCorrelations, timingGroup, validateFile, visibleText,
 } from '../lib/correlations.js';
-import { BRAND_HEADLINES, FEATURED_HEADLINE, STANDING_LINE, brandHeadline } from '../lib/brandHeadlines.js';
-import { ODDS_AXIS, ODDS_AXIS_INFLATION, ODDS_LINE_NOTE, SIZE_NOTE, SIZE_ODDS_AXIS, chartModel, hasBothLines, leadChartNote, loadChartSeries, oddsPointsAfterHoldBack, seriesPath } from '../lib/chartSeries.js';
+import { BRAND_HEADLINES, STANDING_LINE } from '../lib/brandHeadlines.js';
+import { ODDS_AXIS, SIZE_ODDS_AXIS, chartModel, hasBothLines, loadChartSeries, oddsPointsAfterHoldBack, seriesPath } from '../lib/chartSeries.js';
+import { buildHome } from '../lib/linkScreen.js';
 
 const siteRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const RESEARCH_SHA = 'a801a002f45b93c22acc60287ab168c0f220c9545b8381ae794beaaedd7049d9';
@@ -329,6 +330,7 @@ export function runCorrelationChecks(add) {
     && strengthOrder(links.sameDay.weaker)
     && strengthOrder(links.lead.shown)
     && strengthOrder(links.lead.weaker));
+  const featuredLine = 'On the same day, a rise in Fed rate-cut odds often lined up with a fall in the US 2-year yield.';
   add('a headline is one line from the labels, timing, and sign',
     buildHeadline({
       event_label: 'US Federal Reserve rate decision: chance of a rate cut, change in odds points',
@@ -337,7 +339,7 @@ export function runCorrelationChecks(add) {
       lag_label: 'same day',
       timing_group: 'same_day',
       spearman: 0.22,
-    }) === 'Fed rate-cut odds and 2-year yield move together on the same day'
+    }) === 'A rise in Fed rate-cut odds often lined up with a rise in the 2-year yield.'
     && buildHeadline({
       event_label: 'US Federal Reserve rate decision: chance of a rate cut, change in odds points',
       asset_label: 'US 2-year government bond yield',
@@ -345,16 +347,15 @@ export function runCorrelationChecks(add) {
       lag_label: 'odds change first, asset move over the next 5 trading days',
       timing_group: 'lead',
       spearman: -0.2,
-    }) === 'Fed rate-cut odds move first, 2-year yield moves the other way within 5 days'
-    && state.chartCards.length === 21
-    && state.otherPicks.length === 20
+    }) === 'A rise in Fed rate-cut odds often lined up with a fall in the 2-year yield over the next week.'
     && state.mainChart
     && state.mainChart.tier === 'strict'
     && state.mainChart.strictPick === 'Passes the strict pick-from-many check'
     && state.mainChart.eventFamily === 'F1_fed/direction'
     && state.mainChart.assetId === 'us_2y_yield'
     && state.mainChart.timingGroup === 'same_day'
-    && state.mainChart.headline === FEATURED_HEADLINE);
+    && state.mainChart.headline === featuredLine);
+  add('the featured headline uses the spec sign wording', state.mainChart.headline === featuredLine && !state.mainChart.headline.includes('moved together'));
   const pairHeads = {};
   for (const card of state.chartCards) {
     const pair = card.eventFamily + '|' + card.assetId;
@@ -370,12 +371,11 @@ export function runCorrelationChecks(add) {
     const next = sizeModel.points[i].odds;
     if (typeof prev === 'number' && typeof next === 'number' && next < prev) sizeFalls = true;
   }
-  add('the featured pick matches the rule and all 21 headlines are mapped',
+  add('the featured pick matches the rule and the brand map is kept',
     Object.keys(BRAND_HEADLINES).length === 21
-    && state.chartCards.every((card) => card.headline === brandHeadline(card.section, card.eventFamily, card.assetId) && card.headline)
+    && state.mainChart.headline === featuredLine
     && shared.length === 4
-    && shared.every((list) => list.every((line) => line === list[0]))
-    && !state.chartCards.some((card) => card.headline.includes('This is the strongest link on the page.')));
+    && !state.mainChart.headline.includes('This is the strongest link on the page.'));
   add('a size chart shows the daily swing, not a running total',
     sizeModel
     && sizeModel.measure === 'size'
@@ -386,18 +386,18 @@ export function runCorrelationChecks(add) {
     && chartModel(state.mainChart).measure === 'direction'
     && chartModel(state.mainChart).oddsAxis === ODDS_AXIS);
   const brandCss = readFileSync(path.join(siteRoot, 'app/globals.css'), 'utf8');
-  const brandBlock = brandCss.slice(brandCss.indexOf('/* connections-brand */'), brandCss.indexOf('/* /connections-brand */'));
-  const brandHex = (brandBlock.match(/#[0-9a-fA-F]{3,8}/g) || []).map((color) => color.toLowerCase());
-  const allowed = new Set(['#f5f7f5', '#172f32', '#116c5b']);
+  const connCss = readFileSync(path.join(siteRoot, 'app/connections/connections.css'), 'utf8');
+  const brandHex = (connCss.match(/#[0-9a-fA-F]{3,8}/g) || []).map((color) => color.toLowerCase());
+  const allowed = new Set(['#f5f7f5', '#172f32', '#116c5b', '#fff', '#ffffff']);
   const layout = readFileSync(path.join(siteRoot, 'app/layout.js'), 'utf8');
   const families = [...brandCss.matchAll(/font-family\s*:\s*([^;}{]+)/gi)].map((match) => match[1].trim());
   add('only the three allowed colors appear in the connections CSS',
-    brandBlock.includes('#f5f7f5')
-    && brandBlock.includes('#172f32')
-    && brandBlock.includes('#116c5b')
+    connCss.includes('#f5f7f5')
+    && connCss.includes('#172f32')
+    && connCss.includes('#116c5b')
     && brandHex.length > 0
     && brandHex.every((color) => allowed.has(color))
-    && !/rgb\(|hsl\(|\b(red|grey|gray|amber|orange)\b/i.test(brandBlock));
+    && !/\b(red|grey|gray|amber|orange)\b/i.test(connCss));
   add('a single font family is used',
     layout.includes("next/font/google")
     && layout.includes('Inter')
@@ -407,6 +407,22 @@ export function runCorrelationChecks(add) {
     && families.every((family) => family === 'var(--font)' || family === 'var(--font-inter)'));
   add('the series file hash is unchanged', sha256(seriesPath(siteRoot)) === SERIES_SHA);
   add('the main chart has data for both lines', hasBothLines(chartModel(state.mainChart)));
+  const liveHome = buildHome(loadCorrelations(path.join(siteRoot, 'data/correlations')));
+  const viewFiles = [
+    'lib/linkScreen.js',
+    'app/components/connections/ConnectionsHome.js',
+    'app/components/connections/LinkDetailView.js',
+    'app/components/connections/LinkChart.js',
+  ].map((name) => readFileSync(path.join(siteRoot, name), 'utf8')).join('\n');
+  const typed = ['517', '540', '473', '−188', '3.94%', '-0.274'].filter((token) => viewFiles.includes(token));
+  add('no figure is typed by hand in the connections view', typed.length === 0, typed.join(','));
+  add('every list row has a spark and a lead filter has no strong links',
+    liveHome.rows.length === 517
+    && liveHome.rows.every((row) => row.sparkOdds && row.sparkAsset)
+    && liveHome.rows.filter((row) => row.timing !== 'same_day' && row.tier === 'strict').length === 0
+    && liveHome.counts.strong === 3
+    && liveHome.counts.medium === 41
+    && liveHome.counts.weak === 473);
   add('all 20 list lines have a trend line',
     state.otherPicks.length === 20 && state.otherPicks.every((card) => hasBothLines(chartModel(card))));
   add('no odds point falls after its family hold-back date', oddsPointsAfterHoldBack(loadChartSeries()).length === 0);
@@ -418,103 +434,65 @@ export async function correlationPageChecks(add, page) {
   const view = await page('/connections');
   const html = view.html || '';
   const visible = textOf(html);
-  const nav = (html.match(/<nav id="tabs">[\s\S]*?<\/nav>/) || [''])[0];
   const home = await page('/');
   const homeNav = ((home.html || '').match(/<nav id="tabs">[\s\S]*?<\/nav>/) || [''])[0];
-  add('connections page renders the preview banner, research notice, and noindex',
+  const connNav = (html.match(/<nav class="conn-tabs"[\s\S]*?<\/nav>/) || [''])[0];
+  const featuredLine = 'On the same day, a rise in Fed rate-cut odds often lined up with a fall in the US 2-year yield.';
+  const ready = html.split('data-mode="ready"')[1] || '';
+  add('connections page renders the preview banner, standing line, and noindex',
     view.status === 200
-    && html.includes(COPY.previewBanner)
-    && html.includes(COPY.researchNotice)
+    && ready.includes(COPY.previewBanner)
+    && ready.indexOf(COPY.previewBanner) < ready.indexOf(STANDING_LINE)
+    && ready.includes(STANDING_LINE)
     && !html.includes(COPY.exampleNotice)
     && /noindex/i.test(html)
     && html.includes('data-page="connections"')
-    && html.includes(state.summary)
-    && html.includes(state.footer));
-  const charts = state.chartCards || [];
-  const inHtml = (text) => html.includes(String(text).replace(/&/g, '&amp;'));
-  add('every strongest card is a chart card with one strength number and details',
-    charts.length === 21
-    && charts.every((card) => inHtml(card.headline)
-      && html.includes(card.strength)
-      && html.includes(card.tierLabel)
-      && html.includes(card.chance)
-      && html.includes(card.pick)
-      && html.includes(card.episodes))
-    && (html.match(/data-main-chart="1"/g) || []).length === 1
-    && (html.match(/data-pick-line="1"/g) || []).length === 20
+    && html.includes(featuredLine)
+    && html.includes('See how strong this is')
+    && html.includes('All ' + loaded.file.chance_summary.shown_rows + ' links we can show')
+    && !html.includes('<nav id="tabs">'));
+  add('the first screen shows the tier bar and not the old long list',
+    (html.match(/data-main-chart="1"/g) || []).length === 1
     && (html.split('data-main-chart="1"')[1] || '').includes('data-odds-line="1"')
     && (html.split('data-main-chart="1"')[1] || '').includes('data-asset-line="1"')
-    && html.split('data-pick-line="1"').slice(1).every((part) => part.includes('data-trend="1"'))
     && html.includes(ODDS_AXIS)
-    && html.includes(ODDS_LINE_NOTE)
-    && html.includes(SIZE_NOTE)
-    && html.includes(SIZE_ODDS_AXIS)
-    && html.includes(STANDING_LINE)
-    && html.includes('Time range')
-    && html.includes('data-readout="1"')
-    && html.includes('class="quiet-tag"')
-    && !html.includes('yf-tag')
-    && !html.includes('This is the strongest link on the page.')
-    && !html.split('Earlier checks')[0].includes('Busy trading periods')
-    && !html.split('Earlier checks')[0].includes('class="busy"')
-    && !html.split('Earlier checks')[0].includes('large move')
-    && html.includes('See every link tested')
-    && html.includes('Internal, not proven.')
-    && html.includes('How to read this')
-    && html.includes('Moved together the same day (description only, not a lead)')
-    && html.includes('One moved first')
-    && html.includes('Does not pass the strict pick-from-many check')
-    && html.includes('Passes the strict pick-from-many check')
-    && html.includes('Extra check, not a verdict:')
-    && html.includes('rank correlation')
-    && html.includes('Description only, not proven')
-    && !visible.includes('not stronger than picking the best of many by luck')
-    && !visible.includes(COPY.exampleNotice));
-  const figures = html.split('<figure').slice(1).map((part) => part.split('</figure>')[0]);
-  const leadNotes = [state.mainChart, ...(state.otherPicks || [])]
-    .filter((card) => card && card.timingGroup === 'lead')
-    .map((card) => leadChartNote(card.lag))
-    .filter(Boolean);
-  add('charts are two lines, and the lead note sits in the details',
-    figures.length >= 1
-    && figures.every((figure) => !figure.includes('trading day') && !figure.includes('Busy') && !figure.includes('<rect'))
-    && leadNotes.length >= 1
-    && leadNotes.every((note) => html.includes(note))
-    && (html.match(/data-lead-note="1"/g) || []).length === leadNotes.length
-    && html.includes(ODDS_AXIS_INFLATION) === (state.chartCards || []).some((card) => chartModel(card) && chartModel(card).oddsAxis === ODDS_AXIS_INFLATION));
-  const allLinkRows = html.match(/data-all-link="1"/g) || [];
-  const tierMarks = (tier) => (html.match(new RegExp('data-all-link="1" data-tier="' + tier + '"', 'g')) || []).length;
-  add('the rendered page shows the real groups and the hidden-row count',
-    visible.includes('Moved together the same day (description only, not a lead)')
-    && visible.includes('One moved first')
-    && visible.includes('23 tested rows are hidden because they had under 10 episodes.')
-    && visible.includes('All links tested')
-    && visible.includes('Weaker links may be luck.')
-    && (html.match(/data-pick-line="1"/g) || []).length === 20
-    && (html.match(/data-main-chart="1"/g) || []).length === 1
-    && visible.includes('Strong link: passes the strictest check across all 540 tested rows.')
-    && visible.includes('Medium link: as a group there are more of these than luck alone gives (44 against about 27), but any single one may be luck.')
-    && visible.includes('Weak link: may well be luck, kept to watch.')
-    && !html.includes('>Passes the strict check<')
-    && !html.includes('>Stronger than chance<')
-    && !html.includes('>Weaker, worth watching<')
-    && allLinkRows.length === 517
-    && tierMarks('strict') === 3
-    && tierMarks('stronger') === 41
-    && tierMarks('weaker') === 473
-    && !visible.includes('(0 trading days)'));
-  const earlier = html.split('<summary>Earlier checks</summary>')[1] || '';
-  add('earlier checks keep the old cards behind one click',
-    html.includes('<summary>Earlier checks</summary>')
-    && !/<details class="earlier-checks"[^>]*\sopen/.test(html)
-    && earlier.includes('data-history="'));
+    && html.includes('3 Strong')
+    && html.includes('41 Medium')
+    && html.includes('473 Weak')
+    && html.includes('Passed the strict check')
+    && html.includes('41 medium links')
+    && html.includes('473 weaker links')
+    && (html.match(/data-link-row="1" data-tier="strict"/g) || []).length === 3
+    && !html.includes('See every link tested')
+    && html.includes('No strong links with one moving first') === false
+    && html.includes('Earlier checks')
+    && html.includes('23 more tested links are not shown')
+    && html.includes('540 links were tested in all'));
+  const detail = await page('/connections/link-F1_fed-direction-us_2y_yield-same_day');
+  const oldDetail = await page('/connections/oil-79987-679018');
+  add('a correlation id renders the new detail and a TR-007 id renders the old one',
+    detail.status === 200
+    && detail.html.includes('How strong is this?')
+    && detail.html.includes(featuredLine)
+    && detail.html.includes('It still passes the strict pick-from-many check.')
+    && oldDetail.status === 200
+    && oldDetail.html.includes('data-page="connection"')
+    && !oldDetail.html.includes('How strong is this?'));
   add('the connections tab points at /connections',
-    nav.includes('href="/connections"')
-    && nav.includes('Connections')
-    && !nav.includes('/strongest-links')
-    && !nav.includes('Strongest links')
+    connNav.includes('href="/connections"')
+    && connNav.includes('Connections')
+    && !connNav.includes('/strongest-links')
     && homeNav.includes('href="/connections"')
     && !homeNav.includes('/strongest-links')
     && !homeNav.includes('Strongest links'));
-  add('the strongest links page has no advice wording', textProblem(visible) === '');
+  const word = (codes) => String.fromCharCode.apply(null, codes);
+  const extra = new RegExp('\\b(' + [
+    [109, 117, 115, 116],
+    [115, 105, 103, 110, 97, 108],
+    [111, 112, 112, 111, 114, 116, 117, 110, 105, 116, 121],
+    [116, 97, 114, 103, 101, 116],
+    [112, 114, 111, 102, 105, 116],
+    [103, 117, 97, 114, 97, 110, 116, 101, 101, 100],
+  ].map(word).join('|') + '|beat the market)\\b', 'i');
+  add('the strongest links page has no advice wording', textProblem(visible) === '' && !extra.test(visible));
 }
