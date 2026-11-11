@@ -1,5 +1,5 @@
 {
-  "run_at": "2026-11-11T19:58:59.806Z",
+  "run_at": "2026-11-11T20:11:15.518Z",
   "all_pass": true,
   "items": [
     {
@@ -404,6 +404,36 @@
     },
     {
       "check": "a pick that passes the strict check uses the pass wording",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "the research data hash is unchanged",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "517 tested links render",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "tier counts are 3, 41, and 473",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "timing groups of tested links sum to every row",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "the weaker-links note uses the summary counts",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "each tested group is ordered by strength",
       "pass": true,
       "detail": ""
     },

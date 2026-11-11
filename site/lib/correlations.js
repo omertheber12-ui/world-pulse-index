@@ -38,6 +38,13 @@ export const COPY = {
   strictFail: 'Does not pass the strict pick-from-many check',
   strictPass: 'Passes the strict pick-from-many check',
   researchNotice: 'Research\'s TR-016 run. Internal, and not proven.',
+  allLinksTitle: 'All links tested',
+  tierStrict: 'Passes the strict check',
+  tierStronger: 'Stronger than chance',
+  tierWeaker: 'Weaker, worth watching',
+  showWeaker: 'Show weaker links',
+  sameWay: 'moved the same way',
+  oppositeWay: 'opposite way',
 };
 
 export const LAG_TEXT = {
@@ -213,6 +220,101 @@ export function summaryLine(summary) {
   return line;
 }
 
+export function formatTwo(value) {
+  const number = numeric(value);
+  if (number == null) return COPY.notAvailable;
+  return number.toFixed(2);
+}
+
+export function directionWords(spearman) {
+  const number = numeric(spearman);
+  if (number == null || number === 0) return COPY.notAvailable;
+  return number > 0 ? COPY.sameWay : COPY.oppositeWay;
+}
+
+export function linkTier(row) {
+  if (row && row.bh_flag === true) return 'strict';
+  if (row && row.passes_chance_line === true && row.bh_flag === false) return 'stronger';
+  return 'weaker';
+}
+
+const TIER_LABEL = {
+  strict: COPY.tierStrict,
+  stronger: COPY.tierStronger,
+  weaker: COPY.tierWeaker,
+};
+
+function byStrength(a, b) {
+  const aSpear = numeric(a.spearman);
+  const bSpear = numeric(b.spearman);
+  const aAbs = aSpear == null ? -1 : Math.abs(aSpear);
+  const bAbs = bSpear == null ? -1 : Math.abs(bSpear);
+  if (aAbs !== bAbs) return bAbs - aAbs;
+  const aZ = numeric(a.z_vs_shuffle);
+  const bZ = numeric(b.z_vs_shuffle);
+  const aRank = aZ == null ? -Infinity : aZ;
+  const bRank = bZ == null ? -Infinity : bZ;
+  if (aRank !== bRank) return bRank - aRank;
+  return 0;
+}
+
+export function buildLinkRow(row) {
+  const item = row || {};
+  const tier = linkTier(item);
+  const episodes = numeric(item.independent_episodes);
+  return {
+    eventLabel: clean(item.event_label) || COPY.notAvailable,
+    assetLabel: clean(item.asset_label) || COPY.notAvailable,
+    lagLabel: lagDisplay(item),
+    strength: formatTwo(item.spearman),
+    direction: directionWords(item.spearman),
+    episodes: episodes == null ? COPY.notAvailable : String(episodes),
+    tier,
+    tierLabel: TIER_LABEL[tier],
+    timingGroup: timingGroup(item),
+  };
+}
+
+function splitByTier(rows) {
+  const ordered = rows.slice().sort(byStrength);
+  const built = ordered.map(buildLinkRow);
+  return {
+    shown: built.filter((row) => row.tier !== 'weaker'),
+    weaker: built.filter((row) => row.tier === 'weaker'),
+  };
+}
+
+export function allLinksNote(summary) {
+  const row = summary || {};
+  return 'Weaker links may be luck. By luck alone about ' + formatPlain(row.expected_strong_by_luck)
+    + ' of ' + formatPlain(row.rows_tested)
+    + ' tested rows would look stronger than chance; ' + formatPlain(row.observed_strong_shown)
+    + ' of the ' + formatPlain(row.shown_rows)
+    + ' shown do. These are leads to look into, not findings.';
+}
+
+export function strictCheckNote(summary) {
+  const tested = formatPlain(summary && summary.rows_tested);
+  return 'This strict check corrects for testing all ' + tested
+    + ' rows at once; it is not the same as the pick-from-many check on the cards above.';
+}
+
+export function buildAllLinks(file) {
+  const pairs = (file && file.pairs) || [];
+  const sameDay = splitByTier(pairs.filter((row) => timingGroup(row) === 'same_day'));
+  const lead = splitByTier(pairs.filter((row) => timingGroup(row) !== 'same_day'));
+  return {
+    title: COPY.allLinksTitle,
+    note: allLinksNote(file && file.chance_summary),
+    strictNote: strictCheckNote(file && file.chance_summary),
+    sameDayTitle: COPY.sameDayHeader,
+    leadTitle: COPY.leadHeader,
+    showWeaker: COPY.showWeaker,
+    sameDay,
+    lead,
+  };
+}
+
 export function footerLine(file) {
   return 'method ' + (clean(file.method_id) || METHOD_ID)
     + ', run ' + (clean(file.run_id) || COPY.notAvailable)
@@ -256,6 +358,7 @@ export function buildPageState(loaded) {
     perEvent: [],
     sameDay: [],
     lead: [],
+    allLinks: null,
     footer: '',
     empty: '',
   };
@@ -276,6 +379,7 @@ export function buildPageState(loaded) {
     perEvent,
     sameDay: ordered.filter((card) => card.timingGroup === 'same_day'),
     lead: ordered.filter((card) => card.timingGroup !== 'same_day'),
+    allLinks: buildAllLinks(file),
     footer: footerLine(file),
   };
 }
@@ -490,6 +594,9 @@ export function visibleText(state) {
     state.summary,
     state.sameDay && state.sameDay.length ? state.sameDayTitle : '',
     state.lead && state.lead.length ? state.leadTitle : '',
+    state.allLinks && state.allLinks.title,
+    state.allLinks && state.allLinks.note,
+    state.allLinks && state.allLinks.strictNote,
     state.footer,
     state.empty,
   ];

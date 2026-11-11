@@ -26,6 +26,69 @@ function Card({ card, index }) {
   );
 }
 
+function LinkTable({ rows }) {
+  if (!rows || !rows.length) return null;
+  return (
+    <div className="corr-table-wrap">
+      <table className="corr-links">
+        <thead>
+          <tr>
+            <th>Event</th>
+            <th>Asset</th>
+            <th>Timing</th>
+            <th>Strength <span>rank correlation</span></th>
+            <th>Separate episodes</th>
+            <th>Tier</th>
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((row, index) => (
+            <tr key={row.timingGroup + '-' + row.tier + '-' + index} data-all-link="1" data-tier={row.tier} data-group={row.timingGroup}>
+              <td>{row.eventLabel}</td>
+              <td>{row.assetLabel}</td>
+              <td>{row.lagLabel}</td>
+              <td><b className="num">{row.strength}</b> {row.direction}</td>
+              <td className="num">{row.episodes}</td>
+              <td>{row.tierLabel}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+function AllGroup({ title, group, showWeaker }) {
+  const shown = group && group.shown ? group.shown : [];
+  const weaker = group && group.weaker ? group.weaker : [];
+  if (!shown.length && !weaker.length) return null;
+  return (
+    <section>
+      <h3>{title}</h3>
+      <LinkTable rows={shown} />
+      {weaker.length ? (
+        <details className="corr-weaker">
+          <summary>{showWeaker}</summary>
+          <LinkTable rows={weaker} />
+        </details>
+      ) : null}
+    </section>
+  );
+}
+
+function AllLinks({ links }) {
+  if (!links) return null;
+  return (
+    <section data-all-links="1">
+      <h2>{links.title}</h2>
+      <p className="corr-luck">{links.note}</p>
+      <p className="corr-strict-note">{links.strictNote}</p>
+      <AllGroup title={links.sameDayTitle} group={links.sameDay} showWeaker={links.showWeaker} />
+      <AllGroup title={links.leadTitle} group={links.lead} showWeaker={links.showWeaker} />
+    </section>
+  );
+}
+
 function Group({ title, cards }) {
   if (!cards || !cards.length) return null;
   return (
@@ -52,6 +115,7 @@ export function StrongestLinksScreen({ state }) {
             <p className="corr-summary">{state.summary}</p>
             <Group title={state.sameDayTitle} cards={state.sameDay} />
             <Group title={state.leadTitle} cards={state.lead} />
+            <AllLinks links={state.allLinks} />
           </>
         ) : null}
       </main>

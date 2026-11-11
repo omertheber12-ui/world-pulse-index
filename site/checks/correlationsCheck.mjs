@@ -1,14 +1,20 @@
 /** Fixture checks for strongest links. Fixtures stay here and are never written to data/correlations/latest.json. */
+import { createHash } from 'crypto';
 import { existsSync, mkdtempSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'fs';
 import { tmpdir } from 'os';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { textProblem } from '../lib/connections.js';
 import {
-  COPY, buildCard, buildPageState, loadCorrelations, validateFile, visibleText,
+  COPY, buildCard, buildPageState, linkTier, loadCorrelations, timingGroup, validateFile, visibleText,
 } from '../lib/correlations.js';
 
 const siteRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const RESEARCH_SHA = 'a801a002f45b93c22acc60287ab168c0f220c9545b8381ae794beaaedd7049d9';
+
+function sha256(filePath) {
+  return createHash('sha256').update(readFileSync(filePath)).digest('hex');
+}
 
 function row(over = {}) {
   return {
@@ -272,6 +278,50 @@ export function runCorrelationChecks(add) {
     state.perEvent.filter((card) => card.strictPick === 'Passes the strict pick-from-many check').length === 2
     && buildCard(row({ beats_pick_line: true }), 'asset').strictPick === 'Passes the strict pick-from-many check'
     && !text.includes('not stronger than picking the best of many by luck'));
+
+  add('the research data hash is unchanged',
+    sha256(latestPath) === RESEARCH_SHA && sha256(runPath) === RESEARCH_SHA);
+  const links = state.allLinks;
+  const sameRows = links.sameDay.shown.concat(links.sameDay.weaker);
+  const leadRows = links.lead.shown.concat(links.lead.weaker);
+  const allRows = sameRows.concat(leadRows);
+  const tierCount = (list, tier) => list.filter((item) => item.tier === tier).length;
+  const fileSame = loaded.file.pairs.filter((item) => timingGroup(item) === 'same_day').length;
+  add('517 tested links render',
+    loaded.file.pairs.length === 517
+    && allRows.length === 517
+    && links.sameDay.shown.length + links.sameDay.weaker.length + links.lead.shown.length + links.lead.weaker.length === 517);
+  add('tier counts are 3, 41, and 473',
+    tierCount(allRows, 'strict') === 3
+    && tierCount(allRows, 'stronger') === 41
+    && tierCount(allRows, 'weaker') === 473
+    && tierCount(sameRows, 'strict') === 3
+    && tierCount(leadRows, 'strict') === 0
+    && tierCount(sameRows, 'stronger') === 15
+    && tierCount(leadRows, 'stronger') === 26);
+  add('timing groups of tested links sum to every row',
+    sameRows.length + leadRows.length === 517
+    && sameRows.length === fileSame
+    && leadRows.length === loaded.file.pairs.length - fileSame
+    && allRows.filter((item) => item.tier === 'strict').every((item) => item.tierLabel === 'Passes the strict check')
+    && allRows.filter((item) => item.tier === 'stronger').every((item) => item.tierLabel === 'Stronger than chance')
+    && allRows.filter((item) => item.tier === 'weaker').every((item) => item.tierLabel === 'Weaker, worth watching'));
+  add('the weaker-links note uses the summary counts',
+    links.note === 'Weaker links may be luck. By luck alone about 27 of 540 tested rows would look stronger than chance; 44 of the 517 shown do. These are leads to look into, not findings.'
+    && links.strictNote === 'This strict check corrects for testing all 540 rows at once; it is not the same as the pick-from-many check on the cards above.'
+    && linkTier({ bh_flag: true, passes_chance_line: false }) === 'strict'
+    && linkTier({ bh_flag: false, passes_chance_line: true }) === 'stronger'
+    && linkTier({ bh_flag: false, passes_chance_line: false }) === 'weaker');
+  const absOf = (item) => {
+    const number = Number(item.strength);
+    return Number.isFinite(number) ? Math.abs(number) : -1;
+  };
+  const strengthOrder = (list) => list.every((item, index) => index === 0 || absOf(item) <= absOf(list[index - 1]) + 0.001);
+  add('each tested group is ordered by strength',
+    strengthOrder(links.sameDay.shown)
+    && strengthOrder(links.sameDay.weaker)
+    && strengthOrder(links.lead.shown)
+    && strengthOrder(links.lead.weaker));
 }
 
 export async function correlationPageChecks(add, page) {
@@ -312,10 +362,19 @@ export async function correlationPageChecks(add, page) {
     && (html.match(/class="corr-split"/g) || []).length === cards.length
     && html.includes('rank correlation')
     && !visible.includes(COPY.exampleNotice));
+  const allLinkRows = html.match(/data-all-link="1"/g) || [];
+  const tierMarks = (tier) => (html.match(new RegExp('data-tier="' + tier + '"', 'g')) || []).length;
   add('the rendered page shows the real groups and the hidden-row count',
     visible.includes('Moved together the same day (description only, not a lead)')
     && visible.includes('One moved first')
     && visible.includes('23 tested rows are hidden because they had under 10 episodes.')
+    && visible.includes('All links tested')
+    && visible.includes('Weaker links may be luck.')
+    && visible.includes('Show weaker links')
+    && allLinkRows.length === 517
+    && tierMarks('strict') === 3
+    && tierMarks('stronger') === 41
+    && tierMarks('weaker') === 473
     && !visible.includes('(0 trading days)'));
   add('the rendered page is not in the tab bar',
     !nav.includes('/strongest-links')
