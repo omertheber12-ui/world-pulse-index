@@ -215,6 +215,8 @@ details.exposure summary::-webkit-details-marker{display:none}
 /* Strongest links, internal preview */
 .preview-banner{margin:16px 0 0;padding:12px 14px;border-radius:12px;background:var(--flag-bg);color:var(--flag-ink);font-weight:600}
 .example-notice{margin:12px 0 0;padding:16px;border-radius:12px;background:var(--error-bg);color:var(--error-ink);font-size:22px;line-height:28px;font-weight:700}
+.research-notice{margin:12px 0 0;padding:12px 14px;border-radius:12px;background:var(--green-50);color:var(--green-800);font-weight:600}
+.corr-extra{margin:8px 0 0;font-size:13px;line-height:18px;color:var(--neutral-500)}
 .corr-summary{margin:16px 0 0}
 .corr-card.conn-card .conn-event{min-height:0}
 .corr-label{margin:0 0 8px}

@@ -1,5 +1,5 @@
 {
-  "run_at": "2026-11-11T19:24:42.696Z",
+  "run_at": "2026-11-11T19:58:59.806Z",
   "all_pass": true,
   "items": [
     {
@@ -248,22 +248,22 @@
       "detail": ""
     },
     {
-      "check": "the example file parses",
+      "check": "the research file parses",
       "pass": true,
       "detail": ""
     },
     {
-      "check": "the run copy matches the example file",
+      "check": "the run copy matches the research file",
       "pass": true,
       "detail": ""
     },
     {
-      "check": "example labels say this is example data",
+      "check": "the shipped file is the research run, not example data",
       "pass": true,
       "detail": ""
     },
     {
-      "check": "the example file has no row under 10 episodes",
+      "check": "shown strongest rows have at least 10 episodes",
       "pass": true,
       "detail": ""
     },
@@ -308,7 +308,7 @@
       "detail": ""
     },
     {
-      "check": "the example notice shows for an example run",
+      "check": "the research notice shows for the research run",
       "pass": true,
       "detail": ""
     },
@@ -383,6 +383,11 @@
       "detail": ""
     },
     {
+      "check": "the research lag label is shown as written",
+      "pass": true,
+      "detail": ""
+    },
+    {
       "check": "unknown lag says timing not available",
       "pass": true,
       "detail": ""
@@ -398,7 +403,7 @@
       "detail": ""
     },
     {
-      "check": "a pick that beats the best of many keeps the beats wording",
+      "check": "a pick that passes the strict check uses the pass wording",
       "pass": true,
       "detail": ""
     },
@@ -593,7 +598,7 @@
       "detail": ""
     },
     {
-      "check": "strongest links page renders the preview banner, example notice, and noindex",
+      "check": "strongest links page renders the preview banner, research notice, and noindex",
       "pass": true,
       "detail": ""
     },
@@ -603,7 +608,7 @@
       "detail": ""
     },
     {
-      "check": "the rendered page shows nulls as not available",
+      "check": "the rendered page shows the real groups and the hidden-row count",
       "pass": true,
       "detail": ""
     },

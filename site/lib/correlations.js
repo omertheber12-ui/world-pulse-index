@@ -36,7 +36,8 @@ export const COPY = {
   assetLead5d: 'Asset moved first, 5 days before the odds',
   timingUnknown: 'Timing not available',
   strictFail: 'Does not pass the strict pick-from-many check',
-  strictPass: 'Beats picking the best of many by luck.',
+  strictPass: 'Passes the strict pick-from-many check',
+  researchNotice: 'Research\'s TR-016 run. Internal, and not proven.',
 };
 
 export const LAG_TEXT = {
@@ -166,6 +167,7 @@ export function timingGroup(row) {
 
 function beatsFlag(row) {
   if (!row) return null;
+  if (typeof row.beats_pick_line === 'boolean') return row.beats_pick_line;
   if (typeof row.beats_best_of_many === 'boolean') return row.beats_best_of_many;
   if (typeof row.beats_pick_from_many === 'boolean') return row.beats_pick_from_many;
   return null;
@@ -176,6 +178,19 @@ export function strictPickLine(row) {
   if (beats === true) return COPY.strictPass;
   if (beats === false) return COPY.strictFail;
   return '';
+}
+
+function extraLine(flag, name) {
+  if (flag !== true && flag !== false) return '';
+  return 'Extra check, not a verdict: the ' + name + ' check ' + (flag ? 'passes.' : 'does not pass.');
+}
+
+export function extraCheckLines(row) {
+  const lines = [
+    extraLine(row && row.passes_consistent_raw, 'raw correlation'),
+    extraLine(row && row.passes_consistent_z, 'spread-adjusted'),
+  ];
+  return lines.filter(Boolean);
 }
 
 export function summaryLine(summary) {
@@ -190,8 +205,9 @@ export function summaryLine(summary) {
   let line = 'We tested ' + formatPlain(tested)
     + ' links. Luck alone would make about ' + formatPlain(expected)
     + ' look this strong; we saw ' + formatPlain(observed) + '.';
-  if (numeric(row.shown_rows) != null && numeric(row.pairs_tested) != null) {
-    const hidden = row.pairs_tested - row.shown_rows;
+  const universe = numeric(row.rows_tested) != null ? row.rows_tested : row.pairs_tested;
+  if (numeric(row.shown_rows) != null && numeric(universe) != null && universe >= row.shown_rows) {
+    const hidden = universe - row.shown_rows;
     line += ' ' + formatPlain(hidden) + ' tested rows are hidden because they had under 10 episodes.';
   }
   return line;
@@ -219,6 +235,7 @@ export function buildCard(row, section) {
     sample: sampleLine(item),
     pick: pickLine(item),
     strictPick: missingCorrelation ? '' : strictPickLine(item),
+    extraChecks: missingCorrelation ? [] : extraCheckLines(item),
     manyTests: manyTestsLine(item.bh_flag),
     lag: missingCorrelation ? COPY.notEnough : lagDisplay(item),
     timingGroup: timingGroup(item),
@@ -231,6 +248,7 @@ export function buildPageState(loaded) {
     title: COPY.title,
     previewBanner: COPY.previewBanner,
     exampleNotice: '',
+    researchNotice: '',
     summary: '',
     sameDayTitle: COPY.sameDayHeader,
     leadTitle: COPY.leadHeader,
@@ -252,6 +270,7 @@ export function buildPageState(loaded) {
     ...base,
     mode: 'ready',
     exampleNotice: isExampleRun(file) ? COPY.exampleNotice : '',
+    researchNotice: isExampleRun(file) ? '' : COPY.researchNotice,
     summary: summaryLine(file.chance_summary),
     perAsset,
     perEvent,
@@ -467,6 +486,7 @@ export function visibleText(state) {
     state.title,
     state.previewBanner,
     state.exampleNotice,
+    state.researchNotice,
     state.summary,
     state.sameDay && state.sameDay.length ? state.sameDayTitle : '',
     state.lead && state.lead.length ? state.leadTitle : '',
@@ -483,6 +503,7 @@ export function visibleText(state) {
       card.sample,
       card.pick,
       card.strictPick,
+      ...(card.extraChecks || []),
       card.manyTests,
       card.lag,
       card.label,

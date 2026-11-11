@@ -61,23 +61,29 @@ export function runCorrelationChecks(add) {
   const state = buildPageState(loaded);
   const cards = [...(state.sameDay || []), ...(state.lead || [])];
   const text = visibleText(state);
-  add('the example file parses',
+  add('the research file parses',
     loaded.status === 'ok' && loaded.errors.length === 0 && loaded.file.schema_version === 'correlations-1'
-    && loaded.file.method_id === 'TR-016' && loaded.file.run_id === 'EXAMPLE' && loaded.file.is_example === true,
+    && loaded.file.method_id === 'TR-016' && loaded.file.run_id === 'TR-016-2026-11-11' && loaded.file.is_example !== true,
     loaded.errors.join('; '));
 
-  const latestRaw = JSON.parse(readFileSync(path.join(siteRoot, 'data/correlations/latest.json'), 'utf8'));
-  const runRaw = JSON.parse(readFileSync(path.join(siteRoot, 'data/correlations/runs/EXAMPLE.json'), 'utf8'));
-  add('the run copy matches the example file', JSON.stringify(latestRaw) === JSON.stringify(runRaw));
-  add('example labels say this is example data',
-    latestRaw.example_label === COPY.exampleNotice
-    && latestRaw.strongest_per_asset.every((item) => item.asset_label.startsWith('Example:'))
-    && latestRaw.strongest_per_event.every((item) => item.event_label.startsWith('Example:')));
-  add('the example file has no row under 10 episodes',
+  const latestPath = path.join(siteRoot, 'data/correlations/latest.json');
+  const runPath = path.join(siteRoot, 'data/correlations/runs/TR-016-2026-11-11.json');
+  const latestRaw = JSON.parse(readFileSync(latestPath, 'utf8'));
+  const runRaw = JSON.parse(readFileSync(runPath, 'utf8'));
+  add('the run copy matches the research file',
+    readFileSync(latestPath).equals(readFileSync(runPath)) && JSON.stringify(latestRaw) === JSON.stringify(runRaw)
+    && !existsSync(path.join(siteRoot, 'data/correlations/runs/EXAMPLE.json')));
+  add('the shipped file is the research run, not example data',
+    latestRaw.run_id === 'TR-016-2026-11-11'
+    && latestRaw.example_label == null
+    && latestRaw.is_example !== true
+    && state.exampleNotice === ''
+    && state.researchNotice === COPY.researchNotice);
+  add('shown strongest rows have at least 10 episodes',
     [...latestRaw.strongest_per_asset, ...latestRaw.strongest_per_event].every((item) => item.independent_episodes >= 10));
 
   add('every strongest card renders the chance line, sample size, pick-from-many warning and the label',
-    cards.length === 4
+    cards.length === 21
     && cards.every((card) => card.chance.startsWith('Chance alone reaches about ±')
       && card.chance.includes('in 95% of shuffles; ')
       && card.chance.includes(' of shuffles were this strong')
@@ -89,44 +95,39 @@ export function runCorrelationChecks(add) {
       && card.label === COPY.label
       && card.rankCaption === COPY.rankCaption));
   add('sample size leads with separate episodes',
-    state.perAsset[0].sample === '18 separate episodes (140 trading days)'
-    && state.perAsset[1].sample === '21 separate episodes (160 trading days)');
+    state.perAsset[0].sample === '55 separate episodes (852 trading days)'
+    && state.perAsset[0].sample.indexOf('separate episodes') < state.perAsset[0].sample.indexOf('trading days'));
+  const nullCard = buildCard(row({ chance_p95_abs: null, chance_share_as_strong: null, bh_flag: null, trading_days: null }), 'asset');
   add('nulls render as not available',
-    state.perAsset[1].chance.includes('±not available')
-    && state.perEvent[0].chance.includes('not available of shuffles were this strong')
-    && state.perEvent[0].manyTests === COPY.notAvailable
-    && !state.perAsset[1].chance.includes('±0')
-    && !state.perEvent[0].chance.includes('0%')
+    nullCard.chance.includes('±not available')
+    && nullCard.chance.includes('not available of shuffles were this strong')
+    && nullCard.manyTests === COPY.notAvailable
+    && nullCard.sample === '18 separate episodes (not available trading days)'
+    && !nullCard.chance.includes('±0')
+    && !nullCard.chance.includes('0%')
     && !text.includes('(0 trading days)')
     && !text.includes('±0 in')
     && !text.includes('±0%'));
   add('cards stay in file order and are not re-ranked',
-    state.perAsset.map((card) => card.correlation).join() === '0.22,0.47'
-    && state.perEvent.map((card) => card.correlation).join() === '-0.18,0.47'
-    && state.perAsset[0].subject === 'Example: Bitcoin'
-    && state.perAsset[1].subject === 'Example: the main oil price'
-    && !text.includes('Example: a decoy link')
-    && !text.includes('0.91')
-    && !text.includes('0.73')
-    && !text.includes('0.64'));
+    state.perAsset.map((card) => card.subject).join('|') === latestRaw.strongest_per_asset.map((item) => item.asset_label).join('|')
+    && state.perEvent.map((card) => card.subject).join('|') === latestRaw.strongest_per_event.map((item) => item.event_label).join('|')
+    && state.sameDay.map((card) => card.correlation).join() === [...state.perAsset, ...state.perEvent].filter((card) => card.timingGroup === 'same_day').map((card) => card.correlation).join());
   add('number_of_pairs_searched fills in when picked_from_n is absent',
-    latestRaw.strongest_per_asset[1].picked_from_n == null
-    && latestRaw.strongest_per_asset[1].number_of_pairs_searched === 17
-    && state.perAsset[1].pick === 'Picked as the strongest of 17 links. The top of a long list looks strong partly by luck.');
+    buildCard(row({ picked_from_n: undefined, number_of_pairs_searched: 17 }), 'asset').pick === 'Picked as the strongest of 17 links. The top of a long list looks strong partly by luck.');
   const both = buildCard(row({ picked_from_n: 3, number_of_pairs_searched: 17 }), 'asset');
   add('picked_from_n wins when both count fields are present',
     both.pick.startsWith('Picked as the strongest of 3 links.'));
   add('the top line uses the shown counts when they are present',
-    state.summary === 'We tested 18 links. Luck alone would make about 0.8 look this strong; we saw 1. 6 tested rows are hidden because they had under 10 episodes.'
-    && !state.summary.includes('1.2')
-    && !state.summary.includes('We tested 24'));
+    state.summary === 'We tested 517 links. Luck alone would make about 25.9 look this strong; we saw 44. 23 tested rows are hidden because they had under 10 episodes.');
   const plainSummary = stateFrom(file());
   add('the top line keeps the all-rows counts when the shown counts are absent',
     plainSummary.checked.ok
     && plainSummary.state.summary === 'We tested 4 links. Luck alone would make about 0.2 look this strong; we saw 1.'
     && !plainSummary.state.summary.includes('hidden'));
-  add('the example notice shows for an example run',
-    state.exampleNotice === COPY.exampleNotice && state.previewBanner === COPY.previewBanner);
+  add('the research notice shows for the research run',
+    state.researchNotice === COPY.researchNotice
+    && state.exampleNotice === ''
+    && state.previewBanner === COPY.previewBanner);
 
   const byId = stateFrom(file({ run_id: 'EXAMPLE', is_example: false }));
   const byFlag = stateFrom(file({ is_example: true }));
@@ -208,10 +209,10 @@ export function runCorrelationChecks(add) {
 
   const runDir = mkdtempSync(path.join(tmpdir(), 'wpi-corr-run-'));
   mkdirSync(path.join(runDir, 'runs'));
-  writeFileSync(path.join(runDir, 'runs', 'EXAMPLE.json'), readFileSync(path.join(siteRoot, 'data/correlations/runs/EXAMPLE.json')));
+  writeFileSync(path.join(runDir, 'runs', 'TR-016-2026-11-11.json'), readFileSync(runPath));
   const fromRun = loadCorrelations(runDir);
   add('a missing latest file can fall back to the run copy',
-    fromRun.status === 'ok' && fromRun.source === 'runs' && fromRun.file.run_id === 'EXAMPLE');
+    fromRun.status === 'ok' && fromRun.source === 'runs' && fromRun.file.run_id === 'TR-016-2026-11-11');
   rmSync(runDir, { recursive: true, force: true });
 
   const chrome = readFileSync(path.join(siteRoot, 'app/components/Chrome.js'), 'utf8');
@@ -225,20 +226,21 @@ export function runCorrelationChecks(add) {
     && sameDay.timingGroup === 'same_day'
     && !sameDay.lag.includes('not a lead')
     && state.sameDayTitle === 'Moved together the same day (description only, not a lead)'
-    && state.sameDay.length === 1
-    && state.sameDay[0].lag === 'same day'
-    && state.sameDay[0].subject === 'Example: Bitcoin');
+    && state.sameDay.length === 11
+    && state.lead.length === 10
+    && state.sameDay.every((card) => card.lag === 'same day')
+    && state.sameDay.every((card) => !card.lag.includes('not a lead')));
   add('odds moved first, 1 day before the asset',
-    buildCard(row({ lag: 'odds_lead_1d', timing_group: 'lead' }), 'asset').lag === 'Odds moved first, 1 day before the asset'
-    && state.perAsset[1].lag === 'Odds moved first, 1 day before the asset');
+    buildCard(row({ lag: 'odds_lead_1d', timing_group: 'lead' }), 'asset').lag === 'Odds moved first, 1 day before the asset');
   add('odds moved first, 5 days before the asset',
-    buildCard(row({ lag: 'odds_lead_5d', timing_group: 'lead' }), 'asset').lag === 'Odds moved first, 5 days before the asset'
-    && state.perEvent[1].lag === 'Odds moved first, 5 days before the asset');
+    buildCard(row({ lag: 'odds_lead_5d', timing_group: 'lead' }), 'asset').lag === 'Odds moved first, 5 days before the asset');
   add('asset moved first, 1 day before the odds',
     buildCard(row({ lag: 'asset_lead_1d', timing_group: 'lead' }), 'asset').lag === 'Asset moved first, 1 day before the odds');
   add('asset moved first, 5 days before the odds',
-    buildCard(row({ lag: 'asset_lead_5d', timing_group: 'lead' }), 'asset').lag === 'Asset moved first, 5 days before the odds'
-    && state.perEvent[0].lag === 'Asset moved first, 5 days before the odds');
+    buildCard(row({ lag: 'asset_lead_5d', timing_group: 'lead' }), 'asset').lag === 'Asset moved first, 5 days before the odds');
+  add('the research lag label is shown as written',
+    state.perAsset.every((card, index) => card.lag === latestRaw.strongest_per_asset[index].lag_label)
+    && state.perEvent.every((card, index) => card.lag === latestRaw.strongest_per_event[index].lag_label));
   const unknown = buildCard(row({ lag: null, timing_group: 'lead' }), 'asset');
   const unrecognized = buildCard(row({ lag: 'later' }), 'asset');
   add('unknown lag says timing not available',
@@ -261,15 +263,14 @@ export function runCorrelationChecks(add) {
     && zeroLag.state.lead.length === 1
     && zeroLag.state.lead[0].lag === 'Odds moved first, 1 day before the asset'
     && forcedLead.timingGroup === 'lead'
-    && state.lead.map((card) => card.correlation).join() === '0.47,-0.18,0.47'
-    && !text.includes('Example: a runner up')
-    && !text.includes('0.55'));
+    && state.sameDay.length === 11
+    && state.lead.length === 10);
   add('a pick that does not beat the best of many says it does not pass',
-    state.sameDay[0].strictPick === 'Does not pass the strict pick-from-many check'
-    && buildCard(row({ beats_best_of_many: false }), 'asset').strictPick === 'Does not pass the strict pick-from-many check');
-  add('a pick that beats the best of many keeps the beats wording',
-    state.perAsset[1].strictPick === 'Beats picking the best of many by luck.'
-    && buildCard(row({ beats_pick_from_many: true }), 'asset').strictPick === 'Beats picking the best of many by luck.'
+    state.perAsset[0].strictPick === 'Does not pass the strict pick-from-many check'
+    && buildCard(row({ beats_pick_line: false }), 'asset').strictPick === 'Does not pass the strict pick-from-many check');
+  add('a pick that passes the strict check uses the pass wording',
+    state.perEvent.filter((card) => card.strictPick === 'Passes the strict pick-from-many check').length === 2
+    && buildCard(row({ beats_pick_line: true }), 'asset').strictPick === 'Passes the strict pick-from-many check'
     && !text.includes('not stronger than picking the best of many by luck'));
 }
 
@@ -283,10 +284,11 @@ export async function correlationPageChecks(add, page) {
   const nav = (html.match(/<nav id="tabs">[\s\S]*?<\/nav>/) || [''])[0];
   const home = await page('/');
   const homeNav = ((home.html || '').match(/<nav id="tabs">[\s\S]*?<\/nav>/) || [''])[0];
-  add('strongest links page renders the preview banner, example notice, and noindex',
+  add('strongest links page renders the preview banner, research notice, and noindex',
     view.status === 200
     && html.includes(COPY.previewBanner)
-    && html.includes(COPY.exampleNotice)
+    && html.includes(COPY.researchNotice)
+    && !html.includes(COPY.exampleNotice)
     && /noindex/i.test(html)
     && html.includes('data-page="strongest-links"')
     && html.includes(state.summary)
@@ -304,18 +306,16 @@ export async function correlationPageChecks(add, page) {
     && html.includes('Moved together the same day (description only, not a lead)')
     && html.includes('One moved first')
     && html.includes('Does not pass the strict pick-from-many check')
-    && html.includes('Beats picking the best of many by luck.')
+    && html.includes('Passes the strict pick-from-many check')
+    && html.includes('Extra check, not a verdict:')
     && !visible.includes('not stronger than picking the best of many by luck')
-    && !visible.includes('Example: a runner up')
     && (html.match(/class="corr-split"/g) || []).length === cards.length
     && html.includes('rank correlation')
-    && !visible.includes('Example: a decoy link')
-    && !visible.includes('0.91'));
-  add('the rendered page shows nulls as not available',
-    visible.includes('±not available')
-    && visible.includes('not available of shuffles')
-    && !visible.includes('±0 in')
-    && !visible.includes('±0%')
+    && !visible.includes(COPY.exampleNotice));
+  add('the rendered page shows the real groups and the hidden-row count',
+    visible.includes('Moved together the same day (description only, not a lead)')
+    && visible.includes('One moved first')
+    && visible.includes('23 tested rows are hidden because they had under 10 episodes.')
     && !visible.includes('(0 trading days)'));
   add('the rendered page is not in the tab bar',
     !nav.includes('/strongest-links')

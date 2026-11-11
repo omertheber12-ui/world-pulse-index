@@ -17,6 +17,9 @@ function Card({ card, index }) {
       <p className="corr-line">{card.sample}</p>
       <p className="corr-line">{card.pick}</p>
       {card.strictPick ? <p className="corr-line">{card.strictPick}</p> : null}
+      {(card.extraChecks || []).map((line) => (
+        <p className="corr-extra" key={line}>{line}</p>
+      ))}
       <p className="corr-line">{card.manyTests}</p>
       <p className="corr-line">{card.lag}</p>
     </article>
@@ -42,6 +45,7 @@ export function StrongestLinksScreen({ state }) {
         <aside className="preview-banner" role="note">{state.previewBanner}</aside>
         <h1>{state.title}</h1>
         {state.exampleNotice ? <p className="example-notice" role="status">{state.exampleNotice}</p> : null}
+        {state.researchNotice ? <p className="research-notice" role="status">{state.researchNotice}</p> : null}
         {state.mode === 'empty' ? <p className="empty">{state.empty}</p> : null}
         {state.mode === 'ready' ? (
           <>
