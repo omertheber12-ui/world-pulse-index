@@ -360,6 +360,9 @@ export function buildLinkRow(row) {
     tier,
     tierLabel: TIER_LABEL[tier],
     timingGroup: timingGroup(item),
+    eventFamily: clean(item.event_family),
+    assetId: clean(item.asset),
+    lag: item.lag || '',
   };
 }
 
@@ -454,6 +457,9 @@ export function buildChartCard(row, section) {
     strictPick: strictPickLine(item),
     runner: runnerLine(item),
     timingGroup: timingGroup(item),
+    eventFamily: clean(item.event_family),
+    assetId: clean(item.asset),
+    lag: item.lag || '',
   };
 }
 

@@ -8,9 +8,11 @@ import { textProblem } from '../lib/connections.js';
 import {
   COPY, buildCard, buildHeadline, buildPageState, linkTier, loadCorrelations, timingGroup, validateFile, visibleText,
 } from '../lib/correlations.js';
+import { chartModel, hasBothLines, loadChartSeries, oddsPointsAfterHoldBack, seriesPath } from '../lib/chartSeries.js';
 
 const siteRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const RESEARCH_SHA = 'a801a002f45b93c22acc60287ab168c0f220c9545b8381ae794beaaedd7049d9';
+const SERIES_SHA = '5f968fbdb71f2bafa8043d4ffbe6278bd6897d0adfa8c0077ccdbad9ee3ef1be';
 
 function sha256(filePath) {
   return createHash('sha256').update(readFileSync(filePath)).digest('hex');
@@ -349,6 +351,11 @@ export function runCorrelationChecks(add) {
     && state.mainChart.tier === 'strict'
     && state.mainChart.strictPick === 'Passes the strict pick-from-many check'
     && state.mainChart.headline === 'Fed rate-cut odds and 2-year yield move opposite ways on the same day');
+  add('the series file hash is unchanged', sha256(seriesPath(siteRoot)) === SERIES_SHA);
+  add('the main chart has data for both lines', hasBothLines(chartModel(state.mainChart)));
+  add('all 20 list lines have a trend line',
+    state.otherPicks.length === 20 && state.otherPicks.every((card) => hasBothLines(chartModel(card))));
+  add('no odds point falls after its family hold-back date', oddsPointsAfterHoldBack(loadChartSeries()).length === 0);
 }
 
 export async function correlationPageChecks(add, page) {
@@ -381,9 +388,13 @@ export async function correlationPageChecks(add, page) {
       && html.includes(card.episodes))
     && (html.match(/data-main-chart="1"/g) || []).length === 1
     && (html.match(/data-pick-line="1"/g) || []).length === 20
+    && (html.split('data-main-chart="1"')[1] || '').includes('data-odds-line="1"')
+    && (html.split('data-main-chart="1"')[1] || '').includes('data-asset-line="1"')
+    && html.split('data-pick-line="1"').slice(1).every((part) => part.includes('data-trend="1"'))
+    && html.includes('Running total of daily odds change (odds points)')
+    && html.includes('Busy trading periods')
     && html.includes('See every link tested')
     && html.includes('Internal, not proven.')
-    && (html.match(/Chart coming/g) || []).length >= 1
     && html.includes('How to read this')
     && html.includes('Moved together the same day (description only, not a lead)')
     && html.includes('One moved first')

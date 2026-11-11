@@ -1,5 +1,5 @@
 {
-  "run_at": "2026-11-11T20:37:29.165Z",
+  "run_at": "2026-11-11T20:42:02.929Z",
   "all_pass": true,
   "items": [
     {
@@ -443,6 +443,26 @@
       "detail": ""
     },
     {
+      "check": "the series file hash is unchanged",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "the main chart has data for both lines",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "all 20 list lines have a trend line",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "no odds point falls after its family hold-back date",
+      "pass": true,
+      "detail": ""
+    },
+    {
       "check": "Gamma HTTP 200 for all events",
       "pass": true,
       "detail": "770450:200, 770451:200, 1025305:200, 1280521:200, 1123963:200, 1194143:200, 1194144:200, 800884:200, 79987:200, 81557:200, 31552:200, 711714:200, 478472:200, 160366:200, 34044:200, 1337182:200"
@@ -510,7 +530,7 @@
     {
       "check": "Today top 3 cards are the first 3 of the personal ranking",
       "pass": true,
-      "detail": "rows=770451,1337182,770450 top=770451,1337182,770450"
+      "detail": "rows=770451,1337182,711714 top=770451,1337182,711714"
     },
     {
       "check": "Exposure text says this is not an expected loss",

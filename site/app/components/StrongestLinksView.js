@@ -1,5 +1,7 @@
 import Link from 'next/link';
 import { COPY } from '../../lib/correlations.js';
+import { chartModel } from '../../lib/chartSeries.js';
+import { SeriesChart } from './SeriesChart.js';
 
 function Tag({ label, tier }) {
   return <span className={'tag yf-tag yf-' + tier}>{label}</span>;
@@ -54,10 +56,10 @@ function PickLine({ card }) {
     <details className="pick-line" data-pick-line="1">
       <summary>
         <span className="pick-name">{card.headline}</span>
-        <span className="yf-spark" aria-hidden="true" />
+        <SeriesChart model={chartModel(card)} spark />
         <Tag label={card.tierLabel} tier={card.tier} />
       </summary>
-      <ChartSlot />
+      <SeriesChart model={chartModel(card)} />
       <div className="yf-detail">
         <p className="num">{card.strength}</p>
         <p>{card.episodes}</p>
@@ -85,6 +87,7 @@ function HowToRead({ state }) {
       {state.researchNotice ? <p>{state.researchNotice}</p> : null}
       <p>Description only, not proven. The number on each card is a rank correlation.</p>
       <p>Extra check, not a verdict: other checks use the same measure and do not change the label.</p>
+      <p>Prices come from Yahoo Finance, FRED and the Bank of Israel. Odds come from Polymarket public trades, with trades before 12 Nov 2023 from the Envio export (CC BY 4.0).</p>
       {state.footer ? <p>{state.footer}</p> : null}
     </details>
   );
@@ -107,7 +110,7 @@ export function StrongestLinksScreen({ state }) {
               <Tag label={state.mainChart.tierLabel} tier={state.mainChart.tier} />
             </header>
             <div className="hero-chart" data-main-chart="1">
-              <ChartSlot large />
+              <SeriesChart model={chartModel(state.mainChart)} />
             </div>
             <details className="chart-details">
               <summary>Details</summary>

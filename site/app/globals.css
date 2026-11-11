@@ -261,7 +261,21 @@ details.exposure summary::-webkit-details-marker{display:none}
 .pick-name{font-size:18px;line-height:26px;font-weight:600;color:var(--ink-900)}
 .see-every{margin-top:56px}
 .see-every > summary{font-size:18px;line-height:26px}
-.chart-slot svg{display:block;width:100%;height:auto}
+.chart-slot svg,.series-chart svg{display:block;width:100%;height:auto}
+.series-chart{margin:0}
+.series-chart .busy{fill:var(--green-600);opacity:.12}
+.series-chart .axis{stroke:var(--neutral-200);stroke-width:1}
+.series-chart .odds-line{fill:none;stroke:var(--green-600);stroke-width:2}
+.series-chart .asset-line{fill:none;stroke:var(--ink-900);stroke-width:1.5}
+.series-chart .tick{fill:var(--neutral-500);font-size:12px;font-family:var(--font)}
+.series-chart figcaption{display:flex;flex-wrap:wrap;gap:8px 16px;margin-top:8px;color:var(--neutral-700);font-size:13px;line-height:18px}
+.swatch{display:inline-block;width:14px;height:3px;margin-right:6px;vertical-align:middle}
+.swatch.odds{background:var(--green-600)}
+.swatch.asset{background:var(--ink-900);height:2px}
+.swatch.busy{height:10px;background:var(--green-600);opacity:.25}
+.lead-note{margin:8px 0 0;color:var(--neutral-700);font-size:14px;line-height:20px}
+.spark{display:block;width:64px;height:28px}
+.spark path{fill:none;stroke:var(--green-600);stroke-width:1.5}
 .chart-slot .axis{stroke:var(--neutral-200);stroke-width:1}
 .chart-slot text{fill:var(--neutral-500);font-size:16px;font-family:var(--font)}
 .chart-details{margin-top:4px}
