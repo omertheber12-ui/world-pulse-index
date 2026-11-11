@@ -3,11 +3,8 @@ import { COPY } from '../../lib/correlations.js';
 
 function Card({ card, index }) {
   return (
-    <article className="conn-card corr-card" data-section={card.section} data-order={index}>
-      <p className="corr-label">
-        <span className="tag fact">{card.label}</span>
-        {card.lagTag ? <span className="tag corr-lag">{card.lagTag}</span> : null}
-      </p>
+    <article className="conn-card corr-card" data-section={card.section} data-group={card.timingGroup} data-order={index}>
+      <p className="corr-label"><span className="tag fact">{card.label}</span></p>
       <h3 className="conn-event">{card.subject}</h3>
       <p className="conn-asset">{card.other}</p>
       <div className="corr-split">
@@ -19,9 +16,22 @@ function Card({ card, index }) {
       </div>
       <p className="corr-line">{card.sample}</p>
       <p className="corr-line">{card.pick}</p>
+      {card.strictPick ? <p className="corr-line">{card.strictPick}</p> : null}
       <p className="corr-line">{card.manyTests}</p>
       <p className="corr-line">{card.lag}</p>
     </article>
+  );
+}
+
+function Group({ title, cards }) {
+  if (!cards || !cards.length) return null;
+  return (
+    <>
+      <h2>{title}</h2>
+      {cards.map((card, index) => (
+        <Card key={card.section + '-' + index} card={card} index={index} />
+      ))}
+    </>
   );
 }
 
@@ -36,14 +46,8 @@ export function StrongestLinksScreen({ state }) {
         {state.mode === 'ready' ? (
           <>
             <p className="corr-summary">{state.summary}</p>
-            <h2>{state.perAssetTitle}</h2>
-            {state.perAsset.map((card, index) => (
-              <Card key={'asset-' + index} card={card} index={index} />
-            ))}
-            <h2>{state.perEventTitle}</h2>
-            {state.perEvent.map((card, index) => (
-              <Card key={'event-' + index} card={card} index={index} />
-            ))}
+            <Group title={state.sameDayTitle} cards={state.sameDay} />
+            <Group title={state.leadTitle} cards={state.lead} />
           </>
         ) : null}
       </main>

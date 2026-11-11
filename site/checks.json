@@ -1,5 +1,5 @@
 {
-  "run_at": "2026-11-11T18:34:08.042Z",
+  "run_at": "2026-11-11T19:24:42.696Z",
   "all_pass": true,
   "items": [
     {
@@ -298,7 +298,12 @@
       "detail": ""
     },
     {
-      "check": "the top line uses the chance summary wording",
+      "check": "the top line uses the shown counts when they are present",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "the top line keeps the all-rows counts when the shown counts are absent",
       "pass": true,
       "detail": ""
     },
@@ -353,7 +358,7 @@
       "detail": ""
     },
     {
-      "check": "same day shows the not-a-lead tag and the same-day line",
+      "check": "same day lag label is just same day and the card does not say not a lead",
       "pass": true,
       "detail": ""
     },
@@ -379,6 +384,21 @@
     },
     {
       "check": "unknown lag says timing not available",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "rows group by timing group and lag 0 means same day",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "a pick that does not beat the best of many says it does not pass",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "a pick that beats the best of many keeps the beats wording",
       "pass": true,
       "detail": ""
     },

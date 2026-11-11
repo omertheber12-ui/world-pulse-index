@@ -27,17 +27,20 @@ export const COPY = {
   stands: 'Still stands after correcting for many tests',
   doesNotStand: 'Does not stand after correcting for many tests',
   insights: 'Insights only, not advice.',
-  sameDayTag: 'Same day, not a lead',
-  sameDayLine: 'These moved on the same day. This does not show which moved first.',
+  sameDayHeader: 'Moved together the same day (description only, not a lead)',
+  leadHeader: 'One moved first',
+  sameDayLag: 'same day',
   oddsLead1d: 'Odds moved first, 1 day before the asset',
   oddsLead5d: 'Odds moved first, 5 days before the asset',
   assetLead1d: 'Asset moved first, 1 day before the odds',
   assetLead5d: 'Asset moved first, 5 days before the odds',
   timingUnknown: 'Timing not available',
+  strictFail: 'Does not pass the strict pick-from-many check',
+  strictPass: 'Beats picking the best of many by luck.',
 };
 
 export const LAG_TEXT = {
-  same_day: COPY.sameDayLine,
+  same_day: COPY.sameDayLag,
   odds_lead_1d: COPY.oddsLead1d,
   odds_lead_5d: COPY.oddsLead5d,
   asset_lead_1d: COPY.assetLead1d,
@@ -141,20 +144,57 @@ export function manyTestsLine(flag) {
 }
 
 export function lagLine(lag) {
+  if (lag === 0 || lag === '0' || lag === 'same_day') return COPY.sameDayLag;
   if (lag == null || lag === '') return COPY.timingUnknown;
   return LAG_TEXT[lag] || COPY.timingUnknown;
 }
 
-export function lagTag(lag) {
-  if (lag === 'same_day') return COPY.sameDayTag;
+export function lagDisplay(row) {
+  const label = clean(row && row.lag_label);
+  if (label) return label;
+  return lagLine(row && row.lag);
+}
+
+/** timing_group wins. A missing group treats lag 0, and the same_day lag, as same day. */
+export function timingGroup(row) {
+  const group = row && row.timing_group;
+  if (group === 'same_day' || group === 'lead') return group;
+  const lag = row && row.lag;
+  if (lag === 0 || lag === '0' || lag === 'same_day') return 'same_day';
+  return 'lead';
+}
+
+function beatsFlag(row) {
+  if (!row) return null;
+  if (typeof row.beats_best_of_many === 'boolean') return row.beats_best_of_many;
+  if (typeof row.beats_pick_from_many === 'boolean') return row.beats_pick_from_many;
+  return null;
+}
+
+export function strictPickLine(row) {
+  const beats = beatsFlag(row);
+  if (beats === true) return COPY.strictPass;
+  if (beats === false) return COPY.strictFail;
   return '';
 }
 
 export function summaryLine(summary) {
   const row = summary || {};
-  return 'We tested ' + formatPlain(row.pairs_tested)
-    + ' links. Luck alone would make about ' + formatPlain(row.expected_strong_by_luck)
-    + ' look this strong; we saw ' + formatPlain(row.observed_strong) + '.';
+  const tested = numeric(row.shown_rows) != null ? row.shown_rows : row.pairs_tested;
+  const expected = numeric(row.expected_strong_by_luck_shown) != null
+    ? row.expected_strong_by_luck_shown
+    : row.expected_strong_by_luck;
+  const observed = numeric(row.observed_strong_shown) != null
+    ? row.observed_strong_shown
+    : row.observed_strong;
+  let line = 'We tested ' + formatPlain(tested)
+    + ' links. Luck alone would make about ' + formatPlain(expected)
+    + ' look this strong; we saw ' + formatPlain(observed) + '.';
+  if (numeric(row.shown_rows) != null && numeric(row.pairs_tested) != null) {
+    const hidden = row.pairs_tested - row.shown_rows;
+    line += ' ' + formatPlain(hidden) + ' tested rows are hidden because they had under 10 episodes.';
+  }
+  return line;
 }
 
 export function footerLine(file) {
@@ -178,9 +218,10 @@ export function buildCard(row, section) {
     chance: missingCorrelation ? COPY.notEnough : chanceLine(item),
     sample: sampleLine(item),
     pick: pickLine(item),
+    strictPick: missingCorrelation ? '' : strictPickLine(item),
     manyTests: manyTestsLine(item.bh_flag),
-    lag: missingCorrelation ? COPY.notEnough : lagLine(item.lag),
-    lagTag: missingCorrelation ? '' : lagTag(item.lag),
+    lag: missingCorrelation ? COPY.notEnough : lagDisplay(item),
+    timingGroup: timingGroup(item),
     label: COPY.label,
   };
 }
@@ -191,10 +232,12 @@ export function buildPageState(loaded) {
     previewBanner: COPY.previewBanner,
     exampleNotice: '',
     summary: '',
-    perAssetTitle: COPY.perAsset,
-    perEventTitle: COPY.perEvent,
+    sameDayTitle: COPY.sameDayHeader,
+    leadTitle: COPY.leadHeader,
     perAsset: [],
     perEvent: [],
+    sameDay: [],
+    lead: [],
     footer: '',
     empty: '',
   };
@@ -202,13 +245,18 @@ export function buildPageState(loaded) {
     return { ...base, mode: 'empty', empty: COPY.empty };
   }
   const file = loaded.file;
+  const perAsset = (file.strongest_per_asset || []).map((row) => buildCard(row, 'asset'));
+  const perEvent = (file.strongest_per_event || []).map((row) => buildCard(row, 'event'));
+  const ordered = perAsset.concat(perEvent);
   return {
     ...base,
     mode: 'ready',
     exampleNotice: isExampleRun(file) ? COPY.exampleNotice : '',
     summary: summaryLine(file.chance_summary),
-    perAsset: (file.strongest_per_asset || []).map((row) => buildCard(row, 'asset')),
-    perEvent: (file.strongest_per_event || []).map((row) => buildCard(row, 'event')),
+    perAsset,
+    perEvent,
+    sameDay: ordered.filter((card) => card.timingGroup === 'same_day'),
+    lead: ordered.filter((card) => card.timingGroup !== 'same_day'),
     footer: footerLine(file),
   };
 }
@@ -241,7 +289,24 @@ function checkText(value, errors, label) {
 
 function checkLag(value, errors, label) {
   if (value == null) return;
+  if (typeof value === 'number' && Number.isFinite(value)) return;
   if (!LAGS.includes(value)) errors.push(label + ' lag is not allowed');
+}
+
+function checkTiming(value, errors, label) {
+  if (value == null) return;
+  if (value !== 'same_day' && value !== 'lead') errors.push(label + ' timing_group is not allowed');
+}
+
+function checkRunner(row, errors, label) {
+  if (row == null) return;
+  if (!row || typeof row !== 'object' || Array.isArray(row)) {
+    errors.push(label + ' is not an object');
+    return;
+  }
+  checkTiming(row.timing_group, errors, label);
+  checkLag(row.lag, errors, label);
+  if (row.lag_label != null) checkText(row.lag_label, errors, label + ' lag_label');
 }
 
 function checkFlag(value, errors, label) {
@@ -259,7 +324,9 @@ function checkPair(row, index, errors) {
   checkText(row.event_label, errors, label + ' event_label');
   checkText(row.asset, errors, label + ' asset');
   checkText(row.asset_label, errors, label + ' asset_label');
+  checkTiming(row.timing_group, errors, label);
   checkLag(row.lag, errors, label);
+  if (row.lag_label != null) checkText(row.lag_label, errors, label + ' lag_label');
   checkNumber(row.spearman, errors, label + ' spearman');
   checkNumber(row.pearson, errors, label + ' pearson');
   checkNumber(row.trading_days, errors, label + ' trading_days');
@@ -268,6 +335,11 @@ function checkPair(row, index, errors) {
   checkNumber(row.chance_share_as_strong, errors, label + ' chance_share_as_strong');
   checkFlag(row.bh_flag, errors, label + ' bh_flag');
   checkNumber(row.trades_corr, errors, label + ' trades_corr');
+  checkRunner(row.runner_up, errors, label + ' runner_up');
+  if (row.runner_ups != null && !Array.isArray(row.runner_ups)) errors.push(label + ' runner_ups must be a list');
+  if (Array.isArray(row.runner_ups)) {
+    row.runner_ups.forEach((item, runnerIndex) => checkRunner(item, errors, label + ' runner_ups ' + runnerIndex));
+  }
 }
 
 function checkStrong(row, index, name, errors) {
@@ -280,7 +352,9 @@ function checkStrong(row, index, name, errors) {
   checkText(row.event_label, errors, label + ' event_label');
   checkText(row.asset, errors, label + ' asset');
   checkText(row.asset_label, errors, label + ' asset_label');
+  checkTiming(row.timing_group, errors, label);
   checkLag(row.lag, errors, label);
+  if (row.lag_label != null) checkText(row.lag_label, errors, label + ' lag_label');
   checkNumber(row.spearman, errors, label + ' spearman');
   checkNumber(row.chance_p95_abs, errors, label + ' chance_p95_abs');
   checkNumber(row.chance_share_as_strong, errors, label + ' chance_share_as_strong');
@@ -289,6 +363,13 @@ function checkStrong(row, index, name, errors) {
   checkFlag(row.bh_flag, errors, label + ' bh_flag');
   checkNumber(row.picked_from_n, errors, label + ' picked_from_n');
   checkNumber(row.number_of_pairs_searched, errors, label + ' number_of_pairs_searched');
+  checkFlag(row.beats_best_of_many, errors, label + ' beats_best_of_many');
+  checkFlag(row.beats_pick_from_many, errors, label + ' beats_pick_from_many');
+  checkRunner(row.runner_up, errors, label + ' runner_up');
+  if (row.runner_ups != null && !Array.isArray(row.runner_ups)) errors.push(label + ' runner_ups must be a list');
+  if (Array.isArray(row.runner_ups)) {
+    row.runner_ups.forEach((item, runnerIndex) => checkRunner(item, errors, label + ' runner_ups ' + runnerIndex));
+  }
   return { ...row, picked_from_n: pickedCount(row) };
 }
 
@@ -317,6 +398,11 @@ export function validateFile(raw) {
     for (const key of ['pairs_tested', 'expected_strong_by_luck', 'observed_strong']) {
       if (!Object.prototype.hasOwnProperty.call(raw.chance_summary, key)) errors.push('chance_summary is missing ' + key);
       checkNumber(raw.chance_summary[key], errors, 'chance_summary.' + key);
+    }
+    for (const key of ['shown_rows', 'observed_strong_shown', 'expected_strong_by_luck_shown']) {
+      if (Object.prototype.hasOwnProperty.call(raw.chance_summary, key)) {
+        checkNumber(raw.chance_summary[key], errors, 'chance_summary.' + key);
+      }
     }
   }
   if (!Array.isArray(raw.pairs)) errors.push('pairs must be a list');
@@ -382,12 +468,12 @@ export function visibleText(state) {
     state.previewBanner,
     state.exampleNotice,
     state.summary,
-    state.perAssetTitle,
-    state.perEventTitle,
+    state.sameDay && state.sameDay.length ? state.sameDayTitle : '',
+    state.lead && state.lead.length ? state.leadTitle : '',
     state.footer,
     state.empty,
   ];
-  for (const card of [...(state.perAsset || []), ...(state.perEvent || [])]) {
+  for (const card of [...(state.sameDay || []), ...(state.lead || [])]) {
     parts.push(
       card.subject,
       card.other,
@@ -396,8 +482,8 @@ export function visibleText(state) {
       card.chance,
       card.sample,
       card.pick,
+      card.strictPick,
       card.manyTests,
-      card.lagTag,
       card.lag,
       card.label,
     );

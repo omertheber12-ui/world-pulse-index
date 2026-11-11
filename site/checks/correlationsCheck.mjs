@@ -59,7 +59,7 @@ function textOf(html) {
 export function runCorrelationChecks(add) {
   const loaded = loadCorrelations(path.join(siteRoot, 'data/correlations'));
   const state = buildPageState(loaded);
-  const cards = [...state.perAsset, ...state.perEvent];
+  const cards = [...(state.sameDay || []), ...(state.lead || [])];
   const text = visibleText(state);
   add('the example file parses',
     loaded.status === 'ok' && loaded.errors.length === 0 && loaded.file.schema_version === 'correlations-1'
@@ -116,8 +116,15 @@ export function runCorrelationChecks(add) {
   const both = buildCard(row({ picked_from_n: 3, number_of_pairs_searched: 17 }), 'asset');
   add('picked_from_n wins when both count fields are present',
     both.pick.startsWith('Picked as the strongest of 3 links.'));
-  add('the top line uses the chance summary wording',
-    state.summary === 'We tested 24 links. Luck alone would make about 1.2 look this strong; we saw 2.');
+  add('the top line uses the shown counts when they are present',
+    state.summary === 'We tested 18 links. Luck alone would make about 0.8 look this strong; we saw 1. 6 tested rows are hidden because they had under 10 episodes.'
+    && !state.summary.includes('1.2')
+    && !state.summary.includes('We tested 24'));
+  const plainSummary = stateFrom(file());
+  add('the top line keeps the all-rows counts when the shown counts are absent',
+    plainSummary.checked.ok
+    && plainSummary.state.summary === 'We tested 4 links. Luck alone would make about 0.2 look this strong; we saw 1.'
+    && !plainSummary.state.summary.includes('hidden'));
   add('the example notice shows for an example run',
     state.exampleNotice === COPY.exampleNotice && state.previewBanner === COPY.previewBanner);
 
@@ -146,7 +153,6 @@ export function runCorrelationChecks(add) {
     missingCorrelation.correlation === COPY.notEnough
     && missingCorrelation.chance === COPY.notEnough
     && missingCorrelation.lag === COPY.notEnough
-    && missingCorrelation.lagTag === ''
     && missingCorrelation.label === COPY.label
     && missingCorrelation.subject === 'Example: Bitcoin'
     && missingCorrelation.sample === '18 separate episodes (140 trading days)'
@@ -165,8 +171,7 @@ export function runCorrelationChecks(add) {
     few.correlation === '0.33'
     && few.sample === '4 separate episodes (140 trading days)'
     && few.chance.startsWith('Chance alone reaches about ±')
-    && few.lag === COPY.sameDayLine
-    && few.lagTag === COPY.sameDayTag
+    && few.lag === 'same day'
     && fewFile.checked.ok
     && fewFile.state.perAsset.length === 1
     && fewFile.state.perAsset[0].correlation === '0.33');
@@ -214,32 +219,58 @@ export function runCorrelationChecks(add) {
   add('the page does not appear in the tab bar',
     !tabs.includes('strongest-links') && !tabs.includes('Strongest links'));
 
-  const sameDay = buildCard(row({ lag: 'same_day' }), 'asset');
-  add('same day shows the not-a-lead tag and the same-day line',
-    sameDay.lagTag === 'Same day, not a lead'
-    && sameDay.lag === 'These moved on the same day. This does not show which moved first.'
-    && state.perAsset[0].lagTag === 'Same day, not a lead'
-    && state.perAsset[0].lag === 'These moved on the same day. This does not show which moved first.');
+  const sameDay = buildCard(row({ lag: 'same_day', lag_label: 'same day', timing_group: 'same_day' }), 'asset');
+  add('same day lag label is just same day and the card does not say not a lead',
+    sameDay.lag === 'same day'
+    && sameDay.timingGroup === 'same_day'
+    && !sameDay.lag.includes('not a lead')
+    && state.sameDayTitle === 'Moved together the same day (description only, not a lead)'
+    && state.sameDay.length === 1
+    && state.sameDay[0].lag === 'same day'
+    && state.sameDay[0].subject === 'Example: Bitcoin');
   add('odds moved first, 1 day before the asset',
-    buildCard(row({ lag: 'odds_lead_1d' }), 'asset').lag === 'Odds moved first, 1 day before the asset'
-    && buildCard(row({ lag: 'odds_lead_1d' }), 'asset').lagTag === ''
+    buildCard(row({ lag: 'odds_lead_1d', timing_group: 'lead' }), 'asset').lag === 'Odds moved first, 1 day before the asset'
     && state.perAsset[1].lag === 'Odds moved first, 1 day before the asset');
   add('odds moved first, 5 days before the asset',
-    buildCard(row({ lag: 'odds_lead_5d' }), 'asset').lag === 'Odds moved first, 5 days before the asset'
+    buildCard(row({ lag: 'odds_lead_5d', timing_group: 'lead' }), 'asset').lag === 'Odds moved first, 5 days before the asset'
     && state.perEvent[1].lag === 'Odds moved first, 5 days before the asset');
   add('asset moved first, 1 day before the odds',
-    buildCard(row({ lag: 'asset_lead_1d' }), 'asset').lag === 'Asset moved first, 1 day before the odds'
-    && buildCard(row({ lag: 'asset_lead_1d' }), 'asset').lagTag === '');
+    buildCard(row({ lag: 'asset_lead_1d', timing_group: 'lead' }), 'asset').lag === 'Asset moved first, 1 day before the odds');
   add('asset moved first, 5 days before the odds',
-    buildCard(row({ lag: 'asset_lead_5d' }), 'asset').lag === 'Asset moved first, 5 days before the odds'
+    buildCard(row({ lag: 'asset_lead_5d', timing_group: 'lead' }), 'asset').lag === 'Asset moved first, 5 days before the odds'
     && state.perEvent[0].lag === 'Asset moved first, 5 days before the odds');
-  const unknown = buildCard(row({ lag: null }), 'asset');
+  const unknown = buildCard(row({ lag: null, timing_group: 'lead' }), 'asset');
   const unrecognized = buildCard(row({ lag: 'later' }), 'asset');
   add('unknown lag says timing not available',
     unknown.lag === 'Timing not available'
-    && unknown.lagTag === ''
-    && unrecognized.lag === 'Timing not available'
-    && unrecognized.lagTag === '');
+    && unrecognized.lag === 'Timing not available');
+  const zeroLag = stateFrom(file({
+    strongest_per_asset: [row({ lag: 0 })],
+    strongest_per_event: [row({
+      asset: 'oil',
+      asset_label: 'Example: the main oil price',
+      event_label: 'Example: a central bank meeting',
+      lag: 'odds_lead_1d',
+    })],
+  }));
+  const forcedLead = buildCard(row({ lag: 'same_day', timing_group: 'lead' }), 'asset');
+  add('rows group by timing group and lag 0 means same day',
+    zeroLag.checked.ok
+    && zeroLag.state.sameDay.length === 1
+    && zeroLag.state.sameDay[0].lag === 'same day'
+    && zeroLag.state.lead.length === 1
+    && zeroLag.state.lead[0].lag === 'Odds moved first, 1 day before the asset'
+    && forcedLead.timingGroup === 'lead'
+    && state.lead.map((card) => card.correlation).join() === '0.47,-0.18,0.47'
+    && !text.includes('Example: a runner up')
+    && !text.includes('0.55'));
+  add('a pick that does not beat the best of many says it does not pass',
+    state.sameDay[0].strictPick === 'Does not pass the strict pick-from-many check'
+    && buildCard(row({ beats_best_of_many: false }), 'asset').strictPick === 'Does not pass the strict pick-from-many check');
+  add('a pick that beats the best of many keeps the beats wording',
+    state.perAsset[1].strictPick === 'Beats picking the best of many by luck.'
+    && buildCard(row({ beats_pick_from_many: true }), 'asset').strictPick === 'Beats picking the best of many by luck.'
+    && !text.includes('not stronger than picking the best of many by luck'));
 }
 
 export async function correlationPageChecks(add, page) {
@@ -248,7 +279,7 @@ export async function correlationPageChecks(add, page) {
   const view = await page('/strongest-links');
   const html = view.html || '';
   const visible = textOf(html);
-  const cards = [...state.perAsset, ...state.perEvent];
+  const cards = [...(state.sameDay || []), ...(state.lead || [])];
   const nav = (html.match(/<nav id="tabs">[\s\S]*?<\/nav>/) || [''])[0];
   const home = await page('/');
   const homeNav = ((home.html || '').match(/<nav id="tabs">[\s\S]*?<\/nav>/) || [''])[0];
@@ -268,8 +299,14 @@ export async function correlationPageChecks(add, page) {
       && html.includes(card.label)
       && html.includes(card.correlation)
       && html.includes(card.lag)
-      && (!card.lagTag || html.includes(card.lagTag))
+      && (!card.strictPick || html.includes(card.strictPick))
       && html.includes(card.manyTests))
+    && html.includes('Moved together the same day (description only, not a lead)')
+    && html.includes('One moved first')
+    && html.includes('Does not pass the strict pick-from-many check')
+    && html.includes('Beats picking the best of many by luck.')
+    && !visible.includes('not stronger than picking the best of many by luck')
+    && !visible.includes('Example: a runner up')
     && (html.match(/class="corr-split"/g) || []).length === cards.length
     && html.includes('rank correlation')
     && !visible.includes('Example: a decoy link')

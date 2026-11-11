@@ -15,7 +15,9 @@
       "event_label": "Example: a decoy link",
       "asset": "oil",
       "asset_label": "Example: the main oil price",
+      "timing_group": "same_day",
       "lag": "same_day",
+      "lag_label": "same day",
       "spearman": 0.91,
       "pearson": 0.73,
       "trading_days": 200,
@@ -30,7 +32,9 @@
       "event_label": "Example: a ceasefire chance",
       "asset": "bitcoin",
       "asset_label": "Example: Bitcoin",
+      "timing_group": "same_day",
       "lag": "same_day",
+      "lag_label": "same day",
       "spearman": 0.22,
       "pearson": null,
       "trading_days": 140,
@@ -45,6 +49,7 @@
       "event_label": "Example: a central bank meeting",
       "asset": "oil",
       "asset_label": "Example: the main oil price",
+      "timing_group": "lead",
       "lag": "odds_lead_1d",
       "spearman": 0.47,
       "pearson": null,
@@ -60,6 +65,7 @@
       "event_label": "Example: a large conflict",
       "asset": "bitcoin",
       "asset_label": "Example: Bitcoin",
+      "timing_group": "lead",
       "lag": "asset_lead_5d",
       "spearman": -0.18,
       "pearson": null,
@@ -77,20 +83,34 @@
       "asset_label": "Example: Bitcoin",
       "event_family": "example_ceasefire",
       "event_label": "Example: a ceasefire chance",
+      "timing_group": "same_day",
       "lag": "same_day",
+      "lag_label": "same day",
       "spearman": 0.22,
       "chance_p95_abs": 0.31,
       "chance_share_as_strong": 0.11,
       "independent_episodes": 18,
       "trading_days": 140,
       "bh_flag": false,
-      "picked_from_n": 9
+      "picked_from_n": 9,
+      "beats_best_of_many": false,
+      "runner_up": {
+        "asset": "bitcoin",
+        "asset_label": "Example: Bitcoin",
+        "event_family": "example_runner",
+        "event_label": "Example: a runner up",
+        "timing_group": "same_day",
+        "lag": "same_day",
+        "lag_label": "same day",
+        "spearman": 0.55
+      }
     },
     {
       "asset": "oil",
       "asset_label": "Example: the main oil price",
       "event_family": "example_rates",
       "event_label": "Example: a central bank meeting",
+      "timing_group": "lead",
       "lag": "odds_lead_1d",
       "spearman": 0.47,
       "chance_p95_abs": null,
@@ -98,7 +118,8 @@
       "independent_episodes": 21,
       "trading_days": 160,
       "bh_flag": true,
-      "number_of_pairs_searched": 17
+      "number_of_pairs_searched": 17,
+      "beats_best_of_many": true
     }
   ],
   "strongest_per_event": [
@@ -107,6 +128,7 @@
       "asset_label": "Example: Bitcoin",
       "event_family": "example_conflict",
       "event_label": "Example: a large conflict",
+      "timing_group": "lead",
       "lag": "asset_lead_5d",
       "spearman": -0.18,
       "chance_p95_abs": 0.28,
@@ -114,13 +136,15 @@
       "independent_episodes": 15,
       "trading_days": 90,
       "bh_flag": null,
-      "picked_from_n": 8
+      "picked_from_n": 8,
+      "beats_best_of_many": false
     },
     {
       "asset": "oil",
       "asset_label": "Example: the main oil price",
       "event_family": "example_rates",
       "event_label": "Example: a central bank meeting",
+      "timing_group": "lead",
       "lag": "odds_lead_5d",
       "spearman": 0.47,
       "chance_p95_abs": 0.19,
@@ -128,12 +152,16 @@
       "independent_episodes": 21,
       "trading_days": 160,
       "bh_flag": false,
-      "picked_from_n": 11
+      "picked_from_n": 11,
+      "beats_best_of_many": true
     }
   ],
   "chance_summary": {
     "pairs_tested": 24,
     "expected_strong_by_luck": 1.2,
-    "observed_strong": 2
+    "observed_strong": 2,
+    "shown_rows": 18,
+    "observed_strong_shown": 1,
+    "expected_strong_by_luck_shown": 0.8
   }
 }

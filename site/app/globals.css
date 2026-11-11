@@ -218,7 +218,6 @@ details.exposure summary::-webkit-details-marker{display:none}
 .corr-summary{margin:16px 0 0}
 .corr-card.conn-card .conn-event{min-height:0}
 .corr-label{margin:0 0 8px}
-.tag.corr-lag{background:var(--flag-bg);color:var(--flag-ink)}
 .corr-split{display:grid;grid-template-columns:minmax(7.5rem,max-content) minmax(0,1fr);gap:12px 16px;align-items:start;margin-top:12px}
 .corr-num{margin:0}
 .corr-num b{display:block;font-size:28px;line-height:32px;font-weight:700;font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1;letter-spacing:-.02em}
