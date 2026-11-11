@@ -63,46 +63,64 @@ function CardBody({ card }) {
   );
 }
 
+function ConnectionsBody({ state }) {
+  return (
+    <>
+      <h1>{state.title}</h1>
+      <Filters state={state} />
+      {state.mode === 'loading' ? <p className="checking">{state.loading}</p> : null}
+      {state.mode === 'unread' ? (
+        <>
+          <h2>{state.unread.headline}</h2>
+          <p>{state.unread.body}</p>
+        </>
+      ) : null}
+      {state.mode === 'empty' ? (
+        <>
+          <h2>{state.empty.headline}</h2>
+          <p>{state.empty.body}</p>
+          <p className="note">{state.empty.context}</p>
+        </>
+      ) : null}
+      {state.mode === 'list' ? (
+        <>
+          {state.banners.map((banner) => (
+            <aside className={'conn-banner ' + banner.tone} key={banner.tone}>
+              <p>{banner.text}</p>
+              {banner.helper ? <p className="conn-helper">{banner.helper}</p> : null}
+            </aside>
+          ))}
+          {state.cards.map((card) => (
+            <Link className="conn-card" key={card.id} href={card.href} data-history={card.historyStatus}>
+              <CardBody card={card} />
+              <p className="conn-meta">{card.lastChecked}</p>
+              <p className="morelink">{COPY.details}</p>
+            </Link>
+          ))}
+          {state.quiet.map((line) => (
+            <p className="conn-quiet" key={line}>{line}</p>
+          ))}
+        </>
+      ) : null}
+    </>
+  );
+}
+
+export function EarlierChecks({ state }) {
+  return (
+    <details className="earlier-checks">
+      <summary>Earlier checks</summary>
+      <ConnectionsBody state={state} />
+      {state.footer ? <p>{state.footer}</p> : null}
+    </details>
+  );
+}
+
 export function ConnectionsScreen({ state }) {
   return (
     <>
       <main data-page="connections" data-mode={state.mode}>
-        <h1>{state.title}</h1>
-        <Filters state={state} />
-        {state.mode === 'loading' ? <p className="checking">{state.loading}</p> : null}
-        {state.mode === 'unread' ? (
-          <>
-            <h2>{state.unread.headline}</h2>
-            <p>{state.unread.body}</p>
-          </>
-        ) : null}
-        {state.mode === 'empty' ? (
-          <>
-            <h2>{state.empty.headline}</h2>
-            <p>{state.empty.body}</p>
-            <p className="note">{state.empty.context}</p>
-          </>
-        ) : null}
-        {state.mode === 'list' ? (
-          <>
-            {state.banners.map((banner) => (
-              <aside className={'conn-banner ' + banner.tone} key={banner.tone}>
-                <p>{banner.text}</p>
-                {banner.helper ? <p className="conn-helper">{banner.helper}</p> : null}
-              </aside>
-            ))}
-            {state.cards.map((card) => (
-              <Link className="conn-card" key={card.id} href={card.href} data-history={card.historyStatus}>
-                <CardBody card={card} />
-                <p className="conn-meta">{card.lastChecked}</p>
-                <p className="morelink">{COPY.details}</p>
-              </Link>
-            ))}
-            {state.quiet.map((line) => (
-              <p className="conn-quiet" key={line}>{line}</p>
-            ))}
-          </>
-        ) : null}
+        <ConnectionsBody state={state} />
       </main>
       <Insights footer={state.footer} />
     </>

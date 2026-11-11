@@ -1,12 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   outputFileTracingIncludes: {
-    '/connections': ['./data/connections/**/*', './data/fallback.json'],
+    '/connections': ['./data/connections/**/*', './data/fallback.json', './data/correlations/**/*'],
     '/connections/[pair_id]': ['./data/connections/**/*', './data/fallback.json'],
-    '/strongest-links': ['./data/correlations/**/*'],
   },
   async redirects() {
     return [
+      { source: '/strongest-links', destination: '/connections', permanent: true },
       { source: '/today.html', destination: '/', permanent: false },
       { source: '/index.html', destination: '/', permanent: false },
       { source: '/events.html', destination: '/events', permanent: false },

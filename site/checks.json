@@ -1,5 +1,5 @@
 {
-  "run_at": "2026-11-11T20:45:09.504Z",
+  "run_at": "2026-11-11T20:59:42.571Z",
   "all_pass": true,
   "items": [
     {
@@ -653,7 +653,7 @@
       "detail": ""
     },
     {
-      "check": "strongest links page renders the preview banner, research notice, and noindex",
+      "check": "connections page renders the preview banner, research notice, and noindex",
       "pass": true,
       "detail": ""
     },
@@ -673,7 +673,12 @@
       "detail": ""
     },
     {
-      "check": "the rendered page is not in the tab bar",
+      "check": "earlier checks keep the old cards behind one click",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "the connections tab points at /connections",
       "pass": true,
       "detail": ""
     },
@@ -684,6 +689,11 @@
     },
     {
       "check": "today.html redirects to the Today page",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "/strongest-links redirects to /connections",
       "pass": true,
       "detail": ""
     }

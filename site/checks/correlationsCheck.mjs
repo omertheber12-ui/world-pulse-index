@@ -361,19 +361,19 @@ export function runCorrelationChecks(add) {
 export async function correlationPageChecks(add, page) {
   const loaded = loadCorrelations(path.join(siteRoot, 'data/correlations'));
   const state = buildPageState(loaded);
-  const view = await page('/strongest-links');
+  const view = await page('/connections');
   const html = view.html || '';
   const visible = textOf(html);
   const nav = (html.match(/<nav id="tabs">[\s\S]*?<\/nav>/) || [''])[0];
   const home = await page('/');
   const homeNav = ((home.html || '').match(/<nav id="tabs">[\s\S]*?<\/nav>/) || [''])[0];
-  add('strongest links page renders the preview banner, research notice, and noindex',
+  add('connections page renders the preview banner, research notice, and noindex',
     view.status === 200
     && html.includes(COPY.previewBanner)
     && html.includes(COPY.researchNotice)
     && !html.includes(COPY.exampleNotice)
     && /noindex/i.test(html)
-    && html.includes('data-page="strongest-links"')
+    && html.includes('data-page="connections"')
     && html.includes(state.summary)
     && html.includes(state.footer));
   const charts = state.chartCards || [];
@@ -393,9 +393,9 @@ export async function correlationPageChecks(add, page) {
     && html.split('data-pick-line="1"').slice(1).every((part) => part.includes('data-trend="1"'))
     && html.includes(ODDS_AXIS)
     && html.includes(ODDS_LINE_NOTE)
-    && !html.includes('Busy trading periods')
-    && !html.includes('class="busy"')
-    && !html.includes('large move')
+    && !html.split('Earlier checks')[0].includes('Busy trading periods')
+    && !html.split('Earlier checks')[0].includes('class="busy"')
+    && !html.split('Earlier checks')[0].includes('large move')
     && html.includes('See every link tested')
     && html.includes('Internal, not proven.')
     && html.includes('How to read this')
@@ -441,11 +441,18 @@ export async function correlationPageChecks(add, page) {
     && tierMarks('stronger') === 41
     && tierMarks('weaker') === 473
     && !visible.includes('(0 trading days)'));
-  add('the rendered page is not in the tab bar',
-    !nav.includes('/strongest-links')
+  const earlier = html.split('<summary>Earlier checks</summary>')[1] || '';
+  add('earlier checks keep the old cards behind one click',
+    html.includes('<summary>Earlier checks</summary>')
+    && !/<details class="earlier-checks"[^>]*\sopen/.test(html)
+    && earlier.includes('data-history="'));
+  add('the connections tab points at /connections',
+    nav.includes('href="/connections"')
+    && nav.includes('Connections')
+    && !nav.includes('/strongest-links')
     && !nav.includes('Strongest links')
+    && homeNav.includes('href="/connections"')
     && !homeNav.includes('/strongest-links')
-    && !homeNav.includes('Strongest links')
-    && existsSync(path.join(siteRoot, 'app/strongest-links/page.js')));
+    && !homeNav.includes('Strongest links'));
   add('the strongest links page has no advice wording', textProblem(visible) === '');
 }

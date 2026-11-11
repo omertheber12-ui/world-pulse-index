@@ -285,6 +285,10 @@ if (base) {
   const redir = await fetch(base + '/today.html', { redirect: 'manual' });
   const loc = redir.headers.get('location') || '';
   add('today.html redirects to the Today page', (redir.status === 307 || redir.status === 308) && (loc === '/' || loc.endsWith('/')));
+  const links = await fetch(base + '/strongest-links', { redirect: 'manual' });
+  const linksLoc = links.headers.get('location') || '';
+  add('/strongest-links redirects to /connections',
+    links.status === 308 && (linksLoc === '/connections' || linksLoc.endsWith('/connections')));
 }
 
 const allPass = checks.every((c) => c.pass);

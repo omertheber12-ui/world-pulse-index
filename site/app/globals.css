@@ -260,6 +260,8 @@ details.exposure summary::-webkit-details-marker{display:none}
 .pick-line summary::-webkit-details-marker{display:none}
 .pick-name{font-size:18px;line-height:26px;font-weight:600;color:var(--ink-900)}
 .see-every{margin-top:56px}
+.earlier-checks{margin-top:64px}
+.earlier-checks > summary{font-size:18px;line-height:26px;cursor:pointer}
 .see-every > summary{font-size:18px;line-height:26px}
 .chart-slot svg,.series-chart svg{display:block;width:100%;height:auto}
 .series-chart{margin:0}

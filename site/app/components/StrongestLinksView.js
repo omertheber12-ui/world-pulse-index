@@ -96,12 +96,12 @@ function HowToRead({ state }) {
   );
 }
 
-export function StrongestLinksScreen({ state }) {
+export function StrongestLinksScreen({ state, earlier }) {
   const links = state.allLinks;
   const mainModel = state.mainChart ? chartModel(state.mainChart) : null;
   return (
     <>
-      <main data-page="strongest-links" data-mode={state.mode}>
+      <main data-page="connections" data-mode={state.mode}>
         <aside className="preview-banner" role="note">{state.previewBanner}</aside>
         <p className="quiet-note">Internal, not proven.</p>
         {state.exampleNotice ? <p className="example-notice" role="status">{state.exampleNotice}</p> : null}
@@ -144,6 +144,7 @@ export function StrongestLinksScreen({ state }) {
             ) : null}
           </>
         ) : null}
+        {earlier}
       </main>
       <footer>
         <p>{COPY.insights} · <Link href="/how">How it works</Link></p>
