@@ -13,14 +13,6 @@ export const METHOD_ID = 'TR-016';
 
 export const LAGS = ['same_day', 'odds_lead_1d', 'odds_lead_5d', 'asset_lead_1d', 'asset_lead_5d'];
 
-export const LAG_TEXT = {
-  same_day: 'same day',
-  odds_lead_1d: 'odds moved 1 day before the asset',
-  odds_lead_5d: 'odds moved 5 days before the asset',
-  asset_lead_1d: 'asset moved 1 day before the odds',
-  asset_lead_5d: 'asset moved 5 days before the odds',
-};
-
 export const COPY = {
   title: 'Strongest links',
   previewBanner: 'Internal preview. Not on the live site.',
@@ -35,6 +27,21 @@ export const COPY = {
   stands: 'Still stands after correcting for many tests',
   doesNotStand: 'Does not stand after correcting for many tests',
   insights: 'Insights only, not advice.',
+  sameDayTag: 'Same day, not a lead',
+  sameDayLine: 'These moved on the same day. This does not show which moved first.',
+  oddsLead1d: 'Odds moved first, 1 day before the asset',
+  oddsLead5d: 'Odds moved first, 5 days before the asset',
+  assetLead1d: 'Asset moved first, 1 day before the odds',
+  assetLead5d: 'Asset moved first, 5 days before the odds',
+  timingUnknown: 'Timing not available',
+};
+
+export const LAG_TEXT = {
+  same_day: COPY.sameDayLine,
+  odds_lead_1d: COPY.oddsLead1d,
+  odds_lead_5d: COPY.oddsLead5d,
+  asset_lead_1d: COPY.assetLead1d,
+  asset_lead_5d: COPY.assetLead5d,
 };
 
 const siteRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -134,8 +141,13 @@ export function manyTestsLine(flag) {
 }
 
 export function lagLine(lag) {
-  if (lag == null || lag === '') return COPY.notAvailable;
-  return LAG_TEXT[lag] || COPY.notAvailable;
+  if (lag == null || lag === '') return COPY.timingUnknown;
+  return LAG_TEXT[lag] || COPY.timingUnknown;
+}
+
+export function lagTag(lag) {
+  if (lag === 'same_day') return COPY.sameDayTag;
+  return '';
 }
 
 export function summaryLine(summary) {
@@ -168,6 +180,7 @@ export function buildCard(row, section) {
     pick: pickLine(item),
     manyTests: manyTestsLine(item.bh_flag),
     lag: missingCorrelation ? COPY.notEnough : lagLine(item.lag),
+    lagTag: missingCorrelation ? '' : lagTag(item.lag),
     label: COPY.label,
   };
 }
@@ -384,6 +397,7 @@ export function visibleText(state) {
       card.sample,
       card.pick,
       card.manyTests,
+      card.lagTag,
       card.lag,
       card.label,
     );

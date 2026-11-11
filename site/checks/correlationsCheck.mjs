@@ -146,6 +146,7 @@ export function runCorrelationChecks(add) {
     missingCorrelation.correlation === COPY.notEnough
     && missingCorrelation.chance === COPY.notEnough
     && missingCorrelation.lag === COPY.notEnough
+    && missingCorrelation.lagTag === ''
     && missingCorrelation.label === COPY.label
     && missingCorrelation.subject === 'Example: Bitcoin'
     && missingCorrelation.sample === '18 separate episodes (140 trading days)'
@@ -164,7 +165,8 @@ export function runCorrelationChecks(add) {
     few.correlation === '0.33'
     && few.sample === '4 separate episodes (140 trading days)'
     && few.chance.startsWith('Chance alone reaches about ±')
-    && few.lag === 'same day'
+    && few.lag === COPY.sameDayLine
+    && few.lagTag === COPY.sameDayTag
     && fewFile.checked.ok
     && fewFile.state.perAsset.length === 1
     && fewFile.state.perAsset[0].correlation === '0.33');
@@ -211,6 +213,33 @@ export function runCorrelationChecks(add) {
   const tabs = chrome.slice(chrome.indexOf('const TABS'), chrome.indexOf('];'));
   add('the page does not appear in the tab bar',
     !tabs.includes('strongest-links') && !tabs.includes('Strongest links'));
+
+  const sameDay = buildCard(row({ lag: 'same_day' }), 'asset');
+  add('same day shows the not-a-lead tag and the same-day line',
+    sameDay.lagTag === 'Same day, not a lead'
+    && sameDay.lag === 'These moved on the same day. This does not show which moved first.'
+    && state.perAsset[0].lagTag === 'Same day, not a lead'
+    && state.perAsset[0].lag === 'These moved on the same day. This does not show which moved first.');
+  add('odds moved first, 1 day before the asset',
+    buildCard(row({ lag: 'odds_lead_1d' }), 'asset').lag === 'Odds moved first, 1 day before the asset'
+    && buildCard(row({ lag: 'odds_lead_1d' }), 'asset').lagTag === ''
+    && state.perAsset[1].lag === 'Odds moved first, 1 day before the asset');
+  add('odds moved first, 5 days before the asset',
+    buildCard(row({ lag: 'odds_lead_5d' }), 'asset').lag === 'Odds moved first, 5 days before the asset'
+    && state.perEvent[1].lag === 'Odds moved first, 5 days before the asset');
+  add('asset moved first, 1 day before the odds',
+    buildCard(row({ lag: 'asset_lead_1d' }), 'asset').lag === 'Asset moved first, 1 day before the odds'
+    && buildCard(row({ lag: 'asset_lead_1d' }), 'asset').lagTag === '');
+  add('asset moved first, 5 days before the odds',
+    buildCard(row({ lag: 'asset_lead_5d' }), 'asset').lag === 'Asset moved first, 5 days before the odds'
+    && state.perEvent[0].lag === 'Asset moved first, 5 days before the odds');
+  const unknown = buildCard(row({ lag: null }), 'asset');
+  const unrecognized = buildCard(row({ lag: 'later' }), 'asset');
+  add('unknown lag says timing not available',
+    unknown.lag === 'Timing not available'
+    && unknown.lagTag === ''
+    && unrecognized.lag === 'Timing not available'
+    && unrecognized.lagTag === '');
 }
 
 export async function correlationPageChecks(add, page) {
@@ -239,6 +268,7 @@ export async function correlationPageChecks(add, page) {
       && html.includes(card.label)
       && html.includes(card.correlation)
       && html.includes(card.lag)
+      && (!card.lagTag || html.includes(card.lagTag))
       && html.includes(card.manyTests))
     && (html.match(/class="corr-split"/g) || []).length === cards.length
     && html.includes('rank correlation')

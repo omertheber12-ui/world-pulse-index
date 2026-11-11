@@ -4,7 +4,10 @@ import { COPY } from '../../lib/correlations.js';
 function Card({ card, index }) {
   return (
     <article className="conn-card corr-card" data-section={card.section} data-order={index}>
-      <p className="corr-label"><span className="tag fact">{card.label}</span></p>
+      <p className="corr-label">
+        <span className="tag fact">{card.label}</span>
+        {card.lagTag ? <span className="tag corr-lag">{card.lagTag}</span> : null}
+      </p>
       <h3 className="conn-event">{card.subject}</h3>
       <p className="conn-asset">{card.other}</p>
       <div className="corr-split">

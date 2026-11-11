@@ -1,5 +1,5 @@
 {
-  "run_at": "2026-11-11T18:12:59.585Z",
+  "run_at": "2026-11-11T18:34:08.042Z",
   "all_pass": true,
   "items": [
     {
@@ -349,6 +349,36 @@
     },
     {
       "check": "the page does not appear in the tab bar",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "same day shows the not-a-lead tag and the same-day line",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "odds moved first, 1 day before the asset",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "odds moved first, 5 days before the asset",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "asset moved first, 1 day before the odds",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "asset moved first, 5 days before the odds",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "unknown lag says timing not available",
       "pass": true,
       "detail": ""
     },
