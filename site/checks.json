@@ -1,5 +1,5 @@
 {
-  "run_at": "2026-11-11T21:16:16.281Z",
+  "run_at": "2026-11-11T21:44:42.840Z",
   "all_pass": true,
   "items": [
     {
@@ -443,7 +443,12 @@
       "detail": ""
     },
     {
-      "check": "the featured pick matches the rule and all 21 headlines are mapped",
+      "check": "the featured headline uses the spec sign wording",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "the featured pick matches the rule and the brand map is kept",
       "pass": true,
       "detail": ""
     },
@@ -469,6 +474,16 @@
     },
     {
       "check": "the main chart has data for both lines",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "no figure is typed by hand in the connections view",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "every list row has a spark and a lead filter has no strong links",
       "pass": true,
       "detail": ""
     },
@@ -673,27 +688,17 @@
       "detail": ""
     },
     {
-      "check": "connections page renders the preview banner, research notice, and noindex",
+      "check": "connections page renders the preview banner, standing line, and noindex",
       "pass": true,
       "detail": ""
     },
     {
-      "check": "every strongest card is a chart card with one strength number and details",
+      "check": "the first screen shows the tier bar and not the old long list",
       "pass": true,
       "detail": ""
     },
     {
-      "check": "charts are two lines, and the lead note sits in the details",
-      "pass": true,
-      "detail": ""
-    },
-    {
-      "check": "the rendered page shows the real groups and the hidden-row count",
-      "pass": true,
-      "detail": ""
-    },
-    {
-      "check": "earlier checks keep the old cards behind one click",
+      "check": "a correlation id renders the new detail and a TR-007 id renders the old one",
       "pass": true,
       "detail": ""
     },
