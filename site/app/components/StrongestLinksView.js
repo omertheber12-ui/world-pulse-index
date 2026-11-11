@@ -82,6 +82,9 @@ function AllLinks({ links }) {
     <section data-all-links="1">
       <h2>{links.title}</h2>
       <p className="corr-luck">{links.note}</p>
+      <ul className="corr-legend">
+        {(links.legend || []).map((line) => <li key={line}>{line}</li>)}
+      </ul>
       <p className="corr-strict-note">{links.strictNote}</p>
       <AllGroup title={links.sameDayTitle} group={links.sameDay} showWeaker={links.showWeaker} />
       <AllGroup title={links.leadTitle} group={links.lead} showWeaker={links.showWeaker} />

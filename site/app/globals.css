@@ -227,6 +227,8 @@ details.exposure summary::-webkit-details-marker{display:none}
 .corr-chance{margin:0;font-size:14px;line-height:20px;color:var(--neutral-700)}
 .corr-line{margin:8px 0 0;font-size:14px;line-height:20px;color:var(--neutral-700)}
 .corr-luck{margin:8px 0 0}
+.corr-legend{margin:8px 0 0;padding-left:18px}
+.corr-legend li{margin:4px 0;font-size:14px;line-height:20px}
 .corr-strict-note{margin:8px 0 16px;color:var(--neutral-700);font-size:14px;line-height:20px}
 .corr-table-wrap{overflow-x:auto;margin:8px 0 12px}
 .corr-links{width:100%;border-collapse:collapse}

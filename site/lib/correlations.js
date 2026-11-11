@@ -39,10 +39,10 @@ export const COPY = {
   strictPass: 'Passes the strict pick-from-many check',
   researchNotice: 'Research\'s TR-016 run. Internal, and not proven.',
   allLinksTitle: 'All links tested',
-  tierStrict: 'Passes the strict check',
-  tierStronger: 'Stronger than chance',
-  tierWeaker: 'Weaker, worth watching',
-  showWeaker: 'Show weaker links',
+  tierStrict: 'Strong link',
+  tierStronger: 'Medium link',
+  tierWeaker: 'Weak link',
+  showWeaker: 'Show weak links',
   sameWay: 'moved the same way',
   oppositeWay: 'opposite way',
 };
@@ -293,6 +293,15 @@ export function allLinksNote(summary) {
     + ' shown do. These are leads to look into, not findings.';
 }
 
+export function tierLegend(summary) {
+  const row = summary || {};
+  return [
+    'Strong link: passes the strictest check across all ' + formatPlain(row.rows_tested) + ' tested rows.',
+    'Medium link: as a group there are more of these than luck alone gives (' + formatPlain(row.observed_strong_shown) + ' against about ' + formatPlain(row.expected_strong_by_luck) + '), but any single one may be luck.',
+    'Weak link: may well be luck, kept to watch.',
+  ];
+}
+
 export function strictCheckNote(summary) {
   const tested = formatPlain(summary && summary.rows_tested);
   return 'This strict check corrects for testing all ' + tested
@@ -306,6 +315,7 @@ export function buildAllLinks(file) {
   return {
     title: COPY.allLinksTitle,
     note: allLinksNote(file && file.chance_summary),
+    legend: tierLegend(file && file.chance_summary),
     strictNote: strictCheckNote(file && file.chance_summary),
     sameDayTitle: COPY.sameDayHeader,
     leadTitle: COPY.leadHeader,
@@ -596,6 +606,7 @@ export function visibleText(state) {
     state.lead && state.lead.length ? state.leadTitle : '',
     state.allLinks && state.allLinks.title,
     state.allLinks && state.allLinks.note,
+    ...(state.allLinks && state.allLinks.legend ? state.allLinks.legend : []),
     state.allLinks && state.allLinks.strictNote,
     state.footer,
     state.empty,

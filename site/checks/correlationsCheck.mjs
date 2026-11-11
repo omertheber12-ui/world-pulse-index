@@ -303,12 +303,16 @@ export function runCorrelationChecks(add) {
     sameRows.length + leadRows.length === 517
     && sameRows.length === fileSame
     && leadRows.length === loaded.file.pairs.length - fileSame
-    && allRows.filter((item) => item.tier === 'strict').every((item) => item.tierLabel === 'Passes the strict check')
-    && allRows.filter((item) => item.tier === 'stronger').every((item) => item.tierLabel === 'Stronger than chance')
-    && allRows.filter((item) => item.tier === 'weaker').every((item) => item.tierLabel === 'Weaker, worth watching'));
+    && allRows.filter((item) => item.tier === 'strict').every((item) => item.tierLabel === 'Strong link')
+    && allRows.filter((item) => item.tier === 'stronger').every((item) => item.tierLabel === 'Medium link')
+    && allRows.filter((item) => item.tier === 'weaker').every((item) => item.tierLabel === 'Weak link'));
   add('the weaker-links note uses the summary counts',
     links.note === 'Weaker links may be luck. By luck alone about 27 of 540 tested rows would look stronger than chance; 44 of the 517 shown do. These are leads to look into, not findings.'
     && links.strictNote === 'This strict check corrects for testing all 540 rows at once; it is not the same as the pick-from-many check on the cards above.'
+    && links.legend[0] === 'Strong link: passes the strictest check across all 540 tested rows.'
+    && links.legend[1] === 'Medium link: as a group there are more of these than luck alone gives (44 against about 27), but any single one may be luck.'
+    && links.legend[2] === 'Weak link: may well be luck, kept to watch.'
+    && links.showWeaker === 'Show weak links'
     && linkTier({ bh_flag: true, passes_chance_line: false }) === 'strict'
     && linkTier({ bh_flag: false, passes_chance_line: true }) === 'stronger'
     && linkTier({ bh_flag: false, passes_chance_line: false }) === 'weaker');
@@ -370,7 +374,13 @@ export async function correlationPageChecks(add, page) {
     && visible.includes('23 tested rows are hidden because they had under 10 episodes.')
     && visible.includes('All links tested')
     && visible.includes('Weaker links may be luck.')
-    && visible.includes('Show weaker links')
+    && visible.includes('Show weak links')
+    && visible.includes('Strong link: passes the strictest check across all 540 tested rows.')
+    && visible.includes('Medium link: as a group there are more of these than luck alone gives (44 against about 27), but any single one may be luck.')
+    && visible.includes('Weak link: may well be luck, kept to watch.')
+    && !html.includes('>Passes the strict check<')
+    && !html.includes('>Stronger than chance<')
+    && !html.includes('>Weaker, worth watching<')
     && allLinkRows.length === 517
     && tierMarks('strict') === 3
     && tierMarks('stronger') === 41
