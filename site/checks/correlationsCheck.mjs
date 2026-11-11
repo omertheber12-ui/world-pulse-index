@@ -344,10 +344,11 @@ export function runCorrelationChecks(add) {
       spearman: -0.2,
     }) === 'Fed rate-cut odds move first, 2-year yield moves the other way within 5 days'
     && state.chartCards.length === 21
-    && state.featuredCharts.length <= 5
-    && state.featuredCharts.length > 0
-    && state.featuredCharts.every((card, index) => index === 0 || card.tier !== 'strict' || state.featuredCharts[index - 1].tier === 'strict')
-    && state.featuredCharts.filter((card) => card.tier !== 'strict').every((card) => card.strictPick === 'Passes the strict pick-from-many check'));
+    && state.otherPicks.length === 20
+    && state.mainChart
+    && state.mainChart.tier === 'strict'
+    && state.mainChart.strictPick === 'Passes the strict pick-from-many check'
+    && state.mainChart.headline === 'Fed rate-cut odds and 2-year yield move opposite ways on the same day');
 }
 
 export async function correlationPageChecks(add, page) {
@@ -378,13 +379,11 @@ export async function correlationPageChecks(add, page) {
       && html.includes(card.chance)
       && html.includes(card.pick)
       && html.includes(card.episodes))
-    && (html.match(/data-chart-card="1"/g) || []).length === 21
-    && (html.match(/data-featured="1"/g) || []).length === (state.featuredCharts || []).length
-    && (state.featuredCharts || []).length <= 5
-    && html.includes('See all 21 top picks')
+    && (html.match(/data-main-chart="1"/g) || []).length === 1
+    && (html.match(/data-pick-line="1"/g) || []).length === 20
     && html.includes('See every link tested')
-    && html.includes(COPY.pageLead)
-    && (html.match(/Chart coming/g) || []).length >= 21
+    && html.includes('Internal, not proven.')
+    && (html.match(/Chart coming/g) || []).length >= 1
     && html.includes('How to read this')
     && html.includes('Moved together the same day (description only, not a lead)')
     && html.includes('One moved first')
@@ -403,7 +402,8 @@ export async function correlationPageChecks(add, page) {
     && visible.includes('23 tested rows are hidden because they had under 10 episodes.')
     && visible.includes('All links tested')
     && visible.includes('Weaker links may be luck.')
-    && visible.includes('Show weak links')
+    && (html.match(/data-pick-line="1"/g) || []).length === 20
+    && (html.match(/data-main-chart="1"/g) || []).length === 1
     && visible.includes('Strong link: passes the strictest check across all 540 tested rows.')
     && visible.includes('Medium link: as a group there are more of these than luck alone gives (44 against about 27), but any single one may be luck.')
     && visible.includes('Weak link: may well be luck, kept to watch.')

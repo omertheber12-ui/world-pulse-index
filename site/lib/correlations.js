@@ -367,6 +367,7 @@ function splitByTier(rows) {
   const ordered = rows.slice().sort(byStrength);
   const built = ordered.map(buildLinkRow);
   return {
+    rows: built,
     shown: built.filter((row) => row.tier !== 'weaker'),
     weaker: built.filter((row) => row.tier === 'weaker'),
   };
@@ -427,11 +428,14 @@ function runnerLine(row) {
     + ', ' + formatTwo(runner.spearman) + ', ' + lagDisplay(runner);
 }
 
-export function featuredCharts(cards) {
-  const list = cards || [];
-  const strong = list.filter((card) => card.tier === 'strict');
-  const passed = list.filter((card) => card.strictPick === COPY.strictPass && card.tier !== 'strict');
-  return strong.concat(passed).slice(0, 5);
+function absSpearman(row) {
+  const number = numeric(row && row.spearman);
+  return number == null ? -1 : Math.abs(number);
+}
+
+export function chooseMainRow(rows) {
+  const eligible = (rows || []).filter((row) => linkTier(row) === 'strict' && beatsFlag(row) === true);
+  return eligible.slice().sort((a, b) => absSpearman(b) - absSpearman(a))[0] || null;
 }
 
 export function buildChartCard(row, section) {
@@ -490,7 +494,8 @@ export function buildPageState(loaded) {
     sameDay: [],
     lead: [],
     chartCards: [],
-    featuredCharts: [],
+    mainChart: null,
+    otherPicks: [],
     allLinks: null,
     footer: '',
     empty: '',
@@ -502,8 +507,11 @@ export function buildPageState(loaded) {
   const perAsset = (file.strongest_per_asset || []).map((row) => buildCard(row, 'asset'));
   const perEvent = (file.strongest_per_event || []).map((row) => buildCard(row, 'event'));
   const ordered = perAsset.concat(perEvent);
-  const chartCards = (file.strongest_per_asset || []).map((row) => buildChartCard(row, 'asset'))
-    .concat((file.strongest_per_event || []).map((row) => buildChartCard(row, 'event')));
+  const picks = (file.strongest_per_asset || []).map((row) => ({ row, section: 'asset' }))
+    .concat((file.strongest_per_event || []).map((row) => ({ row, section: 'event' })));
+  const chartCards = picks.map((item) => buildChartCard(item.row, item.section));
+  const mainRow = chooseMainRow(picks.map((item) => item.row));
+  const mainIndex = picks.findIndex((item) => item.row === mainRow);
   return {
     ...base,
     mode: 'ready',
@@ -515,7 +523,8 @@ export function buildPageState(loaded) {
     sameDay: ordered.filter((card) => card.timingGroup === 'same_day'),
     lead: ordered.filter((card) => card.timingGroup !== 'same_day'),
     chartCards,
-    featuredCharts: featuredCharts(chartCards),
+    mainChart: mainIndex >= 0 ? chartCards[mainIndex] : null,
+    otherPicks: chartCards.filter((_, index) => index !== mainIndex),
     allLinks: buildAllLinks(file),
     footer: footerLine(file),
   };

@@ -213,7 +213,8 @@ details.exposure summary::-webkit-details-marker{display:none}
   .conn-stat b{font-size:22px;line-height:28px}
 }
 /* Strongest links, internal preview */
-.preview-banner{margin:16px 0 0;padding:12px 14px;border-radius:12px;background:var(--flag-bg);color:var(--flag-ink);font-weight:600}
+.preview-banner{margin:8px 0 0;padding:0;background:none;color:var(--neutral-500);font-size:13px;line-height:18px;font-weight:500}
+.quiet-note{margin:4px 0 0;color:var(--neutral-500);font-size:13px;line-height:18px}
 .example-notice{margin:12px 0 0;padding:16px;border-radius:12px;background:var(--error-bg);color:var(--error-ink);font-size:22px;line-height:28px;font-weight:700}
 .research-notice,.page-note{margin:12px 0 0;color:var(--neutral-700);font-size:17px;line-height:24px}
 .page-lead{margin:8px 0 0;font-size:22px;line-height:30px;color:var(--ink-900)}
@@ -248,6 +249,18 @@ details.exposure summary::-webkit-details-marker{display:none}
 .yf-stronger,.yf-weaker{background:var(--neutral-50);color:var(--neutral-700)}
 .chart-slot{margin:20px 0 8px;background:var(--neutral-25);border-radius:16px}
 .chart-slot-large{margin-top:28px}
+.hero{display:flex;flex-wrap:wrap;align-items:baseline;gap:12px 16px;margin-top:72px}
+.hero h1{flex:1 1 16rem;margin:0;font-size:40px;line-height:46px;font-weight:650;letter-spacing:-.025em}
+.hero .yf-tag{font-size:15px;white-space:nowrap}
+.hero-chart{margin-top:36px}
+.hero-chart .chart-slot{min-height:420px;display:flex;align-items:center}
+.pick-list{margin-top:80px}
+.pick-line{padding:22px 0;border-bottom:1px solid var(--neutral-100)}
+.pick-line summary{display:grid;grid-template-columns:minmax(0,1fr) 64px auto;gap:20px;align-items:center;list-style:none;cursor:pointer;color:inherit;font-weight:500}
+.pick-line summary::-webkit-details-marker{display:none}
+.pick-name{font-size:18px;line-height:26px;font-weight:600;color:var(--ink-900)}
+.see-every{margin-top:56px}
+.see-every > summary{font-size:18px;line-height:26px}
 .chart-slot svg{display:block;width:100%;height:auto}
 .chart-slot .axis{stroke:var(--neutral-200);stroke-width:1}
 .chart-slot text{fill:var(--neutral-500);font-size:16px;font-family:var(--font)}

@@ -19,32 +19,6 @@ function ChartSlot({ large }) {
   );
 }
 
-function ChartCard({ card, large }) {
-  return (
-    <article
-      className={large ? 'chart-card chart-large' : 'chart-card chart-small'}
-      data-chart-card={large ? undefined : '1'}
-      data-featured={large ? '1' : undefined}
-      data-section={card.section}
-      data-group={card.timingGroup}
-      data-tier={card.tier}
-    >
-      <h2>{card.headline}</h2>
-      <Tag label={card.tierLabel} tier={card.tier} />
-      <ChartSlot large={large} />
-      <details className="chart-details">
-        <summary>Details</summary>
-        <p className="num">{card.strength}</p>
-        <p>{card.episodes}</p>
-        <p>{card.chance}</p>
-        <p>{card.pick}</p>
-        {card.strictPick ? <p>{card.strictPick}</p> : null}
-        {card.runner ? <p>{card.runner}</p> : null}
-      </details>
-    </article>
-  );
-}
-
 function LinkRow({ row }) {
   return (
     <details className="yf-row" data-all-link="1" data-tier={row.tier} data-group={row.timingGroup}>
@@ -62,25 +36,37 @@ function LinkRow({ row }) {
   );
 }
 
-function AllGroup({ title, group, showWeaker }) {
-  const shown = group && group.shown ? group.shown : [];
-  const weaker = group && group.weaker ? group.weaker : [];
-  if (!shown.length && !weaker.length) return null;
+function AllGroup({ title, group }) {
+  const rows = group && group.rows ? group.rows : [];
+  if (!rows.length) return null;
   return (
     <section className="yf-group">
       <h2>{title}</h2>
       <div className="yf-list">
-        {shown.map((row, index) => <LinkRow key={row.timingGroup + '-s-' + index} row={row} />)}
+        {rows.map((row, index) => <LinkRow key={row.timingGroup + '-' + index} row={row} />)}
       </div>
-      {weaker.length ? (
-        <details className="corr-weaker">
-          <summary>{showWeaker}</summary>
-          <div className="yf-list">
-            {weaker.map((row, index) => <LinkRow key={row.timingGroup + '-w-' + index} row={row} />)}
-          </div>
-        </details>
-      ) : null}
     </section>
+  );
+}
+
+function PickLine({ card }) {
+  return (
+    <details className="pick-line" data-pick-line="1">
+      <summary>
+        <span className="pick-name">{card.headline}</span>
+        <span className="yf-spark" aria-hidden="true" />
+        <Tag label={card.tierLabel} tier={card.tier} />
+      </summary>
+      <ChartSlot />
+      <div className="yf-detail">
+        <p className="num">{card.strength}</p>
+        <p>{card.episodes}</p>
+        <p>{card.chance}</p>
+        <p>{card.pick}</p>
+        {card.strictPick ? <p>{card.strictPick}</p> : null}
+        {card.runner ? <p>{card.runner}</p> : null}
+      </div>
+    </details>
   );
 }
 
@@ -96,6 +82,7 @@ function HowToRead({ state }) {
         {(links.legend || []).map((line) => <li key={line}>{line}</li>)}
       </ul>
       <p>{links.strictNote}</p>
+      {state.researchNotice ? <p>{state.researchNotice}</p> : null}
       <p>Description only, not proven. The number on each card is a rank correlation.</p>
       <p>Extra check, not a verdict: other checks use the same measure and do not change the label.</p>
       {state.footer ? <p>{state.footer}</p> : null}
@@ -109,32 +96,41 @@ export function StrongestLinksScreen({ state }) {
     <>
       <main data-page="strongest-links" data-mode={state.mode}>
         <aside className="preview-banner" role="note">{state.previewBanner}</aside>
-        <h1>{state.title}</h1>
+        <p className="quiet-note">Internal, not proven.</p>
         {state.exampleNotice ? <p className="example-notice" role="status">{state.exampleNotice}</p> : null}
-        <p className="page-lead">{COPY.pageLead}</p>
-        {state.researchNotice ? <p className="page-note" role="status">{state.researchNotice}</p> : null}
+        {state.mode === 'empty' ? <h1>{state.title}</h1> : null}
         {state.mode === 'empty' ? <p className="empty">{state.empty}</p> : null}
-        {state.mode === 'ready' ? (
+        {state.mode === 'ready' && state.mainChart ? (
           <>
-            <section className="chart-list chart-featured">
-              {(state.featuredCharts || []).map((card, index) => (
-                <ChartCard key={'featured-' + index} card={card} large />
+            <header className="hero">
+              <h1>{state.mainChart.headline}</h1>
+              <Tag label={state.mainChart.tierLabel} tier={state.mainChart.tier} />
+            </header>
+            <div className="hero-chart" data-main-chart="1">
+              <ChartSlot large />
+            </div>
+            <details className="chart-details">
+              <summary>Details</summary>
+              <p className="num">{state.mainChart.strength}</p>
+              <p>{state.mainChart.episodes}</p>
+              <p>{state.mainChart.chance}</p>
+              <p>{state.mainChart.pick}</p>
+              {state.mainChart.strictPick ? <p>{state.mainChart.strictPick}</p> : null}
+              {state.mainChart.runner ? <p>{state.mainChart.runner}</p> : null}
+            </details>
+            <section className="pick-list">
+              {(state.otherPicks || []).map((card, index) => (
+                <PickLine key={card.section + '-' + index} card={card} />
               ))}
             </section>
             <HowToRead state={state} />
-            <section className="chart-list chart-rest">
-              <h2>{COPY.seePicks}</h2>
-              {(state.chartCards || []).map((card, index) => (
-                <ChartCard key={card.section + '-' + index} card={card} />
-              ))}
-            </section>
             {links ? (
               <details className="see-every">
                 <summary>{COPY.seeEvery}</summary>
                 <section data-all-links="1" className="all-links">
                   <h2 className="all-title">{links.title}</h2>
-                  <AllGroup title={links.sameDayTitle} group={links.sameDay} showWeaker={links.showWeaker} />
-                  <AllGroup title={links.leadTitle} group={links.lead} showWeaker={links.showWeaker} />
+                  <AllGroup title={links.sameDayTitle} group={links.sameDay} />
+                  <AllGroup title={links.leadTitle} group={links.lead} />
                 </section>
               </details>
             ) : null}
