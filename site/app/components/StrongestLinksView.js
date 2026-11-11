@@ -1,60 +1,59 @@
 import Link from 'next/link';
 import { COPY } from '../../lib/correlations.js';
 
-function Card({ card, index }) {
+function Tag({ label, tier }) {
+  return <span className={'tag yf-tag yf-' + tier}>{label}</span>;
+}
+
+function ChartSlot() {
   return (
-    <article className="conn-card corr-card" data-section={card.section} data-group={card.timingGroup} data-order={index}>
-      <p className="corr-label"><span className="tag fact">{card.label}</span></p>
-      <h3 className="conn-event">{card.subject}</h3>
-      <p className="conn-asset">{card.other}</p>
-      <div className="corr-split">
-        <p className="corr-num">
-          <b>{card.correlation}</b>
-          {card.rankCaption ? <small>{card.rankCaption}</small> : null}
-        </p>
-        <p className="corr-chance">{card.chance}</p>
+    <div className="chart-slot">
+      <svg viewBox="0 0 640 220" role="img" aria-label="Chart coming">
+        <title>Chart coming</title>
+        <line className="axis" x1="36" y1="16" x2="36" y2="184" />
+        <line className="axis" x1="36" y1="184" x2="604" y2="184" />
+        <line className="axis" x1="604" y1="16" x2="604" y2="184" />
+        <text x="320" y="108" textAnchor="middle">Chart coming</text>
+      </svg>
+    </div>
+  );
+}
+
+function ChartCard({ card }) {
+  return (
+    <article className="chart-card" data-chart-card="1" data-section={card.section} data-group={card.timingGroup} data-tier={card.tier}>
+      <div className="chart-top">
+        <h2>{card.headline}</h2>
+        <Tag label={card.tierLabel} tier={card.tier} />
+        <p className="chart-strength num">{card.strength}</p>
       </div>
-      <p className="corr-line">{card.sample}</p>
-      <p className="corr-line">{card.pick}</p>
-      {card.strictPick ? <p className="corr-line">{card.strictPick}</p> : null}
-      {(card.extraChecks || []).map((line) => (
-        <p className="corr-extra" key={line}>{line}</p>
-      ))}
-      <p className="corr-line">{card.manyTests}</p>
-      <p className="corr-line">{card.lag}</p>
+      <ChartSlot />
+      <details className="chart-details">
+        <summary>Details</summary>
+        <p>{card.episodes}</p>
+        <p>{card.chance}</p>
+        <p>{card.pick}</p>
+        {card.strictPick ? <p>{card.strictPick}</p> : null}
+        {card.runner ? <p>{card.runner}</p> : null}
+      </details>
     </article>
   );
 }
 
-function LinkTable({ rows }) {
-  if (!rows || !rows.length) return null;
+function LinkRow({ row }) {
   return (
-    <div className="corr-table-wrap">
-      <table className="corr-links">
-        <thead>
-          <tr>
-            <th>Event</th>
-            <th>Asset</th>
-            <th>Timing</th>
-            <th>Strength <span>rank correlation</span></th>
-            <th>Separate episodes</th>
-            <th>Tier</th>
-          </tr>
-        </thead>
-        <tbody>
-          {rows.map((row, index) => (
-            <tr key={row.timingGroup + '-' + row.tier + '-' + index} data-all-link="1" data-tier={row.tier} data-group={row.timingGroup}>
-              <td>{row.eventLabel}</td>
-              <td>{row.assetLabel}</td>
-              <td>{row.lagLabel}</td>
-              <td><b className="num">{row.strength}</b> {row.direction}</td>
-              <td className="num">{row.episodes}</td>
-              <td>{row.tierLabel}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+    <details className="yf-row" data-all-link="1" data-tier={row.tier} data-group={row.timingGroup}>
+      <summary>
+        <span className="yf-name">{row.headline}</span>
+        <Tag label={row.tierLabel} tier={row.tier} />
+        <span className="yf-num num">{row.strength}</span>
+        <span className="yf-spark" aria-hidden="true" />
+      </summary>
+      <div className="yf-detail">
+        <p>{row.episodes} separate episodes</p>
+        <p>{row.lagLabel}. {row.direction}.</p>
+      </div>
+    </details>
   );
 }
 
@@ -63,48 +62,44 @@ function AllGroup({ title, group, showWeaker }) {
   const weaker = group && group.weaker ? group.weaker : [];
   if (!shown.length && !weaker.length) return null;
   return (
-    <section>
-      <h3>{title}</h3>
-      <LinkTable rows={shown} />
+    <section className="yf-group">
+      <h2>{title}</h2>
+      <div className="yf-list">
+        {shown.map((row, index) => <LinkRow key={row.timingGroup + '-s-' + index} row={row} />)}
+      </div>
       {weaker.length ? (
         <details className="corr-weaker">
           <summary>{showWeaker}</summary>
-          <LinkTable rows={weaker} />
+          <div className="yf-list">
+            {weaker.map((row, index) => <LinkRow key={row.timingGroup + '-w-' + index} row={row} />)}
+          </div>
         </details>
       ) : null}
     </section>
   );
 }
 
-function AllLinks({ links }) {
+function HowToRead({ state }) {
+  const links = state.allLinks;
   if (!links) return null;
   return (
-    <section data-all-links="1">
-      <h2>{links.title}</h2>
-      <p className="corr-luck">{links.note}</p>
+    <details className="how-read">
+      <summary>How to read this</summary>
+      <p>{state.summary}</p>
+      <p>{links.note}</p>
       <ul className="corr-legend">
         {(links.legend || []).map((line) => <li key={line}>{line}</li>)}
       </ul>
-      <p className="corr-strict-note">{links.strictNote}</p>
-      <AllGroup title={links.sameDayTitle} group={links.sameDay} showWeaker={links.showWeaker} />
-      <AllGroup title={links.leadTitle} group={links.lead} showWeaker={links.showWeaker} />
-    </section>
-  );
-}
-
-function Group({ title, cards }) {
-  if (!cards || !cards.length) return null;
-  return (
-    <>
-      <h2>{title}</h2>
-      {cards.map((card, index) => (
-        <Card key={card.section + '-' + index} card={card} index={index} />
-      ))}
-    </>
+      <p>{links.strictNote}</p>
+      <p>Description only, not proven. The number on each card is a rank correlation.</p>
+      <p>Extra check, not a verdict: other checks use the same measure and do not change the label.</p>
+      {state.footer ? <p>{state.footer}</p> : null}
+    </details>
   );
 }
 
 export function StrongestLinksScreen({ state }) {
+  const links = state.allLinks;
   return (
     <>
       <main data-page="strongest-links" data-mode={state.mode}>
@@ -115,15 +110,23 @@ export function StrongestLinksScreen({ state }) {
         {state.mode === 'empty' ? <p className="empty">{state.empty}</p> : null}
         {state.mode === 'ready' ? (
           <>
-            <p className="corr-summary">{state.summary}</p>
-            <Group title={state.sameDayTitle} cards={state.sameDay} />
-            <Group title={state.leadTitle} cards={state.lead} />
-            <AllLinks links={state.allLinks} />
+            <HowToRead state={state} />
+            <section className="chart-list">
+              {(state.chartCards || []).map((card, index) => (
+                <ChartCard key={card.section + '-' + index} card={card} />
+              ))}
+            </section>
+            {links ? (
+              <section data-all-links="1" className="all-links">
+                <h2 className="all-title">{links.title}</h2>
+                <AllGroup title={links.sameDayTitle} group={links.sameDay} showWeaker={links.showWeaker} />
+                <AllGroup title={links.leadTitle} group={links.lead} showWeaker={links.showWeaker} />
+              </section>
+            ) : null}
           </>
         ) : null}
       </main>
       <footer>
-        {state.footer ? <p>{state.footer}</p> : null}
         <p>{COPY.insights} · <Link href="/how">How it works</Link></p>
       </footer>
     </>

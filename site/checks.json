@@ -1,5 +1,5 @@
 {
-  "run_at": "2026-11-11T20:13:01.000Z",
+  "run_at": "2026-11-11T20:31:35.252Z",
   "all_pass": true,
   "items": [
     {
@@ -438,6 +438,11 @@
       "detail": ""
     },
     {
+      "check": "a headline is one line from the labels, timing, and sign",
+      "pass": true,
+      "detail": ""
+    },
+    {
       "check": "Gamma HTTP 200 for all events",
       "pass": true,
       "detail": "770450:200, 770451:200, 1025305:200, 1280521:200, 1123963:200, 1194143:200, 1194144:200, 800884:200, 79987:200, 81557:200, 31552:200, 711714:200, 478472:200, 160366:200, 34044:200, 1337182:200"
@@ -633,7 +638,7 @@
       "detail": ""
     },
     {
-      "check": "every strongest card is on the page with the chance line beside the correlation",
+      "check": "every strongest card is a chart card with one strength number and details",
       "pass": true,
       "detail": ""
     },

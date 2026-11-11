@@ -6,7 +6,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { textProblem } from '../lib/connections.js';
 import {
-  COPY, buildCard, buildPageState, linkTier, loadCorrelations, timingGroup, validateFile, visibleText,
+  COPY, buildCard, buildHeadline, buildPageState, linkTier, loadCorrelations, timingGroup, validateFile, visibleText,
 } from '../lib/correlations.js';
 
 const siteRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -326,6 +326,24 @@ export function runCorrelationChecks(add) {
     && strengthOrder(links.sameDay.weaker)
     && strengthOrder(links.lead.shown)
     && strengthOrder(links.lead.weaker));
+  add('a headline is one line from the labels, timing, and sign',
+    buildHeadline({
+      event_label: 'US Federal Reserve rate decision: chance of a rate cut, change in odds points',
+      asset_label: 'US 2-year government bond yield',
+      lag: 'same_day',
+      lag_label: 'same day',
+      timing_group: 'same_day',
+      spearman: 0.22,
+    }) === 'Fed rate-cut odds and 2-year yield move together on the same day'
+    && buildHeadline({
+      event_label: 'US Federal Reserve rate decision: chance of a rate cut, change in odds points',
+      asset_label: 'US 2-year government bond yield',
+      lag: 'odds_lead_5d',
+      lag_label: 'odds change first, asset move over the next 5 trading days',
+      timing_group: 'lead',
+      spearman: -0.2,
+    }) === 'Fed rate-cut odds move first, 2-year yield moves the other way within 5 days'
+    && state.chartCards.length === 21);
 }
 
 export async function correlationPageChecks(add, page) {
@@ -334,7 +352,6 @@ export async function correlationPageChecks(add, page) {
   const view = await page('/strongest-links');
   const html = view.html || '';
   const visible = textOf(html);
-  const cards = [...(state.sameDay || []), ...(state.lead || [])];
   const nav = (html.match(/<nav id="tabs">[\s\S]*?<\/nav>/) || [''])[0];
   const home = await page('/');
   const homeNav = ((home.html || '').match(/<nav id="tabs">[\s\S]*?<\/nav>/) || [''])[0];
@@ -347,27 +364,30 @@ export async function correlationPageChecks(add, page) {
     && html.includes('data-page="strongest-links"')
     && html.includes(state.summary)
     && html.includes(state.footer));
-  add('every strongest card is on the page with the chance line beside the correlation',
-    cards.length > 0
-    && cards.every((card) => html.includes(card.chance)
-      && html.includes(card.sample)
+  const charts = state.chartCards || [];
+  const inHtml = (text) => html.includes(String(text).replace(/&/g, '&amp;'));
+  add('every strongest card is a chart card with one strength number and details',
+    charts.length === 21
+    && charts.every((card) => inHtml(card.headline)
+      && html.includes(card.strength)
+      && html.includes(card.tierLabel)
+      && html.includes(card.chance)
       && html.includes(card.pick)
-      && html.includes(card.label)
-      && html.includes(card.correlation)
-      && html.includes(card.lag)
-      && (!card.strictPick || html.includes(card.strictPick))
-      && html.includes(card.manyTests))
+      && html.includes(card.episodes))
+    && (html.match(/data-chart-card="1"/g) || []).length === 21
+    && (html.match(/Chart coming/g) || []).length >= 21
+    && html.includes('How to read this')
     && html.includes('Moved together the same day (description only, not a lead)')
     && html.includes('One moved first')
     && html.includes('Does not pass the strict pick-from-many check')
     && html.includes('Passes the strict pick-from-many check')
     && html.includes('Extra check, not a verdict:')
-    && !visible.includes('not stronger than picking the best of many by luck')
-    && (html.match(/class="corr-split"/g) || []).length === cards.length
     && html.includes('rank correlation')
+    && html.includes('Description only, not proven')
+    && !visible.includes('not stronger than picking the best of many by luck')
     && !visible.includes(COPY.exampleNotice));
   const allLinkRows = html.match(/data-all-link="1"/g) || [];
-  const tierMarks = (tier) => (html.match(new RegExp('data-tier="' + tier + '"', 'g')) || []).length;
+  const tierMarks = (tier) => (html.match(new RegExp('data-all-link="1" data-tier="' + tier + '"', 'g')) || []).length;
   add('the rendered page shows the real groups and the hidden-row count',
     visible.includes('Moved together the same day (description only, not a lead)')
     && visible.includes('One moved first')

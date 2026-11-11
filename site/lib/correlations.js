@@ -232,6 +232,90 @@ export function directionWords(spearman) {
   return number > 0 ? COPY.sameWay : COPY.oppositeWay;
 }
 
+export function shortAsset(label) {
+  const text = clean(label);
+  const rules = [
+    ['2-year government bond yield', '2-year yield'],
+    ['10-year government bond yield', '10-year yield'],
+    ['3-month Treasury bill', '3-month bill rate'],
+    ['Bitcoin', 'Bitcoin'],
+    ['oil price', 'oil'],
+    ['Gold price', 'gold'],
+    ['S&P 500', 'S&P 500'],
+    ['Nasdaq 100', 'Nasdaq 100'],
+    ['Inflation expected over 5 years', '5-year inflation expectations'],
+    ['Inflation expected over 10 years', '10-year inflation expectations'],
+    ['Japanese yen', 'dollar vs yen'],
+    ['Israeli shekel', 'dollar vs shekel'],
+  ];
+  for (const [needle, name] of rules) {
+    if (text.includes(needle)) return name;
+  }
+  const cut = text.split(':')[0].trim();
+  return cut || COPY.notAvailable;
+}
+
+export function shortEvent(label) {
+  const text = clean(label);
+  if (text.includes('Federal Reserve') && text.includes('rate cut')) return 'Fed rate-cut odds';
+  if (text.includes('Federal Reserve')) return 'Fed odds';
+  if (text.includes('Other central bank') && text.includes('rate cut')) return 'other central-bank rate-cut odds';
+  if (text.includes('Other central bank')) return 'other central-bank odds';
+  if (text.includes('National elections')) return 'election odds';
+  if (text.includes('peace minus')) return 'war and peace odds';
+  if (text.includes('Wars and ceasefires')) return 'war and ceasefire odds';
+  if (text.toLowerCase().includes('inflation report')) return 'inflation-report odds';
+  const cut = text.split(':')[0].trim();
+  return cut || COPY.notAvailable;
+}
+
+function leadDays(row) {
+  const lag = row && row.lag;
+  if (lag === 'odds_lead_1d' || lag === 'asset_lead_1d') return 1;
+  if (lag === 'odds_lead_5d' || lag === 'asset_lead_5d') return 5;
+  const label = clean(row && row.lag_label);
+  if (label.includes('5')) return 5;
+  if (label.includes('next day')) return 1;
+  return null;
+}
+
+function oddsMovedFirst(row) {
+  const lag = String((row && row.lag) || '');
+  if (lag.startsWith('odds_lead')) return true;
+  if (lag.startsWith('asset_lead')) return false;
+  return clean(row && row.lag_label).startsWith('odds');
+}
+
+function dayPhrase(days) {
+  if (days === 1) return '1 day';
+  if (days === 5) return '5 days';
+  return 'the recorded lead';
+}
+
+function sentenceCase(text) {
+  if (!text) return text;
+  return text.charAt(0).toUpperCase() + text.slice(1);
+}
+
+export function buildHeadline(row) {
+  const item = row || {};
+  const event = shortEvent(item.event_label);
+  const asset = shortAsset(item.asset_label);
+  const opposite = numeric(item.spearman) != null && numeric(item.spearman) < 0;
+  let line;
+  if (timingGroup(item) === 'same_day') {
+    line = event + ' and ' + asset + (opposite ? ' move opposite ways on the same day' : ' move together on the same day');
+  } else {
+    const within = ' within ' + dayPhrase(leadDays(item));
+    if (oddsMovedFirst(item)) {
+      line = event + ' move first, ' + asset + (opposite ? ' moves the other way' : ' follows') + within;
+    } else {
+      line = asset + ' moves first, ' + event + (opposite ? ' move the other way' : ' follow') + within;
+    }
+  }
+  return sentenceCase(line);
+}
+
 export function linkTier(row) {
   if (row && row.bh_flag === true) return 'strict';
   if (row && row.passes_chance_line === true && row.bh_flag === false) return 'stronger';
@@ -265,6 +349,7 @@ export function buildLinkRow(row) {
   return {
     eventLabel: clean(item.event_label) || COPY.notAvailable,
     assetLabel: clean(item.asset_label) || COPY.notAvailable,
+    headline: buildHeadline(item),
     lagLabel: lagDisplay(item),
     strength: formatTwo(item.spearman),
     direction: directionWords(item.spearman),
@@ -332,6 +417,32 @@ export function footerLine(file) {
     + ', generated ' + formatDay(file.generated_at);
 }
 
+function runnerLine(row) {
+  const runner = row && row.runner_up;
+  if (!runner || typeof runner !== 'object') return '';
+  return 'Runner-up: ' + shortEvent(runner.event_label) + ' and ' + shortAsset(runner.asset_label)
+    + ', ' + formatTwo(runner.spearman) + ', ' + lagDisplay(runner);
+}
+
+export function buildChartCard(row, section) {
+  const item = row || {};
+  const tier = linkTier(item);
+  const episodes = numeric(item.independent_episodes);
+  return {
+    section,
+    headline: buildHeadline(item),
+    tier,
+    tierLabel: TIER_LABEL[tier],
+    strength: formatTwo(item.spearman),
+    episodes: episodes == null ? COPY.notAvailable : String(episodes) + ' separate episodes',
+    chance: chanceLine(item),
+    pick: pickLine(item),
+    strictPick: strictPickLine(item),
+    runner: runnerLine(item),
+    timingGroup: timingGroup(item),
+  };
+}
+
 export function buildCard(row, section) {
   const item = row || {};
   const subject = section === 'event' ? clean(item.event_label) : clean(item.asset_label);
@@ -368,6 +479,7 @@ export function buildPageState(loaded) {
     perEvent: [],
     sameDay: [],
     lead: [],
+    chartCards: [],
     allLinks: null,
     footer: '',
     empty: '',
@@ -389,6 +501,8 @@ export function buildPageState(loaded) {
     perEvent,
     sameDay: ordered.filter((card) => card.timingGroup === 'same_day'),
     lead: ordered.filter((card) => card.timingGroup !== 'same_day'),
+    chartCards: (file.strongest_per_asset || []).map((row) => buildChartCard(row, 'asset'))
+      .concat((file.strongest_per_event || []).map((row) => buildChartCard(row, 'event'))),
     allLinks: buildAllLinks(file),
     footer: footerLine(file),
   };
