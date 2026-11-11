@@ -9,12 +9,12 @@ const TABS = [
 
 export function TopBar() {
   return (
-    <header className="conn-top">
-      <div className="conn-wrap conn-topin">
-        <Link className="conn-brand" href="/">World Pulse Index</Link>
-        <nav className="conn-tabs" aria-label="Sections">
+    <header className="cx-top">
+      <div className="cx-wrap cx-topin">
+        <Link className="cx-brand" href="/">World Pulse Index</Link>
+        <nav className="cx-tabs" aria-label="Sections">
           {TABS.map(([href, label]) => (
-            <Link key={href} className={href === '/connections' ? 'conn-tab on' : 'conn-tab'} href={href} aria-current={href === '/connections' ? 'page' : undefined}>
+            <Link key={href} className={href === '/connections' ? 'cx-tab on' : 'cx-tab'} href={href} aria-current={href === '/connections' ? 'page' : undefined}>
               {label}
             </Link>
           ))}
@@ -26,8 +26,8 @@ export function TopBar() {
 
 export function ConnFooter() {
   return (
-    <footer className="conn-foot">
-      <div className="conn-wrap">
+    <footer className="cx-foot">
+      <div className="cx-wrap">
         <p>Insights only, not advice. · <Link href="/how">How it works</Link></p>
       </div>
     </footer>

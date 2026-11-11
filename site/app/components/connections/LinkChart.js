@@ -69,26 +69,26 @@ export function LinkChart({ chart, variant }) {
   if (!chart || !chart.points || !chart.points.length) return null;
   const points = windowOf(chart.points, range);
   return (
-    <figure className="conn-chart" data-range={range}>
-      <div className="conn-cardtop">
+    <figure className="cx-chart" data-range={range}>
+      <div className="cx-cardtop">
         <span />
         {variant === 'detail' ? chips(range, setRange, setHover) : (
-          <details className="conn-range">
-            <summary className="conn-pill">Range</summary>
+          <details className="cx-range">
+            <summary className="cx-pill">Range ⌄</summary>
             {chips(range, setRange, setHover)}
           </details>
         )}
       </div>
-      <div className="conn-chart-desk"><ChartSvg chart={chart} points={points} phone={false} hover={hover} setHover={setHover} /></div>
-      <div className="conn-chart-phone"><ChartSvg chart={chart} points={points} phone={true} hover={hover} setHover={setHover} /></div>
-      <p className="conn-readout" data-readout="1">{labelFor(chart, points, hover)}</p>
+      <div className="cx-chart-desk"><ChartSvg chart={chart} points={points} phone={false} hover={hover} setHover={setHover} /></div>
+      <div className="cx-chart-phone"><ChartSvg chart={chart} points={points} phone={true} hover={hover} setHover={setHover} /></div>
+      <p className="cx-readout" data-readout="1" aria-live="polite">{labelFor(chart, points, hover)}</p>
     </figure>
   );
 }
 
 function chips(range, setRange, setHover) {
   return (
-    <div className="conn-chips" role="group" aria-label="Time range">
+    <div className="cx-chips" role="group" aria-label="Time range">
       {RANGES.map(([id, name]) => (
         <button key={id} type="button" className={range === id ? 'on' : ''} aria-pressed={range === id} onClick={() => { setRange(id); setHover(null); }}>{name}</button>
       ))}
@@ -143,23 +143,23 @@ function ChartSvg({ chart, points, phone, hover, setHover }) {
   const aria = 'Line chart, ' + chart.windowStart + ' to ' + chart.windowEnd + '. ' + oddsTitle + ' ends at ' + chart.oddsEnd + '. ' + chart.assetName + ' ends at ' + chart.assetEnd + '.';
 
   return (
-      <svg className="conn-mainchart" viewBox={'0 -56 ' + width + ' ' + (height + 56)} role="img" aria-label={aria} onPointerMove={readAt} onPointerDown={readAt} onPointerLeave={() => setHover(null)}>
-        <text className="conn-axisdate" x="0" y={plotH + 22}>{monthLabel(points[0] && points[0].date)}</text>
-        <text className="conn-axisdate" x={plotW} y={plotH + 22} textAnchor="end">{monthLabel(points[points.length - 1] && points[points.length - 1].date)}</text>
-        <line className="conn-base" x1="0" y1={plotH} x2={plotW} y2={plotH} />
-        <path className="conn-asset" data-asset-line="1" d={assetPath} />
-        <path className="conn-odds" data-odds-line="1" d={oddsPath} />
-        {lastAsset ? <circle className="conn-end asset" cx={xAt(points.indexOf(lastAsset))} cy={assetY} r="4" /> : null}
-        {lastOdds ? <circle className="conn-end odds" cx={xAt(points.indexOf(lastOdds))} cy={oddsY} r="4" /> : null}
-        <text className="conn-name" x={plotW + 12} y={nameAssetY}>{chart.assetName}</text>
-        <text className="conn-value" x={plotW + 12} y={nameAssetY + 18}>{chart.assetEnd}</text>
-        <text className="conn-name" x={plotW + 12} y={nameOddsY}>{oddsTitle}</text>
-        <text className="conn-value odds" x={plotW + 12} y={nameOddsY + 18}>{chart.oddsEnd}</text>
+      <svg className="cx-mainchart" viewBox={'0 -8 ' + width + ' ' + (height + 8)} role="img" aria-label={aria} onPointerMove={readAt} onPointerDown={readAt} onPointerLeave={() => setHover(null)}>
+        <text className="cx-axisdate" x="0" y={plotH + 22}>{monthLabel(points[0] && points[0].date)}</text>
+        <text className="cx-axisdate" x={plotW} y={plotH + 22} textAnchor="end">{monthLabel(points[points.length - 1] && points[points.length - 1].date)}</text>
+        <line className="cx-base" x1="0" y1={plotH} x2={plotW} y2={plotH} />
+        <path className="cx-asset" data-asset-line="1" d={assetPath} />
+        <path className="cx-odds" data-odds-line="1" d={oddsPath} />
+        {lastAsset ? <circle className="cx-end asset" cx={xAt(points.indexOf(lastAsset))} cy={assetY} r="4" /> : null}
+        {lastOdds ? <circle className="cx-end odds" cx={xAt(points.indexOf(lastOdds))} cy={oddsY} r="4" /> : null}
+        <text className="cx-name" x={plotW + 12} y={nameAssetY}>{chart.assetName}</text>
+        <text className="cx-value" x={plotW + 12} y={nameAssetY + 18}>{chart.assetEnd}</text>
+        <text className="cx-name" x={plotW + 12} y={nameOddsY}>{oddsTitle}</text>
+        <text className="cx-value odds" x={plotW + 12} y={nameOddsY + 18}>{chart.oddsEnd}</text>
         {hover != null && points[hover] ? (
           <g>
-            <line className="conn-hoverline" x1={xAt(hover)} y1="0" x2={xAt(hover)} y2={plotH} />
-            {typeof points[hover].asset === 'number' ? <circle className="conn-hollow asset" cx={xAt(hover)} cy={yAt(points[hover].asset, assetMin, assetMax)} r="5" /> : null}
-            {typeof points[hover].odds === 'number' ? <circle className="conn-hollow odds" cx={xAt(hover)} cy={yAt(points[hover].odds, oddsMin, oddsMax)} r="5" /> : null}
+            <line className="cx-hoverline" x1={xAt(hover)} y1="0" x2={xAt(hover)} y2={plotH} />
+            {typeof points[hover].asset === 'number' ? <circle className="cx-hollow asset" cx={xAt(hover)} cy={yAt(points[hover].asset, assetMin, assetMax)} r="5" /> : null}
+            {typeof points[hover].odds === 'number' ? <circle className="cx-hollow odds" cx={xAt(hover)} cy={yAt(points[hover].odds, oddsMin, oddsMax)} r="5" /> : null}
           </g>
         ) : null}
       </svg>

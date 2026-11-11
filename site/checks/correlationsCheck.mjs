@@ -6,11 +6,11 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { textProblem } from '../lib/connections.js';
 import {
-  COPY, buildCard, buildHeadline, buildPageState, linkTier, loadCorrelations, timingGroup, validateFile, visibleText,
+  COPY, buildCard, buildHeadline, buildPageState, isSizeRow, linkTier, loadCorrelations, timingGroup, validateFile, visibleText,
 } from '../lib/correlations.js';
 import { BRAND_HEADLINES, STANDING_LINE } from '../lib/brandHeadlines.js';
 import { ODDS_AXIS, SIZE_ODDS_AXIS, chartModel, hasBothLines, loadChartSeries, oddsPointsAfterHoldBack, seriesPath } from '../lib/chartSeries.js';
-import { buildHome } from '../lib/linkScreen.js';
+import { buildHome, strengthCopy } from '../lib/linkScreen.js';
 
 const siteRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const RESEARCH_SHA = 'a801a002f45b93c22acc60287ab168c0f220c9545b8381ae794beaaedd7049d9';
@@ -339,6 +339,8 @@ export function runCorrelationChecks(add) {
       lag_label: 'same day',
       timing_group: 'same_day',
       spearman: 0.22,
+      bh_flag: false,
+      passes_chance_line: true,
     }) === 'A rise in Fed rate-cut odds often lined up with a rise in the 2-year yield.'
     && buildHeadline({
       event_label: 'US Federal Reserve rate decision: chance of a rate cut, change in odds points',
@@ -347,6 +349,8 @@ export function runCorrelationChecks(add) {
       lag_label: 'odds change first, asset move over the next 5 trading days',
       timing_group: 'lead',
       spearman: -0.2,
+      bh_flag: false,
+      passes_chance_line: true,
     }) === 'A rise in Fed rate-cut odds often lined up with a fall in the 2-year yield over the next week.'
     && state.mainChart
     && state.mainChart.tier === 'strict'
@@ -356,6 +360,20 @@ export function runCorrelationChecks(add) {
     && state.mainChart.timingGroup === 'same_day'
     && state.mainChart.headline === featuredLine);
   add('the featured headline uses the spec sign wording', state.mainChart.headline === featuredLine && !state.mainChart.headline.includes('moved together'));
+  const livePairs = loadCorrelations(path.join(siteRoot, 'data/correlations')).file.pairs;
+  const weakHeads = livePairs.filter((row) => linkTier(row) === 'weaker').map(buildHeadline);
+  const sizeNotes = livePairs.filter(isSizeRow).map((row) => strengthCopy(row).way + ' ' + buildHeadline(row));
+  add('weak headlines say sometimes and none say a opposite',
+    weakHeads.length === 473
+    && weakHeads.every((line) => line.includes('sometimes lined up') && !line.includes('often lined up'))
+    && livePairs.every((row) => !buildHeadline(row).includes('a opposite')));
+  add('size sentences do not say same way',
+    sizeNotes.length > 0 && sizeNotes.every((line) => !line.includes('same way') && !line.includes('moved the same way')));
+  add('Only starts the shuffle sentence only outside the chance band',
+    livePairs.every((row) => {
+      const way = strengthCopy(row).way;
+      return row.passes_chance_line === true ? way.includes('Only ') : !way.includes('Only');
+    }));
   const pairHeads = {};
   for (const card of state.chartCards) {
     const pair = card.eventFamily + '|' + card.assetId;
@@ -436,7 +454,7 @@ export async function correlationPageChecks(add, page) {
   const visible = textOf(html);
   const home = await page('/');
   const homeNav = ((home.html || '').match(/<nav id="tabs">[\s\S]*?<\/nav>/) || [''])[0];
-  const connNav = (html.match(/<nav class="conn-tabs"[\s\S]*?<\/nav>/) || [''])[0];
+  const connNav = (html.match(/<nav class="cx-tabs"[\s\S]*?<\/nav>/) || [''])[0];
   const featuredLine = 'On the same day, a rise in Fed rate-cut odds often lined up with a fall in the US 2-year yield.';
   const ready = html.split('data-mode="ready"')[1] || '';
   add('connections page renders the preview banner, standing line, and noindex',

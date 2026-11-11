@@ -27,7 +27,7 @@ function tally(rows) {
 
 function Spark({ row }) {
   return (
-    <svg className="conn-spark" viewBox="0 0 88 32" aria-hidden="true">
+    <svg className="cx-spark" viewBox="0 0 88 32" aria-hidden="true">
       <path className="asset" d={row.sparkAsset} />
       <path className="odds" d={row.sparkOdds} />
     </svg>
@@ -36,14 +36,14 @@ function Spark({ row }) {
 
 function RowLink({ row }) {
   return (
-    <Link className="conn-lrow" href={row.href} data-link-row="1" data-tier={row.tier} data-timing={row.timing}>
+    <Link className="cx-lrow" href={row.href} data-link-row="1" data-tier={row.tier} data-timing={row.timing}>
       <Spark row={row} />
-      <span className="conn-ltext">
-        <span className="conn-lhead">{row.headline}</span>
-        <span className="conn-lmeta">{row.timingLabel} · {row.episodes} separate episodes</span>
+      <span className="cx-ltext">
+        <span className="cx-lhead">{row.headline}</span>
+        <span className="cx-lmeta">{row.timingLabel} · {row.episodes} separate episodes</span>
       </span>
-      <span className={'conn-tag t-' + (row.tier === 'strict' ? 'strong' : row.tier === 'stronger' ? 'medium' : 'weak')}>{row.tierLabel}</span>
-      <span className="conn-chev" aria-hidden="true">›</span>
+      <span className={'cx-tag t-' + (row.tier === 'strict' ? 'strong' : row.tier === 'stronger' ? 'medium' : 'weak')}>{row.tierLabel}</span>
+      <span className="cx-chev" aria-hidden="true">›</span>
     </Link>
   );
 }
@@ -53,17 +53,17 @@ function Group({ title, note, rows, empty, preview }) {
   const shown = more ? rows : rows.slice(0, preview);
   const rest = rows.length - preview;
   return (
-    <details className="conn-group">
-      <summary className="conn-grow">
-        <span className="conn-ltext">
-          <span className="conn-gtitle">{title}</span>
-          <span className="conn-lmeta">{note}</span>
+    <details className="cx-group">
+      <summary className="cx-grow">
+        <span className="cx-ltext">
+          <span className="cx-gtitle">{title}</span>
+          <span className="cx-lmeta">{note}</span>
         </span>
-        <span className="conn-chev" aria-hidden="true">›</span>
+        <span className="cx-chev" aria-hidden="true">›</span>
       </summary>
-      {rows.length === 0 ? <p className="conn-empty-row">{empty}</p> : shown.map((row) => <RowLink key={row.id} row={row} />)}
+      {rows.length === 0 ? <p className="cx-empty-row">{empty}</p> : shown.map((row) => <RowLink key={row.id} row={row} />)}
       {rest > 0 && !more ? (
-        <button type="button" className="conn-more" onClick={() => setMore(true)}>Show {rest} more {title.replace(/^\d+\s/, '')} ›</button>
+        <button type="button" className="cx-more" onClick={() => setMore(true)}>Show {rest} more {title.replace(/^\d+\s/, '')} ›</button>
       ) : null}
     </details>
   );
@@ -74,11 +74,11 @@ export function ConnectionsHome({ state, earlier }) {
   if (state.mode !== 'ready' || !state.featured) {
     return (
       <>
-        <main className="conn-wrap" data-page="connections" data-mode="empty">
-          <p className="conn-banner">{state.banner}</p>
+        <main className="cx-wrap" data-page="connections" data-mode="empty">
+          <p className="cx-banner">{state.banner}</p>
           <h1>Connections</h1>
-          <p className="conn-stand">{state.standing}</p>
-          <p className="conn-empty">{state.empty}</p>
+          <p className="cx-stand">{state.standing}</p>
+          <p className="cx-empty">{state.empty}</p>
         </main>
         <ConnFooter />
       </>
@@ -92,49 +92,49 @@ export function ConnectionsHome({ state, earlier }) {
   const featured = state.featured;
   return (
     <>
-      <main className="conn-wrap" data-page="connections" data-mode="ready" data-filter={filter}>
-        <p className="conn-banner">{state.banner}</p>
-        <p className="conn-stand">{state.standing}</p>
-        <div className="conn-tags">
-          <span className="conn-tag t-strong">{featured.tierLabel}</span>
-          <span className="conn-tag t-plain">{featured.timingLabel}</span>
+      <main className="cx-wrap" data-page="connections" data-mode="ready" data-filter={filter}>
+        <p className="cx-banner">{state.banner}</p>
+        <p className="cx-stand">{state.standing}</p>
+        <div className="cx-tags">
+          <span className="cx-tag t-strong">{featured.tierLabel}</span>
+          <span className="cx-tag t-plain">{featured.timingLabel}</span>
         </div>
         <h1>{featured.detail.pageHeadline}</h1>
-        <p className="conn-meta">{featured.detail.meta}</p>
-        <section className="conn-card conn-chartcard" data-main-chart="1">
+        <p className="cx-meta">{featured.detail.meta}</p>
+        <section className="cx-card cx-chartcard" data-main-chart="1">
           <LinkChart chart={featured.chart} variant="overview" />
         </section>
-        <Link className="conn-quiet" href={featured.href}>See how strong this is ›</Link>
-        <section className="conn-sec">
+        <Link className="cx-quiet" href={featured.href}>See how strong this is ›</Link>
+        <section className="cx-sec">
           <h2>{'All ' + state.shown + ' links we can show'}</h2>
-          <p className="conn-sub">Each link pairs one kind of event odds with one asset, on the same day or with one moving first.</p>
-          <div className="conn-tbar" role="img" aria-label={tiers.strong + ' strong, ' + tiers.medium + ' medium, ' + tiers.weak + ' weak'}>
+          <p className="cx-sub">Each link pairs one kind of event odds with one asset, on the same day or with one moving first.</p>
+          <div className="cx-tbar" role="img" aria-label={tiers.strong + ' strong, ' + tiers.medium + ' medium, ' + tiers.weak + ' weak'}>
             <span className="seg strong" style={{ flex: Math.max(tiers.strong, tiers.strong ? 1 : 0) + ' 0 0', minWidth: tiers.strong ? 8 : 0 }} />
             <span className="seg medium" style={{ flex: tiers.medium + ' 0 0' }} />
             <span className="seg weak" style={{ flex: tiers.weak + ' 0 0' }} />
           </div>
-          <div className="conn-legend">
-            <div className="conn-leg"><span className="sw strong" /><div><div className="conn-legn">{tiers.strong + ' Strong'}</div><div className="conn-legs">Passed the strict check</div></div></div>
-            <div className="conn-leg"><span className="sw medium" /><div><div className="conn-legn">{tiers.medium + ' Medium'}</div><div className="conn-legs">Above the chance line</div></div></div>
-            <div className="conn-leg"><span className="sw weak" /><div><div className="conn-legn">{tiers.weak + ' Weak'}</div><div className="conn-legs">Below the chance line</div></div></div>
+          <div className="cx-legend">
+            <div className="cx-leg"><span className="sw strong" /><div><div className="cx-legn">{tiers.strong + ' Strong'}</div><div className="cx-legs">Passed the strict check</div></div></div>
+            <div className="cx-leg"><span className="sw medium" /><div><div className="cx-legn">{tiers.medium + ' Medium'}</div><div className="cx-legs">Above the chance line</div></div></div>
+            <div className="cx-leg"><span className="sw weak" /><div><div className="cx-legn">{tiers.weak + ' Weak'}</div><div className="cx-legs">Below the chance line</div></div></div>
           </div>
-          <div className="conn-segw">
-            <div className="conn-segc" role="tablist" aria-label="Timing">
+          <div className="cx-segw">
+            <div className="cx-segc" role="group" aria-label="Timing">
               {FILTERS.map(([id, label, key]) => (
-                <button key={id} type="button" role="tab" aria-selected={filter === id} className={filter === id ? 'on' : ''} onClick={() => setFilter(id)}>
+                <button key={id} type="button" aria-pressed={filter === id} className={filter === id ? 'on' : ''} onClick={() => setFilter(id)}>
                   {label} <span>{state.counts[key]}</span>
                 </button>
               ))}
             </div>
           </div>
-          <div className="conn-card conn-list">
-            <div className="conn-ghead">Strong links <span>· passed the strict check</span></div>
-            {strong.length === 0 ? <p className="conn-empty-row">{filter === 'lead' ? 'No strong links with one moving first' : 'No strong links in this timing'}</p> : strong.map((row) => <RowLink key={row.id} row={row} />)}
+          <div className="cx-card cx-list">
+            <div className="cx-ghead">Strong links <span>· passed the strict check</span></div>
+            {strong.length === 0 ? <p className="cx-empty-row">{filter === 'lead' ? 'No strong links with one moving first' : 'No strong links in this timing'}</p> : strong.map((row) => <RowLink key={row.id} row={row} />)}
             <Group title={medium.length + ' medium links'} note="Above the chance line. Any single one may be luck." rows={medium} empty="No medium links in this timing" preview={4} />
             <Group title={weak.length + ' weaker links'} note="Below the chance line. May well be luck, kept to watch." rows={weak} empty="No weaker links in this timing" preview={4} />
           </div>
-          <div className="conn-card conn-list conn-earlier">{earlier}</div>
-          <p className="conn-fn">{state.hidden + ' more tested links are not shown because they had fewer than 10 separate episodes. ' + state.tested + ' links were tested in all.'}</p>
+          <div className="cx-card cx-list cx-earlier">{earlier}</div>
+          <p className="cx-fn">{state.hidden + ' more tested links are not shown because they had fewer than 10 separate episodes. ' + state.tested + ' links were tested in all.'}</p>
         </section>
       </main>
       <ConnFooter />

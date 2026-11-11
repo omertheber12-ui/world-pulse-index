@@ -25,8 +25,8 @@ const MOVE_NAME = {
   us_2y_yield: '2-year yield',
   us_10y_yield: '10-year yield',
   us_3m_bill: '3-month bill',
-  inflation_expectation_5y: '5-year inflation',
-  inflation_expectation_10y: '10-year inflation',
+  inflation_expectation_5y: '5-year expected inflation',
+  inflation_expectation_10y: '10-year expected inflation',
 };
 
 const LEVEL_UNIT = {

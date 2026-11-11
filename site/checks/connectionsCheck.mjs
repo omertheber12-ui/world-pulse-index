@@ -480,10 +480,14 @@ export async function connectionPageChecks(add, page) {
     const loaded = loadConnections(path.join(siteRoot, 'data/connections'), { root: siteRoot, today: TODAY });
     const state = buildListState(loaded, 'all');
     const rendered = visibleText(state);
+    const shownDate = (text) => String(text).replace(/(\d{4})-(\d{2})-(\d{2})/g, (_, year, month, day) => {
+      const names = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+      return Number(day) + ' ' + names[Number(month) - 1] + ' ' + year;
+    });
     add('live Connections page shows the results file',
       loaded.status === 'ok'
       && list.status === 200
-      && html.includes(state.footer)
+      && html.includes(shownDate(state.footer))
       && state.mode !== 'empty'
       && !html.includes(COPY.emptyHeadline)
       && state.cards.length > 0

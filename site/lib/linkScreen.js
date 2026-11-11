@@ -5,9 +5,11 @@
 import { loadChartSeries, chartModel, sparkSeries } from './chartSeries.js';
 import {
   COPY,
+  assetPhrase,
   beatsFlag,
   buildHeadline,
   buildPageState,
+  eventPhrase,
   formatDay,
   formatNumber,
   formatShare,
@@ -104,12 +106,19 @@ function oddsPhrase(row) {
 
 export function chartNote(row, model) {
   const asset = (model && model.assetName) || 'asset';
-  const unit = (model && model.assetUnit) || '';
+  const unit = (model && model.assetUnit) ? ', in ' + model.assetUnit : '';
   if (model && model.measure === 'size') {
-    return 'The odds line is the size of ' + oddsPhrase(row) + '. The ' + asset + ' line is the size of that day\'s move.';
+    return 'The odds line is the size of each day\'s odds swing. The ' + asset + ' line is the size of that day\'s move, up or down.';
   }
-  const level = unit ? ', in ' + unit : '';
-  return 'The odds line adds up the daily changes in ' + oddsPhrase(row) + ', starting at 0. The ' + asset + ' line is its closing level' + level + '.';
+  const close = String(asset).includes('yield') ? 'shows the yield at each day\'s close' : 'shows its level at each day\'s close';
+  return 'The odds line adds up each day\'s change in ' + oddsPhrase(row) + ', starting at 0. The ' + asset + ' line ' + close + unit + '.';
+}
+
+function signedTwo(value) {
+  const number = Number(value);
+  if (!Number.isFinite(number)) return '';
+  const text = Math.abs(number).toFixed(2);
+  return number < 0 ? '−' + text : text;
 }
 
 export function strengthCopy(row) {
@@ -117,14 +126,39 @@ export function strengthCopy(row) {
   const outside = row.passes_chance_line === true;
   const band = 'Chance alone stays inside the band in 95 of 100 shuffles. This link is ' + (outside ? 'outside' : 'inside') + ' it.';
   const sign = typeof row.spearman === 'number' ? row.spearman : null;
-  const asset = (row.asset_label || 'the asset').replace(/^US /, 'the ');
+  const asset = assetPhrase(row, false);
+  const event = eventPhrase(row);
+  const tail = outside
+    ? ' Only ' + share + ' of shuffles were this strong.'
+    : '';
   let way = '';
-  if (sign != null && sign < 0) {
-    way = 'Below zero means the two moved opposite ways: when the odds went up, ' + asset + ' went down. Only ' + share + ' of shuffles were this strong.';
+  if (!outside) {
+    way = 'This link is inside it, so chance alone could explain it. ' + share + ' of shuffles were this strong.';
+  } else if (isSizeRow(row) && sign != null && sign < 0) {
+    way = 'Below zero means bigger swings in the odds came with smaller moves in ' + asset + '.' + tail;
+  } else if (isSizeRow(row)) {
+    way = 'Above zero means bigger swings in the odds came with bigger moves in ' + asset + ', whichever way each went.' + tail;
+  } else if (sign != null && sign < 0) {
+    const odds = String(row.event_label || '').includes('rate cut') ? 'the odds of a cut' : 'the odds';
+    way = 'Below zero means the two moved opposite ways: when ' + odds + ' went up, ' + asset + ' went down.' + tail;
   } else if (sign != null && sign > 0) {
-    way = 'Above zero means the two moved the same way. Only ' + share + ' of shuffles were this strong.';
+    const oddsFirst = String(row.lag || '').startsWith('odds_lead');
+    way = oddsFirst
+      ? 'Above zero means the two moved the same way: when the odds went up, ' + asset + ' tended to go up too.' + tail
+      : 'Above zero means the two moved the same way: when ' + asset + ' went up, ' + event + ' tended to go up too.' + tail;
   }
-  return { band, way, share, bandAbs: formatNumber(row.chance_p95_abs), value: formatNumber(row.spearman) };
+  return {
+    band,
+    way,
+    share,
+    outside,
+    size: isSizeRow(row),
+    bandAbs: formatNumber(row.chance_p95_abs),
+    bandText: signedTwo(row.chance_p95_abs),
+    value: formatNumber(row.spearman),
+    valueText: signedTwo(row.spearman),
+    raw: sign,
+  };
 }
 
 function pickRows(file, row) {
@@ -138,12 +172,7 @@ export function checksCopy(row, summary, file) {
   const tested = formatNumber(summary && summary.rows_tested);
   const picks = pickRows(file, row);
   const passing = picks.find((item) => beatsFlag(item) === true) || picks[0];
-  const event = String(row.event_label || '');
-  const subject = event.includes('Federal Reserve') && !isSizeRow(row)
-    ? 'Fed rate-cut odds'
-    : event.includes('Federal Reserve')
-      ? 'Fed rate-decision odds'
-      : 'this event';
+  const subject = eventPhrase(row);
   const lines = [];
   if (passing && passing.picked_from_n != null) {
     lines.push('Picked as the strongest of ' + formatNumber(passing.picked_from_n) + ' links for ' + subject + '. The top of a long list looks strong partly by luck.');

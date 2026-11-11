@@ -6,11 +6,11 @@ export function LinkDetailView({ state }) {
   if (!state || state.mode === 'empty') {
     return (
       <>
-        <main className="conn-wrap" data-page="connections" data-mode="empty">
-          <p className="conn-banner">{state && state.banner}</p>
+        <main className="cx-wrap" data-page="connections" data-mode="empty">
+          <p className="cx-banner">{state && state.banner}</p>
           <h1>Connections</h1>
-          <p className="conn-stand">{state && state.standing}</p>
-          <p className="conn-empty">{state && state.empty}</p>
+          <p className="cx-stand">{state && state.standing}</p>
+          <p className="cx-empty">{state && state.empty}</p>
         </main>
         <ConnFooter />
       </>
@@ -19,11 +19,11 @@ export function LinkDetailView({ state }) {
   if (state.mode !== 'ready' || !state.row) {
     return (
       <>
-        <main className="conn-wrap" data-page="connections" data-mode="missing">
-          <p className="conn-banner">{state.banner}</p>
-          <Link className="conn-back" href="/connections">‹ Connections</Link>
+        <main className="cx-wrap" data-page="connections" data-mode="missing">
+          <p className="cx-banner">{state.banner}</p>
+          <Link className="cx-back" href="/connections">‹ Connections</Link>
           <h1>{state.message}</h1>
-          <p className="conn-stand">{state.standing}</p>
+          <p className="cx-stand">{state.standing}</p>
         </main>
         <ConnFooter />
       </>
@@ -35,46 +35,46 @@ export function LinkDetailView({ state }) {
   const tag = row.tier === 'strict' ? 'strong' : row.tier === 'stronger' ? 'medium' : 'weak';
   return (
     <>
-      <main className="conn-wrap" data-page="connections" data-mode="detail" data-link-detail="1">
-        <p className="conn-banner">{state.banner}</p>
-        <Link className="conn-back" href="/connections">‹ Connections</Link>
-        <div className="conn-tags">
-          <span className={'conn-tag t-' + tag}>{row.tierLabel}</span>
-          <span className="conn-tag t-plain">{row.timingLabel}</span>
+      <main className="cx-wrap" data-page="connections" data-mode="detail" data-link-detail="1">
+        <p className="cx-banner">{state.banner}</p>
+        <Link className="cx-back" href="/connections">‹ Connections</Link>
+        <div className="cx-tags">
+          <span className={'cx-tag t-' + tag}>{row.tierLabel}</span>
+          <span className="cx-tag t-plain">{row.timingLabel}</span>
         </div>
         <h1>{detail.pageHeadline}</h1>
-        <p className="conn-meta">{detail.meta}</p>
-        <section className="conn-card conn-chartcard" data-main-chart="1">
+        <p className="cx-meta">{detail.meta}</p>
+        <section className="cx-card cx-chartcard" data-main-chart="1">
           <LinkChart chart={chart} variant="detail" />
-          <p className="conn-note">{detail.note}</p>
+          <p className="cx-note">{detail.note}</p>
         </section>
-        <section className="conn-sec">
+        <section className="cx-sec">
           <h2>How strong is this?</h2>
-          <div className="conn-card conn-pad">
+          <div className="cx-card cx-pad">
             <StrengthScale strength={detail.strength} />
-            <p className="conn-plain">{detail.strength.band}</p>
-            {detail.strength.way ? <p className="conn-sub2">{detail.strength.way}</p> : null}
+            <p className="cx-plain">{detail.strength.band}</p>
+            {detail.strength.way ? <p className="cx-sub2">{detail.strength.way}</p> : null}
           </div>
-          <div className="conn-facts">
+          <div className="cx-facts">
             {detail.facts.map((fact) => (
-              <div className="conn-fact" key={fact.label}>
-                <div className="conn-fig">{fact.value}</div>
-                <div className="conn-fl">{fact.label}</div>
+              <div className="cx-fact" key={fact.label}>
+                <div className="cx-fig">{fact.value}</div>
+                <div className="cx-fl">{fact.label}</div>
               </div>
             ))}
           </div>
-          <div className="conn-card conn-pad conn-checks">
+          <div className="cx-card cx-pad cx-checks">
             {detail.checks.map((line) => <p key={line}>{line}</p>)}
           </div>
-          <details className="conn-card conn-list">
-            <summary className="conn-grow">
-              <span className="conn-ltext">
-                <span className="conn-gtitle">How to read this</span>
-                <span className="conn-lmeta">What the lines, the band and the checks mean.</span>
+          <details className="cx-card cx-list">
+            <summary className="cx-grow">
+              <span className="cx-ltext">
+                <span className="cx-gtitle">How to read this</span>
+                <span className="cx-lmeta">What the lines, the band and the checks mean.</span>
               </span>
-              <span className="conn-chev">›</span>
+              <span className="cx-chev" aria-hidden="true">›</span>
             </summary>
-            <div className="conn-read">
+            <div className="cx-read">
               <p>{detail.note}</p>
               <table>
                 <caption>Chart values</caption>
@@ -87,8 +87,8 @@ export function LinkDetailView({ state }) {
               </table>
             </div>
           </details>
-          <p className="conn-fn">{detail.sources}</p>
-          <p className="conn-fn">{state.standing}</p>
+          <p className="cx-fn">{detail.sources}</p>
+          <p className="cx-fn">{state.standing}</p>
         </section>
       </main>
       <ConnFooter />
@@ -97,20 +97,30 @@ export function LinkDetailView({ state }) {
 }
 
 function StrengthScale({ strength }) {
-  const value = Number(strength.value);
+  const value = Number(strength.raw);
   const band = Number(strength.bandAbs);
-  const x = (number) => ((number + 1) / 2) * 100;
-  const left = Number.isFinite(band) ? x(-band) : 50;
-  const width = Number.isFinite(band) ? x(band) - x(-band) : 0;
-  const dot = Number.isFinite(value) ? x(Math.max(-1, Math.min(1, value))) : 50;
+  const place = (number) => ((Math.max(-1, Math.min(1, number)) + 1) / 2) * 100;
+  const dot = Number.isFinite(value) ? place(value) : 50;
+  const left = Number.isFinite(band) ? place(-Math.abs(band)) : 40;
+  const right = Number.isFinite(band) ? place(Math.abs(band)) : 60;
+  const ends = strength.size
+    ? ['−1 bigger with smaller', 'bigger with bigger +1']
+    : ['−1 opposite ways', 'same way +1'];
   return (
-    <svg className="conn-scale" viewBox="0 0 100 24" role="img" aria-label={'Strength scale from minus 1 to plus 1. Chance alone reaches about plus or minus ' + strength.bandAbs + '. This link is ' + strength.value + '.'}>
-      <line x1="0" y1="14" x2="100" y2="14" />
-      <rect x={left} y="8" width={Math.max(width, 0)} height="12" rx="1" />
-      <circle cx={dot} cy="14" r="1.6" />
-      <text x="0" y="6">−1 opposite ways</text>
-      <text x="50" y="6" textAnchor="middle">0</text>
-      <text x="100" y="6" textAnchor="end">same way +1</text>
-    </svg>
+    <div className="cx-scale" role="img" aria-label={'Strength scale from minus 1 to plus 1. This link ' + strength.valueText + '. Chance alone plus or minus ' + strength.bandText + '.'}>
+      <div className="cx-scale-labels">
+        <span className="cx-scale-link" style={{ left: dot + '%' }}>{'This link ' + strength.valueText}</span>
+        <span className="cx-scale-chance" style={{ left: ((left + right) / 2) + '%' }}>{'Chance alone ±' + strength.bandText}</span>
+      </div>
+      <div className="cx-scale-track">
+        <div className="cx-scale-line" />
+        <div className="cx-scale-band" style={{ left: left + '%', width: Math.max(right - left, 0) + '%' }} />
+        <div className="cx-scale-dot" style={{ left: dot + '%' }} />
+      </div>
+      <div className="cx-scale-ends">
+        <span>{ends[0]}</span>
+        <span>{ends[1]}</span>
+      </div>
+    </div>
   );
 }

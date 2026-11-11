@@ -1,5 +1,5 @@
 {
-  "run_at": "2026-11-11T21:44:42.840Z",
+  "run_at": "2026-11-11T21:58:54.634Z",
   "all_pass": true,
   "items": [
     {
@@ -444,6 +444,21 @@
     },
     {
       "check": "the featured headline uses the spec sign wording",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "weak headlines say sometimes and none say a opposite",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "size sentences do not say same way",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "Only starts the shuffle sentence only outside the chance band",
       "pass": true,
       "detail": ""
     },

@@ -7,7 +7,7 @@ export const metadata = {
 
 export default function ConnectionsLayout({ children }) {
   return (
-    <div className="conn-shell">
+    <div className="cx-shell">
       <TopBar />
       {children}
     </div>

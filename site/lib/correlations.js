@@ -300,7 +300,7 @@ export function isSizeRow(row) {
   return String((row && row.event_family) || '').endsWith('/size');
 }
 
-function eventPhrase(row) {
+export function eventPhrase(row) {
   const text = clean(row && row.event_label);
   const size = isSizeRow(row);
   if (text.includes('Federal Reserve')) return size ? 'Fed rate-decision odds' : 'Fed rate-cut odds';
@@ -311,7 +311,7 @@ function eventPhrase(row) {
   return shortEvent(text);
 }
 
-function assetPhrase(row, page) {
+export function assetPhrase(row, page) {
   const text = clean(row && row.asset_label);
   if (text.includes('2-year')) return page ? 'US 2-year yield' : 'the 2-year yield';
   if (text.includes('10-year government')) return 'the 10-year yield';
@@ -335,6 +335,10 @@ function whenPhrase(row) {
   return 'over the recorded lead';
 }
 
+function linedUp(row) {
+  return linkTier(row) === 'weaker' ? 'sometimes lined up with' : 'often lined up with';
+}
+
 export function buildHeadline(row) {
   const item = row || {};
   const event = eventPhrase(item);
@@ -343,22 +347,23 @@ export function buildHeadline(row) {
   const negative = sign != null && sign < 0;
   const size = isSizeRow(item);
   const when = whenPhrase(item);
+  const lined = linedUp(item);
   if (timingGroup(item) === 'same_day') {
     if (size) {
-      return 'Bigger swings in ' + event + ' often lined up with ' + (negative ? 'smaller' : 'bigger') + ' moves in ' + asset + '.';
+      return 'Bigger swings in ' + event + ' ' + lined + ' ' + (negative ? 'smaller' : 'bigger') + ' moves in ' + asset + '.';
     }
-    return 'A rise in ' + event + ' often lined up with a ' + (negative ? 'fall' : 'rise') + ' in ' + asset + '.';
+    return 'A rise in ' + event + ' ' + lined + ' a ' + (negative ? 'fall' : 'rise') + ' in ' + asset + '.';
   }
   if (size && oddsMovedFirst(item)) {
-    return 'A bigger swing in ' + event + ' often lined up with a ' + (negative ? 'smaller' : 'bigger') + ' move in ' + asset + ' ' + when + '.';
+    return 'A bigger swing in ' + event + ' ' + lined + ' a ' + (negative ? 'smaller' : 'bigger') + ' move in ' + asset + ' ' + when + '.';
   }
   if (size) {
-    return 'A bigger move in ' + asset + ' often lined up with ' + (negative ? 'a smaller swing' : 'a bigger swing') + ' in ' + event + ' ' + when + '.';
+    return 'A bigger move in ' + asset + ' ' + lined + ' ' + (negative ? 'a smaller swing' : 'a bigger swing') + ' in ' + event + ' ' + when + '.';
   }
   if (oddsMovedFirst(item)) {
-    return 'A rise in ' + event + ' often lined up with a ' + (negative ? 'fall' : 'rise') + ' in ' + asset + ' ' + when + '.';
+    return 'A rise in ' + event + ' ' + lined + ' a ' + (negative ? 'fall' : 'rise') + ' in ' + asset + ' ' + when + '.';
   }
-  return 'A move in ' + asset + ' often lined up with a ' + (negative ? 'opposite' : 'same-way') + ' move in ' + event + ' ' + when + '.';
+  return 'A rise in ' + asset + ' ' + lined + ' a ' + (negative ? 'fall' : 'rise') + ' in ' + event + ' ' + when + '.';
 }
 
 /** The first-screen sentence. A negative same-day direction link uses the spec's rise/fall form. */
@@ -366,7 +371,7 @@ export function pageHeadline(row) {
   const item = row || {};
   const sign = numeric(item.spearman);
   if (!isSizeRow(item) && sign != null && sign < 0 && timingGroup(item) === 'same_day') {
-    return 'On the same day, a rise in ' + eventPhrase(item) + ' often lined up with a fall in the ' + assetPhrase(item, true) + '.';
+    return 'On the same day, a rise in ' + eventPhrase(item) + ' ' + linedUp(item) + ' a fall in the ' + assetPhrase(item, true) + '.';
   }
   if (timingGroup(item) === 'same_day') return 'On the same day, ' + buildHeadline(item).charAt(0).toLowerCase() + buildHeadline(item).slice(1);
   return buildHeadline(item);

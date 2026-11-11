@@ -63,10 +63,17 @@ function CardBody({ card }) {
   );
 }
 
-function ConnectionsBody({ state }) {
+function readableDate(text) {
+  return String(text || '').replace(/(\d{4})-(\d{2})-(\d{2})/g, (_, year, month, day) => {
+    const names = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    return Number(day) + ' ' + names[Number(month) - 1] + ' ' + year;
+  });
+}
+
+function ConnectionsBody({ state, embedded }) {
   return (
     <>
-      <h1>{state.title}</h1>
+      {embedded ? <h3 className="cx-older">Older tests</h3> : <h1>{state.title}</h1>}
       <Filters state={state} />
       {state.mode === 'loading' ? <p className="checking">{state.loading}</p> : null}
       {state.mode === 'unread' ? (
@@ -93,7 +100,7 @@ function ConnectionsBody({ state }) {
           {state.cards.map((card) => (
             <Link className="conn-card" key={card.id} href={card.href} data-history={card.historyStatus}>
               <CardBody card={card} />
-              <p className="conn-meta">{card.lastChecked}</p>
+              <p className="conn-meta">{readableDate(card.lastChecked)}</p>
               <p className="morelink">{COPY.details}</p>
             </Link>
           ))}
@@ -109,9 +116,17 @@ function ConnectionsBody({ state }) {
 export function EarlierChecks({ state }) {
   return (
     <details className="earlier-checks">
-      <summary>Earlier checks</summary>
-      <ConnectionsBody state={state} />
-      {state.footer ? <p>{state.footer}</p> : null}
+      <summary className="cx-grow">
+        <span className="cx-ltext">
+          <span className="cx-gtitle">Earlier checks</span>
+          <span className="cx-lmeta">Older tests from earlier runs, kept for the record.</span>
+        </span>
+        <span className="cx-chev" aria-hidden="true">›</span>
+      </summary>
+      <div className="earlier-body">
+        <ConnectionsBody state={state} embedded />
+        {state.footer ? <p className="conn-meta">{readableDate(state.footer)}</p> : null}
+      </div>
     </details>
   );
 }
