@@ -212,3 +212,20 @@ details.exposure summary::-webkit-details-marker{display:none}
   .conn-card .conn-event{font-size:20px;line-height:26px;min-height:78px}
   .conn-stat b{font-size:22px;line-height:28px}
 }
+/* Strongest links, internal preview */
+.preview-banner{margin:16px 0 0;padding:12px 14px;border-radius:12px;background:var(--flag-bg);color:var(--flag-ink);font-weight:600}
+.example-notice{margin:12px 0 0;padding:16px;border-radius:12px;background:var(--error-bg);color:var(--error-ink);font-size:22px;line-height:28px;font-weight:700}
+.corr-summary{margin:16px 0 0}
+.corr-card.conn-card .conn-event{min-height:0}
+.corr-label{margin:0 0 8px}
+.corr-split{display:grid;grid-template-columns:minmax(7.5rem,max-content) minmax(0,1fr);gap:12px 16px;align-items:start;margin-top:12px}
+.corr-num{margin:0}
+.corr-num b{display:block;font-size:28px;line-height:32px;font-weight:700;font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1;letter-spacing:-.02em}
+.corr-num small{display:block;margin-top:2px;color:var(--neutral-500);font-size:12px;line-height:16px;font-weight:500;letter-spacing:.01em}
+.corr-chance{margin:0;font-size:14px;line-height:20px;color:var(--neutral-700)}
+.corr-line{margin:8px 0 0;font-size:14px;line-height:20px;color:var(--neutral-700)}
+@media(min-width:600px){
+  .example-notice{font-size:24px;line-height:30px}
+  .corr-num b{font-size:32px;line-height:36px}
+  .corr-card.conn-card .conn-event{min-height:0}
+}

@@ -1,5 +1,5 @@
 {
-  "run_at": "2026-11-10T15:13:23.018Z",
+  "run_at": "2026-11-11T18:12:59.585Z",
   "all_pass": true,
   "items": [
     {
@@ -248,6 +248,111 @@
       "detail": ""
     },
     {
+      "check": "the example file parses",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "the run copy matches the example file",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "example labels say this is example data",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "the example file has no row under 10 episodes",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "every strongest card renders the chance line, sample size, pick-from-many warning and the label",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "sample size leads with separate episodes",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "nulls render as not available",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "cards stay in file order and are not re-ranked",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "number_of_pairs_searched fills in when picked_from_n is absent",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "picked_from_n wins when both count fields are present",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "the top line uses the chance summary wording",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "the example notice shows for an example run",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "the example notice follows the run id or the example flag",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "a missing correlation says not enough data and the row stays",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "fewer than 10 episodes is not a special rule",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "a null sample or chance field is not shown as zero",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "a file that fails validation fails soft",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "a missing file shows no results yet",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "an unreadable file does not crash and shows no results yet",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "a missing latest file can fall back to the run copy",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "the page does not appear in the tab bar",
+      "pass": true,
+      "detail": ""
+    },
+    {
       "check": "Gamma HTTP 200 for all events",
       "pass": true,
       "detail": "770450:200, 770451:200, 1025305:200, 1280521:200, 1123963:200, 1194143:200, 1194144:200, 800884:200, 79987:200, 81557:200, 31552:200, 711714:200, 478472:200, 160366:200, 34044:200, 1337182:200"
@@ -305,17 +410,17 @@
     {
       "check": "Today headline is built from the question, end date, and change",
       "pass": true,
-      "detail": "Chance that the US central bank keeps rates unchanged at its January 2027 meeting fell"
+      "detail": "Chance that the US central bank raises rates by 0.25 points at its January 2027 meeting rose"
     },
     {
       "check": "Live headlines have no mid-sentence Title Case words except proper nouns",
       "pass": true,
-      "detail": "Chance that the US central bank keeps rates unchanged at its January 2027 meeting fell"
+      "detail": "Chance that the US central bank raises rates by 0.25 points at its January 2027 meeting rose"
     },
     {
       "check": "Today top 3 cards are the first 3 of the personal ranking",
       "pass": true,
-      "detail": "rows=770451,711714,770450 top=770451,711714,770450"
+      "detail": "rows=770451,1337182,770450 top=770451,1337182,770450"
     },
     {
       "check": "Exposure text says this is not an expected loss",
@@ -434,6 +539,31 @@
     },
     {
       "check": "Connections loading does not flash the empty headline",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "strongest links page renders the preview banner, example notice, and noindex",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "every strongest card is on the page with the chance line beside the correlation",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "the rendered page shows nulls as not available",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "the rendered page is not in the tab bar",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "the strongest links page has no advice wording",
       "pass": true,
       "detail": ""
     },

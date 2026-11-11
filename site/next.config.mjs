@@ -3,6 +3,7 @@ const nextConfig = {
   outputFileTracingIncludes: {
     '/connections': ['./data/connections/**/*', './data/fallback.json'],
     '/connections/[pair_id]': ['./data/connections/**/*', './data/fallback.json'],
+    '/strongest-links': ['./data/correlations/**/*'],
   },
   async redirects() {
     return [
