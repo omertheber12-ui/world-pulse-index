@@ -7,8 +7,9 @@ import path from 'path';
 import { correlationsDir } from './correlations.js';
 
 export const SERIES_FILE = 'TR-016-2026-11-11.series.json';
-export const ODDS_AXIS = 'Running total of daily odds change (odds points)';
-export const ODDS_AXIS_INFLATION = 'Running total of daily odds change (basis points)';
+export const ODDS_AXIS = 'Odds change since start';
+export const ODDS_AXIS_INFLATION = 'Inflation odds change since start';
+export const ODDS_LINE_NOTE = 'The odds line adds up the daily odds changes, starting at 0. The total is in odds points, or in basis points for inflation.';
 
 const LEVEL_UNIT = {
   bitcoin: 'US dollars',
@@ -38,12 +39,6 @@ export function loadChartSeries(root) {
   if (!existsSync(file)) return null;
   cached = JSON.parse(readFileSync(file, 'utf8'));
   return cached;
-}
-
-function familyOf(eventFamily) {
-  const text = String(eventFamily || '');
-  const slash = text.indexOf('/');
-  return slash === -1 ? text : text.slice(0, slash);
 }
 
 function leadDays(lag) {
@@ -114,23 +109,8 @@ function geometry(series, eventFamily, assetId) {
     });
   }
   if (!points.length) return null;
-  const family = odds.family || familyOf(eventFamily);
-  const runs = (series.busy_trading_runs && series.busy_trading_runs[family]) || [];
-  const bands = [];
-  for (const run of runs) {
-    let from = -1;
-    let to = -1;
-    for (let i = 0; i < points.length; i++) {
-      if (points[i].date >= run.start && points[i].date <= run.end) {
-        if (from < 0) from = i;
-        to = i;
-      }
-    }
-    if (from >= 0) bands.push({ from, to });
-  }
   return {
     points,
-    bands,
     oddsAxis: oddsAxis(odds),
     assetAxis: LEVEL_UNIT[assetId] || asset.unit || '',
   };

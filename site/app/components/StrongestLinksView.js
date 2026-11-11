@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { COPY } from '../../lib/correlations.js';
-import { chartModel } from '../../lib/chartSeries.js';
+import { ODDS_LINE_NOTE, chartModel } from '../../lib/chartSeries.js';
 import { SeriesChart } from './SeriesChart.js';
 
 function Tag({ label, tier }) {
@@ -52,14 +52,15 @@ function AllGroup({ title, group }) {
 }
 
 function PickLine({ card }) {
+  const model = chartModel(card);
   return (
     <details className="pick-line" data-pick-line="1">
       <summary>
         <span className="pick-name">{card.headline}</span>
-        <SeriesChart model={chartModel(card)} spark />
+        <SeriesChart model={model} spark />
         <Tag label={card.tierLabel} tier={card.tier} />
       </summary>
-      <SeriesChart model={chartModel(card)} />
+      <SeriesChart model={model} />
       <div className="yf-detail">
         <p className="num">{card.strength}</p>
         <p>{card.episodes}</p>
@@ -67,6 +68,7 @@ function PickLine({ card }) {
         <p>{card.pick}</p>
         {card.strictPick ? <p>{card.strictPick}</p> : null}
         {card.runner ? <p>{card.runner}</p> : null}
+        {model && model.leadNote ? <p data-lead-note="1">{model.leadNote}</p> : null}
       </div>
     </details>
   );
@@ -87,6 +89,7 @@ function HowToRead({ state }) {
       {state.researchNotice ? <p>{state.researchNotice}</p> : null}
       <p>Description only, not proven. The number on each card is a rank correlation.</p>
       <p>Extra check, not a verdict: other checks use the same measure and do not change the label.</p>
+      <p>{ODDS_LINE_NOTE}</p>
       <p>Prices come from Yahoo Finance, FRED and the Bank of Israel. Odds come from Polymarket public trades, with trades before 12 Nov 2023 from the Envio export (CC BY 4.0).</p>
       {state.footer ? <p>{state.footer}</p> : null}
     </details>
@@ -95,6 +98,7 @@ function HowToRead({ state }) {
 
 export function StrongestLinksScreen({ state }) {
   const links = state.allLinks;
+  const mainModel = state.mainChart ? chartModel(state.mainChart) : null;
   return (
     <>
       <main data-page="strongest-links" data-mode={state.mode}>
@@ -110,7 +114,7 @@ export function StrongestLinksScreen({ state }) {
               <Tag label={state.mainChart.tierLabel} tier={state.mainChart.tier} />
             </header>
             <div className="hero-chart" data-main-chart="1">
-              <SeriesChart model={chartModel(state.mainChart)} />
+              <SeriesChart model={mainModel} />
             </div>
             <details className="chart-details">
               <summary>Details</summary>
@@ -120,6 +124,7 @@ export function StrongestLinksScreen({ state }) {
               <p>{state.mainChart.pick}</p>
               {state.mainChart.strictPick ? <p>{state.mainChart.strictPick}</p> : null}
               {state.mainChart.runner ? <p>{state.mainChart.runner}</p> : null}
+              {mainModel && mainModel.leadNote ? <p data-lead-note="1">{mainModel.leadNote}</p> : null}
             </details>
             <section className="pick-list">
               {(state.otherPicks || []).map((card, index) => (

@@ -263,7 +263,6 @@ details.exposure summary::-webkit-details-marker{display:none}
 .see-every > summary{font-size:18px;line-height:26px}
 .chart-slot svg,.series-chart svg{display:block;width:100%;height:auto}
 .series-chart{margin:0}
-.series-chart .busy{fill:var(--green-600);opacity:.12}
 .series-chart .axis{stroke:var(--neutral-200);stroke-width:1}
 .series-chart .odds-line{fill:none;stroke:var(--green-600);stroke-width:2}
 .series-chart .asset-line{fill:none;stroke:var(--ink-900);stroke-width:1.5}
@@ -272,8 +271,6 @@ details.exposure summary::-webkit-details-marker{display:none}
 .swatch{display:inline-block;width:14px;height:3px;margin-right:6px;vertical-align:middle}
 .swatch.odds{background:var(--green-600)}
 .swatch.asset{background:var(--ink-900);height:2px}
-.swatch.busy{height:10px;background:var(--green-600);opacity:.25}
-.lead-note{margin:8px 0 0;color:var(--neutral-700);font-size:14px;line-height:20px}
 .spark{display:block;width:64px;height:28px}
 .spark path{fill:none;stroke:var(--green-600);stroke-width:1.5}
 .chart-slot .axis{stroke:var(--neutral-200);stroke-width:1}

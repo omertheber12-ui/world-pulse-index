@@ -8,7 +8,7 @@ import { textProblem } from '../lib/connections.js';
 import {
   COPY, buildCard, buildHeadline, buildPageState, linkTier, loadCorrelations, timingGroup, validateFile, visibleText,
 } from '../lib/correlations.js';
-import { chartModel, hasBothLines, loadChartSeries, oddsPointsAfterHoldBack, seriesPath } from '../lib/chartSeries.js';
+import { ODDS_AXIS, ODDS_AXIS_INFLATION, ODDS_LINE_NOTE, chartModel, hasBothLines, leadChartNote, loadChartSeries, oddsPointsAfterHoldBack, seriesPath } from '../lib/chartSeries.js';
 
 const siteRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const RESEARCH_SHA = 'a801a002f45b93c22acc60287ab168c0f220c9545b8381ae794beaaedd7049d9';
@@ -391,8 +391,11 @@ export async function correlationPageChecks(add, page) {
     && (html.split('data-main-chart="1"')[1] || '').includes('data-odds-line="1"')
     && (html.split('data-main-chart="1"')[1] || '').includes('data-asset-line="1"')
     && html.split('data-pick-line="1"').slice(1).every((part) => part.includes('data-trend="1"'))
-    && html.includes('Running total of daily odds change (odds points)')
-    && html.includes('Busy trading periods')
+    && html.includes(ODDS_AXIS)
+    && html.includes(ODDS_LINE_NOTE)
+    && !html.includes('Busy trading periods')
+    && !html.includes('class="busy"')
+    && !html.includes('large move')
     && html.includes('See every link tested')
     && html.includes('Internal, not proven.')
     && html.includes('How to read this')
@@ -405,6 +408,18 @@ export async function correlationPageChecks(add, page) {
     && html.includes('Description only, not proven')
     && !visible.includes('not stronger than picking the best of many by luck')
     && !visible.includes(COPY.exampleNotice));
+  const figures = html.split('<figure').slice(1).map((part) => part.split('</figure>')[0]);
+  const leadNotes = [state.mainChart, ...(state.otherPicks || [])]
+    .filter((card) => card && card.timingGroup === 'lead')
+    .map((card) => leadChartNote(card.lag))
+    .filter(Boolean);
+  add('charts are two lines, and the lead note sits in the details',
+    figures.length >= 1
+    && figures.every((figure) => !figure.includes('trading day') && !figure.includes('Busy') && !figure.includes('<rect'))
+    && leadNotes.length >= 1
+    && leadNotes.every((note) => html.includes(note))
+    && (html.match(/data-lead-note="1"/g) || []).length === leadNotes.length
+    && html.includes(ODDS_AXIS_INFLATION) === (state.chartCards || []).some((card) => chartModel(card) && chartModel(card).oddsAxis === ODDS_AXIS_INFLATION));
   const allLinkRows = html.match(/data-all-link="1"/g) || [];
   const tierMarks = (tier) => (html.match(new RegExp('data-all-link="1" data-tier="' + tier + '"', 'g')) || []).length;
   add('the rendered page shows the real groups and the hidden-row count',

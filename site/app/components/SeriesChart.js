@@ -65,16 +65,6 @@ export function SeriesChart({ model, spark }) {
     <figure className="series-chart">
       <svg viewBox="0 0 640 250" role="img">
         <title>{model.oddsAxis}</title>
-        {model.bands.map((band) => (
-          <rect
-            key={band.from + '-' + band.to}
-            className="busy"
-            x={xAt(band.from)}
-            y={top}
-            width={Math.max(2, xAt(band.to) - xAt(band.from))}
-            height={bottom - top}
-          />
-        ))}
         <line className="axis" x1={left} y1={top} x2={left} y2={bottom} />
         <line className="axis" x1={left} y1={bottom} x2={right} y2={bottom} />
         <line className="axis" x1={right} y1={top} x2={right} y2={bottom} />
@@ -90,9 +80,7 @@ export function SeriesChart({ model, spark }) {
       <figcaption>
         <span><i className="swatch odds" /> {model.oddsAxis}</span>
         <span><i className="swatch asset" /> {model.assetAxis}</span>
-        <span><i className="swatch busy" /> Busy trading periods</span>
       </figcaption>
-      {model.leadNote ? <p className="lead-note">{model.leadNote}</p> : null}
     </figure>
   );
 }
