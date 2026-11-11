@@ -5,9 +5,9 @@ function Tag({ label, tier }) {
   return <span className={'tag yf-tag yf-' + tier}>{label}</span>;
 }
 
-function ChartSlot() {
+function ChartSlot({ large }) {
   return (
-    <div className="chart-slot">
+    <div className={large ? 'chart-slot chart-slot-large' : 'chart-slot'}>
       <svg viewBox="0 0 640 220" role="img" aria-label="Chart coming">
         <title>Chart coming</title>
         <line className="axis" x1="36" y1="16" x2="36" y2="184" />
@@ -19,17 +19,22 @@ function ChartSlot() {
   );
 }
 
-function ChartCard({ card }) {
+function ChartCard({ card, large }) {
   return (
-    <article className="chart-card" data-chart-card="1" data-section={card.section} data-group={card.timingGroup} data-tier={card.tier}>
-      <div className="chart-top">
-        <h2>{card.headline}</h2>
-        <Tag label={card.tierLabel} tier={card.tier} />
-        <p className="chart-strength num">{card.strength}</p>
-      </div>
-      <ChartSlot />
+    <article
+      className={large ? 'chart-card chart-large' : 'chart-card chart-small'}
+      data-chart-card={large ? undefined : '1'}
+      data-featured={large ? '1' : undefined}
+      data-section={card.section}
+      data-group={card.timingGroup}
+      data-tier={card.tier}
+    >
+      <h2>{card.headline}</h2>
+      <Tag label={card.tierLabel} tier={card.tier} />
+      <ChartSlot large={large} />
       <details className="chart-details">
         <summary>Details</summary>
+        <p className="num">{card.strength}</p>
         <p>{card.episodes}</p>
         <p>{card.chance}</p>
         <p>{card.pick}</p>
@@ -46,10 +51,10 @@ function LinkRow({ row }) {
       <summary>
         <span className="yf-name">{row.headline}</span>
         <Tag label={row.tierLabel} tier={row.tier} />
-        <span className="yf-num num">{row.strength}</span>
         <span className="yf-spark" aria-hidden="true" />
       </summary>
       <div className="yf-detail">
+        <p className="num">{row.strength}</p>
         <p>{row.episodes} separate episodes</p>
         <p>{row.lagLabel}. {row.direction}.</p>
       </div>
@@ -106,22 +111,32 @@ export function StrongestLinksScreen({ state }) {
         <aside className="preview-banner" role="note">{state.previewBanner}</aside>
         <h1>{state.title}</h1>
         {state.exampleNotice ? <p className="example-notice" role="status">{state.exampleNotice}</p> : null}
-        {state.researchNotice ? <p className="research-notice" role="status">{state.researchNotice}</p> : null}
+        <p className="page-lead">{COPY.pageLead}</p>
+        {state.researchNotice ? <p className="page-note" role="status">{state.researchNotice}</p> : null}
         {state.mode === 'empty' ? <p className="empty">{state.empty}</p> : null}
         {state.mode === 'ready' ? (
           <>
+            <section className="chart-list chart-featured">
+              {(state.featuredCharts || []).map((card, index) => (
+                <ChartCard key={'featured-' + index} card={card} large />
+              ))}
+            </section>
             <HowToRead state={state} />
-            <section className="chart-list">
+            <section className="chart-list chart-rest">
+              <h2>{COPY.seePicks}</h2>
               {(state.chartCards || []).map((card, index) => (
                 <ChartCard key={card.section + '-' + index} card={card} />
               ))}
             </section>
             {links ? (
-              <section data-all-links="1" className="all-links">
-                <h2 className="all-title">{links.title}</h2>
-                <AllGroup title={links.sameDayTitle} group={links.sameDay} showWeaker={links.showWeaker} />
-                <AllGroup title={links.leadTitle} group={links.lead} showWeaker={links.showWeaker} />
-              </section>
+              <details className="see-every">
+                <summary>{COPY.seeEvery}</summary>
+                <section data-all-links="1" className="all-links">
+                  <h2 className="all-title">{links.title}</h2>
+                  <AllGroup title={links.sameDayTitle} group={links.sameDay} showWeaker={links.showWeaker} />
+                  <AllGroup title={links.leadTitle} group={links.lead} showWeaker={links.showWeaker} />
+                </section>
+              </details>
             ) : null}
           </>
         ) : null}

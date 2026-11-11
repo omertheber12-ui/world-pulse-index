@@ -215,7 +215,8 @@ details.exposure summary::-webkit-details-marker{display:none}
 /* Strongest links, internal preview */
 .preview-banner{margin:16px 0 0;padding:12px 14px;border-radius:12px;background:var(--flag-bg);color:var(--flag-ink);font-weight:600}
 .example-notice{margin:12px 0 0;padding:16px;border-radius:12px;background:var(--error-bg);color:var(--error-ink);font-size:22px;line-height:28px;font-weight:700}
-.research-notice{margin:12px 0 0;padding:12px 14px;border-radius:12px;background:var(--green-50);color:var(--green-800);font-weight:600}
+.research-notice,.page-note{margin:12px 0 0;color:var(--neutral-700);font-size:17px;line-height:24px}
+.page-lead{margin:8px 0 0;font-size:22px;line-height:30px;color:var(--ink-900)}
 .corr-extra{margin:8px 0 0;font-size:13px;line-height:18px;color:var(--neutral-500)}
 .corr-summary{margin:16px 0 0}
 .corr-card.conn-card .conn-event{min-height:0}
@@ -234,16 +235,19 @@ details.exposure summary::-webkit-details-marker{display:none}
 .how-read summary,.chart-details summary,.corr-weaker summary,.yf-row summary{cursor:pointer;color:var(--green-600);font-weight:600}
 .how-read summary{font-size:16px}
 .how-read p,.how-read li{font-size:15px;line-height:22px}
-.chart-list{margin-top:28px}
-.chart-card{background:var(--neutral-0);border:1px solid var(--neutral-100);border-radius:16px;padding:20px 20px 12px;margin:0 0 20px}
-.chart-top{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px 16px;align-items:start}
-.chart-card h2{grid-column:1;margin:0;font-size:22px;line-height:28px;font-weight:650;letter-spacing:-.01em}
-.chart-strength{grid-column:2;grid-row:1 / span 2;margin:0;font-size:32px;line-height:36px;font-weight:700;letter-spacing:-.02em}
-.yf-tag{grid-column:1;justify-self:start;margin-top:4px}
+.chart-list{margin-top:40px}
+.chart-featured{margin-top:48px}
+.chart-card{background:var(--neutral-0);border:1px solid var(--neutral-100);border-radius:20px;padding:28px 24px 16px;margin:0 0 28px}
+.chart-large{padding:36px 28px 20px;margin:0 0 48px}
+.chart-large h2{font-size:32px;line-height:38px}
+.chart-small{padding:20px 18px 12px;margin:0 0 16px}
+.chart-small h2{font-size:18px;line-height:24px}
+.chart-card h2{margin:0 0 12px;font-weight:650;letter-spacing:-.02em}
+.yf-tag{margin-top:0}
 .yf-strict{background:var(--green-50);color:var(--green-700)}
-.yf-stronger{background:var(--flag-bg);color:var(--flag-ink)}
-.yf-weaker{background:var(--neutral-50);color:var(--neutral-700)}
-.chart-slot{margin:16px 0 4px;background:var(--neutral-25);border-radius:12px}
+.yf-stronger,.yf-weaker{background:var(--neutral-50);color:var(--neutral-700)}
+.chart-slot{margin:20px 0 8px;background:var(--neutral-25);border-radius:16px}
+.chart-slot-large{margin-top:28px}
 .chart-slot svg{display:block;width:100%;height:auto}
 .chart-slot .axis{stroke:var(--neutral-200);stroke-width:1}
 .chart-slot text{fill:var(--neutral-500);font-size:16px;font-family:var(--font)}
@@ -255,7 +259,9 @@ details.exposure summary::-webkit-details-marker{display:none}
 .yf-group h2{font-size:22px;line-height:28px}
 .yf-list{margin-top:8px}
 .yf-row{border-bottom:1px solid var(--neutral-100);padding:12px 0}
-.yf-row summary{display:grid;grid-template-columns:minmax(0,1fr) auto auto 56px;gap:12px;align-items:center;color:inherit;font-weight:500;list-style:none}
+.see-every{margin-top:48px}
+.see-every > summary{font-size:22px;line-height:28px}
+.yf-row summary{display:grid;grid-template-columns:minmax(0,1fr) auto 56px;gap:16px;align-items:center;color:inherit;font-weight:500;list-style:none}
 .yf-row summary::-webkit-details-marker{display:none}
 .yf-name{font-size:16px;line-height:22px;font-weight:600;color:var(--ink-900)}
 .yf-num{font-size:18px;line-height:24px;font-weight:650;text-align:right}

@@ -343,7 +343,11 @@ export function runCorrelationChecks(add) {
       timing_group: 'lead',
       spearman: -0.2,
     }) === 'Fed rate-cut odds move first, 2-year yield moves the other way within 5 days'
-    && state.chartCards.length === 21);
+    && state.chartCards.length === 21
+    && state.featuredCharts.length <= 5
+    && state.featuredCharts.length > 0
+    && state.featuredCharts.every((card, index) => index === 0 || card.tier !== 'strict' || state.featuredCharts[index - 1].tier === 'strict')
+    && state.featuredCharts.filter((card) => card.tier !== 'strict').every((card) => card.strictPick === 'Passes the strict pick-from-many check'));
 }
 
 export async function correlationPageChecks(add, page) {
@@ -375,6 +379,11 @@ export async function correlationPageChecks(add, page) {
       && html.includes(card.pick)
       && html.includes(card.episodes))
     && (html.match(/data-chart-card="1"/g) || []).length === 21
+    && (html.match(/data-featured="1"/g) || []).length === (state.featuredCharts || []).length
+    && (state.featuredCharts || []).length <= 5
+    && html.includes('See all 21 top picks')
+    && html.includes('See every link tested')
+    && html.includes(COPY.pageLead)
     && (html.match(/Chart coming/g) || []).length >= 21
     && html.includes('How to read this')
     && html.includes('Moved together the same day (description only, not a lead)')

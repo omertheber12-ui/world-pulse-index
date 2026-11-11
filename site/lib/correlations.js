@@ -38,6 +38,9 @@ export const COPY = {
   strictFail: 'Does not pass the strict pick-from-many check',
   strictPass: 'Passes the strict pick-from-many check',
   researchNotice: 'Research\'s TR-016 run. Internal, and not proven.',
+  pageLead: 'Which event odds and prices moved together.',
+  seePicks: 'See all 21 top picks',
+  seeEvery: 'See every link tested',
   allLinksTitle: 'All links tested',
   tierStrict: 'Strong link',
   tierStronger: 'Medium link',
@@ -424,6 +427,13 @@ function runnerLine(row) {
     + ', ' + formatTwo(runner.spearman) + ', ' + lagDisplay(runner);
 }
 
+export function featuredCharts(cards) {
+  const list = cards || [];
+  const strong = list.filter((card) => card.tier === 'strict');
+  const passed = list.filter((card) => card.strictPick === COPY.strictPass && card.tier !== 'strict');
+  return strong.concat(passed).slice(0, 5);
+}
+
 export function buildChartCard(row, section) {
   const item = row || {};
   const tier = linkTier(item);
@@ -480,6 +490,7 @@ export function buildPageState(loaded) {
     sameDay: [],
     lead: [],
     chartCards: [],
+    featuredCharts: [],
     allLinks: null,
     footer: '',
     empty: '',
@@ -491,6 +502,8 @@ export function buildPageState(loaded) {
   const perAsset = (file.strongest_per_asset || []).map((row) => buildCard(row, 'asset'));
   const perEvent = (file.strongest_per_event || []).map((row) => buildCard(row, 'event'));
   const ordered = perAsset.concat(perEvent);
+  const chartCards = (file.strongest_per_asset || []).map((row) => buildChartCard(row, 'asset'))
+    .concat((file.strongest_per_event || []).map((row) => buildChartCard(row, 'event')));
   return {
     ...base,
     mode: 'ready',
@@ -501,8 +514,8 @@ export function buildPageState(loaded) {
     perEvent,
     sameDay: ordered.filter((card) => card.timingGroup === 'same_day'),
     lead: ordered.filter((card) => card.timingGroup !== 'same_day'),
-    chartCards: (file.strongest_per_asset || []).map((row) => buildChartCard(row, 'asset'))
-      .concat((file.strongest_per_event || []).map((row) => buildChartCard(row, 'event'))),
+    chartCards,
+    featuredCharts: featuredCharts(chartCards),
     allLinks: buildAllLinks(file),
     footer: footerLine(file),
   };
