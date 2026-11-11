@@ -8,7 +8,8 @@ import { textProblem } from '../lib/connections.js';
 import {
   COPY, buildCard, buildHeadline, buildPageState, linkTier, loadCorrelations, timingGroup, validateFile, visibleText,
 } from '../lib/correlations.js';
-import { ODDS_AXIS, ODDS_AXIS_INFLATION, ODDS_LINE_NOTE, chartModel, hasBothLines, leadChartNote, loadChartSeries, oddsPointsAfterHoldBack, seriesPath } from '../lib/chartSeries.js';
+import { BRAND_HEADLINES, FEATURED_HEADLINE, STANDING_LINE, brandHeadline } from '../lib/brandHeadlines.js';
+import { ODDS_AXIS, ODDS_AXIS_INFLATION, ODDS_LINE_NOTE, SIZE_NOTE, SIZE_ODDS_AXIS, chartModel, hasBothLines, leadChartNote, loadChartSeries, oddsPointsAfterHoldBack, seriesPath } from '../lib/chartSeries.js';
 
 const siteRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const RESEARCH_SHA = 'a801a002f45b93c22acc60287ab168c0f220c9545b8381ae794beaaedd7049d9';
@@ -350,7 +351,60 @@ export function runCorrelationChecks(add) {
     && state.mainChart
     && state.mainChart.tier === 'strict'
     && state.mainChart.strictPick === 'Passes the strict pick-from-many check'
-    && state.mainChart.headline === 'Fed rate-cut odds and 2-year yield move opposite ways on the same day');
+    && state.mainChart.eventFamily === 'F1_fed/direction'
+    && state.mainChart.assetId === 'us_2y_yield'
+    && state.mainChart.timingGroup === 'same_day'
+    && state.mainChart.headline === FEATURED_HEADLINE);
+  const pairHeads = {};
+  for (const card of state.chartCards) {
+    const pair = card.eventFamily + '|' + card.assetId;
+    if (!pairHeads[pair]) pairHeads[pair] = [];
+    pairHeads[pair].push(card.headline);
+  }
+  const shared = Object.values(pairHeads).filter((list) => list.length > 1);
+  const sizeCard = state.chartCards.find((card) => String(card.eventFamily).endsWith('/size'));
+  const sizeModel = chartModel(sizeCard);
+  let sizeFalls = false;
+  for (let i = 1; sizeModel && i < sizeModel.points.length; i++) {
+    const prev = sizeModel.points[i - 1].odds;
+    const next = sizeModel.points[i].odds;
+    if (typeof prev === 'number' && typeof next === 'number' && next < prev) sizeFalls = true;
+  }
+  add('the featured pick matches the rule and all 21 headlines are mapped',
+    Object.keys(BRAND_HEADLINES).length === 21
+    && state.chartCards.every((card) => card.headline === brandHeadline(card.section, card.eventFamily, card.assetId) && card.headline)
+    && shared.length === 4
+    && shared.every((list) => list.every((line) => line === list[0]))
+    && !state.chartCards.some((card) => card.headline.includes('This is the strongest link on the page.')));
+  add('a size chart shows the daily swing, not a running total',
+    sizeModel
+    && sizeModel.measure === 'size'
+    && sizeModel.oddsAxis === SIZE_ODDS_AXIS
+    && sizeModel.assetAxis.startsWith('Size of daily ')
+    && sizeModel.assetAxis.endsWith(' move')
+    && sizeFalls
+    && chartModel(state.mainChart).measure === 'direction'
+    && chartModel(state.mainChart).oddsAxis === ODDS_AXIS);
+  const brandCss = readFileSync(path.join(siteRoot, 'app/globals.css'), 'utf8');
+  const brandBlock = brandCss.slice(brandCss.indexOf('/* connections-brand */'), brandCss.indexOf('/* /connections-brand */'));
+  const brandHex = (brandBlock.match(/#[0-9a-fA-F]{3,8}/g) || []).map((color) => color.toLowerCase());
+  const allowed = new Set(['#f5f7f5', '#172f32', '#116c5b']);
+  const layout = readFileSync(path.join(siteRoot, 'app/layout.js'), 'utf8');
+  const families = [...brandCss.matchAll(/font-family\s*:\s*([^;}{]+)/gi)].map((match) => match[1].trim());
+  add('only the three allowed colors appear in the connections CSS',
+    brandBlock.includes('#f5f7f5')
+    && brandBlock.includes('#172f32')
+    && brandBlock.includes('#116c5b')
+    && brandHex.length > 0
+    && brandHex.every((color) => allowed.has(color))
+    && !/rgb\(|hsl\(|\b(red|grey|gray|amber|orange)\b/i.test(brandBlock));
+  add('a single font family is used',
+    layout.includes("next/font/google")
+    && layout.includes('Inter')
+    && layout.includes('--font-inter')
+    && brandCss.includes('--font:var(--font-inter)')
+    && families.length > 0
+    && families.every((family) => family === 'var(--font)' || family === 'var(--font-inter)'));
   add('the series file hash is unchanged', sha256(seriesPath(siteRoot)) === SERIES_SHA);
   add('the main chart has data for both lines', hasBothLines(chartModel(state.mainChart)));
   add('all 20 list lines have a trend line',
@@ -393,6 +447,14 @@ export async function correlationPageChecks(add, page) {
     && html.split('data-pick-line="1"').slice(1).every((part) => part.includes('data-trend="1"'))
     && html.includes(ODDS_AXIS)
     && html.includes(ODDS_LINE_NOTE)
+    && html.includes(SIZE_NOTE)
+    && html.includes(SIZE_ODDS_AXIS)
+    && html.includes(STANDING_LINE)
+    && html.includes('Time range')
+    && html.includes('data-readout="1"')
+    && html.includes('class="quiet-tag"')
+    && !html.includes('yf-tag')
+    && !html.includes('This is the strongest link on the page.')
     && !html.split('Earlier checks')[0].includes('Busy trading periods')
     && !html.split('Earlier checks')[0].includes('class="busy"')
     && !html.split('Earlier checks')[0].includes('large move')

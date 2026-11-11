@@ -9,7 +9,25 @@ import { correlationsDir } from './correlations.js';
 export const SERIES_FILE = 'TR-016-2026-11-11.series.json';
 export const ODDS_AXIS = 'Odds change since start';
 export const ODDS_AXIS_INFLATION = 'Inflation odds change since start';
-export const ODDS_LINE_NOTE = 'The odds line adds up the daily odds changes, starting at 0. The total is in odds points, or in basis points for inflation.';
+export const SIZE_ODDS_AXIS = 'Size of daily odds swing';
+export const DIRECTION_NOTE = 'For a direction link, the odds line adds up the daily odds changes, starting at 0 (odds points, or basis points for inflation), and the other line is the asset\'s closing level.';
+export const SIZE_NOTE = 'For a size link, the odds line is that day\'s odds swing and the other line is the size of that day\'s asset move.';
+export const ODDS_LINE_NOTE = DIRECTION_NOTE;
+
+const MOVE_NAME = {
+  bitcoin: 'Bitcoin',
+  gold: 'gold',
+  oil: 'oil',
+  nasdaq100: 'Nasdaq 100',
+  sp500: 'S&P 500',
+  usd_jpy: 'dollar vs yen',
+  usd_ils: 'dollar vs shekel',
+  us_2y_yield: '2-year yield',
+  us_10y_yield: '10-year yield',
+  us_3m_bill: '3-month bill',
+  inflation_expectation_5y: '5-year inflation',
+  inflation_expectation_10y: '10-year inflation',
+};
 
 const LEVEL_UNIT = {
   bitcoin: 'US dollars',
@@ -59,9 +77,21 @@ function dailyChanges(odds) {
   return odds.values || [];
 }
 
+function isSize(odds) {
+  return odds && odds.odds_measure === 'size';
+}
+
 function oddsAxis(odds) {
+  if (isSize(odds)) return SIZE_ODDS_AXIS;
   if (odds.family === 'INF_us_cpi' || String(odds.what || '').includes('basis points')) return ODDS_AXIS_INFLATION;
   return ODDS_AXIS;
+}
+
+function assetAxis(assetId, asset, size) {
+  if (size) return 'Size of daily ' + (MOVE_NAME[assetId] || 'asset') + ' move';
+  const name = MOVE_NAME[assetId] || 'Asset';
+  const unit = LEVEL_UNIT[assetId] || asset.unit || '';
+  return unit ? name + ' (' + unit + ')' : name;
 }
 
 export function oddsPointsAfterHoldBack(series) {
@@ -94,25 +124,34 @@ function geometry(series, eventFamily, assetId) {
   const changes = dailyChanges(odds);
   if (start < 0 || end < start || changes.length !== end - start + 1) return null;
   const limit = odds.hold_back_boundary || odds.last_date;
+  const size = isSize(odds);
   const points = [];
   let total = 0;
   for (let i = start; i <= end; i++) {
     const day = dates[i];
     if (limit && day > limit) break;
     const change = changes[i - start];
-    if (typeof change === 'number' && Number.isFinite(change)) total += change;
-    const level = asset.level[i];
-    points.push({
-      date: day,
-      odds: total,
-      asset: typeof level === 'number' && Number.isFinite(level) ? level : null,
-    });
+    const finite = typeof change === 'number' && Number.isFinite(change);
+    let oddsValue = null;
+    if (size) oddsValue = finite ? change : null;
+    else if (finite) {
+      total += change;
+      oddsValue = total;
+    } else oddsValue = total;
+    const rawAsset = size ? asset.move[i] : asset.level[i];
+    const assetValue = typeof rawAsset === 'number' && Number.isFinite(rawAsset)
+      ? (size ? Math.abs(rawAsset) : rawAsset)
+      : null;
+    points.push({ date: day, odds: oddsValue, asset: assetValue });
   }
   if (!points.length) return null;
   return {
     points,
+    measure: size ? 'size' : 'direction',
     oddsAxis: oddsAxis(odds),
-    assetAxis: LEVEL_UNIT[assetId] || asset.unit || '',
+    assetAxis: assetAxis(assetId, asset, size),
+    oddsName: size ? 'Odds swing' : 'Odds',
+    assetName: MOVE_NAME[assetId] || 'Asset',
   };
 }
 

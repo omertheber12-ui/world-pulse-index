@@ -1,10 +1,11 @@
 import Link from 'next/link';
 import { COPY } from '../../lib/correlations.js';
-import { ODDS_LINE_NOTE, chartModel } from '../../lib/chartSeries.js';
+import { DIRECTION_NOTE, SIZE_NOTE, chartModel } from '../../lib/chartSeries.js';
+import { STANDING_LINE } from '../../lib/brandHeadlines.js';
 import { SeriesChart } from './SeriesChart.js';
 
-function Tag({ label, tier }) {
-  return <span className={'tag yf-tag yf-' + tier}>{label}</span>;
+function Tag({ label }) {
+  return <span className="quiet-tag">{label}</span>;
 }
 
 function ChartSlot({ large }) {
@@ -26,7 +27,7 @@ function LinkRow({ row }) {
     <details className="yf-row" data-all-link="1" data-tier={row.tier} data-group={row.timingGroup}>
       <summary>
         <span className="yf-name">{row.headline}</span>
-        <Tag label={row.tierLabel} tier={row.tier} />
+        <Tag label={row.tierLabel} />
         <span className="yf-spark" aria-hidden="true" />
       </summary>
       <div className="yf-detail">
@@ -58,7 +59,7 @@ function PickLine({ card }) {
       <summary>
         <span className="pick-name">{card.headline}</span>
         <SeriesChart model={model} spark />
-        <Tag label={card.tierLabel} tier={card.tier} />
+        <Tag label={card.tierLabel} />
       </summary>
       <SeriesChart model={model} />
       <div className="yf-detail">
@@ -89,7 +90,8 @@ function HowToRead({ state }) {
       {state.researchNotice ? <p>{state.researchNotice}</p> : null}
       <p>Description only, not proven. The number on each card is a rank correlation.</p>
       <p>Extra check, not a verdict: other checks use the same measure and do not change the label.</p>
-      <p>{ODDS_LINE_NOTE}</p>
+      <p>{DIRECTION_NOTE}</p>
+      <p>{SIZE_NOTE}</p>
       <p>Prices come from Yahoo Finance, FRED and the Bank of Israel. Odds come from Polymarket public trades, with trades before 12 Nov 2023 from the Envio export (CC BY 4.0).</p>
       {state.footer ? <p>{state.footer}</p> : null}
     </details>
@@ -111,8 +113,9 @@ export function StrongestLinksScreen({ state, earlier }) {
           <>
             <header className="hero">
               <h1>{state.mainChart.headline}</h1>
-              <Tag label={state.mainChart.tierLabel} tier={state.mainChart.tier} />
+              <Tag label={state.mainChart.tierLabel} />
             </header>
+            <p className="standing">{STANDING_LINE}</p>
             <div className="hero-chart" data-main-chart="1">
               <SeriesChart model={mainModel} />
             </div>

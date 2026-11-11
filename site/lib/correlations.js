@@ -6,6 +6,7 @@
 import { existsSync, readdirSync, readFileSync } from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { brandHeadline } from './brandHeadlines.js';
 import { textProblem } from './connections.js';
 
 export const SCHEMA_VERSION = 'correlations-1';
@@ -447,7 +448,7 @@ export function buildChartCard(row, section) {
   const episodes = numeric(item.independent_episodes);
   return {
     section,
-    headline: buildHeadline(item),
+    headline: brandHeadline(section, clean(item.event_family), clean(item.asset)) || buildHeadline(item),
     tier,
     tierLabel: TIER_LABEL[tier],
     strength: formatTwo(item.spearman),

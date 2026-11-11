@@ -6,7 +6,7 @@
   --move-up:#116C5B; --move-down:#B4532A;
   --flag-ink:#8A5A00; --flag-bg:#FFF4DB; --guess-ink:#5B4B8A; --guess-bg:#EFEBFA; --fact-ink:#3E5254; --fact-bg:#EEF1F1;
   --error-ink:#A3262A; --error-bg:#FDECEC;
-  --font:'Inter','Source Sans 3',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  --font:var(--font-inter);
   --ease:250ms ease-out;
 }
 *{box-sizing:border-box}
@@ -296,6 +296,24 @@ details.exposure summary::-webkit-details-marker{display:none}
 .yf-detail p{margin:4px 0;color:var(--neutral-700);font-size:15px;line-height:22px}
 .corr-weaker{margin:12px 0 8px}
 .corr-weaker summary{font-size:16px;line-height:22px}
+/* connections-brand */
+body:has([data-page="connections"]){background:#f5f7f5;color:#172f32}
+[data-page="connections"]{background:#f5f7f5;color:#172f32}
+[data-page="connections"] .standing{margin:12px 0 0;color:#172f32;font-size:16px;line-height:24px}
+[data-page="connections"] .quiet-tag{color:#172f32;background:none;border:0;padding:0;font-size:13px;line-height:18px;font-weight:400}
+[data-page="connections"] .series-chart .axis{stroke:#172f32;stroke-width:1;opacity:.2}
+[data-page="connections"] .series-chart .odds-line{fill:none;stroke:#116c5b;stroke-width:2}
+[data-page="connections"] .series-chart .asset-line{fill:none;stroke:#172f32;stroke-width:1}
+[data-page="connections"] .series-chart .tick,[data-page="connections"] .series-chart .end-label,[data-page="connections"] .series-chart .end-name,[data-page="connections"] .readout{fill:#172f32;color:#172f32}
+[data-page="connections"] .series-chart .end-label,[data-page="connections"] .series-chart .end-name{font-size:12px}
+[data-page="connections"] .trend{display:block;width:64px;height:28px}
+[data-page="connections"] .trend path{fill:none;stroke:#116c5b;stroke-width:1}
+[data-page="connections"] .readout{min-height:20px;margin:8px 0 0;font-size:14px;line-height:20px}
+[data-page="connections"] .time-range{margin-top:8px}
+[data-page="connections"] .time-range summary{cursor:pointer;color:#172f32}
+[data-page="connections"] .time-range button{margin:8px 8px 0 0;padding:0;border:0;background:none;color:#172f32;font:inherit;cursor:pointer}
+[data-page="connections"] .time-range button[aria-pressed="true"]{color:#116c5b}
+/* /connections-brand */
 @media(min-width:600px){
   .example-notice{font-size:24px;line-height:30px}
   .corr-num b{font-size:32px;line-height:36px}

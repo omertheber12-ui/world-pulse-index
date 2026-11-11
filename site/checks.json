@@ -1,5 +1,5 @@
 {
-  "run_at": "2026-11-11T20:59:42.571Z",
+  "run_at": "2026-11-11T21:16:16.281Z",
   "all_pass": true,
   "items": [
     {
@@ -439,6 +439,26 @@
     },
     {
       "check": "a headline is one line from the labels, timing, and sign",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "the featured pick matches the rule and all 21 headlines are mapped",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "a size chart shows the daily swing, not a running total",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "only the three allowed colors appear in the connections CSS",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "a single font family is used",
       "pass": true,
       "detail": ""
     },
