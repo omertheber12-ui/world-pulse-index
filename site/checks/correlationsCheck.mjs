@@ -454,7 +454,7 @@ export async function correlationPageChecks(add, page) {
   const visible = textOf(html);
   const home = await page('/');
   const homeNav = ((home.html || '').match(/<nav id="tabs">[\s\S]*?<\/nav>/) || [''])[0];
-  const connNav = (html.match(/<nav class="cx-tabs"[\s\S]*?<\/nav>/) || [''])[0];
+  const connNav = (html.match(/<nav id="tabs">[\s\S]*?<\/nav>/) || [''])[0];
   const featuredLine = 'On the same day, a rise in Fed rate-cut odds often lined up with a fall in the US 2-year yield.';
   const ready = html.split('data-mode="ready"')[1] || '';
   add('connections page renders the preview banner, standing line, and noindex',
@@ -467,8 +467,7 @@ export async function correlationPageChecks(add, page) {
     && html.includes('data-page="connections"')
     && html.includes(featuredLine)
     && html.includes('See how strong this is')
-    && html.includes('All ' + loaded.file.chance_summary.shown_rows + ' links we can show')
-    && !html.includes('<nav id="tabs">'));
+    && html.includes('All ' + loaded.file.chance_summary.shown_rows + ' links we can show'));
   add('the first screen shows the tier bar and not the old long list',
     (html.match(/data-main-chart="1"/g) || []).length === 1
     && (html.split('data-main-chart="1"')[1] || '').includes('data-odds-line="1"')
@@ -496,6 +495,15 @@ export async function correlationPageChecks(add, page) {
     && oldDetail.status === 200
     && oldDetail.html.includes('data-page="connection"')
     && !oldDetail.html.includes('How strong is this?'));
+  const hasBottomBar = (pageHtml) => {
+    const nav = (pageHtml.match(/<nav id="tabs">[\s\S]*?<\/nav>/) || [''])[0];
+    return nav.includes('href="/connections"')
+      && nav.includes('Connections')
+      && !pageHtml.includes('class="cx-top"')
+      && !pageHtml.includes('cx-tabs');
+  };
+  add('Connections pages render the bottom tab bar and no top bar',
+    hasBottomBar(html) && hasBottomBar(detail.html));
   add('the connections tab points at /connections',
     connNav.includes('href="/connections"')
     && connNav.includes('Connections')

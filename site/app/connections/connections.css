@@ -1,7 +1,7 @@
 .cx-shell{background:#f5f7f5;color:#172f32;min-height:100vh}
 header.cx-top{position:static;z-index:auto;background:#f5f7f5;box-shadow:none}
 footer.cx-foot{width:100%;max-width:none;margin:64px 0 0;padding:24px 0 40px;color:rgba(23,47,50,.72);font-size:14px;font-weight:400;letter-spacing:0;line-height:24px}
-body:has(.cx-shell){padding-bottom:0;background:#f5f7f5}
+body:has(.cx-shell){background:#f5f7f5}
 .cx-wrap{width:1120px;max-width:calc(100% - 48px);margin:0 auto}
 .cx-top{border-bottom:1px solid rgba(23,47,50,.12);background:#f5f7f5}
 .cx-topin{display:flex;align-items:center;gap:48px;height:72px;max-width:1120px}

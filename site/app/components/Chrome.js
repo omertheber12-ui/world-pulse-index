@@ -19,7 +19,6 @@ function on(pathname, href) {
 
 export function Header() {
   const pathname = usePathname() || '/';
-  if (pathname === '/connections' || pathname.startsWith('/connections/')) return null;
   return (
     <header>
       <div className="bar">

@@ -1,5 +1,5 @@
 {
-  "run_at": "2026-11-11T21:58:54.634Z",
+  "run_at": "2026-11-12T09:44:29.444Z",
   "all_pass": true,
   "items": [
     {
@@ -570,17 +570,17 @@
     {
       "check": "Today headline is built from the question, end date, and change",
       "pass": true,
-      "detail": "Chance that the US central bank raises rates by 0.25 points at its January 2027 meeting rose"
+      "detail": "Chance that the Russia and Ukraine ceasefire agreement by December 31, 2026 fell"
     },
     {
       "check": "Live headlines have no mid-sentence Title Case words except proper nouns",
       "pass": true,
-      "detail": "Chance that the US central bank raises rates by 0.25 points at its January 2027 meeting rose"
+      "detail": "Chance that the Russia and Ukraine ceasefire agreement by December 31, 2026 fell"
     },
     {
       "check": "Today top 3 cards are the first 3 of the personal ranking",
       "pass": true,
-      "detail": "rows=770451,1337182,711714 top=770451,1337182,711714"
+      "detail": "rows=478472,770450,770451 top=478472,770450,770451"
     },
     {
       "check": "Exposure text says this is not an expected loss",
@@ -714,6 +714,11 @@
     },
     {
       "check": "a correlation id renders the new detail and a TR-007 id renders the old one",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "Connections pages render the bottom tab bar and no top bar",
       "pass": true,
       "detail": ""
     },
