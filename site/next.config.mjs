@@ -1,8 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   outputFileTracingIncludes: {
+    '/': ['./data/daily/**/*', './data/correlations/**/*'],
+    '/week': ['./data/daily/**/*', './data/correlations/**/*'],
     '/connections': ['./data/connections/**/*', './data/fallback.json', './data/correlations/**/*'],
-    '/connections/[pair_id]': ['./data/connections/**/*', './data/fallback.json'],
+    '/connections/[pair_id]': ['./data/connections/**/*', './data/fallback.json', './data/correlations/**/*'],
   },
   async redirects() {
     return [

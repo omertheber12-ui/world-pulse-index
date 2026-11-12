@@ -11,8 +11,18 @@ const TABS = [
   ['/portfolio', 'Portfolio', '<svg viewBox="0 0 24 24"><path d="M12 4a8 8 0 1 0 8 8h-8z"/><path d="M14 2.5A8 8 0 0 1 21.5 10H14z"/></svg>'],
 ];
 
+const memory = new Map();
+
+function memGet(key) {
+  return memory.has(key) ? String(memory.get(key)) : '';
+}
+
+function memSet(key, value) {
+  memory.set(key, String(value));
+}
+
 function on(pathname, href) {
-  if (href === '/') return pathname === '/';
+  if (href === '/') return pathname === '/' || pathname === '/week';
   if (href === '/events') return pathname === '/events' || pathname.startsWith('/event/');
   return pathname === href || pathname.startsWith(href + '/');
 }
@@ -40,11 +50,11 @@ export function Transition({ children }) {
   const pathname = usePathname();
   const [cls, setCls] = useState('');
   useEffect(() => {
-    let dir = '';
-    try { dir = sessionStorage.getItem('wpi-dir') || ''; sessionStorage.removeItem('wpi-dir'); } catch { /* ignore */ }
+    const dir = memGet('wpi-dir');
+    memory.delete('wpi-dir');
     setCls(dir === 'back' ? 'nav-back' : dir === 'forward' ? 'nav-forward' : '');
     if (dir === 'back') {
-      const y = Number(sessionStorage.getItem('wpi-scroll:' + location.pathname + location.search) || 0);
+      const y = Number(memGet('wpi-scroll:' + location.pathname + location.search) || 0);
       if (y) requestAnimationFrame(() => window.scrollTo(0, y));
     }
   }, [pathname]);
@@ -58,11 +68,9 @@ export function RowLink({ href, className, children, ...rest }) {
       className={className}
       {...rest}
       onClick={() => {
-        try {
-          sessionStorage.setItem('wpi-dir', 'forward');
-          sessionStorage.setItem('wpi-scroll:' + location.pathname + location.search, String(window.scrollY));
-          sessionStorage.setItem('wpi-return', location.pathname + location.search);
-        } catch { /* ignore */ }
+        memSet('wpi-dir', 'forward');
+        memSet('wpi-scroll:' + location.pathname + location.search, String(window.scrollY));
+        memSet('wpi-return', location.pathname + location.search);
       }}
     >
       {children}
@@ -73,14 +81,12 @@ export function RowLink({ href, className, children, ...rest }) {
 export function BackLink() {
   const [href, setHref] = useState('/events');
   useEffect(() => {
-    try {
-      const ret = sessionStorage.getItem('wpi-return') || '';
-      if (ret.startsWith('/events')) setHref(ret);
-    } catch { /* ignore */ }
+    const ret = memGet('wpi-return');
+    if (ret.startsWith('/events')) setHref(ret);
   }, []);
   return (
     <p className="back">
-      <Link className="back" href={href} onClick={() => { try { sessionStorage.setItem('wpi-dir', 'back'); } catch { /* ignore */ } }}>
+      <Link className="back" href={href} onClick={() => { memSet('wpi-dir', 'back'); }}>
         ‹ Events
       </Link>
     </p>

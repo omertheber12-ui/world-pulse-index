@@ -1,4 +1,6 @@
 import Link from 'next/link';
+import { learnCardSet } from '../../../lib/screenCopy.js';
+import { LearnOneThing } from './LearnOneThing.js';
 import { LinkChart } from './LinkChart.js';
 import { ConnFooter } from './TopBar.js';
 
@@ -45,6 +47,13 @@ export function LinkDetailView({ state }) {
           <LinkChart chart={chart} variant="detail" />
           <p className="cx-note">{detail.note}</p>
         </section>
+        <LearnOneThing cards={learnCardSet({
+          scoreText: detail.strength.valueText,
+          bandText: detail.strength.bandText,
+          episodes: detail.facts[0] && detail.facts[0].value,
+          tradingDays: detail.facts[1] && detail.facts[1].value,
+          outside: detail.strength.outside,
+        })} />
         <section className="cx-sec">
           <h2>How strong is this?</h2>
           <div className="cx-card cx-pad">
