@@ -1,0 +1,3 @@
+# Keeps large data and screenshots out of coding-agent context.
+site/data/
+docs/screenshots/

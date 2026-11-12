@@ -11,7 +11,7 @@ import {
 } from '../lib/correlations.js';
 import { BRAND_HEADLINES, STANDING_LINE } from '../lib/brandHeadlines.js';
 import { ODDS_AXIS, SIZE_ODDS_AXIS, chartModel, hasBothLines, loadChartSeries, oddsPointsAfterHoldBack, seriesPath } from '../lib/chartSeries.js';
-import { buildHome, strengthCopy } from '../lib/linkScreen.js';
+import { buildHome, checksCopy, strengthCopy } from '../lib/linkScreen.js';
 
 const siteRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const RESEARCH_SHA = 'a801a002f45b93c22acc60287ab168c0f220c9545b8381ae794beaaedd7049d9';
@@ -526,10 +526,8 @@ export async function correlationPageChecks(add, page) {
   const connNav = (html.match(/<nav id="tabs">[\s\S]*?<\/nav>/) || [''])[0];
   const featuredLine = 'On the same day, a rise in Fed rate-cut odds often lined up with a fall in the US 2-year yield.';
   const ready = html.split('data-mode="ready"')[1] || '';
-  add('connections page renders the preview banner, standing line, and noindex',
+  add('connections page renders the standing line and noindex',
     view.status === 200
-    && ready.includes(COPY.previewBanner)
-    && ready.indexOf(COPY.previewBanner) < ready.indexOf(STANDING_LINE)
     && ready.includes(STANDING_LINE)
     && !html.includes(COPY.exampleNotice)
     && /noindex/i.test(html)
@@ -635,4 +633,130 @@ export async function correlationPageChecks(add, page) {
     !!homeBox
     && homeBox.scroll === 0
     && homeBox.linkBottom + 8 <= homeBox.barTop);
+
+  const previewLine = 'Internal preview. Not on the live site.';
+  const listText = textOf(html);
+  const detailText = textOf(detail.html);
+  add('the internal preview line is gone and the standing line stays',
+    !listText.includes(previewLine)
+    && !detailText.includes(previewLine)
+    && !html.includes(previewLine)
+    && !detail.html.includes(previewLine)
+    && listText.includes(STANDING_LINE)
+    && detailText.includes(STANDING_LINE));
+
+  const testedCount = loaded.file.chance_summary.rows_tested;
+  const passSentence = 'Out of ' + testedCount + ' links checked, this one is unlikely to be luck.';
+  const failSentence = 'Out of ' + testedCount + ' links checked, this one could easily be luck.';
+  const homeModel = buildHome(loaded);
+  const passRow = homeModel.rows.find((row) => row.tier === 'strict');
+  const failRow = homeModel.rows.find((row) => row.tier !== 'strict');
+  const passPage = passRow ? await page(passRow.href) : { html: '' };
+  const failPage = failRow ? await page(failRow.href) : { html: '' };
+  const unitPass = checksCopy({ bh_flag: true, event_family: 'x', asset: 'y', lag: 'same_day' }, { rows_tested: testedCount }, null);
+  const unitFail = checksCopy({ bh_flag: false, event_family: 'x', asset: 'y', lag: 'same_day' }, { rows_tested: testedCount }, null);
+  const screenSrc = readFileSync(path.join(siteRoot, 'lib/linkScreen.js'), 'utf8');
+  const copySrc = readFileSync(path.join(siteRoot, 'lib/correlations.js'), 'utf8');
+  add('the many-test line uses plain words for a pass and a fail',
+    unitPass.includes(passSentence)
+    && unitFail.includes(failSentence)
+    && !unitPass.includes(failSentence)
+    && !unitFail.includes(passSentence)
+    && passPage.html.includes(passSentence)
+    && !passPage.html.includes(failSentence)
+    && !passPage.html.includes('after correcting for')
+    && failPage.html.includes(failSentence)
+    && !failPage.html.includes(passSentence)
+    && !failPage.html.includes('after correcting for')
+    && !screenSrc.includes('after correcting for')
+    && !copySrc.includes('after correcting for'));
+
+  const gapExpr = `(() => {
+    const facts = [...document.querySelectorAll('.cx-fact')];
+    const timing = facts.find((el) => {
+      const fig = el.querySelector('.cx-fig');
+      return fig && (fig.textContent === 'Same day' || fig.textContent === 'One moved first');
+    });
+    const checks = document.querySelector('.cx-checks');
+    if (!timing || !checks) return null;
+    return {
+      gap: checks.getBoundingClientRect().top - timing.getBoundingClientRect().bottom,
+      label: timing.querySelector('.cx-fig').textContent,
+    };
+  })()`;
+  const barExpr = `(() => {
+    const details = document.querySelector('details.earlier-checks');
+    if (details) details.open = true;
+    const chip = details && [...details.querySelectorAll('.chips a')].find((el) => el.textContent.trim() === 'All');
+    const tab = document.querySelector('#tabs a.tab:not(.on)');
+    const bar = document.querySelector('#tabs');
+    if (!chip || !tab || !bar) return null;
+    const barStyle = getComputedStyle(bar);
+    return {
+      width: chip.getBoundingClientRect().width,
+      color: getComputedStyle(tab).color,
+      background: barStyle.backgroundColor,
+      barHeight: barStyle.height,
+      barPad: barStyle.paddingBottom,
+      bodyPad: getComputedStyle(document.body).paddingBottom,
+    };
+  })()`;
+  const leadRow = homeModel.rows.find((row) => row.timing !== 'same_day');
+  const follow = await measurePages([
+    { url: passRow ? origin + passRow.href : featuredUrl, width: 390, height: 844, expression: gapExpr },
+    { url: passRow ? origin + passRow.href : featuredUrl, width: 1280, height: 900, expression: gapExpr },
+    { url: leadRow ? origin + leadRow.href : featuredUrl, width: 390, height: 844, expression: gapExpr },
+    { url: origin + '/connections', width: 390, height: 844, expression: barExpr },
+  ]);
+  const gaps = follow.slice(0, 3);
+  const near12 = (item) => item && Math.abs(item.gap - 12) <= 0.5;
+  add('the timing fact card has a 12px gap below it',
+    gaps.length === 3
+    && gaps[0] && gaps[0].label === 'Same day'
+    && gaps[2] && (gaps[2].label === 'Same day' || gaps[2].label === 'One moved first')
+    && gaps.every(near12));
+  const barBox = follow[3];
+  const tabsRule = (readFileSync(path.join(siteRoot, 'app/globals.css'), 'utf8').match(/#tabs\{[^}]*\}/) || [''])[0];
+  const tabRule = (readFileSync(path.join(siteRoot, 'app/globals.css'), 'utf8').match(/\.tab\{[^}]*\}/) || [''])[0];
+  const fg = parseCssColor(barBox && barBox.color);
+  const bg = parseCssColor(barBox && barBox.background);
+  const solid = fg && bg ? (fg.a < 1 ? blendColor(fg, bg) : fg) : null;
+  const ratio = solid && bg ? contrastRatio(solid, bg) : 0;
+  const brandInk = /rgba\(23,\s*47,\s*50|rgba\(17,\s*108,\s*91|#172f32|#116c5b/i.test(tabRule);
+  add('the All chip in Earlier checks is at least 44px wide',
+    !!barBox && barBox.width >= 44);
+  add('inactive tabs clear 4.5:1 and the bar pads for the safe area',
+    tabsRule.includes('env(safe-area-inset-bottom)')
+    && brandInk
+    && ratio >= 4.5
+    && barBox.barHeight === '64px'
+    && barBox.barPad === '0px'
+    && barBox.bodyPad === '80px',
+    barBox ? ratio.toFixed(2) + ' ' + barBox.color + ' h=' + barBox.barHeight + ' pad=' + barBox.barPad + ' body=' + barBox.bodyPad : 'no bar');
+}
+
+function parseCssColor(color) {
+  const match = String(color || '').match(/rgba?\(([0-9.]+)[,\s]+([0-9.]+)[,\s]+([0-9.]+)(?:[,\s/]+([0-9.]+))?\)/);
+  if (!match) return null;
+  return { r: Number(match[1]), g: Number(match[2]), b: Number(match[3]), a: match[4] == null ? 1 : Number(match[4]) };
+}
+
+function blendColor(fg, bg) {
+  const alpha = fg.a == null ? 1 : fg.a;
+  return {
+    r: fg.r * alpha + bg.r * (1 - alpha),
+    g: fg.g * alpha + bg.g * (1 - alpha),
+    b: fg.b * alpha + bg.b * (1 - alpha),
+  };
+}
+
+function contrastRatio(fg, bg) {
+  const channel = (value) => {
+    const c = value / 255;
+    return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4;
+  };
+  const lum = (color) => 0.2126 * channel(color.r) + 0.7152 * channel(color.g) + 0.0722 * channel(color.b);
+  const hi = Math.max(lum(fg), lum(bg));
+  const lo = Math.min(lum(fg), lum(bg));
+  return (hi + 0.05) / (lo + 0.05);
 }

@@ -11,7 +11,7 @@
 }
 *{box-sizing:border-box}
 html,body{margin:0;background:var(--neutral-25);color:var(--ink-900)}
-body{font-family:var(--font);font-size:16px;line-height:24px;font-weight:400;-webkit-font-smoothing:antialiased;padding-bottom:80px}
+body{font-family:var(--font);font-size:16px;line-height:24px;font-weight:400;-webkit-font-smoothing:antialiased;padding-bottom:80px;padding-bottom:calc(80px + env(safe-area-inset-bottom))}
 .num,.bignum,.rfig,.rchg,.opct,.hw,.hval,.contrib,.mv{font-feature-settings:"tnum" 1;font-variant-numeric:tabular-nums}
 a{color:var(--green-600);font-weight:600;text-decoration:none}
 a:hover{text-decoration:underline}
@@ -21,8 +21,8 @@ header{position:sticky;top:0;z-index:10;background:var(--neutral-0);box-shadow:0
 .bar{height:56px;display:flex;align-items:center;justify-content:space-between;gap:12px}
 .brand{color:var(--ink-900);font-weight:600;font-size:17px;line-height:22px}
 .brand:hover{text-decoration:none}
-#tabs{position:fixed;left:0;right:0;bottom:0;height:64px;display:flex;background:var(--neutral-0);box-shadow:0 -1px 0 var(--neutral-100);z-index:10;padding:0}
-.tab{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;color:var(--neutral-500);font-size:12px;line-height:16px;font-weight:500}
+#tabs{position:fixed;left:0;right:0;bottom:0;height:64px;height:calc(64px + env(safe-area-inset-bottom));display:flex;background:var(--neutral-0);box-shadow:0 -1px 0 var(--neutral-100);z-index:10;padding:0;padding-bottom:env(safe-area-inset-bottom)}
+.tab{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;color:rgba(23,47,50,.72);font-size:12px;line-height:16px;font-weight:500}
 .tab svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.8}
 .tab.on{color:var(--green-600)}
 .tab:hover{text-decoration:none}
@@ -120,7 +120,7 @@ html.nav-back main{animation:slide-back 250ms ease-out}
 @media(min-width:600px){
   body{padding-bottom:0}
   .bar{height:64px}
-  #tabs{position:static;height:auto;width:auto;background:none;box-shadow:none;gap:4px}
+  #tabs{position:static;height:auto;width:auto;background:none;box-shadow:none;gap:4px;padding:0}
   .tab{flex-direction:row;font-size:15px;line-height:20px;font-weight:600;color:var(--neutral-700);padding:8px 10px}
   .tab svg{display:none}
   .tab.on{color:var(--green-600);box-shadow:inset 0 -2px 0 var(--green-600)}

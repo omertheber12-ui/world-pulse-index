@@ -7,7 +7,6 @@ export function LinkDetailView({ state }) {
     return (
       <>
         <main className="cx-wrap" data-page="connections" data-mode="empty">
-          <p className="cx-banner">{state && state.banner}</p>
           <h1>Connections</h1>
           <p className="cx-stand">{state && state.standing}</p>
           <p className="cx-empty">{state && state.empty}</p>
@@ -20,7 +19,6 @@ export function LinkDetailView({ state }) {
     return (
       <>
         <main className="cx-wrap" data-page="connections" data-mode="missing">
-          <p className="cx-banner">{state.banner}</p>
           <Link className="cx-back" href="/connections">‹ Connections</Link>
           <h1>{state.message}</h1>
           <p className="cx-stand">{state.standing}</p>
@@ -36,7 +34,6 @@ export function LinkDetailView({ state }) {
   return (
     <>
       <main className="cx-wrap" data-page="connections" data-mode="detail" data-link-detail="1">
-        <p className="cx-banner">{state.banner}</p>
         <Link className="cx-back" href="/connections">‹ Connections</Link>
         <div className="cx-tags">
           <span className={'cx-tag t-' + tag}>{row.tierLabel}</span>

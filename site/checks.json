@@ -1,5 +1,5 @@
 {
-  "run_at": "2026-11-12T10:07:29.155Z",
+  "run_at": "2026-11-12T10:43:29.812Z",
   "all_pass": true,
   "items": [
     {
@@ -703,7 +703,7 @@
       "detail": ""
     },
     {
-      "check": "connections page renders the preview banner, standing line, and noindex",
+      "check": "connections page renders the standing line and noindex",
       "pass": true,
       "detail": ""
     },
@@ -746,6 +746,31 @@
       "check": "the link bottom plus 8 is at most the bar top at 390x844",
       "pass": true,
       "detail": ""
+    },
+    {
+      "check": "the internal preview line is gone and the standing line stays",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "the many-test line uses plain words for a pass and a fail",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "the timing fact card has a 12px gap below it",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "the All chip in Earlier checks is at least 44px wide",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "inactive tabs clear 4.5:1 and the bar pads for the safe area",
+      "pass": true,
+      "detail": "5.74 rgba(23, 47, 50, 0.72) h=64px pad=0px body=80px"
     },
     {
       "check": "today.html redirects to the Today page",
