@@ -77,8 +77,8 @@ export function LearnOneThing({ cards }) {
             </div>
           ))}
           <div className="cx-learn-actions">
-            <button type="button" aria-disabled={step === 0 ? 'true' : 'false'} onClick={() => { if (step > 0) setStep(step - 1); }}>
-              Back
+            <button type="button" onClick={() => { if (step === 0) close(); else setStep(step - 1); }}>
+              {step === 0 ? 'Close' : 'Back'}
             </button>
             {step < cards.length - 1 ? (
               <button type="button" className="cx-learn-next" onClick={() => setStep(step + 1)}>Next</button>

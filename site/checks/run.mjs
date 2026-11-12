@@ -330,7 +330,7 @@ if (base) {
     && chartAt >= 0 && learnAt > chartAt && strongAt > learnAt
     && learnPage.html.includes('Three short cards.')
     && !learnPage.html.includes('Figures on these cards are the accepted TR-016 numbers')
-    && /<button[^>]*>\s*Back\s*<\/button>/.test(learnPage.html)
+    && /<button[^>]*>\s*Close\s*<\/button>/.test(learnPage.html)
     && learnPage.html.includes('aria-label="Close"')
     && learnPage.html.includes(learnCards[1].topic)
     && learnPage.html.includes(learnCards[2].topic)
