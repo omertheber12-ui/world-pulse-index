@@ -1,0 +1,28 @@
+{
+  "schema_version": "weekly-summary-1",
+  "week": "2026-W42",
+  "week_start": "2026-10-12",
+  "week_end": "2026-10-18",
+  "days_covered": [
+    "2026-10-13",
+    "2026-10-14",
+    "2026-10-15",
+    "2026-10-16",
+    "2026-10-17",
+    "2026-10-18"
+  ],
+  "status": "picked",
+  "biggest_move": {
+    "market_id": "3215013",
+    "event_id": "770451",
+    "name": "Fed rate decision in January — 25 bps increase",
+    "move_points": 10.5,
+    "abs_move_points": 10.5,
+    "odds": 0.405,
+    "previous_odds": 0.3,
+    "previous_date": "2026-10-13",
+    "volume_24h_usd": 20610.072322,
+    "date": "2026-10-14"
+  },
+  "summary": "Saved days 13 to 18 October 2026. The largest move was 10.5 points up on Fed rate decision in January — 25 bps increase, on 14 October 2026. Recorded traded volume that day was 20,610.07 shares."
+}

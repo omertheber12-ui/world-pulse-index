@@ -1,5 +1,5 @@
 {
-  "run_at": "2026-11-12T10:43:29.812Z",
+  "run_at": "2026-11-12T12:12:00.516Z",
   "all_pass": true,
   "items": [
     {
@@ -513,6 +513,61 @@
       "detail": ""
     },
     {
+      "check": "TR-016 correlation files are unchanged",
+      "pass": true,
+      "detail": "latest a801a002f45b93c22acc60287ab168c0f220c9545b8381ae794beaaedd7049d9 run a801a002f45b93c22acc60287ab168c0f220c9545b8381ae794beaaedd7049d9 series 5f968fbdb71f2bafa8043d4ffbe6278bd6897d0adfa8c0077ccdbad9ee3ef1be"
+    },
+    {
+      "check": "Biggest-change numbers are in rule.json with a version",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "Biggest-change rule keeps the largest move, then the higher volume",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "Daily files use the schema",
+      "pass": true,
+      "detail": "31 days"
+    },
+    {
+      "check": "No duplicate markets in a day",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "Recorded odds are between 0 and 1",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "Daily timestamps are present",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "Saved biggest-change results match the rule",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "history.json matches the day files",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "Weekly summaries match the saved days",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "Backfill table lists every saved day",
+      "pass": true,
+      "detail": ""
+    },
+    {
       "check": "Gamma HTTP 200 for all events",
       "pass": true,
       "detail": "770450:200, 770451:200, 1025305:200, 1280521:200, 1123963:200, 1194143:200, 1194144:200, 800884:200, 79987:200, 81557:200, 31552:200, 711714:200, 478472:200, 160366:200, 34044:200, 1337182:200"
@@ -534,6 +589,11 @@
     },
     {
       "check": "No buy/sell, edge, alpha, or risk-free wording in source",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "Pages do not use browser storage",
       "pass": true,
       "detail": ""
     },
@@ -568,27 +628,22 @@
       "detail": ""
     },
     {
-      "check": "Today headline is built from the question, end date, and change",
+      "check": "Event headline is built from the question, end date, and change",
       "pass": true,
-      "detail": "Chance that the Russia and Ukraine ceasefire agreement by December 31, 2026 fell"
+      "detail": "Chance that the US central bank raises rates by 0.25 points at its December 2026 meeting rose"
     },
     {
       "check": "Live headlines have no mid-sentence Title Case words except proper nouns",
       "pass": true,
-      "detail": "Chance that the Russia and Ukraine ceasefire agreement by December 31, 2026 fell"
+      "detail": "Chance that the US central bank raises rates by 0.25 points at its December 2026 meeting rose"
     },
     {
-      "check": "Today top 3 cards are the first 3 of the personal ranking",
+      "check": "Today shows the saved change",
       "pass": true,
-      "detail": "rows=478472,770450,770451 top=478472,770450,770451"
+      "detail": "What changed today | US presidential election 2028: JD Vance odds fell 3.8 points since yesterday."
     },
     {
       "check": "Exposure text says this is not an expected loss",
-      "pass": true,
-      "detail": ""
-    },
-    {
-      "check": "Breakdown groups are present",
       "pass": true,
       "detail": ""
     },
@@ -603,7 +658,42 @@
       "detail": ""
     },
     {
+      "check": "Quiet day says there was no meaningful move",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "No-update day says the latest data could not be read",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "No-baseline day says the latest data cannot be compared yet",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "Demo day states stay off in production",
+      "pass": true,
+      "detail": ""
+    },
+    {
       "check": "Empty state shows 'No events to show right now'",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "The weekly page reads the saved week",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "Learn cards use this link numbers and stay near 50 words",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "Learn one thing sits under the chart and above how strong",
       "pass": true,
       "detail": ""
     },

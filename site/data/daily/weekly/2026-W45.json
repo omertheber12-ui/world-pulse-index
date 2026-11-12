@@ -1,0 +1,29 @@
+{
+  "schema_version": "weekly-summary-1",
+  "week": "2026-W45",
+  "week_start": "2026-11-02",
+  "week_end": "2026-11-08",
+  "days_covered": [
+    "2026-11-02",
+    "2026-11-03",
+    "2026-11-04",
+    "2026-11-05",
+    "2026-11-06",
+    "2026-11-07",
+    "2026-11-08"
+  ],
+  "status": "picked",
+  "biggest_move": {
+    "market_id": "3215008",
+    "event_id": "770450",
+    "name": "Fed rate decision in December — 25 bps increase",
+    "move_points": -14,
+    "abs_move_points": 14,
+    "odds": 0.635,
+    "previous_odds": 0.775,
+    "previous_date": "2026-11-04",
+    "volume_24h_usd": 929657.2542230004,
+    "date": "2026-11-05"
+  },
+  "summary": "Saved days 2 to 8 November 2026. The largest move was 14 points down on Fed rate decision in December — 25 bps increase, on 5 November 2026. Recorded traded volume that day was 929,657.25 shares."
+}

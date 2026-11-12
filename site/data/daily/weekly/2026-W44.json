@@ -1,0 +1,29 @@
+{
+  "schema_version": "weekly-summary-1",
+  "week": "2026-W44",
+  "week_start": "2026-10-26",
+  "week_end": "2026-11-01",
+  "days_covered": [
+    "2026-10-26",
+    "2026-10-27",
+    "2026-10-28",
+    "2026-10-29",
+    "2026-10-30",
+    "2026-10-31",
+    "2026-11-01"
+  ],
+  "status": "picked",
+  "biggest_move": {
+    "market_id": "682708",
+    "event_id": "81557",
+    "name": "Israel next prime minister — Gadi Eizenkot",
+    "move_points": -19.8,
+    "abs_move_points": 19.8,
+    "odds": 0.2445,
+    "previous_odds": 0.4425,
+    "previous_date": "2026-10-27",
+    "volume_24h_usd": 1612350.2146170018,
+    "date": "2026-10-28"
+  },
+  "summary": "Saved days 26 October 2026 to 1 November 2026. The largest move was 19.8 points down on Israel next prime minister — Gadi Eizenkot, on 28 October 2026. Recorded traded volume that day was 1,612,350.21 shares."
+}

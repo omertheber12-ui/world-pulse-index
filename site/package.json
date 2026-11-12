@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "node scripts/writeKnownIds.mjs && next build",
     "start": "next start",
-    "check": "node checks/run.mjs"
+    "check": "node checks/run.mjs",
+    "check:daily": "node checks/dailyCheck.mjs"
   },
   "dependencies": {
     "next": "^15.5.4",
