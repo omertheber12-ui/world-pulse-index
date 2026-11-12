@@ -38,9 +38,9 @@ export function TodayScreen({ model }) {
         <details className="smaller">
           <summary>
             <span className="smaller-label">{model.smaller.label}</span>
-            <span className="smaller-titles">
-              {model.smaller.titles.map((title) => <span key={title}>{title}</span>)}
-            </span>
+            <svg className="smaller-chev" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
           </summary>
           <ul>
             {model.smaller.moves.map((move) => <li key={move}>{move}</li>)}

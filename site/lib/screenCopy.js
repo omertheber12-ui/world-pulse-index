@@ -17,9 +17,10 @@ export function displayName(name) {
 }
 
 export function moveSentence(name, direction, pointsText, when) {
-  if (direction === 'held') return name + ' odds held ' + when + '.';
+  const tail = when ? ' ' + when : '';
+  if (direction === 'held') return name + ' odds held' + tail + '.';
   const unit = pointsText === '1' ? 'point' : 'points';
-  return name + ' odds ' + direction + ' ' + pointsText + ' ' + unit + ' ' + when + '.';
+  return name + ' odds ' + direction + ' ' + pointsText + ' ' + unit + tail + '.';
 }
 
 export function directionOf(points) {

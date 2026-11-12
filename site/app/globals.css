@@ -337,12 +337,13 @@ body:has([data-page="connections"]){background:#f5f7f5;color:#172f32}
 .today-chart .chart-caps,.today-chart figcaption{color:var(--neutral-700)}
 .today-chart figcaption{margin:4px 0 0;font-size:14px;line-height:20px}
 .smaller{margin:4px 0 8px;border-top:1px solid var(--neutral-100)}
-.smaller summary{display:flex;flex-direction:column;justify-content:center;gap:2px;min-height:44px;padding:8px 0;cursor:pointer;list-style:none;color:var(--ink-900)}
+.smaller summary{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:44px;padding:0;cursor:pointer;list-style:none;color:var(--ink-900)}
 .smaller summary::-webkit-details-marker{display:none}
 .smaller-label{font-size:16px;line-height:24px;font-weight:600}
-.smaller-titles{display:flex;flex-direction:column;color:var(--neutral-700);font-size:14px;line-height:20px;font-weight:400}
+.smaller-chev{width:20px;height:20px;flex:none}
+.smaller[open] .smaller-chev{transform:rotate(90deg)}
 .smaller ul{margin:0;padding:0 0 8px;list-style:none}
-.smaller li{padding:8px 0;border-top:1px solid var(--neutral-100);font-size:16px;line-height:24px;color:var(--ink-900)}
+.smaller li{padding:10px 0;border-top:1px solid var(--neutral-100);font-size:16px;line-height:24px;color:var(--ink-900)}
 .caught{display:flex;gap:12px;align-items:flex-start}
 .caught svg{width:28px;height:28px;flex:none;margin-top:2px;color:var(--green-700)}
 .caught p{margin:0;color:var(--neutral-700);font-size:16px;line-height:24px}

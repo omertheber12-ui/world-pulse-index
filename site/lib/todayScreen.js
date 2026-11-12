@@ -187,8 +187,7 @@ export function todayModel(days, pairs, mode) {
     },
     smaller: smallerRows.length ? {
       label: smallerLabel(smallerRows.length),
-      titles: smallerRows.map((row) => displayName(row.name)),
-      moves: smallerRows.map((row) => moveLine(row, whenPhrase(latest.date, row.previous_date))),
+      moves: smallerRows.map((row) => moveLine(row, '')),
     } : null,
   };
 }
