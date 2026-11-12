@@ -1,5 +1,5 @@
 {
-  "run_at": "2026-11-12T10:43:29.812Z",
+  "run_at": "2026-11-12T11:48:01.500Z",
   "all_pass": true,
   "items": [
     {
@@ -509,6 +509,61 @@
     },
     {
       "check": "no odds point falls after its family hold-back date",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "TR-016 correlation files are unchanged",
+      "pass": true,
+      "detail": "latest a801a002f45b93c22acc60287ab168c0f220c9545b8381ae794beaaedd7049d9 run a801a002f45b93c22acc60287ab168c0f220c9545b8381ae794beaaedd7049d9 series 5f968fbdb71f2bafa8043d4ffbe6278bd6897d0adfa8c0077ccdbad9ee3ef1be"
+    },
+    {
+      "check": "Biggest-change numbers are in rule.json with a version",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "Biggest-change rule keeps the largest move, then the higher volume",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "Daily files use the schema",
+      "pass": true,
+      "detail": "31 days"
+    },
+    {
+      "check": "No duplicate markets in a day",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "Recorded odds are between 0 and 1",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "Daily timestamps are present",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "Saved biggest-change results match the rule",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "history.json matches the day files",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "Weekly summaries match the saved days",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "Backfill table lists every saved day",
       "pass": true,
       "detail": ""
     },

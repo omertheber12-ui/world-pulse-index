@@ -7,6 +7,7 @@ import { fileURLToPath } from 'node:url';
 import { chancePhrase, changeLine, changeVerb, strayTitleCase, thinMarketNote, whyMatters } from '../lib/copy.js';
 import { runConnectionChecks, connectionPageChecks } from './connectionsCheck.mjs';
 import { runCorrelationChecks, correlationPageChecks } from './correlationsCheck.mjs';
+import { runDailyChecks } from './dailyCheck.mjs';
 import { homeEligible, moveScore, qualityScore, rankOpen } from '../lib/score.js';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -86,6 +87,7 @@ add('A move under 1 point reads held steady',
 
 runConnectionChecks(add);
 runCorrelationChecks(add);
+runDailyChecks(add);
 
 let gammaOk = true;
 const gammaDetail = [];

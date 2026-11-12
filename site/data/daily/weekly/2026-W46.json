@@ -1,0 +1,26 @@
+{
+  "schema_version": "weekly-summary-1",
+  "week": "2026-W46",
+  "week_start": "2026-11-09",
+  "week_end": "2026-11-15",
+  "days_covered": [
+    "2026-11-09",
+    "2026-11-10",
+    "2026-11-11",
+    "2026-11-12"
+  ],
+  "status": "picked",
+  "biggest_move": {
+    "market_id": "3215013",
+    "event_id": "770451",
+    "name": "Fed rate decision in January — 25 bps increase",
+    "move_points": 30,
+    "abs_move_points": 30,
+    "odds": 0.475,
+    "previous_odds": 0.175,
+    "previous_date": "2026-11-09",
+    "volume_24h_usd": 179997.64466700002,
+    "date": "2026-11-10"
+  },
+  "summary": "Saved days 9 to 12 November 2026. The largest move was 30 points up on Fed rate decision in January — 25 bps increase, on 10 November 2026. Recorded volume that day was $179,997.64."
+}
