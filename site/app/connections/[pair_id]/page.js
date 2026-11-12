@@ -1,3 +1,4 @@
+import { notFound } from 'next/navigation';
 import { buildDetailState, loadConnections, parsePairId } from '../../../lib/connections.js';
 import { parseLinkId } from '../../../lib/correlations.js';
 import { loadDetail } from '../../../lib/linkScreen.js';
@@ -20,7 +21,14 @@ export async function generateMetadata({ params }) {
 export default async function ConnectionPairPage({ params, searchParams }) {
   const { pair_id: id } = await params;
   const sp = await searchParams;
+  if (parsePairId(id)) {
+    const state = buildDetailState(loadConnections(), id);
+    if (state.mode !== 'detail') notFound();
+    if (sp.state === 'loading') return <ConnectionsLoading />;
+    return <ConnectionDetail state={state} />;
+  }
+  const detail = loadDetail(id);
+  if (!detail || detail.mode !== 'ready') notFound();
   if (sp.state === 'loading') return <ConnectionsLoading />;
-  if (parsePairId(id)) return <ConnectionDetail state={buildDetailState(loadConnections(), id)} />;
-  return <LinkDetailView state={loadDetail(id)} />;
+  return <LinkDetailView state={detail} />;
 }

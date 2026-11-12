@@ -2,7 +2,7 @@ import { Inter } from 'next/font/google';
 import { Header, Transition } from './components/Chrome.js';
 import './globals.css';
 
-const inter = Inter({ subsets: ['latin'], weight: ['400', '500', '600', '700'], variable: '--font-inter' });
+const inter = Inter({ subsets: ['latin'], weight: ['400', '500', '600', '700'], variable: '--font-inter', fallback: ['ui-sans-serif', 'system-ui', 'sans-serif'] });
 
 export const metadata = {
   title: 'World Pulse Index',

@@ -131,7 +131,12 @@ body:has(.cx-shell){background:#f5f7f5}
   .cx-tags{margin-top:16px}
   .cx-shell h1{font-size:28px;line-height:36px;margin-top:16px}
   .cx-meta{font-size:16px;line-height:24px}
-  .cx-chartcard{padding:16px;margin-top:24px}
+  .cx-chartcard{padding:16px 16px 8px;margin-top:24px}
+  .cx-chart{margin-block:0}
+  .cx-cardtop{margin-bottom:8px}
+  .cx-readout:empty{display:none}
+  .cx-scale-labels{height:auto;display:flex;flex-direction:column;align-items:stretch;gap:4px}
+  .cx-scale-link,.cx-scale-chance{position:static;transform:none;display:block;width:100%;white-space:normal}
   .cx-sec{margin-top:64px}
   .cx-shell h2{font-size:22px;line-height:28px}
   .cx-sub{font-size:16px;line-height:24px}

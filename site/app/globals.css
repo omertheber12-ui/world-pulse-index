@@ -6,7 +6,7 @@
   --move-up:#116C5B; --move-down:#B4532A;
   --flag-ink:#8A5A00; --flag-bg:#FFF4DB; --guess-ink:#5B4B8A; --guess-bg:#EFEBFA; --fact-ink:#3E5254; --fact-bg:#EEF1F1;
   --error-ink:#A3262A; --error-bg:#FDECEC;
-  --font:var(--font-inter);
+  --font:var(--font-inter),ui-sans-serif,system-ui,sans-serif;
   --ease:250ms ease-out;
 }
 *{box-sizing:border-box}

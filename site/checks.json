@@ -1,5 +1,5 @@
 {
-  "run_at": "2026-11-12T09:44:29.444Z",
+  "run_at": "2026-11-12T10:07:29.155Z",
   "all_pass": true,
   "items": [
     {
@@ -729,6 +729,21 @@
     },
     {
       "check": "the strongest links page has no advice wording",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "an unknown connection id returns 404",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "the two labels sit on separate rows below desktop width",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "the link bottom plus 8 is at most the bar top at 390x844",
       "pass": true,
       "detail": ""
     },

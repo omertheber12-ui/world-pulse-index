@@ -1,4 +1,5 @@
 /** Fixture checks for strongest links. Fixtures stay here and are never written to data/correlations/latest.json. */
+import { spawn } from 'child_process';
 import { createHash } from 'crypto';
 import { existsSync, mkdtempSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'fs';
 import { tmpdir } from 'os';
@@ -420,7 +421,8 @@ export function runCorrelationChecks(add) {
     layout.includes("next/font/google")
     && layout.includes('Inter')
     && layout.includes('--font-inter')
-    && brandCss.includes('--font:var(--font-inter)')
+    && brandCss.includes('--font:var(--font-inter),ui-sans-serif,system-ui,sans-serif')
+    && layout.includes("fallback: ['ui-sans-serif', 'system-ui', 'sans-serif']")
     && families.length > 0
     && families.every((family) => family === 'var(--font)' || family === 'var(--font-inter)'));
   add('the series file hash is unchanged', sha256(seriesPath(siteRoot)) === SERIES_SHA);
@@ -444,6 +446,73 @@ export function runCorrelationChecks(add) {
   add('all 20 list lines have a trend line',
     state.otherPicks.length === 20 && state.otherPicks.every((card) => hasBothLines(chartModel(card))));
   add('no odds point falls after its family hold-back date', oddsPointsAfterHoldBack(loadChartSeries()).length === 0);
+}
+
+async function measurePages(jobs) {
+  const dir = mkdtempSync(path.join(tmpdir(), 'cx-chrome-'));
+  const chrome = spawn('google-chrome', [
+    '--headless=new',
+    '--disable-gpu',
+    '--no-sandbox',
+    '--remote-debugging-port=9225',
+    '--user-data-dir=' + dir,
+    'about:blank',
+  ], { stdio: 'ignore' });
+  const callOn = (ws) => {
+    let seq = 0;
+    return (method, params = {}) => {
+      const id = ++seq;
+      return new Promise((resolve, reject) => {
+        const timer = setTimeout(() => reject(new Error('timeout ' + method)), 30000);
+        const onMessage = (event) => {
+          const message = JSON.parse(event.data);
+          if (message.id !== id) return;
+          clearTimeout(timer);
+          ws.removeEventListener('message', onMessage);
+          if (message.error) reject(new Error(JSON.stringify(message.error)));
+          else resolve(message.result);
+        };
+        ws.addEventListener('message', onMessage);
+        ws.send(JSON.stringify({ id, method, params }));
+      });
+    };
+  };
+  try {
+    let ready = false;
+    for (let i = 0; i < 40; i++) {
+      try {
+        const res = await fetch('http://127.0.0.1:9225/json/version');
+        if (res.ok) { ready = true; break; }
+      } catch { /* starting */ }
+      await new Promise((r) => setTimeout(r, 250));
+    }
+    if (!ready) throw new Error('chrome did not start');
+    const created = await fetch('http://127.0.0.1:9225/json/new?about:blank', { method: 'PUT' });
+    const tab = created.ok ? await created.json() : (await (await fetch('http://127.0.0.1:9225/json')).json())[0];
+    const ws = new WebSocket(tab.webSocketDebuggerUrl);
+    await new Promise((resolve) => { ws.addEventListener('open', resolve); });
+    const call = callOn(ws);
+    await call('Page.enable');
+    const out = [];
+    for (const job of jobs) {
+      await call('Emulation.setDeviceMetricsOverride', {
+        width: job.width,
+        height: job.height,
+        deviceScaleFactor: 1,
+        mobile: job.width < 700,
+      });
+      await call('Page.navigate', { url: job.url });
+      await new Promise((r) => setTimeout(r, 1200));
+      await call('Runtime.evaluate', { expression: 'document.fonts.ready', awaitPromise: true });
+      const result = await call('Runtime.evaluate', { expression: job.expression, returnByValue: true });
+      out.push(result.result && result.result.value);
+    }
+    ws.close();
+    return out;
+  } finally {
+    chrome.kill('SIGKILL');
+    rmSync(dir, { recursive: true, force: true });
+  }
 }
 
 export async function correlationPageChecks(add, page) {
@@ -521,4 +590,49 @@ export async function correlationPageChecks(add, page) {
     [103, 117, 97, 114, 97, 110, 116, 101, 101, 100],
   ].map(word).join('|') + '|beat the market)\\b', 'i');
   add('the strongest links page has no advice wording', textProblem(visible) === '' && !extra.test(visible));
+  const unknown = await page('/connections/no-such-pair');
+  const missingLink = await page('/connections/link-F1_fed-direction-not_an_asset-same_day');
+  add('an unknown connection id returns 404', unknown.status === 404 && missingLink.status === 404);
+  const origin = 'http://127.0.0.1:3461';
+  const featuredUrl = origin + '/connections/link-F1_fed-direction-us_2y_yield-same_day';
+  const sizeUrl = origin + '/connections/link-F1_fed-size-us_2y_yield-same_day';
+  const weakUrl = origin + '/connections/link-F1_fed-direction-bitcoin-same_day';
+  const labelExpr = `(() => {
+    const link = document.querySelector('.cx-scale-link');
+    const chance = document.querySelector('.cx-scale-chance');
+    if (!link || !chance) return null;
+    const a = link.getBoundingClientRect();
+    const b = chance.getBoundingClientRect();
+    return { text: link.textContent + '|' + chance.textContent, separate: a.bottom <= b.top + 0.5 && a.top < b.top };
+  })()`;
+  const homeExpr = `(() => {
+    const link = document.querySelector('a.cx-quiet');
+    const bar = document.querySelector('#tabs');
+    if (!link || !bar) return null;
+    return { scroll: window.scrollY, linkBottom: link.getBoundingClientRect().bottom, barTop: bar.getBoundingClientRect().top };
+  })()`;
+  const measured = await measurePages([
+    { url: origin + '/connections', width: 390, height: 844, expression: homeExpr },
+    { url: featuredUrl, width: 390, height: 844, expression: labelExpr },
+    { url: sizeUrl, width: 390, height: 844, expression: labelExpr },
+    { url: weakUrl, width: 390, height: 844, expression: labelExpr },
+    { url: featuredUrl, width: 699, height: 900, expression: labelExpr },
+    { url: sizeUrl, width: 699, height: 900, expression: labelExpr },
+    { url: weakUrl, width: 699, height: 900, expression: labelExpr },
+  ]);
+  const homeBox = measured[0];
+  const labels = measured.slice(1);
+  const expected = [
+    'This link −0.27|Chance alone ±0.13',
+    'This link 0.22|Chance alone ±0.09',
+    'This link 0.06|Chance alone ±0.10',
+  ];
+  add('the two labels sit on separate rows below desktop width',
+    labels.length === 6
+    && labels.every((item) => item && item.separate)
+    && expected.every((text, index) => labels[index].text === text && labels[index + 3].text === text));
+  add('the link bottom plus 8 is at most the bar top at 390x844',
+    !!homeBox
+    && homeBox.scroll === 0
+    && homeBox.linkBottom + 8 <= homeBox.barTop);
 }
