@@ -1,0 +1,195 @@
+type,market_id,event,question,volume,primary,step,odds_points,used,bars_main,usable_pairs,share_zero_odds_change,share_zero_asset_return,share_bars_odds_outside_3_97,sign
+C,518068,Will Supreme Court delay the Tiktok ban?,Will Supreme Court delay the Tiktok ban?,337644.36114,META,H,228,True,42.0,30.0,0.3333333333333333,0.0,0.1428571428571429,-1.0
+C,1146193,Will the Supreme Court rule on Trump's tariffs by...?,Will the Supreme Court rule on Trump's tarriffs by January 31?,560210.795883,XRT,H,503,True,91.0,48.0,0.3541666666666667,0.0,0.37362637362637363,-1.0
+C,1126854,Will the Court Force Trump to Refund Tariffs?,Will the Court Force Trump to Refund Tariffs?,466650.47508500074,XRT,H,2868,True,592.0,488.0,0.7192622950819673,0.006147540983606557,0.02533783783783783,-1.0
+E,253595,Presidential Election Winner 2024,Will Robert F. Kennedy Jr. win the 2024 US Presidential Election?,141605110.748029,BTCUSDT,H,4367,True,4297.0,136.0,0.9044117647058824,0.0,0.9681172911333489,1.0
+E,253597,Presidential Election Winner 2024,Will Kamala Harris win the 2024 US Presidential Election?,1037039118.18879,BTCUSDT,H,4367,True,4297.0,3046.0,0.2304661851608667,0.0,0.2897370258319758,1.0
+E,253593,Presidential Election Winner 2024,Will Nikki Haley win the 2024 US Presidential Election?,107529158.083605,BTCUSDT,H,4362,False,,,,,,
+E,253594,Presidential Election Winner 2024,Will Gavin Newsom win the 2024 US Presidential Election?,54161276.228088,BTCUSDT,H,4362,True,4297.0,205.0,0.35609756097560974,0.0,0.9490342099138934,-1.0
+E,253598,Presidential Election Winner 2024,Will Vivek Ramaswamy win the 2024 US Presidential Election?,21181731.472915,BTCUSDT,H,4363,False,,,,,,
+E,253609,Presidential Election Winner 2024,Will Michelle Obama win the 2024 US Presidential Election?,153382275.618594,BTCUSDT,H,4363,True,4297.0,1234.0,0.5486223662884927,0.0008103727714748784,0.7051431231091458,1.0
+E,253610,Presidential Election Winner 2024,Will Hillary Clinton win the 2024 US Presidential Election?,93307167.686999,BTCUSDT,H,4363,False,,,,,,
+E,253634,Presidential Election Winner 2024,Will Chris Christie win the 2024 US Presidential Election?,14192736.345,BTCUSDT,H,4364,False,,,,,,
+E,253639,Presidential Election Winner 2024,Will Elizabeth Warren win the 2024 US Presidential Election?,14714813.728,BTCUSDT,H,4364,False,,,,,,
+E,253640,Presidential Election Winner 2024,Will Bernie Sanders win the 2024 US Presidential Election?,9829356.367,BTCUSDT,H,4364,False,,,,,,
+E,253641,Presidential Election Winner 2024,Will any other Democratic Politician win the 2024 US Presidential Election?,116558196.386525,BTCUSDT,H,4363,True,4297.0,400.0,0.2275,0.0,0.9036537118920177,-1.0
+E,253642,Presidential Election Winner 2024,Will any other Republican Politician win the 2024 US Presidential Election?,241655099.850067,BTCUSDT,H,4363,False,,,,,,
+E,253643,Presidential Election Winner 2024,Will Kanye West win the 2024 US Presidential Election?,9203011.891998,BTCUSDT,H,4363,False,,,,,,
+E,253591,Presidential Election Winner 2024,Will Donald Trump win the 2024 US Presidential Election?,1531479284.504353,BTCUSDT,H,4347,True,4297.0,4295.0,0.6039580908032596,0.00023282887077997672,0.00023272050267630906,-1.0
+E,253592,Presidential Election Winner 2024,Will Joe Biden win the 2024 US Presidential Election?,72176112.338298,BTCUSDT,H,4351,True,4297.0,1758.0,0.7946530147895335,0.0005688282138794084,0.5906446357924133,1.0
+E,253596,Presidential Election Winner 2024,Will Ron DeSantis win the 2024 US Presidential Election?,46309049.202369,BTCUSDT,H,4351,False,,,,,,
+E,253635,Presidential Election Winner 2024,Will AOC win the 2024 US Presidential Election?,22011560.654836,BTCUSDT,H,4352,False,,,,,,
+E,516767,Next Prime Minister of Canada after the election?,Will Pierre Poilievre be the next Canadian Prime Minister?,67376035.838465,CAD=X,H,2900,True,2006.0,1988.0,0.6443661971830986,0.02012072434607646,0.0004985044865404298,1.0
+E,516768,Next Prime Minister of Canada after the election?,Will Chrystia Freeland be the next Canadian Prime Minister?,3567691.942821,CAD=X,H,2900,True,2006.0,314.0,0.3980891719745223,0.0732484076433121,0.8389830508474576,-1.0
+E,516769,Next Prime Minister of Canada after the election?,Will Mark Carney be the next Canadian Prime Minister?,36416000.185007,CAD=X,H,2534,True,2006.0,1723.0,0.6453859547301218,0.01044689495066744,0.13359920239282153,1.0
+E,516770,Next Prime Minister of Canada after the election?,Will Jagmeet Singh be the next Canadian Prime Minister?,8476681.915239,CAD=X,H,2900,False,,,,,,
+E,516771,Next Prime Minister of Canada after the election?,Will Justin Trudeau be the next Canadian Prime Minister?,5148798.146629,CAD=X,H,2900,True,2006.0,105.0,0.3619047619047619,0.19047619047619047,0.9466600199401795,1.0
+E,514138,Poland Presidential Election,Will Karol Nawrocki be the next President of Poland?,31735999.949038,PLN=X,H,4188,True,2933.0,2907.0,0.7853457172342622,0.026487788097695218,0.00034094783498128667,-1.0
+E,514139,Poland Presidential Election,Will Rafał Trzaskowski be the next President of Poland?,40863065.298881,PLN=X,H,4188,True,2933.0,2907.0,0.7561059511523908,0.026487788097695218,0.00034094783498128667,1.0
+E,514140,Poland Presidential Election,Will Szymon Hołownia be the next President of Poland?,5916966.568325,PLN=X,H,4188,True,2933.0,69.0,0.9565217391304348,0.0,0.9761336515513126,-1.0
+E,514141,Poland Presidential Election,Will Sławomir Mentzen be the next President of Poland?,5264047.092374,PLN=X,H,4188,True,2933.0,2570.0,0.5233463035019456,0.028793774319066146,0.11251278554381183,-1.0
+E,514142,Poland Presidential Election,Will Marek Jakubiak be the next President of Poland?,13480557.035509,PLN=X,H,4188,True,2933.0,68.0,0.9705882352941176,0.0,0.9764745993862939,1.0
+E,514143,Poland Presidential Election,Will Waldemar Witkowski be the next President of Poland?,8469812.975078,PLN=X,H,4188,True,2933.0,69.0,0.9565217391304348,0.0,0.9761336515513126,-1.0
+E,514144,Poland Presidential Election,Will Romuald Starosielec be the next President of Poland?,8085883.314604,PLN=X,H,4188,True,2933.0,68.0,0.9705882352941176,0.0,0.9764745993862939,1.0
+E,514145,Poland Presidential Election,Will Agnieszka Dziemianowicz-Bąk be the next President of Poland?,5942131.969367,PLN=X,H,4188,True,2933.0,68.0,0.9705882352941176,0.0,0.9764745993862939,1.0
+E,514146,Poland Presidential Election,Will Krzysztof Stanowski be the next President of Poland?,1986191.782876,PLN=X,H,2274,False,,,,,,
+E,514147,Poland Presidential Election,Will Grzegorz Braun be the next President of Poland?,3486190.757568,PLN=X,H,2274,False,,,,,,
+E,514148,Poland Presidential Election,Will Magdalena Biejat be the next President of Poland?,1423677.935331,PLN=X,H,2274,False,,,,,,
+E,514149,Poland Presidential Election,Will Adrian Zandberg be the next President of Poland?,1899069.527084,PLN=X,H,2274,False,,,,,,
+E,534189,Next president of South Korea?,Will Lee Jae-myung be elected the next president of South Korea?,88035547.447225,KRW=X,H,1439,True,897.0,852.0,0.6549295774647887,0.01643192488262911,0.0033444816053511683,1.0
+E,534190,Next president of South Korea?,Will Kim Dong-yeon be elected the next president of South Korea?,7888208.010183,KRW=X,H,1439,False,,,,,,
+E,534191,Next president of South Korea?,Will Kim Kyoung-soo be elected the next president of South Korea?,4647400.034245,KRW=X,H,1440,False,,,,,,
+E,534192,Next president of South Korea?,Will Han Dong-hoon be elected the next president of South Korea?,12733593.001313,KRW=X,H,1440,True,897.0,413.0,0.20581113801452786,0.014527845036319613,0.5128205128205128,-1.0
+E,534193,Next president of South Korea?,Will Oh Se-hoon be elected the next president of South Korea?,2049072.85254,KRW=X,H,1439,False,,,,,,
+E,534194,Next president of South Korea?,Will Hong Joon-pyo be elected the next president of South Korea?,4457911.683177,KRW=X,H,1439,True,897.0,262.0,0.1717557251908397,0.015267175572519083,0.6778149386845038,1.0
+E,534195,Next president of South Korea?,Will Yoo Seong-min be elected the next president of South Korea?,8769788.891732,KRW=X,H,1440,False,,,,,,
+E,534196,Next president of South Korea?,Will Ahn Cheol-soo be elected the next president of South Korea?,4565521.929049,KRW=X,H,1440,True,897.0,54.0,0.2222222222222222,0.0,0.9319955406911928,1.0
+E,534197,Next president of South Korea?,Will Kim Moon-soo be elected the next president of South Korea?,73197949.803466,KRW=X,H,1439,True,897.0,780.0,0.18974358974358974,0.016666666666666666,0.06800445930880716,-1.0
+E,534198,Next president of South Korea?,Will Lee Nak-yon be elected the next president of South Korea?,5753948.667076,KRW=X,H,1439,False,,,,,,
+E,534200,Next president of South Korea?,Will Yoon Suk Yeol be elected the next president of South Korea?,8070735.318291,KRW=X,H,1344,False,,,,,,
+E,534201,Next president of South Korea?,Will Han Duck-soo be elected the next president of South Korea?,11957034.639752,KRW=X,H,1275,True,897.0,351.0,0.1396011396011396,0.011396011396011397,0.5785953177257526,-1.0
+E,534220,Next president of South Korea?,Will Lee Jun-seok be elected the next president of South Korea?,51905307.266619,KRW=X,H,1439,True,897.0,587.0,0.26916524701873934,0.015332197614991482,0.3054626532887402,-1.0
+E,534222,Next president of South Korea?,Will Kim Boo-kyum be elected the next president of South Korea?,1420675.714832,KRW=X,H,1439,False,,,,,,
+E,534224,Next president of South Korea?,Will Na Kyung-won be elected the next president of South Korea?,3259437.761553,KRW=X,H,1440,False,,,,,,
+E,534225,Next president of South Korea?,Will Won Hee-ryong be elected the next president of South Korea?,1000540.425978,KRW=X,H,1439,False,,,,,,
+E,530738,Czech Republic Parliamentary Election Winner,Will ANO win the most seats in the next Czech parliamentary election?,1468798.471713,CZK=X,H,4368,True,3035.0,2250.0,0.9008888888888889,0.03111111111111111,0.24876441515650738,-1.0
+E,530739,Czech Republic Parliamentary Election Winner,Will ODS win the most seats in the next Czech parliamentary election?,1100241.02426,CZK=X,H,4368,True,3035.0,1393.0,0.6826992103374013,0.03158650394831299,0.5327841845140033,1.0
+E,530740,Czech Republic Parliamentary Election Winner,Will STAN win the most seats in the next Czech parliamentary election?,1555833.439573,CZK=X,H,4368,False,,,,,,
+E,530741,Czech Republic Parliamentary Election Winner,Will SPD win the most seats in the next Czech parliamentary election?,1869252.149607,CZK=X,H,4368,False,,,,,,
+E,530742,Czech Republic Parliamentary Election Winner,Will Pirates win the most seats in the next Czech parliamentary election?,2017184.847693,CZK=X,H,4368,False,,,,,,
+E,530743,Czech Republic Parliamentary Election Winner,Will Přísaha win the most seats in the next Czech parliamentary election?,2017422.828992,CZK=X,H,4368,False,,,,,,
+E,530744,Czech Republic Parliamentary Election Winner,Will AUTO win the most seats in the next Czech parliamentary election?,2474830.765809,CZK=X,H,4368,False,,,,,,
+E,530745,Czech Republic Parliamentary Election Winner,Will SOCDEM win the most seats in the next Czech parliamentary election?,2348699.789748,CZK=X,H,4368,False,,,,,,
+E,530746,Czech Republic Parliamentary Election Winner,Will Stačilo! win the most seats in the next Czech parliamentary election?,3052147.835279,CZK=X,H,4368,False,,,,,,
+E,530747,Czech Republic Parliamentary Election Winner,Will Greens win the most seats in the next Czech parliamentary election?,3062128.863263,CZK=X,H,4368,False,,,,,,
+E,541615,Chile Presidential Election,Will Jeannette Jara win the Chilean presidential election?,8873168.0766,CLP=X,H,4364,True,1715.0,1296.0,0.3541666666666667,0.2515432098765432,0.09329446064139946,1.0
+E,541616,Chile Presidential Election,Will Jaime Mulet win the Chilean presidential election?,2989187.839967,CLP=X,H,4364,False,,,,,,
+E,541619,Chile Presidential Election,Will Eduardo Artés win the Chilean presidential election?,3048375.585137,CLP=X,H,4364,False,,,,,,
+E,541620,Chile Presidential Election,Will Félix González win the Chilean presidential election?,3700698.555633,CLP=X,H,4364,False,,,,,,
+E,541621,Chile Presidential Election,Will Johannes Kaiser win the Chilean presidential election?,3058238.391047,CLP=X,H,4364,True,1715.0,698.0,0.2922636103151863,0.2349570200573066,0.5061224489795919,-1.0
+E,541622,Chile Presidential Election,Will José Antonio Kast win the Chilean presidential election?,6918328.14737,CLP=X,H,4364,True,1715.0,1422.0,0.7440225035161744,0.26019690576652604,0.0023323615160349975,1.0
+E,541623,Chile Presidential Election,Will Evelyn Matthei win the Chilean presidential election?,4415717.573235,CLP=X,H,4364,True,1715.0,1368.0,0.5906432748538012,0.26608187134502925,0.03848396501457729,-1.0
+E,541624,Chile Presidential Election,Will Francesca Muñoz win the Chilean presidential election?,5466768.418238,CLP=X,H,4364,False,,,,,,
+E,541625,Chile Presidential Election,Will Ximena Rincón win the Chilean presidential election?,13270465.032302,CLP=X,H,4365,False,,,,,,
+E,541626,Chile Presidential Election,Will Michelle Bachelet win the Chilean presidential election?,6818524.005079,CLP=X,H,4364,False,,,,,,
+E,541627,Chile Presidential Election,Will Marco Enríquez-Ominami win the Chilean presidential election?,11376039.492757,CLP=X,H,4364,False,,,,,,
+E,541628,Chile Presidential Election,Will Franco Parisi win the Chilean presidential election?,3635525.308024,CLP=X,H,4364,True,1715.0,335.0,0.41194029850746267,0.29253731343283584,0.7533527696793003,-1.0
+E,541629,Chile Presidential Election,Will Alberto Undurraga win the Chilean presidential election?,8076282.887557,CLP=X,H,4364,False,,,,,,
+E,541630,Chile Presidential Election,Will Harold Mayne-Nicholls win the Chilean presidential election?,3605321.528534,CLP=X,H,311,False,,,,,,
+E,519065,Romania Presidential Election Winner,Will Călin Georgescu win the Romanian presidential election?,3881020.159797,EURRON=X,H,2912,True,2022.0,882.0,0.47165532879818595,0.1145124716553288,0.5568743818001978,1.0
+E,519066,Romania Presidential Election Winner,Will George Simion win the Romanian presidential election?,31796892.976285,EURRON=X,H,2910,True,2022.0,2003.0,0.654518222666001,0.09535696455317025,0.0004945598417408492,-1.0
+E,519067,Romania Presidential Election Winner,Will Victor Ponta win the Romanian presidential election?,9883931.329149,EURRON=X,H,2912,True,2022.0,1435.0,0.2794425087108014,0.09547038327526132,0.27299703264094954,-1.0
+E,519068,Romania Presidential Election Winner,Will Nicușor Dan win the Romanian presidential election?,50991003.196931,EURRON=X,H,2911,True,2022.0,2003.0,0.618572141787319,0.09535696455317025,0.0004945598417408492,1.0
+E,519069,Romania Presidential Election Winner,Will Elena Lasconi win the Romanian presidential election?,3477039.844198,EURRON=X,H,2912,True,2022.0,722.0,0.628808864265928,0.11218836565096953,0.6300692383778437,1.0
+E,519070,Romania Presidential Election Winner,Will Crin Antonescu win the Romanian presidential election?,7373293.389946,EURRON=X,H,2912,True,2022.0,1767.0,0.7272212790039615,0.0967741935483871,0.1181998021760633,-1.0
+E,519071,Romania Presidential Election Winner,Will Marcel Ciolacu win the Romanian presidential election?,1258918.480753,EURRON=X,H,2912,True,2022.0,70.0,0.34285714285714286,0.07142857142857142,0.9629080118694362,1.0
+E,519072,Romania Presidential Election Winner,Will Ana Birchall win the Romanian presidential election?,15606066.322637,EURRON=X,H,2912,False,,,,,,
+E,519075,Romania Presidential Election Winner,Will Hunor Kelemen win the Romanian presidential election?,80897096.543524,EURRON=X,H,2911,False,,,,,,
+E,519076,Romania Presidential Election Winner,Will Daniel Funeriu win the Romanian presidential election?,1973081.098446,EURRON=X,H,2911,False,,,,,,
+E,519078,Romania Presidential Election Winner,Will Cristian Sima win the Romanian presidential election?,1141855.09395,EURRON=X,H,2911,True,2021.0,116.0,0.13793103448275862,0.08620689655172414,0.9396338446313706,1.0
+E,519079,Romania Presidential Election Winner,Will Ilie Bolojan win the Romanian presidential election?,2556249.163829,EURRON=X,H,2339,True,2021.0,439.0,0.13211845102505695,0.10478359908883828,0.7773379515091539,1.0
+E,519081,Romania Presidential Election Winner,Will Anamaria Gavrilă win the Romanian presidential election?,1471675.422618,EURRON=X,H,1618,True,2021.0,46.0,0.17391304347826086,0.15217391304347827,0.9737753587333003,1.0
+E,519089,Romania Presidential Election Winner,Will any other candidate win the Romanian presidential election?,15687662.574508,EURRON=X,H,1234,False,,,,,,
+E,947271,Peru Presidential Election Winner,Will Carlos Álvarez win the 2026 Peruvian presidential election?,13208030.096722003,PEN=X,H,2470,True,1070.0,691.0,0.5904486251808972,0.26483357452966716,0.15887850467289721,1.0
+E,567560,Next Prime Minister of Hungary,Will the next Prime Minister of Hungary be Viktor Orbán?,25456113.707224935,HUF=X,H,4024,True,3033.0,2892.0,0.8084370677731674,0.0169432918395574,0.027695351137487667,-1.0
+E,567561,Next Prime Minister of Hungary,Will the next Prime Minister of Hungary be Péter Magyar?,24555476.477281053,HUF=X,H,4179,True,3033.0,2961.0,0.7987166497804795,0.016886187098953058,0.008902077151335286,1.0
+E,567562,Next Prime Minister of Hungary,Will the next Prime Minister of Hungary be Klára Dobrev?,6196534.541471966,HUF=X,H,4055,False,,,,,,
+E,567563,Next Prime Minister of Hungary,Will the next Prime Minister of Hungary be László Toroczkai?,13863122.728459079,HUF=X,H,4151,False,,,,,,
+E,567564,Next Prime Minister of Hungary,Will the next Prime Minister of Hungary be István Kapitány?,21744519.72813603,HUF=X,H,1546,False,,,,,,
+E,567565,Next Prime Minister of Hungary,Will the next Prime Minister of Hungary be János Lázár?,9297942.55577898,HUF=X,H,1533,False,,,,,,
+E,947268,Peru Presidential Election Winner,Will Rafael López Aliaga win the 2026 Peruvian presidential election?,14784685.9830578,PEN=X,H,4101,True,1729.0,946.0,0.554968287526427,0.25792811839323465,0.3030653556969346,-1.0
+E,947269,Peru Presidential Election Winner,Will Keiko Fujimori win the 2026 Peruvian presidential election?,21817048.613106236,PEN=X,H,3849,True,1729.0,1342.0,0.763785394932936,0.22503725782414308,0.03354540196645461,1.0
+E,947273,Peru Presidential Election Winner,Will Alfonso López Chau win the 2026 Peruvian presidential election?,2319061.2862390033,PEN=X,H,3808,True,1729.0,786.0,0.4223918575063613,0.2633587786259542,0.41873915558126085,-1.0
+E,947281,Peru Presidential Election Winner,Will Ricardo Belmont win the 2026 Peruvian presidential election?,4348946.182431993,PEN=X,H,3714,True,1729.0,71.0,0.5774647887323944,0.2535211267605634,0.9381145170618855,1.0
+E,947283,Peru Presidential Election Winner,Will Carlos Espá win the 2026 Peruvian presidential election?,1816789.446928001,PEN=X,H,4126,True,1729.0,379.0,0.6781002638522428,0.3034300791556728,0.7212261422787738,-1.0
+E,947287,Peru Presidential Election Winner,Will Marisol Pérez Tello win the 2026 Peruvian presidential election?,1746028.2730179995,PEN=X,H,3956,True,1729.0,64.0,0.5625,0.34375,0.9531521110468479,1.0
+E,947288,Peru Presidential Election Winner,Will Jorge Nieto win the 2026 Peruvian presidential election?,5786320.319471,PEN=X,H,3836,True,1729.0,245.0,0.24897959183673468,0.23265306122448978,0.8114517061885482,1.0
+E,947289,Peru Presidential Election Winner,Will Roberto Sánchez Palomino win the 2026 Peruvian presidential election?,36601896.005035795,PEN=X,H,3962,True,1729.0,943.0,0.3796394485683987,0.20572640509013787,0.33024869866975126,-1.0
+E,569356,Colombia Presidential Election,Will Vicky Dávila win the 2026 Colombian presidential election?,3024888.5356869996,COP=X,H,4231,False,,,,,,
+E,569357,Colombia Presidential Election,Will Luis Gilberto Murillo win the 2026 Colombian presidential election?,1931059.8008420153,COP=X,H,4087,False,,,,,,
+E,569358,Colombia Presidential Election,Will Claudia López win the 2026 Colombian presidential election?,1207057.0262990056,COP=X,H,4088,False,,,,,,
+E,569359,Colombia Presidential Election,Will David Luna Sánchez win the 2026 Colombian presidential election?,1860921.864651001,COP=X,H,4036,False,,,,,,
+E,569360,Colombia Presidential Election,Will Juan Daniel Oviedo win the 2026 Colombian presidential election?,1535907.4933820108,COP=X,H,4253,False,,,,,,
+E,569362,Colombia Presidential Election,Will Gustavo Bolívar win the 2026 Colombian presidential election?,5796853.804643,COP=X,H,3899,False,,,,,,
+E,569363,Colombia Presidential Election,Will Sergio Fajardo win the 2026 Colombian presidential election?,2394251.6639960203,COP=X,H,4005,True,2442.0,468.0,0.8376068376068376,0.3076923076923077,0.7719082719082719,-1.0
+E,569365,Colombia Presidential Election,Will Germán Vargas Lleras win the 2026 Colombian presidential election?,1787258.4062750214,COP=X,H,3846,False,,,,,,
+E,569366,Colombia Presidential Election,Will Abelardo de la Espriella  win the 2026 Colombian presidential election?,6883971.476312924,COP=X,H,3969,True,2442.0,1919.0,0.7165190203230849,0.242313705054716,0.06429156429156424,1.0
+E,569367,Colombia Presidential Election,Will Mauricio Cardenas win the 2026 Colombian presidential election?,2526661.7690050183,COP=X,H,3964,False,,,,,,
+E,569368,Colombia Presidential Election,Will Ivan Cepeda Castro win the 2026 Colombian presidential election?,7331927.18613499,COP=X,H,4099,True,2442.0,2015.0,0.6987593052109181,0.2401985111662531,0.023341523341523396,-1.0
+E,569370,Colombia Presidential Election,Will Roy Barreras win the 2026 Colombian presidential election?,1231962.0574800058,COP=X,H,3934,True,2442.0,513.0,0.4775828460038986,0.25925925925925924,0.7534807534807535,1.0
+E,569371,Colombia Presidential Election,Will Enrique Peñalosa win the 2026 Colombian presidential election?,1313337.607176,COP=X,H,4210,False,,,,,,
+E,569373,Colombia Presidential Election,Will Paloma Valencia win the 2026 Colombian presidential election?,2870441.325665989,COP=X,H,4044,True,2442.0,1728.0,0.4230324074074074,0.23726851851851852,0.16502866502866498,1.0
+E,601818,Brazil Presidential Election,Will Tarcisio de Freitas win the 2026 Brazilian presidential election?,14956503.143295998,BRL=X,H,4133,False,,,,,,
+E,601819,Brazil Presidential Election,Will Luiz Inácio Lula da Silva win the 2026 Brazilian presidential election?,48514562.175727,BRL=X,H,4242,True,2175.0,1673.0,0.8930065750149432,0.12731619844590555,0.005057471264367841,-1.0
+E,601820,Brazil Presidential Election,Will Jair Bolsonaro win the 2026 Brazilian presidential election?,7617302.078874,BRL=X,H,4207,False,,,,,,
+E,601821,Brazil Presidential Election,Will Fernando Haddad win the 2026 Brazilian presidential election?,7739832.271962998,BRL=X,H,4200,True,2177.0,500.0,0.518,0.134,0.6991272393201653,-1.0
+E,601822,Brazil Presidential Election,Will Michelle Bolsonaro win the 2026 Brazilian presidential election?,10417999.312318,BRL=X,H,4087,True,2174.0,47.0,0.1702127659574468,0.14893617021276595,0.968261269549218,-1.0
+E,601823,Brazil Presidential Election,Will Eduardo Bolsonaro win the 2026 Brazilian presidential election?,10485717.345772,BRL=X,H,4132,False,,,,,,
+E,601824,Brazil Presidential Election,Will Carlos Roberto Massa Júnior win the 2026 Brazilian presidential election?,10501753.546619002,BRL=X,H,4149,False,,,,,,
+E,601825,Brazil Presidential Election,Will Renan Santos win the 2026 Brazilian presidential election?,17121884.170471,BRL=X,H,4198,True,2172.0,1264.0,0.46281645569620256,0.12658227848101267,0.24033149171270718,1.0
+E,601826,Brazil Presidential Election,Will Flávio Bolsonaro win the 2026 Brazilian presidential election?,62159932.427386016,BRL=X,H,4278,True,2175.0,1680.0,0.48154761904761906,0.12678571428571428,0.0018390804597701038,1.0
+E,601827,Brazil Presidential Election,Will Ronaldo Caiado win the 2026 Brazilian presidential election?,7824041.698362002,BRL=X,H,4133,False,,,,,,
+E,601828,Brazil Presidential Election,Will Romeu Zema win the 2026 Brazilian presidential election?,7737285.351736,BRL=X,H,4247,True,2173.0,388.0,0.5283505154639175,0.13144329896907217,0.7680625862862402,-1.0
+E,601829,Brazil Presidential Election,Will Camilo Santana win the 2026 Brazilian presidential election?,5609157.589657001,BRL=X,H,4263,True,2172.0,144.0,0.5763888888888888,0.125,0.9093001841620626,-1.0
+E,601830,Brazil Presidential Election,Will Geraldo Alckmin win the 2026 Brazilian presidential election?,9361528.167183999,BRL=X,H,4212,False,,,,,,
+E,601831,Brazil Presidential Election,Will Eduardo Leite win the 2026 Brazilian presidential election?,8030906.969926996,BRL=X,H,4238,False,,,,,,
+E,601832,Brazil Presidential Election,Will Aldo Rebelo win the 2026 Brazilian presidential election?,4984840.694043,BRL=X,H,4102,False,,,,,,
+E,601833,Brazil Presidential Election,Will Tereza Cristina win the 2026 Brazilian presidential election?,4109580.666595998,BRL=X,H,3445,False,,,,,,
+E,601834,Brazil Presidential Election,Will Helder Barbalho win the 2026 Brazilian presidential election?,2430918.496881999,BRL=X,H,3445,False,,,,,,
+E,601835,Brazil Presidential Election,Will Pablo Marçal win the 2026 Brazilian presidential election?,4013677.792228002,BRL=X,H,1189,False,,,,,,
+E,601836,Brazil Presidential Election,Will Augusto Cury win the 2026 Brazilian presidential election?,5508598.979753005,BRL=X,H,955,False,,,,,,
+E,682705,Prime Minister of Israel after the next election?,Will Benjamin Netanyahu be the next Prime Minister of Israel?,34768268.067446,ILS=X,H,4257,True,2946.0,2844.0,0.8150492264416315,0.02390998593530239,0.00950441276306857,1.0
+E,682706,Prime Minister of Israel after the next election?,Will Naftali Bennett be the next Prime Minister of Israel?,5858301.297935,ILS=X,H,4283,True,2946.0,2856.0,0.8602941176470589,0.02415966386554622,0.006109979633401208,1.0
+E,682707,Prime Minister of Israel after the next election?,Will Yair Lapid be the next Prime Minister of Israel?,2138683.6123870006,ILS=X,H,4249,False,,,,,,
+E,682708,Prime Minister of Israel after the next election?,Will Gadi Eizenkot be the next Prime Minister of Israel?,9877007.052346002,ILS=X,H,4318,True,2946.0,2873.0,0.43543334493560737,0.024016707274625827,0.002376103190767087,1.0
+E,682709,Prime Minister of Israel after the next election?,Will Benny Gantz be the next Prime Minister of Israel?,2483510.6553110005,ILS=X,H,4304,False,,,,,,
+E,682710,Prime Minister of Israel after the next election?,Will Avigdor Lieberman be the next Prime Minister of Israel?,5463137.454078,ILS=X,H,4261,True,2946.0,2207.0,0.6443135478024468,0.025373810602628003,0.2257298031228785,-1.0
+E,682711,Prime Minister of Israel after the next election?,Will Yossi Cohen be the next Prime Minister of Israel?,4624728.009689999,ILS=X,H,4315,False,,,,,,
+E,682712,Prime Minister of Israel after the next election?,Will Yair Golan be the next Prime Minister of Israel?,3017309.602029,ILS=X,H,4318,False,,,,,,
+E,682713,Prime Minister of Israel after the next election?,Will Itamar Ben Gvir be the next Prime Minister of Israel?,2338242.0967329997,ILS=X,H,4289,False,,,,,,
+E,682714,Prime Minister of Israel after the next election?,Will Gideon Sa’ar be the next Prime Minister of Israel?,2598873.2630769997,ILS=X,H,4292,False,,,,,,
+E,682715,Prime Minister of Israel after the next election?,Will Yariv Levin be the next Prime Minister of Israel?,2135391.7360679996,ILS=X,H,4245,False,,,,,,
+E,682716,Prime Minister of Israel after the next election?,Will Moshe Feiglin be the next Prime Minister of Israel?,2642573.6893880004,ILS=X,H,4295,False,,,,,,
+E,682717,Prime Minister of Israel after the next election?,Will Ayelet Shaked be the next Prime Minister of Israel?,2139792.628132,ILS=X,H,4281,False,,,,,,
+E,682718,Prime Minister of Israel after the next election?,Will Yoaz Hendel be the next Prime Minister of Israel?,1818426.21288,ILS=X,H,4289,False,,,,,,
+E,682719,Prime Minister of Israel after the next election?,Will Israel Katz be the next Prime Minister of Israel?,1679792.4497649998,ILS=X,H,4309,False,,,,,,
+E,682720,Prime Minister of Israel after the next election?,Will Nir Barkat be the next Prime Minister of Israel?,1926978.548133,ILS=X,H,4318,False,,,,,,
+E,682721,Prime Minister of Israel after the next election?,Will Amir Ohana be the next Prime Minister of Israel?,3246878.639413,ILS=X,H,4318,False,,,,,,
+P,506202,Will there be a US Government shutdown? ,Will there be a US Government shutdown? ,53500373.740494,SPY,D,2696,True,79.0,73.0,0.2602739726027397,0.0,0.03797468354430378,-1.0
+P,533744,Will Trump lower tariffs on China in April? ,Will Trump lower tariffs on China in April? ,11020745.16158,FXI,H,320,True,56.0,42.0,0.40476190476190477,0.0,0.125,1.0
+P,585592,US government shutdown by October 1?,US government shutdown by October 1?,13491651.789377,SPY,H,700,True,140.0,120.0,0.4166666666666667,0.008333333333333333,0.0,1.0
+P,618515,When will the Government shutdown end?,Will the Government shutdown end October 3-5?,1012002.730066,SPY,H,131,False,,,,,,
+P,618516,When will the Government shutdown end?,Will the Government shutdown end October 6-9?,1196432.865395,SPY,H,227,False,,,,,,
+P,618518,When will the Government shutdown end?,Will the Government shutdown end October 15+?,2797439.29135,SPY,H,347,True,63.0,48.0,0.3958333333333333,0.0,0.11111111111111116,1.0
+P,673597,What day will the Government Shutdown end?,Will the government shutdown end November 12?,13086678.140873,SPY,H,79,False,,,,,,
+P,673598,What day will the Government Shutdown end?,Will the government shutdown end November 13?,6006067.422007,SPY,H,85,False,,,,,,
+P,673599,What day will the Government Shutdown end?,Will the government shutdown end November 14?,2698200.031423,SPY,H,85,False,,,,,,
+P,673600,What day will the Government Shutdown end?,Will the government shutdown end November 15?,1588426.46724,SPY,H,85,False,,,,,,
+P,673601,What day will the Government Shutdown end?,Will the government shutdown end November 16?,1184856.44148,SPY,H,85,False,,,,,,
+P,673602,What day will the Government Shutdown end?,Will the government shutdown end November 17?,1755362.694435,SPY,H,85,False,,,,,,
+P,673606,What day will the Government Shutdown end?,Will the government shutdown end November 21 or later?,1141449.193407,SPY,H,85,False,,,,,,
+P,638734,Will the Government shutdown end by...?,Will the Government shutdown end by November 15?,4194774.675777,SPY,H,636,True,119.0,102.0,0.3627450980392157,0.0,0.0,-1.0
+P,638735,Will the Government shutdown end by...?,Will the Government shutdown end by November 30?,4131241.435567,SPY,H,636,True,119.0,90.0,0.5,0.0,0.11764705882352944,1.0
+P,638736,Will the Government shutdown end by...?,Will the Government shutdown end by December 31?,2429313.379395,SPY,H,636,True,119.0,72.0,0.3333333333333333,0.0,0.2941176470588235,1.0
+P,520930,Jerome Powell out as Fed Chair in 2025?,Jerome Powell out as Fed Chair in 2025?,11760101.336012,ZT=F,H,4336,True,2715.0,1784.0,0.7757847533632287,0.1446188340807175,0.3042357274401474,-1.0
+P,680392,US government shutdown Saturday?,US government shutdown Saturday?,157296576.448084,SPY,H,1923,True,358.0,303.0,0.6501650165016502,0.0033003300330033004,0.0027932960893854997,1.0
+P,1308327,Government shutdown on Saturday?,Government shutdown on Saturday?,13550398.086217,SPY,H,297,True,58.0,48.0,0.375,0.0,0.03448275862068961,1.0
+P,1261050,How long will the Government Shutdown last?,Will the government shutdown last 1 day or more?,2164196.828235,SPY,H,160,False,,,,,,
+P,1261051,How long will the Government Shutdown last?,Will the government shutdown last 3 days or more?,2986463.593437,SPY,H,200,False,,,,,,
+P,1261052,How long will the Government Shutdown last?,Will the government shutdown last 7 days or more?,2275569.845594,SPY,H,235,False,,,,,,
+P,1261053,How long will the Government Shutdown last?,Will the government shutdown last 14 days or more?,1157026.908903,SPY,H,241,False,,,,,,
+P,1299961,How long will the Government Shutdown last?,Will the government shutdown last 4 days or more?,4389035.691402,SPY,H,84,False,,,,,,
+P,1299962,How long will the Government Shutdown last?,Will the government shutdown last 5 days or more?,6260855.937367,SPY,H,100,False,,,,,,
+P,1299963,How long will the Government Shutdown last?,Will the government shutdown last 10 days or more?,1238745.021489,SPY,H,101,False,,,,,,
+P,1316610,How long will the Government Shutdown last?,Will the government shutdown last 6 days or more?,1251150.084374,SPY,H,46,False,,,,,,
+P,1092482,Jerome Powell out as Fed Chair by...?,"Jerome Powell out as Fed Chair by May 14, 2026?",3133197.559704,ZT=F,H,2745,True,2021.0,784.0,0.5204081632653061,0.19770408163265307,0.5848589807026225,-1.0
+P,2099880,Jerome Powell out as Fed Chair by...?,"Jerome Powell out as Fed Chair by May 15, 2026?",1185656.0985100018,ZT=F,H,436,True,279.0,265.0,0.5811320754716981,0.1660377358490566,0.0035842293906810374,1.0
+P,1500754,Who will be confirmed as Fed Chair?,Will Kevin Warsh be confirmed as Fed Chair?,14412257.808405764,ZT=F,H,1592,True,1109.0,775.0,0.3470967741935484,0.10580645161290322,0.2623985572587917,-1.0
+P,1500755,Who will be confirmed as Fed Chair?,Will Judy Shelton be confirmed as Fed Chair?,23970639.983398777,ZT=F,H,1283,False,,,,,,
+P,1500756,Who will be confirmed as Fed Chair?,Will Kevin Hassett be confirmed as Fed Chair?,2096549.2662980002,ZT=F,H,1556,False,,,,,,
+P,1500757,Who will be confirmed as Fed Chair?,Will Christopher Waller be confirmed as Fed Chair?,2229963.1938400026,ZT=F,H,1294,False,,,,,,
+P,1500766,Who will be confirmed as Fed Chair?,Will Jerome Powell be confirmed as Fed Chair?,2694320.672932001,ZT=F,H,1549,False,,,,,,
+P,1500767,Who will be confirmed as Fed Chair?,Will Stephen Miran be confirmed as Fed Chair?,1672833.7187289996,ZT=F,H,1268,False,,,,,,
+P,1500768,Who will be confirmed as Fed Chair?,Will Scott Bessent be confirmed as Fed Chair?,4678391.943971024,ZT=F,H,1201,False,,,,,,
+P,1500770,Who will be confirmed as Fed Chair?,Will Michelle Bowman be confirmed as Fed Chair?,10611543.693432987,ZT=F,H,1140,False,,,,,,
+P,1500804,Who will be confirmed as Fed Chair?,Will Rick Reider be confirmed as Fed Chair?,2086774.5020839993,ZT=F,H,1386,False,,,,,,
