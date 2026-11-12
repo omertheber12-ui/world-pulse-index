@@ -183,8 +183,8 @@ export function checksCopy(row, summary, file) {
       : 'It does not pass the strict pick-from-many check.');
   }
   lines.push(row.bh_flag === true
-    ? 'It still stands after correcting for all ' + tested + ' tests.'
-    : 'It does not stand after correcting for all ' + tested + ' tests.');
+    ? 'Out of ' + tested + ' links checked, this one is unlikely to be luck.'
+    : 'Out of ' + tested + ' links checked, this one could easily be luck.');
   return lines;
 }
 
@@ -261,7 +261,7 @@ function countsOf(rows) {
 export function buildHome(loaded) {
   const base = buildPageState(loaded);
   if (!loaded || loaded.status !== 'ok' || !loaded.file) {
-    return { mode: 'empty', banner: COPY.previewBanner, standing: 'Past data. Description only, not proven. Not a forecast and not advice.', empty: COPY.empty };
+    return { mode: 'empty', banner: '', standing: 'Past data. Description only, not proven. Not a forecast and not advice.', empty: COPY.empty };
   }
   const file = loaded.file;
   const pairs = (file.pairs || []).slice().sort((a, b) => {
@@ -281,7 +281,7 @@ export function buildHome(loaded) {
     : null;
   return {
     mode: 'ready',
-    banner: COPY.previewBanner,
+    banner: '',
     standing: 'Past data. Description only, not proven. Not a forecast and not advice.',
     featured,
     rows,
@@ -297,11 +297,11 @@ export function buildLinkDetail(loaded, id) {
   if (!parseLinkId(id)) return null;
   const standing = 'Past data. Description only, not proven. Not a forecast and not advice.';
   if (!loaded || loaded.status !== 'ok' || !loaded.file) {
-    return { mode: 'empty', banner: COPY.previewBanner, standing, empty: COPY.empty };
+    return { mode: 'empty', banner: '', standing, empty: COPY.empty };
   }
   const row = (loaded.file.pairs || []).find((item) => linkId(item) === id);
-  if (!row) return { mode: 'missing', banner: COPY.previewBanner, standing, message: 'This link is not in the latest check.' };
-  return { mode: 'ready', banner: COPY.previewBanner, standing, row: rowView(row, loaded.file, true) };
+  if (!row) return { mode: 'missing', banner: '', standing, message: 'This link is not in the latest check.' };
+  return { mode: 'ready', banner: '', standing, row: rowView(row, loaded.file, true) };
 }
 
 export function loadHome() {

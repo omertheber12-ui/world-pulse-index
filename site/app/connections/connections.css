@@ -91,7 +91,7 @@ body:has(.cx-shell){background:#f5f7f5}
 .cx-pad{padding:32px}
 .cx-plain{font-size:17px;font-weight:500;line-height:24px;margin-top:8px}
 .cx-sub2{font-size:16px;line-height:24px;color:rgba(23,47,50,.72);margin-top:8px;max-width:760px}
-.cx-facts{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:24px}
+.cx-facts{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:24px;margin-bottom:12px}
 .cx-fact{background:#fff;border-radius:16px;padding:24px 32px}
 .cx-fig{font-size:48px;line-height:56px;font-weight:600;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
 .cx-fl{font-size:16px;line-height:24px;color:rgba(23,47,50,.72);margin-top:4px}
@@ -117,7 +117,7 @@ body:has(.cx-shell){background:#f5f7f5}
 .cx-skel.chart{height:340px;background:rgba(23,47,50,.06)}
 .cx-group[open] > summary .cx-chev,.earlier-checks[open] > summary .cx-chev{transform:rotate(90deg)}
 .earlier-checks > summary{min-height:44px;border-top:0}
-.earlier-checks .chips a,.earlier-checks .chips button{min-height:44px;display:inline-flex;align-items:center}
+.earlier-checks .chips a,.earlier-checks .chips button{min-height:44px;min-width:44px;display:inline-flex;align-items:center;justify-content:center}
 .cx-older{font-size:17px;line-height:24px;font-weight:600;margin:16px 24px 8px}
 .earlier-body{padding:8px 24px 16px}
 @media (max-width:700px){

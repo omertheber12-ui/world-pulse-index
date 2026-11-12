@@ -75,7 +75,6 @@ export function ConnectionsHome({ state, earlier }) {
     return (
       <>
         <main className="cx-wrap" data-page="connections" data-mode="empty">
-          <p className="cx-banner">{state.banner}</p>
           <h1>Connections</h1>
           <p className="cx-stand">{state.standing}</p>
           <p className="cx-empty">{state.empty}</p>
@@ -93,7 +92,6 @@ export function ConnectionsHome({ state, earlier }) {
   return (
     <>
       <main className="cx-wrap" data-page="connections" data-mode="ready" data-filter={filter}>
-        <p className="cx-banner">{state.banner}</p>
         <p className="cx-stand">{state.standing}</p>
         <div className="cx-tags">
           <span className="cx-tag t-strong">{featured.tierLabel}</span>
