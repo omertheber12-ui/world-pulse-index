@@ -118,12 +118,13 @@ html.nav-back main{animation:slide-back 250ms ease-out}
   html.nav-forward main,html.nav-back main{animation:none}
 }
 @media(min-width:600px){
-  body{padding-bottom:0}
-  .bar{height:64px}
-  #tabs{position:static;height:auto;width:auto;background:none;box-shadow:none;gap:4px;padding:0}
-  .tab{flex-direction:row;font-size:15px;line-height:20px;font-weight:600;color:var(--neutral-700);padding:8px 10px}
-  .tab svg{display:none}
-  .tab.on{color:var(--green-600);box-shadow:inset 0 -2px 0 var(--green-600)}
+  body{padding-bottom:calc(104px + env(safe-area-inset-bottom))}
+  header{background:transparent;box-shadow:none}
+  .bar{height:48px;justify-content:flex-start}
+  #tabs{position:fixed;left:50%;right:auto;bottom:calc(16px + env(safe-area-inset-bottom));transform:translateX(-50%);width:max-content;max-width:calc(100% - 32px);height:auto;display:flex;gap:4px;padding:6px;background:var(--neutral-0);border-radius:999px;box-shadow:0 8px 24px rgba(23,47,50,.16),0 0 0 1px var(--neutral-100);z-index:20}
+  .tab{flex:0 0 auto;flex-direction:row;min-height:44px;padding:0 16px;border-radius:999px;gap:8px;font-size:15px;line-height:20px;font-weight:600;color:var(--neutral-700)}
+  .tab svg{width:18px;height:18px;display:block}
+  .tab.on{color:var(--green-700);background:var(--green-50);box-shadow:none}
   h1{font-size:40px;line-height:44px;margin-top:32px}
   h2{font-size:24px;line-height:30px;margin-top:48px}
   .bignum{font-size:44px;line-height:48px}
