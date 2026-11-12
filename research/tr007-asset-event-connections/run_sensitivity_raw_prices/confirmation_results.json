@@ -1,0 +1,29 @@
+{
+ "bitcoin|34044": {
+  "evaluable": 335,
+  "firing_all_days": 42,
+  "firing_independent": 16,
+  "big_move_count_independent": 2,
+  "big_move_rate_independent_pct": 12.5,
+  "big_move_rate_all_firing_pct": 9.523809523809524,
+  "big_move_rate_not_firing_pct": 29.01023890784983,
+  "extra_average_pp": -0.7555746368934357,
+  "reverse_gap": 0.1499998099999984,
+  "reverse_n_large": 22,
+  "reverse_n_ordinary": 164,
+  "reverse_pass": false,
+  "asset_first_gap_before": 0.1499998099999984,
+  "asset_first_gap_after": 0.10000004000000517,
+  "asset_first_stronger": false,
+  "conflict_share_pct": 12.53731343283582,
+  "placebo_share_beaten_pct": 1.0999999999999999,
+  "p_value": 0.989010989010989,
+  "old_shuffle_share_beaten_pct": 1.2,
+  "likely_low": -1.171837870402134,
+  "likely_high": -0.23111264608314466,
+  "bootstrap_redrawn": 0,
+  "raw_confirmation_large_days": 171,
+  "bh_pass": false,
+  "bh_family_size": 1
+ }
+}

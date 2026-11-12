@@ -1,0 +1,974 @@
+{
+ "meta": {
+  "written_utc": "2026-11-10T14:47:55.794453+00:00",
+  "note": "Locked from discovery only, before any confirmation value was read.",
+  "price_reading": "raw feed floats (sensitivity)",
+  "oil": {
+   "B": "2026-03-03"
+  },
+  "bitcoin": {
+   "B": "2025-12-02"
+  }
+ },
+ "pairs": {
+  "oil|770450": {
+   "asset": "oil",
+   "event_id": "770450",
+   "market_id": "3215008",
+   "windows": {
+    "day_before": {
+     "eligible": false,
+     "indep_large_days_fresh": 0,
+     "up_days": 0,
+     "down_days": 0,
+     "ordinary_days": 0,
+     "audit_reason": "no trade in discovery range; only 0 independent discovery large-move days with a fresh window change (need 10); no ordinary day with a fresh change"
+    },
+    "week_before": {
+     "eligible": false,
+     "indep_large_days_fresh": 0,
+     "up_days": 0,
+     "down_days": 0,
+     "ordinary_days": 0,
+     "audit_reason": "no trade in discovery range; only 0 independent discovery large-move days with a fresh window change (need 10); no ordinary day with a fresh change"
+    }
+   },
+   "status": "not_enough_history",
+   "lock": null
+  },
+  "bitcoin|770450": {
+   "asset": "bitcoin",
+   "event_id": "770450",
+   "market_id": "3215008",
+   "windows": {
+    "day_before": {
+     "eligible": false,
+     "indep_large_days_fresh": 0,
+     "up_days": 0,
+     "down_days": 0,
+     "ordinary_days": 0,
+     "audit_reason": "no trade in discovery range; only 0 independent discovery large-move days with a fresh window change (need 10); no ordinary day with a fresh change"
+    },
+    "week_before": {
+     "eligible": false,
+     "indep_large_days_fresh": 0,
+     "up_days": 0,
+     "down_days": 0,
+     "ordinary_days": 0,
+     "audit_reason": "no trade in discovery range; only 0 independent discovery large-move days with a fresh window change (need 10); no ordinary day with a fresh change"
+    }
+   },
+   "status": "not_enough_history",
+   "lock": null
+  },
+  "oil|770451": {
+   "asset": "oil",
+   "event_id": "770451",
+   "market_id": "3215012",
+   "windows": {
+    "day_before": {
+     "eligible": false,
+     "indep_large_days_fresh": 0,
+     "up_days": 0,
+     "down_days": 0,
+     "ordinary_days": 0,
+     "audit_reason": "no trade in discovery range; only 0 independent discovery large-move days with a fresh window change (need 10); no ordinary day with a fresh change"
+    },
+    "week_before": {
+     "eligible": false,
+     "indep_large_days_fresh": 0,
+     "up_days": 0,
+     "down_days": 0,
+     "ordinary_days": 0,
+     "audit_reason": "no trade in discovery range; only 0 independent discovery large-move days with a fresh window change (need 10); no ordinary day with a fresh change"
+    }
+   },
+   "status": "not_enough_history",
+   "lock": null
+  },
+  "bitcoin|770451": {
+   "asset": "bitcoin",
+   "event_id": "770451",
+   "market_id": "3215012",
+   "windows": {
+    "day_before": {
+     "eligible": false,
+     "indep_large_days_fresh": 0,
+     "up_days": 0,
+     "down_days": 0,
+     "ordinary_days": 0,
+     "audit_reason": "no trade in discovery range; only 0 independent discovery large-move days with a fresh window change (need 10); no ordinary day with a fresh change"
+    },
+    "week_before": {
+     "eligible": false,
+     "indep_large_days_fresh": 0,
+     "up_days": 0,
+     "down_days": 0,
+     "ordinary_days": 0,
+     "audit_reason": "no trade in discovery range; only 0 independent discovery large-move days with a fresh window change (need 10); no ordinary day with a fresh change"
+    }
+   },
+   "status": "not_enough_history",
+   "lock": null
+  },
+  "oil|1025305": {
+   "asset": "oil",
+   "event_id": "1025305",
+   "market_id": "4570943",
+   "windows": {
+    "day_before": {
+     "eligible": false,
+     "indep_large_days_fresh": 0,
+     "up_days": 0,
+     "down_days": 0,
+     "ordinary_days": 0,
+     "audit_reason": "no trade in discovery range; only 0 independent discovery large-move days with a fresh window change (need 10); no ordinary day with a fresh change"
+    },
+    "week_before": {
+     "eligible": false,
+     "indep_large_days_fresh": 0,
+     "up_days": 0,
+     "down_days": 0,
+     "ordinary_days": 0,
+     "audit_reason": "no trade in discovery range; only 0 independent discovery large-move days with a fresh window change (need 10); no ordinary day with a fresh change"
+    }
+   },
+   "status": "not_enough_history",
+   "lock": null
+  },
+  "bitcoin|1025305": {
+   "asset": "bitcoin",
+   "event_id": "1025305",
+   "market_id": "4570943",
+   "windows": {
+    "day_before": {
+     "eligible": false,
+     "indep_large_days_fresh": 0,
+     "up_days": 0,
+     "down_days": 0,
+     "ordinary_days": 0,
+     "audit_reason": "no trade in discovery range; only 0 independent discovery large-move days with a fresh window change (need 10); no ordinary day with a fresh change"
+    },
+    "week_before": {
+     "eligible": false,
+     "indep_large_days_fresh": 0,
+     "up_days": 0,
+     "down_days": 0,
+     "ordinary_days": 0,
+     "audit_reason": "no trade in discovery range; only 0 independent discovery large-move days with a fresh window change (need 10); no ordinary day with a fresh change"
+    }
+   },
+   "status": "not_enough_history",
+   "lock": null
+  },
+  "oil|1280521": {
+   "asset": "oil",
+   "event_id": "1280521",
+   "market_id": "6404226",
+   "windows": {
+    "day_before": {
+     "eligible": false,
+     "indep_large_days_fresh": 0,
+     "up_days": 0,
+     "down_days": 0,
+     "ordinary_days": 0,
+     "audit_reason": "no trade in discovery range; only 0 independent discovery large-move days with a fresh window change (need 10); no ordinary day with a fresh change"
+    },
+    "week_before": {
+     "eligible": false,
+     "indep_large_days_fresh": 0,
+     "up_days": 0,
+     "down_days": 0,
+     "ordinary_days": 0,
+     "audit_reason": "no trade in discovery range; only 0 independent discovery large-move days with a fresh window change (need 10); no ordinary day with a fresh change"
+    }
+   },
+   "status": "not_enough_history",
+   "lock": null
+  },
+  "bitcoin|1280521": {
+   "asset": "bitcoin",
+   "event_id": "1280521",
+   "market_id": "6404226",
+   "windows": {
+    "day_before": {
+     "eligible": false,
+     "indep_large_days_fresh": 0,
+     "up_days": 0,
+     "down_days": 0,
+     "ordinary_days": 0,
+     "audit_reason": "no trade in discovery range; only 0 independent discovery large-move days with a fresh window change (need 10); no ordinary day with a fresh change"
+    },
+    "week_before": {
+     "eligible": false,
+     "indep_large_days_fresh": 0,
+     "up_days": 0,
+     "down_days": 0,
+     "ordinary_days": 0,
+     "audit_reason": "no trade in discovery range; only 0 independent discovery large-move days with a fresh window change (need 10); no ordinary day with a fresh change"
+    }
+   },
+   "status": "not_enough_history",
+   "lock": null
+  },
+  "oil|1123963": {
+   "asset": "oil",
+   "event_id": "1123963",
+   "market_id": "5230123",
+   "windows": {
+    "day_before": {
+     "eligible": false,
+     "indep_large_days_fresh": 0,
+     "up_days": 0,
+     "down_days": 0,
+     "ordinary_days": 0,
+     "audit_reason": "no trade in discovery range; only 0 independent discovery large-move days with a fresh window change (need 10); no ordinary day with a fresh change"
+    },
+    "week_before": {
+     "eligible": false,
+     "indep_large_days_fresh": 0,
+     "up_days": 0,
+     "down_days": 0,
+     "ordinary_days": 0,
+     "audit_reason": "no trade in discovery range; only 0 independent discovery large-move days with a fresh window change (need 10); no ordinary day with a fresh change"
+    }
+   },
+   "status": "not_enough_history",
+   "lock": null
+  },
+  "bitcoin|1123963": {
+   "asset": "bitcoin",
+   "event_id": "1123963",
+   "market_id": "5230123",
+   "windows": {
+    "day_before": {
+     "eligible": false,
+     "indep_large_days_fresh": 0,
+     "up_days": 0,
+     "down_days": 0,
+     "ordinary_days": 0,
+     "audit_reason": "no trade in discovery range; only 0 independent discovery large-move days with a fresh window change (need 10); no ordinary day with a fresh change"
+    },
+    "week_before": {
+     "eligible": false,
+     "indep_large_days_fresh": 0,
+     "up_days": 0,
+     "down_days": 0,
+     "ordinary_days": 0,
+     "audit_reason": "no trade in discovery range; only 0 independent discovery large-move days with a fresh window change (need 10); no ordinary day with a fresh change"
+    }
+   },
+   "status": "not_enough_history",
+   "lock": null
+  },
+  "oil|1194143": {
+   "asset": "oil",
+   "event_id": "1194143",
+   "market_id": "5730325",
+   "windows": {
+    "day_before": {
+     "eligible": false,
+     "indep_large_days_fresh": 0,
+     "up_days": 0,
+     "down_days": 0,
+     "ordinary_days": 0,
+     "audit_reason": "no trade in discovery range; only 0 independent discovery large-move days with a fresh window change (need 10); no ordinary day with a fresh change"
+    },
+    "week_before": {
+     "eligible": false,
+     "indep_large_days_fresh": 0,
+     "up_days": 0,
+     "down_days": 0,
+     "ordinary_days": 0,
+     "audit_reason": "no trade in discovery range; only 0 independent discovery large-move days with a fresh window change (need 10); no ordinary day with a fresh change"
+    }
+   },
+   "status": "not_enough_history",
+   "lock": null
+  },
+  "bitcoin|1194143": {
+   "asset": "bitcoin",
+   "event_id": "1194143",
+   "market_id": "5730325",
+   "windows": {
+    "day_before": {
+     "eligible": false,
+     "indep_large_days_fresh": 0,
+     "up_days": 0,
+     "down_days": 0,
+     "ordinary_days": 0,
+     "audit_reason": "no trade in discovery range; only 0 independent discovery large-move days with a fresh window change (need 10); no ordinary day with a fresh change"
+    },
+    "week_before": {
+     "eligible": false,
+     "indep_large_days_fresh": 0,
+     "up_days": 0,
+     "down_days": 0,
+     "ordinary_days": 0,
+     "audit_reason": "no trade in discovery range; only 0 independent discovery large-move days with a fresh window change (need 10); no ordinary day with a fresh change"
+    }
+   },
+   "status": "not_enough_history",
+   "lock": null
+  },
+  "oil|1194144": {
+   "asset": "oil",
+   "event_id": "1194144",
+   "market_id": "5730329",
+   "windows": {
+    "day_before": {
+     "eligible": false,
+     "indep_large_days_fresh": 0,
+     "up_days": 0,
+     "down_days": 0,
+     "ordinary_days": 0,
+     "audit_reason": "no trade in discovery range; only 0 independent discovery large-move days with a fresh window change (need 10); no ordinary day with a fresh change"
+    },
+    "week_before": {
+     "eligible": false,
+     "indep_large_days_fresh": 0,
+     "up_days": 0,
+     "down_days": 0,
+     "ordinary_days": 0,
+     "audit_reason": "no trade in discovery range; only 0 independent discovery large-move days with a fresh window change (need 10); no ordinary day with a fresh change"
+    }
+   },
+   "status": "not_enough_history",
+   "lock": null
+  },
+  "bitcoin|1194144": {
+   "asset": "bitcoin",
+   "event_id": "1194144",
+   "market_id": "5730329",
+   "windows": {
+    "day_before": {
+     "eligible": false,
+     "indep_large_days_fresh": 0,
+     "up_days": 0,
+     "down_days": 0,
+     "ordinary_days": 0,
+     "audit_reason": "no trade in discovery range; only 0 independent discovery large-move days with a fresh window change (need 10); no ordinary day with a fresh change"
+    },
+    "week_before": {
+     "eligible": false,
+     "indep_large_days_fresh": 0,
+     "up_days": 0,
+     "down_days": 0,
+     "ordinary_days": 0,
+     "audit_reason": "no trade in discovery range; only 0 independent discovery large-move days with a fresh window change (need 10); no ordinary day with a fresh change"
+    }
+   },
+   "status": "not_enough_history",
+   "lock": null
+  },
+  "oil|800884": {
+   "asset": "oil",
+   "event_id": "800884",
+   "market_id": "3358974",
+   "windows": {
+    "day_before": {
+     "eligible": false,
+     "indep_large_days_fresh": 0,
+     "up_days": 0,
+     "down_days": 0,
+     "ordinary_days": 0,
+     "audit_reason": "no trade in discovery range; only 0 independent discovery large-move days with a fresh window change (need 10); no ordinary day with a fresh change"
+    },
+    "week_before": {
+     "eligible": false,
+     "indep_large_days_fresh": 0,
+     "up_days": 0,
+     "down_days": 0,
+     "ordinary_days": 0,
+     "audit_reason": "no trade in discovery range; only 0 independent discovery large-move days with a fresh window change (need 10); no ordinary day with a fresh change"
+    }
+   },
+   "status": "not_enough_history",
+   "lock": null
+  },
+  "bitcoin|800884": {
+   "asset": "bitcoin",
+   "event_id": "800884",
+   "market_id": "3358974",
+   "windows": {
+    "day_before": {
+     "eligible": false,
+     "indep_large_days_fresh": 0,
+     "up_days": 0,
+     "down_days": 0,
+     "ordinary_days": 0,
+     "audit_reason": "no trade in discovery range; only 0 independent discovery large-move days with a fresh window change (need 10); no ordinary day with a fresh change"
+    },
+    "week_before": {
+     "eligible": false,
+     "indep_large_days_fresh": 0,
+     "up_days": 0,
+     "down_days": 0,
+     "ordinary_days": 0,
+     "audit_reason": "no trade in discovery range; only 0 independent discovery large-move days with a fresh window change (need 10); no ordinary day with a fresh change"
+    }
+   },
+   "status": "not_enough_history",
+   "lock": null
+  },
+  "oil|79987": {
+   "asset": "oil",
+   "event_id": "79987",
+   "market_id": "679018",
+   "windows": {
+    "day_before": {
+     "eligible": true,
+     "indep_large_days_fresh": 19,
+     "up_days": 12,
+     "down_days": 7,
+     "ordinary_days": 27,
+     "audit_reason": null,
+     "median_change_up": 0.0,
+     "median_change_down": 0.0,
+     "median_change_ordinary": -3.552713678800501e-15,
+     "gap_up": 3.552713678800501e-15,
+     "gap_down": 3.552713678800501e-15,
+     "score": 3.552713678800501e-15,
+     "median_level_up": 9.0,
+     "median_level_down": 10.0,
+     "median_level_ordinary": 8.999999999999996,
+     "band_up": "5-10",
+     "band_down": "10-15",
+     "band_ordinary": "5-10",
+     "same_day": {
+      "median_change_up": -0.49999594999999974,
+      "median_change_down": -0.9999999999999991,
+      "median_change_ordinary": 1.7763568394002505e-15,
+      "up_days": 12,
+      "down_days": 7,
+      "ordinary_days": 28
+     },
+     "signals_up_count": 40,
+     "signals_down_count": 40,
+     "evaluable_days": 69
+    },
+    "week_before": {
+     "eligible": true,
+     "indep_large_days_fresh": 10,
+     "up_days": 3,
+     "down_days": 7,
+     "ordinary_days": 26,
+     "audit_reason": null,
+     "median_change_up": 0.0,
+     "median_change_down": -3.552713678800501e-15,
+     "median_change_ordinary": -0.5000023049999984,
+     "gap_up": 0.5000023049999984,
+     "gap_down": 0.5000023049999949,
+     "score": 0.5000023049999984,
+     "median_level_up": 13.0,
+     "median_level_down": 8.0,
+     "median_level_ordinary": 8.999999999999996,
+     "band_up": "10-15",
+     "band_down": "5-10",
+     "band_ordinary": "5-10",
+     "same_day": {
+      "median_change_up": -0.49999594999999974,
+      "median_change_down": -0.9999999999999991,
+      "median_change_ordinary": 1.7763568394002505e-15,
+      "up_days": 12,
+      "down_days": 7,
+      "ordinary_days": 28
+     },
+     "signals_up_count": 36,
+     "signals_down_count": 40,
+     "evaluable_days": 66
+    }
+   },
+   "status": "no_lead_pattern",
+   "lock": null
+  },
+  "bitcoin|79987": {
+   "asset": "bitcoin",
+   "event_id": "79987",
+   "market_id": "679018",
+   "windows": {
+    "day_before": {
+     "eligible": false,
+     "indep_large_days_fresh": 4,
+     "up_days": 1,
+     "down_days": 3,
+     "ordinary_days": 6,
+     "audit_reason": "only 4 independent discovery large-move days with a fresh window change (need 10)"
+    },
+    "week_before": {
+     "eligible": false,
+     "indep_large_days_fresh": 2,
+     "up_days": 1,
+     "down_days": 1,
+     "ordinary_days": 4,
+     "audit_reason": "only 2 independent discovery large-move days with a fresh window change (need 10)"
+    }
+   },
+   "status": "not_enough_history",
+   "lock": null
+  },
+  "oil|81557": {
+   "asset": "oil",
+   "event_id": "81557",
+   "market_id": "682708",
+   "windows": {
+    "day_before": {
+     "eligible": false,
+     "indep_large_days_fresh": 8,
+     "up_days": 5,
+     "down_days": 3,
+     "ordinary_days": 13,
+     "audit_reason": "only 8 independent discovery large-move days with a fresh window change (need 10)"
+    },
+    "week_before": {
+     "eligible": false,
+     "indep_large_days_fresh": 4,
+     "up_days": 2,
+     "down_days": 2,
+     "ordinary_days": 9,
+     "audit_reason": "only 4 independent discovery large-move days with a fresh window change (need 10)"
+    }
+   },
+   "status": "not_enough_history",
+   "lock": null
+  },
+  "bitcoin|81557": {
+   "asset": "bitcoin",
+   "event_id": "81557",
+   "market_id": "682708",
+   "windows": {
+    "day_before": {
+     "eligible": false,
+     "indep_large_days_fresh": 2,
+     "up_days": 0,
+     "down_days": 2,
+     "ordinary_days": 2,
+     "audit_reason": "only 2 independent discovery large-move days with a fresh window change (need 10)"
+    },
+    "week_before": {
+     "eligible": false,
+     "indep_large_days_fresh": 1,
+     "up_days": 1,
+     "down_days": 0,
+     "ordinary_days": 0,
+     "audit_reason": "only 1 independent discovery large-move days with a fresh window change (need 10); no ordinary day with a fresh change"
+    }
+   },
+   "status": "not_enough_history",
+   "lock": null
+  },
+  "oil|31552": {
+   "asset": "oil",
+   "event_id": "31552",
+   "market_id": "561261",
+   "windows": {
+    "day_before": {
+     "eligible": false,
+     "indep_large_days_fresh": 3,
+     "up_days": 2,
+     "down_days": 1,
+     "ordinary_days": 6,
+     "audit_reason": "only 3 independent discovery large-move days with a fresh window change (need 10)"
+    },
+    "week_before": {
+     "eligible": false,
+     "indep_large_days_fresh": 1,
+     "up_days": 0,
+     "down_days": 1,
+     "ordinary_days": 4,
+     "audit_reason": "only 1 independent discovery large-move days with a fresh window change (need 10)"
+    }
+   },
+   "status": "not_enough_history",
+   "lock": null
+  },
+  "bitcoin|31552": {
+   "asset": "bitcoin",
+   "event_id": "31552",
+   "market_id": "561261",
+   "windows": {
+    "day_before": {
+     "eligible": false,
+     "indep_large_days_fresh": 0,
+     "up_days": 0,
+     "down_days": 0,
+     "ordinary_days": 0,
+     "audit_reason": "no trade in discovery range; only 0 independent discovery large-move days with a fresh window change (need 10); no ordinary day with a fresh change"
+    },
+    "week_before": {
+     "eligible": false,
+     "indep_large_days_fresh": 0,
+     "up_days": 0,
+     "down_days": 0,
+     "ordinary_days": 0,
+     "audit_reason": "no trade in discovery range; only 0 independent discovery large-move days with a fresh window change (need 10); no ordinary day with a fresh change"
+    }
+   },
+   "status": "not_enough_history",
+   "lock": null
+  },
+  "oil|711714": {
+   "asset": "oil",
+   "event_id": "711714",
+   "market_id": "3399468",
+   "windows": {
+    "day_before": {
+     "eligible": false,
+     "indep_large_days_fresh": 0,
+     "up_days": 0,
+     "down_days": 0,
+     "ordinary_days": 0,
+     "audit_reason": "no trade in discovery range; only 0 independent discovery large-move days with a fresh window change (need 10); no ordinary day with a fresh change"
+    },
+    "week_before": {
+     "eligible": false,
+     "indep_large_days_fresh": 0,
+     "up_days": 0,
+     "down_days": 0,
+     "ordinary_days": 0,
+     "audit_reason": "no trade in discovery range; only 0 independent discovery large-move days with a fresh window change (need 10); no ordinary day with a fresh change"
+    }
+   },
+   "status": "not_enough_history",
+   "lock": null
+  },
+  "bitcoin|711714": {
+   "asset": "bitcoin",
+   "event_id": "711714",
+   "market_id": "3399468",
+   "windows": {
+    "day_before": {
+     "eligible": false,
+     "indep_large_days_fresh": 0,
+     "up_days": 0,
+     "down_days": 0,
+     "ordinary_days": 0,
+     "audit_reason": "no trade in discovery range; only 0 independent discovery large-move days with a fresh window change (need 10); no ordinary day with a fresh change"
+    },
+    "week_before": {
+     "eligible": false,
+     "indep_large_days_fresh": 0,
+     "up_days": 0,
+     "down_days": 0,
+     "ordinary_days": 0,
+     "audit_reason": "no trade in discovery range; only 0 independent discovery large-move days with a fresh window change (need 10); no ordinary day with a fresh change"
+    }
+   },
+   "status": "not_enough_history",
+   "lock": null
+  },
+  "oil|478472": {
+   "asset": "oil",
+   "event_id": "478472",
+   "market_id": "2243897",
+   "windows": {
+    "day_before": {
+     "eligible": false,
+     "indep_large_days_fresh": 0,
+     "up_days": 0,
+     "down_days": 0,
+     "ordinary_days": 0,
+     "audit_reason": "no trade in discovery range; only 0 independent discovery large-move days with a fresh window change (need 10); no ordinary day with a fresh change"
+    },
+    "week_before": {
+     "eligible": false,
+     "indep_large_days_fresh": 0,
+     "up_days": 0,
+     "down_days": 0,
+     "ordinary_days": 0,
+     "audit_reason": "no trade in discovery range; only 0 independent discovery large-move days with a fresh window change (need 10); no ordinary day with a fresh change"
+    }
+   },
+   "status": "not_enough_history",
+   "lock": null
+  },
+  "bitcoin|478472": {
+   "asset": "bitcoin",
+   "event_id": "478472",
+   "market_id": "2243897",
+   "windows": {
+    "day_before": {
+     "eligible": false,
+     "indep_large_days_fresh": 0,
+     "up_days": 0,
+     "down_days": 0,
+     "ordinary_days": 0,
+     "audit_reason": "no trade in discovery range; only 0 independent discovery large-move days with a fresh window change (need 10); no ordinary day with a fresh change"
+    },
+    "week_before": {
+     "eligible": false,
+     "indep_large_days_fresh": 0,
+     "up_days": 0,
+     "down_days": 0,
+     "ordinary_days": 0,
+     "audit_reason": "no trade in discovery range; only 0 independent discovery large-move days with a fresh window change (need 10); no ordinary day with a fresh change"
+    }
+   },
+   "status": "not_enough_history",
+   "lock": null
+  },
+  "oil|160366": {
+   "asset": "oil",
+   "event_id": "160366",
+   "market_id": "1170144",
+   "windows": {
+    "day_before": {
+     "eligible": false,
+     "indep_large_days_fresh": 6,
+     "up_days": 3,
+     "down_days": 3,
+     "ordinary_days": 7,
+     "audit_reason": "only 6 independent discovery large-move days with a fresh window change (need 10)"
+    },
+    "week_before": {
+     "eligible": false,
+     "indep_large_days_fresh": 3,
+     "up_days": 1,
+     "down_days": 2,
+     "ordinary_days": 7,
+     "audit_reason": "only 3 independent discovery large-move days with a fresh window change (need 10)"
+    }
+   },
+   "status": "not_enough_history",
+   "lock": null
+  },
+  "bitcoin|160366": {
+   "asset": "bitcoin",
+   "event_id": "160366",
+   "market_id": "1170144",
+   "windows": {
+    "day_before": {
+     "eligible": false,
+     "indep_large_days_fresh": 0,
+     "up_days": 0,
+     "down_days": 0,
+     "ordinary_days": 0,
+     "audit_reason": "no trade in discovery range; only 0 independent discovery large-move days with a fresh window change (need 10); no ordinary day with a fresh change"
+    },
+    "week_before": {
+     "eligible": false,
+     "indep_large_days_fresh": 0,
+     "up_days": 0,
+     "down_days": 0,
+     "ordinary_days": 0,
+     "audit_reason": "no trade in discovery range; only 0 independent discovery large-move days with a fresh window change (need 10); no ordinary day with a fresh change"
+    }
+   },
+   "status": "not_enough_history",
+   "lock": null
+  },
+  "oil|34044": {
+   "asset": "oil",
+   "event_id": "34044",
+   "market_id": "567621",
+   "windows": {
+    "day_before": {
+     "eligible": true,
+     "indep_large_days_fresh": 40,
+     "up_days": 21,
+     "down_days": 19,
+     "ordinary_days": 63,
+     "audit_reason": null,
+     "median_change_up": 1.0999999666694293e-07,
+     "median_change_down": -2.069999993636884e-06,
+     "median_change_ordinary": -7.030000004348835e-06,
+     "gap_up": 7.140000001015778e-06,
+     "gap_down": 4.960000010711951e-06,
+     "score": 7.140000001015778e-06,
+     "median_level_up": 14.000000069999995,
+     "median_level_down": 14.000000000000002,
+     "median_level_ordinary": 15.000000000000002,
+     "band_up": "10-15",
+     "band_down": "10-15",
+     "band_ordinary": "15-20",
+     "same_day": {
+      "median_change_up": 0.0,
+      "median_change_down": 0.0,
+      "median_change_ordinary": 0.0,
+      "up_days": 21,
+      "down_days": 20,
+      "ordinary_days": 63
+     },
+     "signals_up_count": 56,
+     "signals_down_count": 86,
+     "evaluable_days": 149
+    },
+    "week_before": {
+     "eligible": true,
+     "indep_large_days_fresh": 20,
+     "up_days": 9,
+     "down_days": 11,
+     "ordinary_days": 63,
+     "audit_reason": null,
+     "median_change_up": -0.9999978399999989,
+     "median_change_down": 0.0,
+     "median_change_ordinary": -4.400000026549833e-07,
+     "gap_up": -0.9999973999999963,
+     "gap_down": 4.400000026549833e-07,
+     "score": 0.9999973999999963,
+     "median_level_up": 16.000000000000004,
+     "median_level_down": 13.0,
+     "median_level_ordinary": 15.000000000000002,
+     "band_up": "10-15",
+     "band_down": "10-15",
+     "band_ordinary": "15-20",
+     "same_day": {
+      "median_change_up": 0.0,
+      "median_change_down": 0.0,
+      "median_change_ordinary": 0.0,
+      "up_days": 21,
+      "down_days": 20,
+      "ordinary_days": 63
+     },
+     "signals_up_count": 56,
+     "signals_down_count": 62,
+     "evaluable_days": 145
+    }
+   },
+   "status": "no_lead_pattern",
+   "lock": null
+  },
+  "bitcoin|34044": {
+   "asset": "bitcoin",
+   "event_id": "34044",
+   "market_id": "567621",
+   "windows": {
+    "day_before": {
+     "eligible": true,
+     "indep_large_days_fresh": 32,
+     "up_days": 16,
+     "down_days": 16,
+     "ordinary_days": 65,
+     "audit_reason": null,
+     "median_change_up": 0.0,
+     "median_change_down": -8.185000002214338e-06,
+     "median_change_ordinary": 0.0,
+     "gap_up": 0.0,
+     "gap_down": -8.185000002214338e-06,
+     "score": 8.185000002214338e-06,
+     "median_level_up": 17.00000017,
+     "median_level_down": 16.000000390000004,
+     "median_level_ordinary": 17.000000000000004,
+     "band_up": "15-20",
+     "band_down": "15-20",
+     "band_ordinary": "15-20",
+     "same_day": {
+      "median_change_up": -0.4999950199999992,
+      "median_change_down": 5.000000413701855e-09,
+      "median_change_ordinary": 0.0,
+      "up_days": 16,
+      "down_days": 16,
+      "ordinary_days": 65
+     },
+     "signals_up_count": 0,
+     "signals_down_count": 49,
+     "evaluable_days": 130
+    },
+    "week_before": {
+     "eligible": true,
+     "indep_large_days_fresh": 18,
+     "up_days": 9,
+     "down_days": 9,
+     "ordinary_days": 60,
+     "audit_reason": null,
+     "median_change_up": -1.6900000012753935e-06,
+     "median_change_down": -1.0000075800000054,
+     "median_change_ordinary": 0.0,
+     "gap_up": -1.6900000012753935e-06,
+     "gap_down": -1.0000075800000054,
+     "score": 1.0000075800000054,
+     "median_level_up": 16.99999702,
+     "median_level_down": 17.0,
+     "median_level_ordinary": 16.61344048,
+     "band_up": "15-20",
+     "band_down": "15-20",
+     "band_ordinary": "15-20",
+     "same_day": {
+      "median_change_up": -0.4999950199999992,
+      "median_change_down": 5.000000413701855e-09,
+      "median_change_ordinary": 0.0,
+      "up_days": 16,
+      "down_days": 16,
+      "ordinary_days": 65
+     },
+     "signals_up_count": 61,
+     "signals_down_count": 38,
+     "evaluable_days": 124
+    }
+   },
+   "status": "locked",
+   "lock": {
+    "lead_window": "week_before",
+    "locked_direction": "down",
+    "d": -1,
+    "L": -1.0000075800000054,
+    "O": 0.0,
+    "rule": "fire when change <= L",
+    "discovery_gap": -1.0000075800000054,
+    "median_level": 17.0,
+    "band": "15-20",
+    "up_rule": {
+     "L": -1.6900000012753935e-06,
+     "O": 0.0
+    },
+    "down_rule": {
+     "L": -1.0000075800000054,
+     "O": 0.0
+    },
+    "signals_up_count": 61,
+    "signals_down_count": 38,
+    "indep_discovery_days": 18
+   }
+  },
+  "oil|1337182": {
+   "asset": "oil",
+   "event_id": "1337182",
+   "market_id": "6831494",
+   "windows": {
+    "day_before": {
+     "eligible": false,
+     "indep_large_days_fresh": 0,
+     "up_days": 0,
+     "down_days": 0,
+     "ordinary_days": 0,
+     "audit_reason": "no trade in discovery range; only 0 independent discovery large-move days with a fresh window change (need 10); no ordinary day with a fresh change"
+    },
+    "week_before": {
+     "eligible": false,
+     "indep_large_days_fresh": 0,
+     "up_days": 0,
+     "down_days": 0,
+     "ordinary_days": 0,
+     "audit_reason": "no trade in discovery range; only 0 independent discovery large-move days with a fresh window change (need 10); no ordinary day with a fresh change"
+    }
+   },
+   "status": "not_enough_history",
+   "lock": null
+  },
+  "bitcoin|1337182": {
+   "asset": "bitcoin",
+   "event_id": "1337182",
+   "market_id": "6831494",
+   "windows": {
+    "day_before": {
+     "eligible": false,
+     "indep_large_days_fresh": 0,
+     "up_days": 0,
+     "down_days": 0,
+     "ordinary_days": 0,
+     "audit_reason": "no trade in discovery range; only 0 independent discovery large-move days with a fresh window change (need 10); no ordinary day with a fresh change"
+    },
+    "week_before": {
+     "eligible": false,
+     "indep_large_days_fresh": 0,
+     "up_days": 0,
+     "down_days": 0,
+     "ordinary_days": 0,
+     "audit_reason": "no trade in discovery range; only 0 independent discovery large-move days with a fresh window change (need 10); no ordinary day with a fresh change"
+    }
+   },
+   "status": "not_enough_history",
+   "lock": null
+  }
+ }
+}
