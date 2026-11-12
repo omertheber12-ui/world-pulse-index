@@ -6,6 +6,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { chancePhrase, changeLine, changeVerb, strayTitleCase, thinMarketNote, whyMatters } from '../lib/copy.js';
 import { runConnectionChecks, connectionPageChecks } from './connectionsCheck.mjs';
+import { runCorrelationChecks, correlationPageChecks } from './correlationsCheck.mjs';
 import { homeEligible, moveScore, qualityScore, rankOpen } from '../lib/score.js';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -84,6 +85,7 @@ add('A move under 1 point reads held steady',
   changeVerb(0.4) === 'held steady' && changeLine(80.5, 0.4) === 'at 80.5%, less than 1 point change in 24 hours' && changeVerb(-4) === 'fell');
 
 runConnectionChecks(add);
+runCorrelationChecks(add);
 
 let gammaOk = true;
 const gammaDetail = [];
@@ -279,9 +281,14 @@ if (base) {
   }
   add('No buy/sell, edge, alpha, or risk-free wording on pages', advicePages.length === 0, advicePages.join(','));
   await connectionPageChecks(add, page);
+  await correlationPageChecks(add, page);
   const redir = await fetch(base + '/today.html', { redirect: 'manual' });
   const loc = redir.headers.get('location') || '';
   add('today.html redirects to the Today page', (redir.status === 307 || redir.status === 308) && (loc === '/' || loc.endsWith('/')));
+  const links = await fetch(base + '/strongest-links', { redirect: 'manual' });
+  const linksLoc = links.headers.get('location') || '';
+  add('/strongest-links redirects to /connections',
+    links.status === 308 && (linksLoc === '/connections' || linksLoc.endsWith('/connections')));
 }
 
 const allPass = checks.every((c) => c.pass);

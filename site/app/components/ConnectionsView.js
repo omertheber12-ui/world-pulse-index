@@ -63,46 +63,79 @@ function CardBody({ card }) {
   );
 }
 
+function readableDate(text) {
+  return String(text || '').replace(/(\d{4})-(\d{2})-(\d{2})/g, (_, year, month, day) => {
+    const names = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    return Number(day) + ' ' + names[Number(month) - 1] + ' ' + year;
+  });
+}
+
+function ConnectionsBody({ state, embedded }) {
+  return (
+    <>
+      {embedded ? <h3 className="cx-older">Older tests</h3> : <h1>{state.title}</h1>}
+      <Filters state={state} />
+      {state.mode === 'loading' ? <p className="checking">{state.loading}</p> : null}
+      {state.mode === 'unread' ? (
+        <>
+          <h2>{state.unread.headline}</h2>
+          <p>{state.unread.body}</p>
+        </>
+      ) : null}
+      {state.mode === 'empty' ? (
+        <>
+          <h2>{state.empty.headline}</h2>
+          <p>{state.empty.body}</p>
+          <p className="note">{state.empty.context}</p>
+        </>
+      ) : null}
+      {state.mode === 'list' ? (
+        <>
+          {state.banners.map((banner) => (
+            <aside className={'conn-banner ' + banner.tone} key={banner.tone}>
+              <p>{banner.text}</p>
+              {banner.helper ? <p className="conn-helper">{banner.helper}</p> : null}
+            </aside>
+          ))}
+          {state.cards.map((card) => (
+            <Link className="conn-card" key={card.id} href={card.href} data-history={card.historyStatus}>
+              <CardBody card={card} />
+              <p className="conn-meta">{readableDate(card.lastChecked)}</p>
+              <p className="morelink">{COPY.details}</p>
+            </Link>
+          ))}
+          {state.quiet.map((line) => (
+            <p className="conn-quiet" key={line}>{line}</p>
+          ))}
+        </>
+      ) : null}
+    </>
+  );
+}
+
+export function EarlierChecks({ state }) {
+  return (
+    <details className="earlier-checks">
+      <summary className="cx-grow">
+        <span className="cx-ltext">
+          <span className="cx-gtitle">Earlier checks</span>
+          <span className="cx-lmeta">Older tests from earlier runs, kept for the record.</span>
+        </span>
+        <span className="cx-chev" aria-hidden="true">›</span>
+      </summary>
+      <div className="earlier-body">
+        <ConnectionsBody state={state} embedded />
+        {state.footer ? <p className="conn-meta">{readableDate(state.footer)}</p> : null}
+      </div>
+    </details>
+  );
+}
+
 export function ConnectionsScreen({ state }) {
   return (
     <>
       <main data-page="connections" data-mode={state.mode}>
-        <h1>{state.title}</h1>
-        <Filters state={state} />
-        {state.mode === 'loading' ? <p className="checking">{state.loading}</p> : null}
-        {state.mode === 'unread' ? (
-          <>
-            <h2>{state.unread.headline}</h2>
-            <p>{state.unread.body}</p>
-          </>
-        ) : null}
-        {state.mode === 'empty' ? (
-          <>
-            <h2>{state.empty.headline}</h2>
-            <p>{state.empty.body}</p>
-            <p className="note">{state.empty.context}</p>
-          </>
-        ) : null}
-        {state.mode === 'list' ? (
-          <>
-            {state.banners.map((banner) => (
-              <aside className={'conn-banner ' + banner.tone} key={banner.tone}>
-                <p>{banner.text}</p>
-                {banner.helper ? <p className="conn-helper">{banner.helper}</p> : null}
-              </aside>
-            ))}
-            {state.cards.map((card) => (
-              <Link className="conn-card" key={card.id} href={card.href} data-history={card.historyStatus}>
-                <CardBody card={card} />
-                <p className="conn-meta">{card.lastChecked}</p>
-                <p className="morelink">{COPY.details}</p>
-              </Link>
-            ))}
-            {state.quiet.map((line) => (
-              <p className="conn-quiet" key={line}>{line}</p>
-            ))}
-          </>
-        ) : null}
+        <ConnectionsBody state={state} />
       </main>
       <Insights footer={state.footer} />
     </>

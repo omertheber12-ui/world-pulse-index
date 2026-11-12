@@ -1,5 +1,5 @@
 {
-  "run_at": "2026-11-10T15:13:23.018Z",
+  "run_at": "2026-11-12T10:07:29.155Z",
   "all_pass": true,
   "items": [
     {
@@ -248,6 +248,271 @@
       "detail": ""
     },
     {
+      "check": "the research file parses",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "the run copy matches the research file",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "the shipped file is the research run, not example data",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "shown strongest rows have at least 10 episodes",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "every strongest card renders the chance line, sample size, pick-from-many warning and the label",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "sample size leads with separate episodes",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "nulls render as not available",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "cards stay in file order and are not re-ranked",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "number_of_pairs_searched fills in when picked_from_n is absent",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "picked_from_n wins when both count fields are present",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "the top line uses the shown counts when they are present",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "the top line keeps the all-rows counts when the shown counts are absent",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "the research notice shows for the research run",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "the example notice follows the run id or the example flag",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "a missing correlation says not enough data and the row stays",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "fewer than 10 episodes is not a special rule",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "a null sample or chance field is not shown as zero",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "a file that fails validation fails soft",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "a missing file shows no results yet",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "an unreadable file does not crash and shows no results yet",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "a missing latest file can fall back to the run copy",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "the page does not appear in the tab bar",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "same day lag label is just same day and the card does not say not a lead",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "odds moved first, 1 day before the asset",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "odds moved first, 5 days before the asset",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "asset moved first, 1 day before the odds",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "asset moved first, 5 days before the odds",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "the research lag label is shown as written",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "unknown lag says timing not available",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "rows group by timing group and lag 0 means same day",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "a pick that does not beat the best of many says it does not pass",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "a pick that passes the strict check uses the pass wording",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "the research data hash is unchanged",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "517 tested links render",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "tier counts are 3, 41, and 473",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "timing groups of tested links sum to every row",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "the weaker-links note uses the summary counts",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "each tested group is ordered by strength",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "a headline is one line from the labels, timing, and sign",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "the featured headline uses the spec sign wording",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "weak headlines say sometimes and none say a opposite",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "size sentences do not say same way",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "Only starts the shuffle sentence only outside the chance band",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "the featured pick matches the rule and the brand map is kept",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "a size chart shows the daily swing, not a running total",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "only the three allowed colors appear in the connections CSS",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "a single font family is used",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "the series file hash is unchanged",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "the main chart has data for both lines",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "no figure is typed by hand in the connections view",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "every list row has a spark and a lead filter has no strong links",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "all 20 list lines have a trend line",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "no odds point falls after its family hold-back date",
+      "pass": true,
+      "detail": ""
+    },
+    {
       "check": "Gamma HTTP 200 for all events",
       "pass": true,
       "detail": "770450:200, 770451:200, 1025305:200, 1280521:200, 1123963:200, 1194143:200, 1194144:200, 800884:200, 79987:200, 81557:200, 31552:200, 711714:200, 478472:200, 160366:200, 34044:200, 1337182:200"
@@ -305,17 +570,17 @@
     {
       "check": "Today headline is built from the question, end date, and change",
       "pass": true,
-      "detail": "Chance that the US central bank keeps rates unchanged at its January 2027 meeting fell"
+      "detail": "Chance that the Russia and Ukraine ceasefire agreement by December 31, 2026 fell"
     },
     {
       "check": "Live headlines have no mid-sentence Title Case words except proper nouns",
       "pass": true,
-      "detail": "Chance that the US central bank keeps rates unchanged at its January 2027 meeting fell"
+      "detail": "Chance that the Russia and Ukraine ceasefire agreement by December 31, 2026 fell"
     },
     {
       "check": "Today top 3 cards are the first 3 of the personal ranking",
       "pass": true,
-      "detail": "rows=770451,711714,770450 top=770451,711714,770450"
+      "detail": "rows=478472,770450,770451 top=478472,770450,770451"
     },
     {
       "check": "Exposure text says this is not an expected loss",
@@ -438,7 +703,57 @@
       "detail": ""
     },
     {
+      "check": "connections page renders the preview banner, standing line, and noindex",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "the first screen shows the tier bar and not the old long list",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "a correlation id renders the new detail and a TR-007 id renders the old one",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "Connections pages render the bottom tab bar and no top bar",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "the connections tab points at /connections",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "the strongest links page has no advice wording",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "an unknown connection id returns 404",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "the two labels sit on separate rows below desktop width",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "the link bottom plus 8 is at most the bar top at 390x844",
+      "pass": true,
+      "detail": ""
+    },
+    {
       "check": "today.html redirects to the Today page",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "/strongest-links redirects to /connections",
       "pass": true,
       "detail": ""
     }

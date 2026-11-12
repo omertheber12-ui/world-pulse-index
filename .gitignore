@@ -1,4 +1,5 @@
 *.png
+site/lib/knownConnectionIds.json
 public-fetch.json
 holdings-live.json
 etoro-*

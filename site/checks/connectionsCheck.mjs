@@ -480,10 +480,14 @@ export async function connectionPageChecks(add, page) {
     const loaded = loadConnections(path.join(siteRoot, 'data/connections'), { root: siteRoot, today: TODAY });
     const state = buildListState(loaded, 'all');
     const rendered = visibleText(state);
+    const shownDate = (text) => String(text).replace(/(\d{4})-(\d{2})-(\d{2})/g, (_, year, month, day) => {
+      const names = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+      return Number(day) + ' ' + names[Number(month) - 1] + ' ' + year;
+    });
     add('live Connections page shows the results file',
       loaded.status === 'ok'
       && list.status === 200
-      && html.includes(state.footer)
+      && html.includes(shownDate(state.footer))
       && state.mode !== 'empty'
       && !html.includes(COPY.emptyHeadline)
       && state.cards.length > 0
@@ -492,9 +496,10 @@ export async function connectionPageChecks(add, page) {
       && state.banners.every((banner) => html.includes(banner.text))
       && (html.match(/data-history="/g) || []).length === state.cards.length,
       'cards ' + state.cards.length + ' mode ' + state.mode);
+    const earlierHtml = (html.split('<details class="earlier-checks">')[1] || '').split('</details>')[0];
     add('live page does not add strength tags the file did not earn',
       state.cards.every((card) => card.tags.length === 0)
-        ? !html.includes('Stronger connection') && !html.includes('First look') && !html.includes('Moved together')
+        ? !earlierHtml.includes('Stronger connection') && !earlierHtml.includes('First look') && !earlierHtml.includes('Moved together')
         : true);
     add('oil delay note is absent when no oil card has numbers',
       state.cards.every((card) => !card.oilNote) ? !html.includes('official oil print') && !rendered.includes('official oil print') : true);
@@ -521,7 +526,8 @@ export async function connectionPageChecks(add, page) {
   const loading = await page('/connections?state=loading');
   add('Connections loading does not flash the empty headline',
     loading.status === 200
-    && loading.html.includes(COPY.loading)
+    && loading.html.includes('data-loading="1"')
     && loading.html.includes('Connections')
-    && !loading.html.includes(COPY.emptyHeadline));
+    && !loading.html.includes(COPY.emptyHeadline)
+    && !loading.html.includes('No results yet.'));
 }
