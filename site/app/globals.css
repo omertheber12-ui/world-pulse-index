@@ -118,8 +118,8 @@ html.nav-back main{animation:slide-back 250ms ease-out}
   html.nav-forward main,html.nav-back main{animation:none}
 }
 @media(min-width:600px){
-  body{padding-bottom:calc(128px + env(safe-area-inset-bottom))}
-  header{background:var(--neutral-0);box-shadow:0 1px 0 var(--neutral-100)}
+  body{padding-top:48px;padding-bottom:calc(128px + env(safe-area-inset-bottom))}
+  header{position:fixed;top:0;left:0;right:0;z-index:30;height:48px;background:var(--neutral-0);border-bottom:1px solid var(--neutral-100);box-shadow:none}
   .bar{height:48px;justify-content:flex-start}
   #tabs{position:fixed;left:50%;right:auto;bottom:calc(16px + env(safe-area-inset-bottom));transform:translateX(-50%);width:max-content;max-width:calc(100% - 32px);height:auto;display:flex;gap:4px;padding:6px;background:var(--neutral-0);border-radius:999px;box-shadow:0 8px 24px rgba(23,47,50,.16),0 0 0 1px var(--neutral-100);z-index:20}
   .tab{flex:0 0 auto;flex-direction:row;min-height:44px;padding:0 16px;border-radius:999px;gap:8px;font-size:15px;line-height:20px;font-weight:600;color:var(--neutral-700)}
