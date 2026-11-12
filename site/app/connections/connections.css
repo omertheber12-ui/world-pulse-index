@@ -161,3 +161,20 @@ body:has(.cx-shell){background:#f5f7f5}
   .cx-chips button{min-width:44px;min-height:44px;padding:0 8px}
   footer.cx-foot{padding:24px 0 32px}
 }
+.cx-learn{margin-top:24px}
+.cx-learn h2{font-size:22px;line-height:28px}
+.cx-learn-start{display:inline-flex;align-items:center;justify-content:center;min-height:44px;min-width:44px;margin-top:16px;padding:0 20px;border:0;border-radius:999px;background:#116c5b;color:#fff;font:inherit;font-weight:600;cursor:pointer}
+.cx-learn-overlay{position:fixed;inset:0;z-index:30;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(23,47,50,.45)}
+.cx-learn-overlay[hidden]{display:none}
+.cx-learn-dialog{width:min(440px,100%);max-height:min(640px,calc(100% - 32px));overflow:auto;padding:24px;border-radius:16px;background:#fff;color:#172f32}
+.cx-learn-dialog h2{margin:0;font-size:22px;line-height:28px}
+.cx-learn-progress{display:flex;align-items:center;margin:12px 0 0;color:#172f32;font-size:14px;line-height:20px;font-weight:600}
+.cx-dots{display:inline-flex;gap:6px;margin-right:8px}
+.cx-dots i{width:8px;height:8px;border-radius:99px;background:rgba(23,47,50,.28)}
+.cx-dots i.on{background:#116c5b}
+.cx-learn-topic{margin:16px 0 0;font-size:16px;line-height:24px;font-weight:600;color:#172f32}
+.cx-learn-body{margin:8px 0 0;font-size:16px;line-height:24px;color:#172f32}
+.cx-learn-source{margin:16px 0 0;font-size:14px;line-height:20px;color:#172f32}
+.cx-learn-actions{display:flex;gap:8px;margin-top:16px}
+.cx-learn-actions button{flex:1;min-height:44px;min-width:44px;border-radius:999px;border:1px solid rgba(23,47,50,.35);background:#fff;color:#172f32;font:inherit;font-weight:600;cursor:pointer}
+.cx-learn-actions .cx-learn-next{background:#116c5b;color:#fff;border-color:#116c5b}

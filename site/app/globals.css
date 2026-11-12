@@ -319,3 +319,31 @@ body:has([data-page="connections"]){background:#f5f7f5;color:#172f32}
   .corr-num b{font-size:32px;line-height:36px}
   .corr-card.conn-card .conn-event{min-height:0}
 }
+@media(max-width:599px){
+  .brand{display:inline-flex;align-items:center;min-height:44px}
+  footer a{display:inline-flex;align-items:center;min-height:44px}
+}
+.today-hint{display:flex;align-items:center;gap:12px;min-height:44px;margin:12px 0 0;padding:0 4px 0 12px;background:var(--green-50);color:var(--ink-900);border-radius:12px}
+.today-hint svg{width:22px;height:22px;flex:none}
+.today-hint p{margin:0;flex:1;font-size:16px;line-height:24px;font-weight:600}
+.today-hint button{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;min-width:44px;min-height:44px;padding:0;border:0;border-radius:12px;background:transparent;color:var(--ink-900);cursor:pointer}
+.today-date{margin:16px 0 0;color:var(--neutral-700);font-size:14px;line-height:20px;font-weight:500}
+.today-sentence{margin:0;font-size:20px;line-height:28px;font-weight:600;color:var(--ink-900)}
+.today-follow{margin:8px 0 0;color:var(--neutral-700);font-size:16px;line-height:24px}
+.today-link,.today-back{display:inline-flex;align-items:center;min-height:44px;font-size:16px;line-height:24px}
+.today-jump{margin:8px 0}
+.today-chart{margin:16px 0 0}
+.today-chart svg{display:block;width:100%;height:auto}
+.today-chart .chart-caps,.today-chart figcaption{color:var(--neutral-700)}
+.today-chart figcaption{margin:4px 0 0;font-size:14px;line-height:20px}
+.smaller{margin:4px 0 8px;border-top:1px solid var(--neutral-100)}
+.smaller summary{display:flex;flex-direction:column;justify-content:center;gap:2px;min-height:44px;padding:8px 0;cursor:pointer;list-style:none;color:var(--ink-900)}
+.smaller summary::-webkit-details-marker{display:none}
+.smaller-label{font-size:16px;line-height:24px;font-weight:600}
+.smaller-titles{display:flex;flex-direction:column;color:var(--neutral-700);font-size:14px;line-height:20px;font-weight:400}
+.smaller ul{margin:0;padding:0 0 8px;list-style:none}
+.smaller li{padding:8px 0;border-top:1px solid var(--neutral-100);font-size:16px;line-height:24px;color:var(--ink-900)}
+.caught{display:flex;gap:12px;align-items:flex-start}
+.caught svg{width:28px;height:28px;flex:none;margin-top:2px;color:var(--green-700)}
+.caught p{margin:0;color:var(--neutral-700);font-size:16px;line-height:24px}
+.story.caught h2{font-size:20px;line-height:26px;margin:0 0 4px}

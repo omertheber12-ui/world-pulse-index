@@ -9,6 +9,9 @@ import { runConnectionChecks, connectionPageChecks } from './connectionsCheck.mj
 import { runCorrelationChecks, correlationPageChecks } from './correlationsCheck.mjs';
 import { runDailyChecks } from './dailyCheck.mjs';
 import { homeEligible, moveScore, qualityScore, rankOpen } from '../lib/score.js';
+import { learnCardSet, wordCount } from '../lib/screenCopy.js';
+import { loadDetail } from '../lib/linkScreen.js';
+import { buildToday, buildWeek, demoAllowed } from '../lib/todayScreen.js';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const checks = [];
@@ -162,6 +165,13 @@ for (const f of files) {
 }
 add('No secrets or keys in site files', secretHits.length === 0, secretHits.join(','));
 add('No buy/sell, edge, alpha, or risk-free wording in source', adviceHits.length === 0, adviceHits.join(','));
+const storageRe = /localStorage|sessionStorage|indexedDB|document\.cookie/;
+const storageHits = [];
+for (const f of files) {
+  if (f.includes(path.sep + 'checks' + path.sep)) continue;
+  if (storageRe.test(readFileSync(f, 'utf8'))) storageHits.push(path.relative(root, f));
+}
+add('Pages do not use browser storage', storageHits.length === 0, storageHits.join(','));
 
 let server;
 let base = process.env.BASE_URL || '';
@@ -189,6 +199,9 @@ async function page(urlpath) {
 function textOf(html) {
   return html.replace(/<script[\s\S]*?<\/script>/g, ' ').replace(/<style[\s\S]*?<\/style>/g, ' ').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ');
 }
+function plain(html) {
+  return textOf(html).replace(/&#x27;|&#39;|&apos;/g, "'");
+}
 
 if (base) {
   const pages = [
@@ -206,36 +219,118 @@ if (base) {
       r.status === 200 && r.html.includes('class="tab') && r.html.includes('Polymarket, public data') && r.html.includes('Insights only, not advice') && r.html.includes('/how'));
   }
   const today = doms['/'].html;
-  const h1 = (today.match(/<h1[^>]*>([\s\S]*?)<\/h1>/) || [, ''])[1].replace(/<[^>]+>/g, '').trim();
-  add('Today headline is built from the question, end date, and change',
-    /^Chance that /.test(h1) && /(rose|fell|held steady)/.test(h1) && /20\d\d/.test(h1) && today.includes('in 24 hours'),
+  const ev = doms['/event/770450'].html;
+  const h1 = (ev.match(/<h1[^>]*>([\s\S]*?)<\/h1>/) || [, ''])[1].replace(/<[^>]+>/g, '').trim();
+  add('Event headline is built from the question, end date, and change',
+    /^Chance that /.test(h1) && /(rose|fell|held steady)/.test(h1) && /20\d\d/.test(h1) && ev.includes('in 24 hours'),
     h1);
-  const liveHeads = [...today.matchAll(/<h[12][^>]*>([\s\S]*?)<\/h[12]>/g)]
+  const liveHeads = [...ev.matchAll(/<h[12][^>]*>([\s\S]*?)<\/h[12]>/g)]
     .map((m) => m[1].replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim())
     .filter((t) => t.startsWith('Chance that '));
   const liveStray = liveHeads.flatMap((t) => strayTitleCase(t).map((w) => t + ' [' + w + ']'));
   add('Live headlines have no mid-sentence Title Case words except proper nouns',
     liveHeads.length > 0 && liveStray.length === 0, liveStray.join(' | ') || liveHeads[0] || '');
-  const rankAttr = (today.match(/data-ranking="([^"]*)"/) || [, ''])[1];
-  const ranking = rankAttr ? rankAttr.split(',').map((x) => x.split(':')) : [];
-  const rowIds = [...today.matchAll(/data-id="(\d+)"/g)].map((m) => m[1]);
-  const att = ranking.map((x) => Number(x[1]));
-  add('Today top 3 cards are the first 3 of the personal ranking',
-    ranking.length >= 3 && rowIds.length === 3 && rowIds.join(',') === ranking.slice(0, 3).map((x) => x[0]).join(',')
-    && att.every((n, i) => i === 0 || att[i - 1] >= n - 1e-9),
-    'rows=' + rowIds.join(',') + ' top=' + ranking.slice(0, 3).map((x) => x[0]).join(','));
+  const todayText = plain(today);
+  const todayH1 = (today.match(/<h1[^>]*>([\s\S]*?)<\/h1>/) || [, ''])[1].replace(/<[^>]+>/g, '').trim();
+  const todayModel = buildToday('');
+  add('Today shows the saved change',
+    todayH1 === 'What changed today'
+    && todayModel.pick
+    && todayText.includes(todayModel.pick.sentence)
+    && todayText.includes('The one change worth knowing')
+    && todayText.includes('2 smaller changes')
+    && todayText.includes('Last 7 days')
+    && today.includes('data-axis="end">Today<')
+    && todayText.includes('This week in one minute')
+    && todayText.includes("You're caught up.")
+    && todayText.includes("Start here: today's one change")
+    && todayText.includes('Next update tomorrow at ')
+    && !todayText.includes('$'),
+    todayH1 + ' | ' + (todayModel.pick && todayModel.pick.sentence));
   add('Exposure text says this is not an expected loss',
-    today.includes('Share of your portfolio linked to this event. This is not an expected loss.') && today.includes('All events') && today.includes('Sample portfolio'));
-  add('Breakdown groups are present',
-    today.includes('% direct') && today.includes('% funds') && today.includes('% estimated'));
-  const err = await page('/?state=error');
+    ev.includes('Share of your portfolio linked to this event. This is not an expected loss.')
+    && ev.includes('% direct') && ev.includes('% funds') && ev.includes('% estimated'));
+  const err = await page('/event/770450?state=error');
   add('Error state shows a short message and keeps figures',
     err.html.includes('Live read failed') && err.html.includes('data-id='));
   const loading = await page('/?state=loading');
   add('Loading state shows grey blocks', (loading.html.match(/class="sk/g) || []).length >= 5);
-  const empty = await page('/?state=empty');
+  const quiet = await page('/?state=quiet');
+  const quietText = plain(quiet.html);
+  add('Quiet day says there was no meaningful move',
+    quiet.status === 200
+    && quietText.includes('No meaningful move since yesterday')
+    && quietText.includes("You're caught up.")
+    && !quietText.includes(todayModel.pick.sentence));
+  const none = await page('/?state=noupdate');
+  const noneText = plain(none.html);
+  add('No-update day says the latest data could not be read',
+    none.status === 200
+    && noneText.includes('The latest data could not be read.')
+    && noneText.includes('Last good day:')
+    && !noneText.includes("You're caught up.")
+    && !noneText.includes(todayModel.pick.sentence));
+  const baselinePage = await page('/?state=nobaseline');
+  const baselineText = plain(baselinePage.html);
+  add('No-baseline day says the latest data cannot be compared yet',
+    baselinePage.status === 200
+    && baselineText.includes("The latest data can't be compared yet.")
+    && baselineText.includes('Last good day:')
+    && !baselineText.includes(todayModel.pick.sentence));
+  add('Demo day states stay off in production',
+    demoAllowed({ VERCEL_ENV: 'production', VERCEL: '1' }) === false
+    && demoAllowed({ VERCEL_ENV: 'preview', VERCEL: '1' }) === true);
+  const empty = await page('/events?state=empty');
   add("Empty state shows 'No events to show right now'", empty.html.includes('No events to show right now'));
-  const ev = doms['/event/770450'].html;
+  const week = await page('/week');
+  const weekText = plain(week.html);
+  const weekModel = buildWeek();
+  const linkCard = weekModel.cards.find((card) => card.kicker === 'A link that held');
+  add('The weekly page reads the saved week',
+    week.status === 200
+    && weekText.includes(weekModel.range)
+    && weekText.includes('This week in one minute')
+    && weekText.includes('Back to Today')
+    && weekText.includes('The biggest move')
+    && weekText.includes(weekModel.cards[0].sentence)
+    && weekText.includes('What a same-day link means.')
+    && weekText.includes('Learn more about this')
+    && (linkCard ? weekText.includes('A link that held') : !weekText.includes('A link that held'))
+    && !weekText.includes('$'));
+  const featured = loadDetail('link-F1_fed-direction-us_2y_yield-same_day');
+  const featuredStrength = featured.row.detail.strength;
+  const featuredFacts = featured.row.detail.facts;
+  const learnCards = learnCardSet({
+    scoreText: featuredStrength.valueText,
+    bandText: featuredStrength.bandText,
+    episodes: featuredFacts[0] && featuredFacts[0].value,
+    tradingDays: featuredFacts[1] && featuredFacts[1].value,
+    outside: featuredStrength.outside,
+  });
+  add('Learn cards use this link numbers and stay near 50 words',
+    learnCards.length === 3
+    && learnCards[1].topic.includes(featuredStrength.valueText)
+    && learnCards[1].body.includes(String(featuredFacts[0].value))
+    && learnCards[1].body.includes(String(featuredFacts[1].value))
+    && learnCards[2].topic.includes(featuredStrength.bandText)
+    && learnCards.every((card) => wordCount(card.body) >= 40 && wordCount(card.body) <= 60)
+    && learnCards.every((card) => !/\bluck\b/i.test(card.body + card.topic) && !/what to do now/i.test(card.body))
+    && featuredStrength.outside === true
+    && learnCards[1].body.includes('often lined up')
+    && learnCards[2].body.includes('chance')
+    && !learnCards.some((card) => /\bluck\b/i.test(card.body + card.topic)));
+  const learnPage = await page('/connections/link-F1_fed-direction-us_2y_yield-same_day');
+  const chartAt = learnPage.html.indexOf('data-main-chart="1"');
+  const learnAt = learnPage.html.indexOf('>Learn one thing<');
+  const strongAt = learnPage.html.indexOf('How strong is this?');
+  add('Learn one thing sits under the chart and above how strong',
+    learnPage.status === 200
+    && chartAt >= 0 && learnAt > chartAt && strongAt > learnAt
+    && learnPage.html.includes('Three short cards.')
+    && learnPage.html.includes('Figures on these cards are the accepted TR-016 numbers for this link.')
+    && learnPage.html.includes(learnCards[1].topic)
+    && learnPage.html.includes(learnCards[2].topic)
+    && !/what to do now/i.test(textOf(learnPage.html)));
   add('Event detail keeps the exposure breakdown and Polymarket link',
     ev.includes('Show holdings') && ev.includes('Share of your portfolio linked to this event. This is not an expected loss.')
     && ev.includes('Polymarket') && ev.includes('Guess') && ev.includes('% direct'));
