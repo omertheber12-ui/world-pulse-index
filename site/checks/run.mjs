@@ -316,7 +316,9 @@ if (base) {
     && learnCards.every((card) => wordCount(card.body) >= 40 && wordCount(card.body) <= 60)
     && learnCards.every((card) => !/\bluck\b/i.test(card.body + card.topic) && !/what to do now/i.test(card.body))
     && featuredStrength.outside === true
-    && learnCards[1].body.includes('often lined up')
+    && featuredStrength.valueText.startsWith('−')
+    && learnCards[1].body.includes('often went opposite ways')
+    && !learnCards[1].body.includes('often lined up')
     && learnCards[2].body.includes('chance')
     && !learnCards.some((card) => /\bluck\b/i.test(card.body + card.topic)));
   const learnPage = await page('/connections/link-F1_fed-direction-us_2y_yield-same_day');
@@ -327,7 +329,9 @@ if (base) {
     learnPage.status === 200
     && chartAt >= 0 && learnAt > chartAt && strongAt > learnAt
     && learnPage.html.includes('Three short cards.')
-    && learnPage.html.includes('Figures on these cards are the accepted TR-016 numbers for this link.')
+    && !learnPage.html.includes('Figures on these cards are the accepted TR-016 numbers')
+    && /<button[^>]*>\s*Back\s*<\/button>/.test(learnPage.html)
+    && learnPage.html.includes('aria-label="Close"')
     && learnPage.html.includes(learnCards[1].topic)
     && learnPage.html.includes(learnCards[2].topic)
     && !/what to do now/i.test(textOf(learnPage.html)));

@@ -10,7 +10,6 @@ export function TodayScreen({ model }) {
       <p className="today-date">
         {model.dateLabel}
         {model.updatedLabel ? ' · Updated ' + model.updatedLabel + ' Israel time' : ''}
-        {model.lastGoodLabel ? ' · Last good day: ' + model.lastGoodLabel : ''}
       </p>
       <h1>{model.title}</h1>
       {model.pick ? (

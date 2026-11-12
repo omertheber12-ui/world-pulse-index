@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { LEARN_ENTRY, LEARN_SOURCE } from '../../../lib/screenCopy.js';
+import { LEARN_ENTRY } from '../../../lib/screenCopy.js';
 
 export function LearnOneThing({ cards }) {
   const [open, setOpen] = useState(false);
@@ -58,9 +58,12 @@ export function LearnOneThing({ cards }) {
           aria-labelledby="learn-title"
           onClick={(event) => event.stopPropagation()}
         >
-          <h2 id="learn-title" data-learn-title="1" tabIndex={-1}>
-            {'Learn one thing · ' + (step + 1) + ' of 3'}
-          </h2>
+          <button type="button" className="cx-learn-x" aria-label="Close" onClick={close}>
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M7 7l10 10M17 7 7 17" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+            </svg>
+          </button>
+          <h2 id="learn-title" data-learn-title="1" tabIndex={-1}>Learn one thing</h2>
           <p className="cx-learn-progress">
             <span className="cx-dots" aria-hidden="true">
               {cards.map((item, index) => <i key={item.topic} className={index === step ? 'on' : ''} />)}
@@ -73,7 +76,6 @@ export function LearnOneThing({ cards }) {
               <p className="cx-learn-body">{item.body}</p>
             </div>
           ))}
-          <p className="cx-learn-source">{LEARN_SOURCE}</p>
           <div className="cx-learn-actions">
             <button type="button" aria-disabled={step === 0 ? 'true' : 'false'} onClick={() => { if (step > 0) setStep(step - 1); }}>
               Back

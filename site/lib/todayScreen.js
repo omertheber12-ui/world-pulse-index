@@ -12,7 +12,7 @@ import {
   directionOf,
   displayName,
   formatOddsPercent,
-  moveSentence,
+  plainMove,
   shortDay,
   smallerLabel,
 } from './screenCopy.js';
@@ -100,10 +100,7 @@ function whenPhrase(date, previous) {
 }
 
 function moveLine(row, when) {
-  const name = displayName(row.name);
-  const direction = directionOf(row.move_points);
-  const points = formatPoints(row.move_points);
-  return moveSentence(name, direction, points, when);
+  return plainMove(row.name, directionOf(row.move_points), formatPoints(row.move_points), when);
 }
 
 function chartBlock(points, startLabel, endLabel) {

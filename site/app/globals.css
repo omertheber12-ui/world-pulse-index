@@ -118,7 +118,7 @@ html.nav-back main{animation:slide-back 250ms ease-out}
   html.nav-forward main,html.nav-back main{animation:none}
 }
 @media(min-width:600px){
-  body{padding-bottom:calc(104px + env(safe-area-inset-bottom))}
+  body{padding-bottom:calc(128px + env(safe-area-inset-bottom))}
   header{background:transparent;box-shadow:none}
   .bar{height:48px;justify-content:flex-start}
   #tabs{position:fixed;left:50%;right:auto;bottom:calc(16px + env(safe-area-inset-bottom));transform:translateX(-50%);width:max-content;max-width:calc(100% - 32px);height:auto;display:flex;gap:4px;padding:6px;background:var(--neutral-0);border-radius:999px;box-shadow:0 8px 24px rgba(23,47,50,.16),0 0 0 1px var(--neutral-100);z-index:20}
@@ -322,7 +322,8 @@ body:has([data-page="connections"]){background:#f5f7f5;color:#172f32}
 }
 @media(max-width:599px){
   .brand{display:inline-flex;align-items:center;min-height:44px}
-  footer a{display:inline-flex;align-items:center;min-height:44px}
+  footer{line-height:16px}
+  footer a{display:inline-block;line-height:16px;padding:14px 0;margin:-14px 0;vertical-align:baseline}
 }
 .today-hint{display:flex;align-items:center;gap:12px;min-height:44px;margin:12px 0 0;padding:0 4px 0 12px;background:var(--green-50);color:var(--ink-900);border-radius:12px}
 .today-hint svg{width:22px;height:22px;flex:none}

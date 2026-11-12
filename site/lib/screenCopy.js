@@ -5,21 +5,46 @@
 
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
+const OUTCOME_PLAIN = {
+  '25 bps increase': ['0.25-point', 'rise'],
+  '50 bps increase': ['0.5-point', 'rise'],
+  '50+ bps increase': ['0.5-point or larger', 'rise'],
+  '25 bps decrease': ['0.25-point', 'cut'],
+  '50 bps decrease': ['0.5-point', 'cut'],
+  '50+ bps decrease': ['0.5-point or larger', 'cut'],
+};
+
 export function displayName(name) {
   const raw = String(name || '').trim();
   const parts = raw.split(' — ');
   const event = (parts[0] || raw).trim();
   const outcome = parts.slice(1).join(' — ').trim();
+  const plain = OUTCOME_PLAIN[outcome];
+  const shown = plain ? plain[0] + ' rate ' + plain[1] : outcome;
   const rate = /^([A-Za-z]+) rate decision in ([A-Za-z]+)$/.exec(event);
   const eventLabel = rate ? rate[1] + ' ' + rate[2] + ' decision' : event;
-  if (!outcome) return eventLabel;
-  return eventLabel + ': ' + outcome;
+  if (!shown) return eventLabel;
+  return eventLabel + ': ' + shown;
 }
 
-export function moveSentence(name, direction, pointsText, when) {
+export function plainMove(rawName, direction, pointsText, when) {
+  const raw = String(rawName || '').trim();
+  const parts = raw.split(' — ');
+  const event = (parts[0] || raw).trim();
+  const outcome = parts.slice(1).join(' — ').trim();
+  const rate = /^([A-Za-z]+) rate decision in ([A-Za-z]+)$/.exec(event);
+  const plain = OUTCOME_PLAIN[outcome];
   const tail = when ? ' ' + when : '';
-  if (direction === 'held') return name + ' odds held' + tail + '.';
   const unit = pointsText === '1' ? 'point' : 'points';
+  const move = direction === 'held' ? 'held' : direction + ' ' + pointsText + ' ' + unit;
+  if (rate && plain) {
+    return 'Odds of a ' + plain[0] + ' ' + rate[1] + ' rate ' + plain[1] + ' in ' + rate[2] + ' ' + move + tail + '.';
+  }
+  if (rate && outcome === 'No change') {
+    return 'Odds of no ' + rate[1] + ' rate change in ' + rate[2] + ' ' + move + tail + '.';
+  }
+  const name = displayName(raw);
+  if (direction === 'held') return name + ' odds held' + tail + '.';
   return name + ' odds ' + direction + ' ' + pointsText + ' ' + unit + tail + '.';
 }
 
@@ -54,7 +79,7 @@ export function chartCaption(points) {
       : 'held';
   const gaps = (points || []).some((point) => typeof point.odds !== 'number');
   const gap = gaps ? ' Days with no saved odds are left out of the line.' : '';
-  return 'Saved odds ' + verb + ' from ' + start + ' to ' + end + ' over these days.' + gap;
+  return 'Odds ' + verb + ' from ' + start + ' to ' + end + ' over these days.' + gap;
 }
 
 export function smallerLabel(count) {
@@ -67,8 +92,6 @@ export function wordCount(text) {
 }
 
 const LINES_BODY = 'The chart has two lines. Labels at the ends name the odds line and the asset line. This is a picture of the past, from the first saved day in the window to the last. It shows what already happened on those days. It is not a forecast.';
-
-export const LEARN_SOURCE = 'Figures on these cards are the accepted TR-016 numbers for this link.';
 
 export const LEARN_ENTRY = {
   title: 'Learn one thing',
@@ -94,9 +117,13 @@ export function learnCardSet({ scoreText, bandText, episodes, tradingDays, outsi
   const episodesText = blank(episodes) ? 'the saved' : String(episodes);
   const daysText = blank(tradingDays) ? 'the saved' : String(tradingDays);
   const known = score !== 'not available' && !blank(episodes) && !blank(tradingDays);
-  const lined = outside
-    ? 'the moves often lined up'
-    : 'the moves did not line up more than chance alone';
+  const negative = score.startsWith('−') || score.startsWith('-');
+  const positive = !negative && score !== 'not available' && Number(score) > 0;
+  const lined = negative
+    ? 'the moves often went opposite ways'
+    : positive
+      ? 'the moves often moved the same way'
+      : 'the moves did not line up more than chance alone';
   const scoreBody = known
     ? 'The score on this link is ' + score + '. Across ' + episodesText + ' separate episodes and ' + daysText + ' trading days, ' + lined + '. That score only ranks how the moves lined up in this recorded window. It does not prove one side caused the other, and it is not a forecast.'
     : 'The score on this link is ' + score + '. The saved figures do not give a full episode count for this window. A score only ranks how moves lined up in the recorded window. It does not prove one side caused the other, and it is not a forecast.';
