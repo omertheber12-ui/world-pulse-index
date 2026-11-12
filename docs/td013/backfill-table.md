@@ -4,8 +4,8 @@ Window: 2026-10-14 through 2026-11-12 (30 UTC dates).
 2026-10-13 is also saved. It is the day before that window, so 2026-10-14 has a previous day to subtract.
 Collected at 2026-11-12T11:45:55.862Z.
 
-4 saved days are quiet, 27 have a pick, and 0 are no update.
-A quiet day has no eligible move of 3 points or more. A pick is the largest absolute eligible move.
+The 30-day window from 2026-10-14 through 2026-11-12 has 27 picked days and 3 quiet days. 2026-10-13 is no baseline.
+A quiet day has no eligible move of 3 points or more. A day with no earlier saved day is no baseline. A pick is the largest absolute eligible move.
 
 ## What the public feeds did and did not provide
 
@@ -13,11 +13,11 @@ Odds are the last public CLOB price point on that UTC date for the Yes token (`p
 
 Past 24-hour volume is not on the price history, and Gamma `volume24hr` is only the current rolling window. It was not copied onto past days.
 
-In its place, each finished UTC date uses the sum of public trade sizes (`data-api` `/v2/trades` for that condition id) whose timestamps fall on that date. Size is in shares. On a spot check during this work, that share sum matched Gamma `volume24hr` when the window was Gamma's own last 24 hours (Fed December contract 3215008: 210,935.60 shares against Gamma 210,936.77). Two other contracts were within about 2% and about 10%. Gamma labels that share sum in dollars. It is not the USDC paid (size times price), which is smaller. A day with no trades is a real zero, not a missing figure.
+In its place, each finished UTC date uses the sum of public trade sizes (`data-api` `/v2/trades` for that condition id) whose timestamps fall on that date. That sum is traded volume in shares. On a spot check during this work, it matched Gamma `volume24hr` when the window was Gamma's own last 24 hours (Fed December contract 3215008: 210,935.60 shares against Gamma 210,936.77). Two other contracts were within about 2% and about 10%. It is not the USDC paid (size times price), which is smaller. A day with no trades is a real zero, not a missing figure.
 
-2026-11-12 is not a finished UTC day. Its odds are the latest price point so far, and its volume is trades from 00:00 UTC until this fetch. That is a shorter window than a full day.
+2026-11-12 is not a finished UTC day. Its odds are the latest price point so far, and its traded volume is trades from 00:00 UTC until this fetch. That is a shorter window than a full day.
 
-If the trade pages stopped before the window was covered, that contract's volume for the affected days is empty. The empty volume is counted in the under $10,000 column and is not replaced with a guess. Price-history misses stay no update and are left out of both filter columns.
+If the trade pages stopped before the window was covered, that contract's traded volume for the affected days is empty. The empty volume is counted in the under 10,000 shares column and is not replaced with a guess. Price-history misses stay no update and are left out of both filter columns.
 
 Trade pages that did not finish: none.
 Contract-days with no odds: 74.
@@ -27,11 +27,11 @@ The tracked contracts are the 45 markets stored on the site events in site/data/
 
 ## Table
 
-Under $10,000 counts readings that are below the floor and readings that have odds but no volume figure. The number in parentheses, when present, is how many of that count had no volume figure. Outside 3% to 97% counts readings whose odds are under 3% or over 97%. A contract can be in both counts. No-update rows are in neither count.
+Under 10,000 shares counts readings that are below the floor and readings that have odds but no traded volume. The number in parentheses, when present, is how many of that count had no volume figure. Outside 3% to 97% counts readings whose odds are under 3% or over 97%. A contract can be in both counts. No-update rows are in neither count.
 
-| Date | Result | Market | Move in points | Volume in dollars | Under $10,000 | Outside 3% to 97% |
+| Date | Result | Market | Move in points | Traded volume (shares) | Under 10,000 shares | Outside 3% to 97% |
 | --- | --- | --- | --- | --- | --- | --- |
-| 2026-10-13 | quiet | — | — | — | 19 | 20 |
+| 2026-10-13 | no baseline | — | — | — | 19 | 20 |
 | 2026-10-14 | picked | Fed rate decision in January — 25 bps increase | +10.5 | 20,610.07 | 18 | 19 |
 | 2026-10-15 | picked | Israel-Iran ceasefire holds — December 31 | -4.5 | 13,313.92 | 24 | 18 |
 | 2026-10-16 | picked | Fed rate decision in January — No change | +5 | 11,961.52 | 19 | 18 |

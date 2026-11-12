@@ -11,8 +11,9 @@ import { readDayFiles, readWeekFiles } from '../lib/dailyStore.js';
 
 function fixtureRule() {
   return parseRule({
-    version: 1,
-    min_volume_usd: 10000,
+    version: 2,
+    min_traded_volume_shares: 10000,
+    traded_volume_unit: 'shares',
     min_odds: 0.03,
     max_odds: 0.97,
     min_abs_move_points: 3,
@@ -63,7 +64,7 @@ export function ruleFixtureErrors() {
   const quiet = applyRule(day('2026-11-12', [row('a', 0.42, 20000)]), prev, rule);
   if (quiet.status !== 'quiet' || quiet.pick) errors.push('a 2 point move was not quiet');
   const exact = applyRule(day('2026-11-12', [row('a', 0.43, 10000)]), prev, rule);
-  if (exact.status !== 'picked' || exact.pick.move_points !== 3) errors.push('a 3 point move on $10,000 was dropped');
+  if (exact.status !== 'picked' || exact.pick.move_points !== 3) errors.push('a 3 point move at 10,000 shares was dropped');
   const edgeOdds = applyRule(day('2026-11-12', [row('a', 0.03, 10000, 'low')]), day('2026-11-11', [row('a', 0.2, 10000, 'low')]), rule);
   if (edgeOdds.status !== 'picked') errors.push('odds of 3% were excluded');
   const missing = applyRule(
@@ -72,6 +73,8 @@ export function ruleFixtureErrors() {
     rule,
   );
   if (missing.status !== 'quiet' || missing.pick || missing.no_update_count !== 1) errors.push('a failed read was treated as a number');
+  const baseline = applyRule(day('2026-10-13', [row('a', 0.4, 20000)]), null, rule);
+  if (baseline.status !== 'no baseline' || baseline.pick || baseline.compared_to !== null) errors.push('a day with no earlier saved day was quiet');
   return errors;
 }
 
@@ -155,7 +158,8 @@ export function runDailyChecks(add, site = SITE) {
   try {
     const table = readFileSync(path.join(REPO, 'docs/td013/backfill-table.md'), 'utf8');
     const missing = days.map((day) => day.date).filter((date) => !table.includes(date));
-    tableOk = table.includes('Under $10,000') && table.includes('Outside 3% to 97%') && missing.length === 0 && days.length > 0;
+    tableOk = table.includes('Traded volume (shares)') && table.includes('10,000 shares') && table.includes('no baseline')
+      && table.includes('Outside 3% to 97%') && !table.includes('$') && missing.length === 0 && days.length > 0;
     if (!tableOk) tableDetail = missing.slice(0, 4).join(', ') || 'table missing';
   } catch (err) {
     tableDetail = err && err.message ? err.message : 'table missing';

@@ -1,11 +1,12 @@
 {
-  "version": 1,
-  "min_volume_usd": 10000,
+  "version": 2,
+  "min_traded_volume_shares": 10000,
   "min_odds": 0.03,
   "max_odds": 0.97,
   "min_abs_move_points": 3,
   "smaller_changes": 2,
   "odds_unit": "probability from 0 to 1",
   "move_unit": "percentage points",
-  "note": "Starting numbers. The COO approves changes later. Edit this file to change them. The daily scripts read this file."
+  "traded_volume_unit": "shares",
+  "note": "Traded volume is a share count, not a cash amount. The COO approved these numbers. Edit this file to change them. The daily scripts read this file."
 }

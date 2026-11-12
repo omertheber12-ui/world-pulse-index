@@ -83,11 +83,12 @@ export function loadTracked(site = SITE) {
 export function parseRule(raw) {
   return {
     version: raw.version,
-    min_volume_usd: Number(raw.min_volume_usd),
+    min_traded_volume_shares: Number(raw.min_traded_volume_shares),
     min_odds: Number(raw.min_odds),
     max_odds: Number(raw.max_odds),
     min_abs_move_points: Number(raw.min_abs_move_points),
     smaller_changes: Number(raw.smaller_changes),
+    traded_volume_unit: raw.traded_volume_unit,
   };
 }
 
@@ -98,11 +99,12 @@ export function loadRule(site = SITE) {
 export function ruleErrors(rule) {
   const errors = [];
   if (rule.version == null || rule.version === '') errors.push('version missing');
-  for (const key of ['min_volume_usd', 'min_odds', 'max_odds', 'min_abs_move_points', 'smaller_changes']) {
+  for (const key of ['min_traded_volume_shares', 'min_odds', 'max_odds', 'min_abs_move_points', 'smaller_changes']) {
     if (!Number.isFinite(rule[key])) errors.push(key + ' is not a number');
   }
+  if (rule.traded_volume_unit !== 'shares') errors.push('traded volume unit');
   if (!(rule.min_odds >= 0 && rule.max_odds <= 1 && rule.min_odds < rule.max_odds)) errors.push('odds bounds');
-  if (!(rule.min_volume_usd >= 0)) errors.push('volume floor');
+  if (!(rule.min_traded_volume_shares >= 0)) errors.push('volume floor');
   if (!(rule.min_abs_move_points >= 0)) errors.push('move floor');
   if (!(Number.isInteger(rule.smaller_changes) && rule.smaller_changes >= 0 && rule.smaller_changes <= 10)) {
     errors.push('smaller changes');
@@ -193,7 +195,7 @@ export function applyRule(today, previous, rule) {
     const outside = row.odds < rule.min_odds || row.odds > rule.max_odds;
     if (outside) fellOdds += 1;
     const missing = volumeMissing(row.volume_24h_usd);
-    const low = !missing && Number(row.volume_24h_usd) < rule.min_volume_usd;
+    const low = !missing && Number(row.volume_24h_usd) < rule.min_traded_volume_shares;
     if (missing) {
       fellVolume += 1;
       fellVolumeMissing += 1;
@@ -220,10 +222,11 @@ export function applyRule(today, previous, rule) {
     if (a.market_id > b.market_id) return 1;
     return 0;
   });
-  const picked = eligible.length > 0 && eligible[0].abs_move_points >= rule.min_abs_move_points;
+  const picked = previous && eligible.length > 0 && eligible[0].abs_move_points >= rule.min_abs_move_points;
+  const status = !previous ? 'no baseline' : (picked ? 'picked' : 'quiet');
   return {
     version: rule.version,
-    status: picked ? 'picked' : 'quiet',
+    status,
     compared_to: previous ? previous.date : null,
     pick: picked ? eligible[0] : null,
     smaller_changes: picked ? eligible.slice(1, 1 + rule.smaller_changes) : [],
@@ -310,12 +313,12 @@ export function formatPoints(n) {
   return (Math.round(Math.abs(Number(n)) * 100) / 100).toFixed(2).replace(/0+$/, '').replace(/\.$/, '');
 }
 
-export function formatUsd(n) {
+export function formatShares(n) {
   if (n == null || !Number.isFinite(Number(n))) return 'no volume figure';
   const neg = Number(n) < 0;
   const [whole, frac] = Math.abs(Math.round(Number(n) * 100) / 100).toFixed(2).split('.');
   const grouped = whole.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-  return (neg ? '-$' : '$') + grouped + (frac === '00' ? '' : '.' + frac);
+  return (neg ? '-' : '') + grouped + (frac === '00' ? '' : '.' + frac);
 }
 
 export function formatDay(iso) {
@@ -377,7 +380,7 @@ export function weekSummary(days, status, biggest, rule) {
   return 'Saved ' + noun + ' ' + span
     + '. The largest move was ' + formatPoints(biggest.move_points) + ' points ' + dir
     + ' on ' + biggest.name + ', on ' + formatDay(biggest.date)
-    + '. Recorded volume that day was ' + formatUsd(biggest.volume_24h_usd) + '.';
+    + '. Recorded traded volume that day was ' + formatShares(biggest.volume_24h_usd) + ' shares.';
 }
 
 export function weeksFromDays(days, rule) {
@@ -431,11 +434,12 @@ export function summaryProblem(text) {
 }
 
 export function renderBackfillTable(days) {
-  const quiet = days.filter((day) => day.status !== 'no update' && day.rule && day.rule.status === 'quiet').length;
+  const quiet = days.filter((day) => day.rule && day.rule.status === 'quiet').length;
   const picked = days.filter((day) => day.rule && day.rule.status === 'picked').length;
+  const baseline = days.filter((day) => day.rule && day.rule.status === 'no baseline').length;
   const none = days.filter((day) => day.status === 'no update').length;
   const lines = [];
-  lines.push('| Date | Result | Market | Move in points | Volume in dollars | Under $10,000 | Outside 3% to 97% |');
+  lines.push('| Date | Result | Market | Move in points | Traded volume (shares) | Under 10,000 shares | Outside 3% to 97% |');
   lines.push('| --- | --- | --- | --- | --- | --- | --- |');
   for (const day of days) {
     const rule = day.rule || {};
@@ -443,7 +447,7 @@ export function renderBackfillTable(days) {
     const pick = result === 'picked' ? rule.pick : null;
     const market = pick ? String(pick.name).replace(/\|/g, '/') : '—';
     const move = pick ? (pick.move_points > 0 ? '+' : pick.move_points < 0 ? '-' : '') + formatPoints(pick.move_points) : '—';
-    const volume = pick ? formatUsd(pick.volume_24h_usd).replace(/^\$/, '') : '—';
+    const volume = pick ? formatShares(pick.volume_24h_usd) : '—';
     const under = rule.fell_out_volume || 0;
     const underCell = rule.fell_out_volume_missing
       ? under + ' (' + rule.fell_out_volume_missing + ' with no volume figure)'
@@ -458,5 +462,5 @@ export function renderBackfillTable(days) {
       String(rule.fell_out_odds || 0),
     ].join(' | ') + ' |');
   }
-  return { quiet, picked, none, markdown: lines.join('\n') };
+  return { quiet, picked, baseline, none, markdown: lines.join('\n') };
 }

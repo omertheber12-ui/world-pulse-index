@@ -727,7 +727,7 @@
     }
   ],
   "rule": {
-    "version": 1,
+    "version": 2,
     "status": "quiet",
     "compared_to": "2026-10-30",
     "pick": null,

@@ -727,8 +727,8 @@
     }
   ],
   "rule": {
-    "version": 1,
-    "status": "quiet",
+    "version": 2,
+    "status": "no baseline",
     "compared_to": null,
     "pick": null,
     "smaller_changes": [],
