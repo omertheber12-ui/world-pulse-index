@@ -1,6 +1,6 @@
 {
   "schema_version": "daily-history-1",
-  "updated_at": "2026-11-12T11:45:55.862Z",
+  "updated_at": "2026-11-13T12:41:06.494Z",
   "tracked_market_ids": [
     "3215008",
     "3215007",
@@ -12880,6 +12880,420 @@
           "source_url": "https://clob.polymarket.com/prices-history?market=6097871914367610284582440381544005482777665716584926016321254901654860681152&interval=max&fidelity=1440",
           "fetched_at": "2026-11-12T11:45:55.862Z",
           "observed_at": "2026-11-12T11:46:17.000Z"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-13",
+      "status": "no update",
+      "collected_at": "2026-11-13T12:41:06.494Z",
+      "rule_status": "quiet",
+      "pick_market_id": null,
+      "markets": [
+        {
+          "market_id": "3215008",
+          "status": "no update",
+          "odds": null,
+          "volume_24h_usd": null,
+          "source_url": null,
+          "fetched_at": "2026-11-13T12:41:06.494Z",
+          "observed_at": null
+        },
+        {
+          "market_id": "3215007",
+          "status": "no update",
+          "odds": null,
+          "volume_24h_usd": null,
+          "source_url": null,
+          "fetched_at": "2026-11-13T12:41:06.494Z",
+          "observed_at": null
+        },
+        {
+          "market_id": "3215009",
+          "status": "no update",
+          "odds": null,
+          "volume_24h_usd": null,
+          "source_url": null,
+          "fetched_at": "2026-11-13T12:41:06.494Z",
+          "observed_at": null
+        },
+        {
+          "market_id": "3215006",
+          "status": "no update",
+          "odds": null,
+          "volume_24h_usd": null,
+          "source_url": null,
+          "fetched_at": "2026-11-13T12:41:06.494Z",
+          "observed_at": null
+        },
+        {
+          "market_id": "3215005",
+          "status": "no update",
+          "odds": null,
+          "volume_24h_usd": null,
+          "source_url": null,
+          "fetched_at": "2026-11-13T12:41:06.494Z",
+          "observed_at": null
+        },
+        {
+          "market_id": "3215010",
+          "status": "no update",
+          "odds": null,
+          "volume_24h_usd": null,
+          "source_url": null,
+          "fetched_at": "2026-11-13T12:41:06.494Z",
+          "observed_at": null
+        },
+        {
+          "market_id": "3215011",
+          "status": "no update",
+          "odds": null,
+          "volume_24h_usd": null,
+          "source_url": null,
+          "fetched_at": "2026-11-13T12:41:06.494Z",
+          "observed_at": null
+        },
+        {
+          "market_id": "3215012",
+          "status": "no update",
+          "odds": null,
+          "volume_24h_usd": null,
+          "source_url": null,
+          "fetched_at": "2026-11-13T12:41:06.494Z",
+          "observed_at": null
+        },
+        {
+          "market_id": "3215013",
+          "status": "no update",
+          "odds": null,
+          "volume_24h_usd": null,
+          "source_url": null,
+          "fetched_at": "2026-11-13T12:41:06.494Z",
+          "observed_at": null
+        },
+        {
+          "market_id": "3215014",
+          "status": "no update",
+          "odds": null,
+          "volume_24h_usd": null,
+          "source_url": null,
+          "fetched_at": "2026-11-13T12:41:06.494Z",
+          "observed_at": null
+        },
+        {
+          "market_id": "4570943",
+          "status": "no update",
+          "odds": null,
+          "volume_24h_usd": null,
+          "source_url": null,
+          "fetched_at": "2026-11-13T12:41:06.494Z",
+          "observed_at": null
+        },
+        {
+          "market_id": "6404226",
+          "status": "no update",
+          "odds": null,
+          "volume_24h_usd": null,
+          "source_url": null,
+          "fetched_at": "2026-11-13T12:41:06.494Z",
+          "observed_at": null
+        },
+        {
+          "market_id": "5230123",
+          "status": "no update",
+          "odds": null,
+          "volume_24h_usd": null,
+          "source_url": null,
+          "fetched_at": "2026-11-13T12:41:06.494Z",
+          "observed_at": null
+        },
+        {
+          "market_id": "5730325",
+          "status": "no update",
+          "odds": null,
+          "volume_24h_usd": null,
+          "source_url": null,
+          "fetched_at": "2026-11-13T12:41:06.494Z",
+          "observed_at": null
+        },
+        {
+          "market_id": "5730329",
+          "status": "no update",
+          "odds": null,
+          "volume_24h_usd": null,
+          "source_url": null,
+          "fetched_at": "2026-11-13T12:41:06.494Z",
+          "observed_at": null
+        },
+        {
+          "market_id": "3358974",
+          "status": "no update",
+          "odds": null,
+          "volume_24h_usd": null,
+          "source_url": null,
+          "fetched_at": "2026-11-13T12:41:06.494Z",
+          "observed_at": null
+        },
+        {
+          "market_id": "679018",
+          "status": "no update",
+          "odds": null,
+          "volume_24h_usd": null,
+          "source_url": null,
+          "fetched_at": "2026-11-13T12:41:06.494Z",
+          "observed_at": null
+        },
+        {
+          "market_id": "679030",
+          "status": "no update",
+          "odds": null,
+          "volume_24h_usd": null,
+          "source_url": null,
+          "fetched_at": "2026-11-13T12:41:06.494Z",
+          "observed_at": null
+        },
+        {
+          "market_id": "679022",
+          "status": "no update",
+          "odds": null,
+          "volume_24h_usd": null,
+          "source_url": null,
+          "fetched_at": "2026-11-13T12:41:06.494Z",
+          "observed_at": null
+        },
+        {
+          "market_id": "679021",
+          "status": "no update",
+          "odds": null,
+          "volume_24h_usd": null,
+          "source_url": null,
+          "fetched_at": "2026-11-13T12:41:06.494Z",
+          "observed_at": null
+        },
+        {
+          "market_id": "679064",
+          "status": "no update",
+          "odds": null,
+          "volume_24h_usd": null,
+          "source_url": null,
+          "fetched_at": "2026-11-13T12:41:06.494Z",
+          "observed_at": null
+        },
+        {
+          "market_id": "679060",
+          "status": "no update",
+          "odds": null,
+          "volume_24h_usd": null,
+          "source_url": null,
+          "fetched_at": "2026-11-13T12:41:06.494Z",
+          "observed_at": null
+        },
+        {
+          "market_id": "679029",
+          "status": "no update",
+          "odds": null,
+          "volume_24h_usd": null,
+          "source_url": null,
+          "fetched_at": "2026-11-13T12:41:06.494Z",
+          "observed_at": null
+        },
+        {
+          "market_id": "679034",
+          "status": "no update",
+          "odds": null,
+          "volume_24h_usd": null,
+          "source_url": null,
+          "fetched_at": "2026-11-13T12:41:06.494Z",
+          "observed_at": null
+        },
+        {
+          "market_id": "682708",
+          "status": "no update",
+          "odds": null,
+          "volume_24h_usd": null,
+          "source_url": null,
+          "fetched_at": "2026-11-13T12:41:06.494Z",
+          "observed_at": null
+        },
+        {
+          "market_id": "682705",
+          "status": "no update",
+          "odds": null,
+          "volume_24h_usd": null,
+          "source_url": null,
+          "fetched_at": "2026-11-13T12:41:06.494Z",
+          "observed_at": null
+        },
+        {
+          "market_id": "682710",
+          "status": "no update",
+          "odds": null,
+          "volume_24h_usd": null,
+          "source_url": null,
+          "fetched_at": "2026-11-13T12:41:06.494Z",
+          "observed_at": null
+        },
+        {
+          "market_id": "682706",
+          "status": "no update",
+          "odds": null,
+          "volume_24h_usd": null,
+          "source_url": null,
+          "fetched_at": "2026-11-13T12:41:06.494Z",
+          "observed_at": null
+        },
+        {
+          "market_id": "682711",
+          "status": "no update",
+          "odds": null,
+          "volume_24h_usd": null,
+          "source_url": null,
+          "fetched_at": "2026-11-13T12:41:06.494Z",
+          "observed_at": null
+        },
+        {
+          "market_id": "682712",
+          "status": "no update",
+          "odds": null,
+          "volume_24h_usd": null,
+          "source_url": null,
+          "fetched_at": "2026-11-13T12:41:06.494Z",
+          "observed_at": null
+        },
+        {
+          "market_id": "682714",
+          "status": "no update",
+          "odds": null,
+          "volume_24h_usd": null,
+          "source_url": null,
+          "fetched_at": "2026-11-13T12:41:06.494Z",
+          "observed_at": null
+        },
+        {
+          "market_id": "682719",
+          "status": "no update",
+          "odds": null,
+          "volume_24h_usd": null,
+          "source_url": null,
+          "fetched_at": "2026-11-13T12:41:06.494Z",
+          "observed_at": null
+        },
+        {
+          "market_id": "561261",
+          "status": "no update",
+          "odds": null,
+          "volume_24h_usd": null,
+          "source_url": null,
+          "fetched_at": "2026-11-13T12:41:06.494Z",
+          "observed_at": null
+        },
+        {
+          "market_id": "561229",
+          "status": "no update",
+          "odds": null,
+          "volume_24h_usd": null,
+          "source_url": null,
+          "fetched_at": "2026-11-13T12:41:06.494Z",
+          "observed_at": null
+        },
+        {
+          "market_id": "561231",
+          "status": "no update",
+          "odds": null,
+          "volume_24h_usd": null,
+          "source_url": null,
+          "fetched_at": "2026-11-13T12:41:06.494Z",
+          "observed_at": null
+        },
+        {
+          "market_id": "561234",
+          "status": "no update",
+          "odds": null,
+          "volume_24h_usd": null,
+          "source_url": null,
+          "fetched_at": "2026-11-13T12:41:06.494Z",
+          "observed_at": null
+        },
+        {
+          "market_id": "561230",
+          "status": "no update",
+          "odds": null,
+          "volume_24h_usd": null,
+          "source_url": null,
+          "fetched_at": "2026-11-13T12:41:06.494Z",
+          "observed_at": null
+        },
+        {
+          "market_id": "561246",
+          "status": "no update",
+          "odds": null,
+          "volume_24h_usd": null,
+          "source_url": null,
+          "fetched_at": "2026-11-13T12:41:06.494Z",
+          "observed_at": null
+        },
+        {
+          "market_id": "561239",
+          "status": "no update",
+          "odds": null,
+          "volume_24h_usd": null,
+          "source_url": null,
+          "fetched_at": "2026-11-13T12:41:06.494Z",
+          "observed_at": null
+        },
+        {
+          "market_id": "561232",
+          "status": "no update",
+          "odds": null,
+          "volume_24h_usd": null,
+          "source_url": null,
+          "fetched_at": "2026-11-13T12:41:06.494Z",
+          "observed_at": null
+        },
+        {
+          "market_id": "3399468",
+          "status": "no update",
+          "odds": null,
+          "volume_24h_usd": null,
+          "source_url": null,
+          "fetched_at": "2026-11-13T12:41:06.494Z",
+          "observed_at": null
+        },
+        {
+          "market_id": "2243897",
+          "status": "no update",
+          "odds": null,
+          "volume_24h_usd": null,
+          "source_url": null,
+          "fetched_at": "2026-11-13T12:41:06.494Z",
+          "observed_at": null
+        },
+        {
+          "market_id": "1170144",
+          "status": "no update",
+          "odds": null,
+          "volume_24h_usd": null,
+          "source_url": null,
+          "fetched_at": "2026-11-13T12:41:06.494Z",
+          "observed_at": null
+        },
+        {
+          "market_id": "567621",
+          "status": "no update",
+          "odds": null,
+          "volume_24h_usd": null,
+          "source_url": null,
+          "fetched_at": "2026-11-13T12:41:06.494Z",
+          "observed_at": null
+        },
+        {
+          "market_id": "6831494",
+          "status": "no update",
+          "odds": null,
+          "volume_24h_usd": null,
+          "source_url": null,
+          "fetched_at": "2026-11-13T12:41:06.494Z",
+          "observed_at": null
         }
       ]
     }
