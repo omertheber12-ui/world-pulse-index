@@ -138,6 +138,7 @@ function unread(days, latest, mode) {
     message: mode === 'no baseline'
       ? "The latest data can't be compared yet."
       : 'The latest data could not be read.',
+    note: '',
     lastGoodLabel: good ? formatDay(good.date) : '',
     pick: null,
     smaller: null,
@@ -147,46 +148,92 @@ function unread(days, latest, mode) {
   };
 }
 
-export function todayModel(days, pairs, mode) {
-  const list = (days || []).slice().sort((a, b) => (a.date < b.date ? -1 : 1));
-  const latest = list[list.length - 1] || null;
-  if (!latest) return unread([], null, 'no update');
-  const actual = classify(latest);
-  const shown = mode || actual;
-  if (shown === 'no update' || shown === 'no baseline') return unread(list, latest, shown);
-  const ms = stamp(latest);
-  const caughtUp = 'That is everything that changed today. Next update tomorrow at ' + nextUpdateClock() + ' Israel time.';
+export function dayHasOdds(day) {
+  return !!(day && (day.markets || []).some((row) => row && typeof row.odds === 'number'));
+}
+
+function lastDayWithOdds(days, beforeDate) {
+  for (let i = days.length - 1; i >= 0; i -= 1) {
+    const day = days[i];
+    if (beforeDate && day.date >= beforeDate) continue;
+    if (dayHasOdds(day)) return day;
+  }
+  return null;
+}
+
+function quietModel(day) {
+  return {
+    mode: 'quiet',
+    title: 'What changed today',
+    dateLabel: day && day.date ? formatDay(day.date) : '',
+    updatedLabel: '',
+    hint: false,
+    message: 'No meaningful move since yesterday.',
+    note: '',
+    lastGoodLabel: '',
+    pick: null,
+    smaller: null,
+    caughtUp: 'That is everything that changed today. Next update tomorrow at ' + nextUpdateClock() + ' Israel time.',
+    weekHref: '/week',
+    pulse: pulseFrom(stamp(day)),
+  };
+}
+
+function presentDay(list, day, pairs) {
+  const shown = classify(day);
+  if (shown === 'no update' || shown === 'no baseline') return unread(list, day, shown);
+  const ms = stamp(day);
   const base = {
     mode: shown,
     title: 'What changed today',
-    dateLabel: formatDay(latest.date),
+    dateLabel: formatDay(day.date),
     updatedLabel: ms ? clock(ms) : '',
     hint: true,
     message: '',
+    note: '',
     lastGoodLabel: '',
-    caughtUp,
+    caughtUp: 'That is everything that changed today. Next update tomorrow at ' + nextUpdateClock() + ' Israel time.',
     weekHref: '/week',
     pulse: pulseFrom(ms),
   };
-  if (shown === 'quiet') {
-    return { ...base, hint: false, pick: null, smaller: null, message: 'No meaningful move since yesterday.' };
-  }
-  const pick = latest.rule.pick;
+  if (shown === 'quiet') return { ...quietModel(day), dateLabel: base.dateLabel, updatedLabel: base.updatedLabel, pulse: base.pulse };
+  const pick = day.rule.pick;
   const link = connectionHref(pick.market_id, pairs);
-  const smallerRows = (latest.rule.smaller_changes || []).filter((row) => row && row.name);
+  const smallerRows = (day.rule.smaller_changes || []).filter((row) => row && row.name);
   return {
     ...base,
     pick: {
       name: displayName(pick.name),
-      sentence: moveLine(pick, whenPhrase(latest.date, pick.previous_date)),
+      sentence: moveLine(pick, whenPhrase(day.date, pick.previous_date)),
       href: link ? link.href : '',
-      chart: chartBlock(last7(list, pick.market_id, latest.date), 'Last 7 days', 'Today'),
+      chart: chartBlock(last7(list, pick.market_id, day.date), 'Last 7 days', 'Today'),
     },
     smaller: smallerRows.length ? {
       label: smallerLabel(smallerRows.length),
       moves: smallerRows.map((row) => moveLine(row, '')),
     } : null,
   };
+}
+
+export function todayModel(days, pairs, mode) {
+  const list = (days || []).slice().sort((a, b) => (a.date < b.date ? -1 : 1));
+  const latest = list[list.length - 1] || null;
+  if (!latest) return unread([], null, 'no update');
+  if (mode === 'no update' || mode === 'no baseline') return unread(list, latest, mode);
+  if (mode === 'quiet') return quietModel(latest);
+  const missing = classify(latest) === 'no update' || !dayHasOdds(latest);
+  if (!missing) return presentDay(list, latest, pairs);
+  const earlier = lastDayWithOdds(list, latest.date);
+  if (!earlier) {
+    return {
+      ...unread(list, latest, 'no update'),
+      message: '',
+      note: 'No update today.',
+      lastGoodLabel: '',
+    };
+  }
+  const shown = presentDay(list, earlier, pairs);
+  return { ...shown, note: 'No update today. ' + formatDay(earlier.date) + '.' };
 }
 
 function weekChart(days, move, covered) {

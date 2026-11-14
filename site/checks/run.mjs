@@ -7,7 +7,7 @@ import { fileURLToPath } from 'node:url';
 import { chancePhrase, changeLine, changeVerb, strayTitleCase, thinMarketNote, whyMatters } from '../lib/copy.js';
 import { runConnectionChecks, connectionPageChecks } from './connectionsCheck.mjs';
 import { runCorrelationChecks, correlationPageChecks } from './correlationsCheck.mjs';
-import { runDailyChecks } from './dailyCheck.mjs';
+import { runDailyChecks, savedChangeFixture } from './dailyCheck.mjs';
 import { homeEligible, moveScore, qualityScore, rankOpen } from '../lib/score.js';
 import { learnCardSet, wordCount } from '../lib/screenCopy.js';
 import { loadDetail } from '../lib/linkScreen.js';
@@ -221,8 +221,10 @@ if (base) {
   const today = doms['/'].html;
   const ev = doms['/event/770450'].html;
   const h1 = (ev.match(/<h1[^>]*>([\s\S]*?)<\/h1>/) || [, ''])[1].replace(/<[^>]+>/g, '').trim();
+  const steady = /held steady/.test(h1);
+  const moved = /(?:rose|fell)/.test(h1);
   add('Event headline is built from the question, end date, and change',
-    /^Chance that /.test(h1) && /(rose|fell|held steady)/.test(h1) && /20\d\d/.test(h1) && ev.includes('in 24 hours'),
+    /^Chance that /.test(h1) && (steady || moved) && /20\d\d/.test(h1) && (steady || ev.includes('in 24 hours')),
     h1);
   const liveHeads = [...ev.matchAll(/<h[12][^>]*>([\s\S]*?)<\/h[12]>/g)]
     .map((m) => m[1].replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim())
@@ -233,10 +235,18 @@ if (base) {
   const todayText = plain(today);
   const todayH1 = (today.match(/<h1[^>]*>([\s\S]*?)<\/h1>/) || [, ''])[1].replace(/<[^>]+>/g, '').trim();
   const todayModel = buildToday('');
+  const savedChange = savedChangeFixture();
   add('Today shows the saved change',
     todayH1 === 'What changed today'
     && todayModel.pick
+    && todayModel.note
+    && todayModel.note.includes('No update today')
+    && todayModel.note.includes(todayModel.dateLabel)
+    && todayText.includes(todayModel.note)
     && todayText.includes(todayModel.pick.sentence)
+    && !todayText.includes('The latest data could not be read')
+    && savedChange.fallbackOk
+    && savedChange.normalOk
     && todayText.includes('The one change worth knowing')
     && todayText.includes('2 smaller changes')
     && todayText.includes('Last 7 days')
@@ -246,7 +256,7 @@ if (base) {
     && todayText.includes("Start here: today's one change")
     && todayText.includes('Next update tomorrow at ')
     && !todayText.includes('$'),
-    todayH1 + ' | ' + (todayModel.pick && todayModel.pick.sentence));
+    todayH1 + ' | ' + (todayModel.note || '') + ' | ' + (todayModel.pick && todayModel.pick.sentence));
   add('Exposure text says this is not an expected loss',
     ev.includes('Share of your portfolio linked to this event. This is not an expected loss.')
     && ev.includes('% direct') && ev.includes('% funds') && ev.includes('% estimated'));
