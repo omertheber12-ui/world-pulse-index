@@ -1,13 +1,16 @@
 /** Checks for saved daily odds, the biggest-change rule, and the TR-016 file hashes. */
-import { readFileSync } from 'fs';
+import { existsSync, mkdtempSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'fs';
+import { tmpdir } from 'os';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import {
-  REPO, SITE, TR016_SERIES_SHA, TR016_SUMMARY_SHA, addDays, applyRule, dayErrors, historyFromDays,
+  REPO, SITE, TR016_SERIES_SHA, TR016_SUMMARY_SHA, addDays, applyRule, dayErrors, formatDay, historyFromDays,
   isUtcTimestamp, loadRule, loadTracked, noUpdateRow, okRow, parseRule, ruleErrors, sha256File,
   summaryProblem, weeksFromDays, withRules,
 } from '../lib/dailyOdds.js';
+import { buildWeek, todayModel } from '../lib/todayScreen.js';
 import { readDayFiles, readWeekFiles } from '../lib/dailyStore.js';
+import { recordNoUpdate } from '../scripts/collect-daily.mjs';
 
 function fixtureRule() {
   return parseRule({
@@ -119,6 +122,91 @@ export function backfillWindowFixture() {
   return { laterPasses, gapFails, missing };
 }
 
+const SAMPLE_META = { market_id: 'a', event_id: '1', name: 'Example market', question: '', page_url: '' };
+
+export function savedChangeFixture() {
+  const rule = fixtureRule();
+  const earlier = day('2026-11-12', [row('a', 0.4, 20000, 'Example market')]);
+  const picked = day('2026-11-13', [row('a', 0.5, 20000, 'Example market')]);
+  const blank = {
+    ...day('2026-11-14', [noUpdateRow(SAMPLE_META, '2026-11-14T00:00:00.000Z', 'no update')]),
+    status: 'no update',
+  };
+  const normal = todayModel(withRules([earlier, picked], rule), [], '');
+  const fallback = todayModel(withRules([earlier, picked, blank], rule), [], '');
+  const noOdds = todayModel(withRules([
+    earlier,
+    picked,
+    { ...picked, date: '2026-11-14', markets: [{ ...picked.markets[0], odds: null, status: 'no update' }] },
+  ], rule), [], '');
+  const missed = todayModel([], [], '');
+  const normalOk = !normal.note && !!normal.pick && normal.pick.sentence.includes('Example market')
+    && normal.message !== 'The latest data could not be read.';
+  const fallbackOk = !!fallback.note && fallback.note.includes('No update today')
+    && fallback.note.includes(formatDay('2026-11-13'))
+    && fallback.dateLabel === formatDay('2026-11-13')
+    && !!fallback.pick && fallback.pick.sentence === normal.pick.sentence
+    && !String(fallback.message || '').includes('could not be read')
+    && !!noOdds.note && noOdds.note.includes('No update today') && noOdds.pick.sentence === normal.pick.sentence;
+  const readFailureOk = missed.message === 'The latest data could not be read.' && !missed.note;
+  return {
+    normalOk,
+    fallbackOk: fallbackOk && readFailureOk,
+    normalDetail: normalOk ? '' : 'normal day did not show its own move',
+    fallbackDetail: fallbackOk && readFailureOk ? '' : 'fallback or read-failure copy was wrong',
+  };
+}
+
+export function noUpdateGuardErrors() {
+  const errors = [];
+  const rule = fixtureRule();
+  const tracked = [SAMPLE_META];
+  const kept = mkdtempSync(path.join(tmpdir(), 'daily-keep-'));
+  const missing = mkdtempSync(path.join(tmpdir(), 'daily-miss-'));
+  try {
+    const keptDir = path.join(kept, 'data', 'daily');
+    mkdirSync(keptDir, { recursive: true });
+    const keptFile = path.join(keptDir, '2026-11-14.json');
+    const original = JSON.stringify({ date: '2026-11-14', status: 'ok', markets: [{ market_id: 'a', odds: 0.42, status: 'ok' }] });
+    writeFileSync(keptFile, original);
+    const skipped = recordNoUpdate({
+      site: kept, date: '2026-11-14', collectedAt: '2026-11-14T01:00:00.000Z', tracked, rule,
+    });
+    if (!skipped.skipped || !skipped.line.includes('skipped') || !skipped.line.includes('already has odds')) {
+      errors.push('a day with odds was not skipped');
+    }
+    if (readFileSync(keptFile, 'utf8') !== original) errors.push('a day with odds was rewritten');
+    if (existsSync(path.join(keptDir, 'history.json'))) errors.push('history.json was touched');
+    if (existsSync(path.join(keptDir, 'weekly'))) errors.push('the weekly file was touched');
+
+    mkdirSync(path.join(missing, 'data', 'daily'), { recursive: true });
+    const created = recordNoUpdate({
+      site: missing, date: '2026-11-15', collectedAt: '2026-11-15T01:00:00.000Z', tracked, rule,
+    });
+    const writtenPath = path.join(missing, 'data', 'daily', '2026-11-15.json');
+    if (created.skipped || !existsSync(writtenPath)) errors.push('a missing day was not recorded');
+    else {
+      const written = JSON.parse(readFileSync(writtenPath, 'utf8'));
+      if (written.status !== 'no update') errors.push('a missing day was not no update');
+      if ((written.markets || []).some((row) => typeof row.odds === 'number')) errors.push('a missing day was given odds');
+    }
+  } finally {
+    rmSync(kept, { recursive: true, force: true });
+    rmSync(missing, { recursive: true, force: true });
+  }
+  return errors;
+}
+
+export function weekFallbackOk() {
+  try {
+    const week = buildWeek();
+    const text = JSON.stringify(week);
+    return !!(week && week.cards && week.cards[0] && week.cards[0].sentence) && !text.includes('could not be read');
+  } catch {
+    return false;
+  }
+}
+
 export function runDailyChecks(add, site = SITE) {
   const latest = sha256File(path.join(site, 'data/correlations/latest.json'));
   const run = sha256File(path.join(site, 'data/correlations/runs/TR-016-2026-11-11.json'));
@@ -134,6 +222,13 @@ export function runDailyChecks(add, site = SITE) {
 
   const fixture = ruleFixtureErrors();
   add('Biggest-change rule keeps the largest move, then the higher volume', fixture.length === 0, fixture.join('; '));
+
+  const saved = savedChangeFixture();
+  add('A no-update day shows the last saved day with odds', saved.fallbackOk, saved.fallbackDetail);
+  add('A saved day with odds shows that day', saved.normalOk, saved.normalDetail);
+  const guardErrors = noUpdateGuardErrors();
+  add('A no-update collect does not overwrite a day that has odds', guardErrors.length === 0, guardErrors.join('; '));
+  add('The week still reads when the latest day has no update', weekFallbackOk());
 
   const tracked = loadTracked(site);
   const ids = tracked.map((row) => row.market_id);
