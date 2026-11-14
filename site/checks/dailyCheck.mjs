@@ -3,7 +3,7 @@ import { readFileSync } from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import {
-  REPO, SITE, TR016_SERIES_SHA, TR016_SUMMARY_SHA, applyRule, dayErrors, historyFromDays,
+  REPO, SITE, TR016_SERIES_SHA, TR016_SUMMARY_SHA, addDays, applyRule, dayErrors, historyFromDays,
   isUtcTimestamp, loadRule, loadTracked, noUpdateRow, okRow, parseRule, ruleErrors, sha256File,
   summaryProblem, weeksFromDays, withRules,
 } from '../lib/dailyOdds.js';
@@ -76,6 +76,47 @@ export function ruleFixtureErrors() {
   const baseline = applyRule(day('2026-10-13', [row('a', 0.4, 20000)]), null, rule);
   if (baseline.status !== 'no baseline' || baseline.pick || baseline.compared_to !== null) errors.push('a day with no earlier saved day was quiet');
   return errors;
+}
+
+export const BACKFILL_FIRST = '2026-10-13';
+export const BACKFILL_LAST = '2026-11-12';
+
+function inBackfillWindow(date) {
+  return date >= BACKFILL_FIRST && date <= BACKFILL_LAST;
+}
+
+export function backfillDatesMissing(dates, table) {
+  return dates.filter((date) => inBackfillWindow(date) && !table.includes(date));
+}
+
+export function backfillTablePasses(dates, table) {
+  const headers = table.includes('Traded volume (shares)') && table.includes('10,000 shares')
+    && table.includes('no baseline') && table.includes('Outside 3% to 97%') && !table.includes('$');
+  const windowDates = dates.filter(inBackfillWindow);
+  return headers && windowDates.length > 0 && backfillDatesMissing(dates, table).length === 0;
+}
+
+function backfillWindowDates() {
+  const dates = [];
+  for (let date = BACKFILL_FIRST; date <= BACKFILL_LAST; date = addDays(date, 1)) dates.push(date);
+  return dates;
+}
+
+export function backfillWindowFixture() {
+  const dates = backfillWindowDates();
+  const table = [
+    'Traded volume (shares)',
+    '10,000 shares',
+    'no baseline',
+    'Outside 3% to 97%',
+  ].concat(dates).join('\n');
+  const laterPasses = backfillTablePasses(dates.concat(['2026-11-13', '2026-11-14']), table)
+    && backfillDatesMissing(['2026-11-13', '2026-11-14'], table).length === 0;
+  const gapped = table.replace('\n2026-11-01', '');
+  const missing = backfillDatesMissing(dates.concat(['2026-11-14']), gapped);
+  const gapFails = missing.length === 1 && missing[0] === '2026-11-01'
+    && !backfillTablePasses(dates.concat(['2026-11-14']), gapped);
+  return { laterPasses, gapFails, missing };
 }
 
 export function runDailyChecks(add, site = SITE) {
@@ -153,13 +194,21 @@ export function runDailyChecks(add, site = SITE) {
   }
   add('Weekly summaries match the saved days', weeksOk, weekDetail);
 
+  // The backfill table is the fixed record for 2026-10-13 through 2026-11-12. Later collects are not rows in that file.
+  const windowFixture = backfillWindowFixture();
+  add('A saved day after 2026-11-12 does not need a backfill table row',
+    windowFixture.laterPasses,
+    windowFixture.laterPasses ? '2026-11-13 and 2026-11-14' : 'later day was required');
+  add('A missing day inside the backfill window fails the table check',
+    windowFixture.gapFails,
+    windowFixture.gapFails ? '2026-11-01' : 'missing window day was accepted');
+
   let tableOk = false;
   let tableDetail = '';
   try {
     const table = readFileSync(path.join(REPO, 'docs/td013/backfill-table.md'), 'utf8');
-    const missing = days.map((day) => day.date).filter((date) => !table.includes(date));
-    tableOk = table.includes('Traded volume (shares)') && table.includes('10,000 shares') && table.includes('no baseline')
-      && table.includes('Outside 3% to 97%') && !table.includes('$') && missing.length === 0 && days.length > 0;
+    const missing = backfillDatesMissing(days.map((day) => day.date), table);
+    tableOk = backfillTablePasses(days.map((day) => day.date), table);
     if (!tableOk) tableDetail = missing.slice(0, 4).join(', ') || 'table missing';
   } catch (err) {
     tableDetail = err && err.message ? err.message : 'table missing';
