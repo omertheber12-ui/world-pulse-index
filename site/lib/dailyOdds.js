@@ -4,11 +4,21 @@
  * The TR-016 files are not rewritten. Their hashes are checked apart from this module.
  */
 import { createHash } from 'crypto';
-import { readFileSync } from 'fs';
+import { existsSync, readFileSync } from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-export const SITE = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const moduleSite = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+
+// On Vercel the bundled file keeps the build machine's path, so look from the working folder first.
+function findSite() {
+  const cwd = process.cwd();
+  if (existsSync(path.join(cwd, 'data', 'daily', 'rule.json'))) return cwd;
+  if (existsSync(path.join(cwd, 'site', 'data', 'daily', 'rule.json'))) return path.join(cwd, 'site');
+  return moduleSite;
+}
+
+export const SITE = findSite();
 export const REPO = path.resolve(SITE, '..');
 
 export const TR016_SUMMARY_SHA = 'a801a002f45b93c22acc60287ab168c0f220c9545b8381ae794beaaedd7049d9';
