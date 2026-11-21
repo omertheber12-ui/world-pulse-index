@@ -1,0 +1,30 @@
+== A_as_locked_dvol contracts 55 pairs 7594 stale med 0.141 {'above': 45, 'reach': 7, 'dip': 3}
+ same-hour corr odds-btc 0.006 gap-btc -0.559
+  t1_gap_leads_btc n 7258 p 0.7521 sum -0.0065 [-0.0224, 0.0093] lag1r -0.027 [-0.05, -0.004]
+  t2_btc_leads_odds n 7187 p 0.0 sum 7.0545 [6.3307, 7.7782] lag1r 0.767 [0.757, 0.776]
+  t3_odds_lead_btc n 7258 p 0.7999 sum -0.0045 [-0.0182, 0.0092] lag1r -0.033 [-0.056, -0.01]
+  events {'n_events': 173, 'post': 0.026769071325330008, 'pre': 0.4417933423911053, 'same': -0.49730720129590783, 'post_p': 0.613, 'pre_p': 0.0}
+  level {'n': 1933, 'contracts': 55, 'spearman': 0.0190262958478607, 'ci95': [-0.025211954412061848, 0.06659168269221818], 'p': 0.404}
+  holdout t1 p 0.646 sum -0.0077 n 1579 | holdout events {'n_events': 29, 'post': 0.031207506614813786, 'pre': 0.49352303810911324, 'same': -0.521628937530135, 'post_p': 0.747, 'pre_p': 0.003}
+  ccf {-3: -0.019, -2: 0.048, -1: 0.54, 0: -0.559, 1: -0.029, 2: 0.015, 3: 0.012}
+  holm {'2_btc_leads_odds': 0, '5_gap_level': 1, '4_event_post': 1, '1_gap_leads_btc': 1, '3_odds_lead_btc': 1}
+== B_timestamp_fixed_dvol contracts 55 pairs 7635 stale med 0.141 {'above': 45, 'reach': 7, 'dip': 3}
+ same-hour corr odds-btc 0.73 gap-btc -0.072
+  t1_gap_leads_btc n 7294 p 0.454 sum 0.0064 [-0.0166, 0.0294] lag1r 0.004 [-0.018, 0.027]
+  t2_btc_leads_odds n 7223 p 0.0728 sum 0.7506 [0.0365, 1.4647] lag1r 0.027 [0.004, 0.051]
+  t3_odds_lead_btc n 7294 p 0.6959 sum 0.0026 [-0.0121, 0.0172] lag1r 0.008 [-0.015, 0.031]
+  events {'n_events': 6, 'post': -0.2452437474571619, 'pre': -0.13910600016848, 'same': -0.1614052146922825, 'post_p': 0.276, 'pre_p': 0.552}
+  level {'n': 1938, 'contracts': 55, 'spearman': -0.00711506750737671, 'ci95': [-0.05741935020200424, 0.03894864802142622], 'p': 0.798}
+  holdout t1 p 0.398 sum -0.0043 n 1589 | holdout events {'n_events': 2, 'post': -0.2006723636329255, 'pre': -0.23620262002073122, 'same': 0.33699957027142347}
+  ccf {-3: -0.008, -2: -0.02, -1: 0.083, 0: -0.072, 1: 0.007, 2: -0.011, 3: -0.002}
+  holm {'2_btc_leads_odds': 0.3642, '4_event_post': 1, '1_gap_leads_btc': 1, '3_odds_lead_btc': 1, '5_gap_level': 1}
+== C_timestamp_fixed_realized_vol contracts 54 pairs 7285 stale med 0.135 {'above': 44, 'reach': 7, 'dip': 3}
+ same-hour corr odds-btc 0.756 gap-btc -0.18
+  t1_gap_leads_btc n 6913 p 0.5907 sum 0.0049 [-0.0189, 0.0286] lag1r 0.006 [-0.018, 0.03]
+  t2_btc_leads_odds n 6830 p 0.0515 sum 1.0291 [0.1268, 1.9315] lag1r 0.029 [0.006, 0.053]
+  t3_odds_lead_btc n 6913 p 0.6885 sum -0.007 [-0.0206, 0.0067] lag1r 0.008 [-0.015, 0.032]
+  events {'n_events': 6, 'post': -0.24014055028809267, 'pre': -0.31948620336014305, 'same': -0.034148696188562866, 'post_p': 0.284, 'pre_p': 0.166}
+  level {'n': 1856, 'contracts': 54, 'spearman': 0.00881618918360577, 'ci95': [-0.04007930211714982, 0.06289653575855446], 'p': 0.76}
+  holdout t1 p 0.677 sum -0.0185 n 1436 | holdout events {'n_events': 2, 'post': -0.2006723636329255, 'pre': -0.23620262002073122, 'same': 0.33699957027142347}
+  ccf {-3: -0.006, -2: -0.018, -1: 0.077, 0: -0.18, 1: 0.011, 2: -0.007, 3: -0.007}
+  holm {'2_btc_leads_odds': 0.2577, '4_event_post': 1, '1_gap_leads_btc': 1, '3_odds_lead_btc': 1, '5_gap_level': 1}
