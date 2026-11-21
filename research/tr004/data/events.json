@@ -1,0 +1,1926 @@
+{
+ "rule": "PREREGISTRATION.md section 2",
+ "qualifying": 119,
+ "selected": [
+  {
+   "type": "strike_deal",
+   "event_id": "114242",
+   "title": "US strikes Iran by...?",
+   "event_volume": 529033417.449223,
+   "markets": [
+    {
+     "market_id": "1198423",
+     "conditionId": "0x3488f31e6449f9803f99a8b5dd232c7ad883637f1c86e6953305a2ef19c77f20",
+     "question": "US strikes Iran by February 28, 2026?",
+     "volume": 89652867.363489,
+     "endDate": "2026-01-31T00:00:00Z",
+     "closedTime": "2026-02-28 09:31:17+00",
+     "clobTokenIds": "[\"110790003121442365126855864076707686014650523258783405996925622264696084778807\", \"10832696757358093775468120009000761778513405247768868107262967513475277652998\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    },
+    {
+     "market_id": "1092199",
+     "conditionId": "0xabb86b080e9858dcb3f46954010e49b6f539c20036856c7f999395bfd58d01e6",
+     "question": "US strikes Iran by January 31, 2026?",
+     "volume": 41754060.055673,
+     "endDate": "2026-01-31T00:00:00Z",
+     "closedTime": "2026-02-01 07:29:42+00",
+     "clobTokenIds": "[\"11631590502751337995086584451805403545770829549632613492416833230270784409909\", \"13294549611854156060952327202052855585194847446707854951585060180328600525494\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    }
+   ]
+  },
+  {
+   "type": "election",
+   "event_id": "14228",
+   "title": "(Old) Romania Election",
+   "event_volume": 371837992.47504497,
+   "markets": [
+    {
+     "market_id": "512340",
+     "conditionId": "0x9872fe47fbf6284e5399c0f41d6d2c8fb310d2f4d2d50635ab3b36f6a0a7f5b0",
+     "question": "Will Nicolae Ciuc\u0103 win the 2024 Romanian Presidential election?",
+     "volume": 326507670.562732,
+     "endDate": "2024-12-08T12:00:00Z",
+     "closedTime": "2025-05-01 09:18:53+00",
+     "clobTokenIds": "[\"53033438245279373213426094525005043480366615306824323472317521871682514379120\", \"59618000103872045883924272587382664437569966578424869104128564655378953160740\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    },
+    {
+     "market_id": "512342",
+     "conditionId": "0x00595863287c7c30148d0714255073d0ae0cf338f5287195b720b4ad1c5cbab7",
+     "question": "Will another candidate win the 2024 Romanian Presidential election?",
+     "volume": 12316645.738355,
+     "endDate": "2024-12-08T12:00:00Z",
+     "closedTime": "2025-05-01 09:28:37+00",
+     "clobTokenIds": "[\"77954885101917694680997876546123468446797411305104780556694518332567138933230\", \"88627813557332605845257549903596285926978404287527273059355798909309731923250\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    }
+   ]
+  },
+  {
+   "type": "election",
+   "event_id": "22254",
+   "title": "Next president of South Korea?",
+   "event_volume": 290745774.792026,
+   "markets": [
+    {
+     "market_id": "534189",
+     "conditionId": "0xa4f51ae09144ebedb1e4329a28597dcb25217be1050fb76b86335837943bf519",
+     "question": "Will Lee Jae-myung be elected the next president of South Korea?",
+     "volume": 88035547.447225,
+     "endDate": "2025-06-03T12:00:00Z",
+     "closedTime": "2025-06-03 21:33:32+00",
+     "clobTokenIds": "[\"106153378961102532315642223211322829491902773315904192835321056658787574388535\", \"77444435762420711044339640645792265526010696615911175439180482698545420366139\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    },
+    {
+     "market_id": "534197",
+     "conditionId": "0xf9425f69ce7fbde7ee54887ea24b164d2d4c06b594c4d4f94b1921cd79321b19",
+     "question": "Will Kim Moon-soo be elected the next president of South Korea?",
+     "volume": 73197949.803466,
+     "endDate": "2025-06-03T12:00:00Z",
+     "closedTime": "2025-06-03 21:49:12+00",
+     "clobTokenIds": "[\"88367287191881225139620787713565692597802556472947648475077029086743269748668\", \"81571664702088275676361008077896353891715141859428403243395296966269838397575\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    }
+   ]
+  },
+  {
+   "type": "election",
+   "event_id": "411239",
+   "title": "Next Prime Minister of Ethiopia?",
+   "event_volume": 286138162.70112,
+   "markets": [
+    {
+     "market_id": "2063134",
+     "conditionId": "0x7d0aaf81bbd3fd73b6a1651cce08a452c0cbf9c0cbb4520ce0f981065b639d88",
+     "question": "Will Adanech Abiebie be the next Prime Minister of Ethiopia?",
+     "volume": 83460060.365002,
+     "endDate": "2026-06-02T03:59:00Z",
+     "closedTime": "2026-10-06 02:19:40+00",
+     "clobTokenIds": "[\"27146956652877944551877724690365745048289675287536243265951843487691050802191\", \"33216695217861742195941369663873573949679634432452142092545486849801915283392\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    },
+    {
+     "market_id": "2063135",
+     "conditionId": "0xb6d6f15a1b5d08753653f1867ccd6126badfbe182a75159a330dc7b15336b309",
+     "question": "Will Gedion Timothewos be the next Prime Minister of Ethiopia?",
+     "volume": 55949081.662122995,
+     "endDate": "2026-06-02T03:59:00Z",
+     "closedTime": "2026-10-06 02:18:39+00",
+     "clobTokenIds": "[\"26485245961222313575373928818655498088613748810606082451526412785977121014592\", \"88478075820276880294718721941038251506706678823987773177467218098225985186038\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    }
+   ]
+  },
+  {
+   "type": "election",
+   "event_id": "45915",
+   "title": "Brazil Presidential Election",
+   "event_volume": 249126022.878794,
+   "markets": [
+    {
+     "market_id": "601826",
+     "conditionId": "0x1a01bf78f56a507fcb666d564d8c8b91b0750679163ed6e96746102c9b7d285d",
+     "question": "Will Fl\u00e1vio Bolsonaro win the 2026 Brazilian presidential election?",
+     "volume": 62159932.427386016,
+     "endDate": "2026-10-26T03:59:00Z",
+     "closedTime": "2026-10-26 03:17:16.107395+00",
+     "clobTokenIds": "[\"109876868437950584369987384406356259939519193117253465815665152916226511121427\", \"38310927461258927563020508025396887688249787380193911540547071417200646834355\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    },
+    {
+     "market_id": "601819",
+     "conditionId": "0xdf8e2dc5860027decbe6164555c3c1c9645c3bd33e16b9dc57ca87125047d4a8",
+     "question": "Will Luiz In\u00e1cio Lula da Silva win the 2026 Brazilian presidential election?",
+     "volume": 48514562.175727,
+     "endDate": "2026-10-26T03:59:00Z",
+     "closedTime": "2026-10-26 03:12:22.402721+00",
+     "clobTokenIds": "[\"30630994248667897740988010928640156931882346081873066002335460180076741328029\", \"79191939610100241429039499950443680906623179487184628479206155805558220344190\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    }
+   ]
+  },
+  {
+   "type": "election",
+   "event_id": "16868",
+   "title": "Romania Presidential Election Winner",
+   "event_volume": 234266874.453681,
+   "markets": [
+    {
+     "market_id": "519075",
+     "conditionId": "0x784d67eb3b205e7f6543b09d8737d5dc1c2a14d43a102bbb59f7f4f94fc56135",
+     "question": "Will Hunor Kelemen win the Romanian presidential election?",
+     "volume": 80897096.543524,
+     "endDate": "2025-12-31T12:00:00Z",
+     "closedTime": "2025-05-19 05:38:37+00",
+     "clobTokenIds": "[\"76281740581554871499625003009408244592747070827294693281849801034738430468659\", \"5779930821109846262669669484867584068088577191267413527354857886763878120297\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    },
+    {
+     "market_id": "519068",
+     "conditionId": "0xaf51603d78545c838490bafe178ee9ff4c23d0c2161f15e0e530d3735229ad3f",
+     "question": "Will Nicu\u0219or Dan win the Romanian presidential election?",
+     "volume": 50991003.196931,
+     "endDate": "2025-12-31T12:00:00Z",
+     "closedTime": "2025-05-19 04:09:33+00",
+     "clobTokenIds": "[\"65635069780420563470359317634895637337713542089289204127626426923331166629221\", \"75108011059255100121309616647139761925541153138774950455720013752098078766968\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    }
+   ]
+  },
+  {
+   "type": "strike_deal",
+   "event_id": "357625",
+   "title": "US x Iran ceasefire extended by...?",
+   "event_volume": 210137726.5107909,
+   "markets": [
+    {
+     "market_id": "2036399",
+     "conditionId": "0x1d2787cb8aed975d092b2799ed6f4083e9445f7420cdc09e9d47e7d54356c6cd",
+     "question": "US x Iran ceasefire extended by April 22, 2026?",
+     "volume": 203621392.1401,
+     "endDate": "2026-04-21T00:00:00Z",
+     "closedTime": "2026-05-01 00:32:42+00",
+     "clobTokenIds": "[\"50049642142024617231697970377792489304039200104142714216386619263735691638204\", \"110959653450933276250915064669875552310439627880508793089816880777942697720191\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    },
+    {
+     "market_id": "1918791",
+     "conditionId": "0xc0be7b1f19f9b658778c2be7e6bc67596a00f347ab64392d0f5d387534c7c3b4",
+     "question": "US x Iran ceasefire extended by April 21, 2026?",
+     "volume": 5811146.908703924,
+     "endDate": "2026-04-21T00:00:00Z",
+     "closedTime": "2026-04-22 07:44:34+00",
+     "clobTokenIds": "[\"65622140732053240281290096331865000706701305367981851971995507628274584691571\", \"112949579642994822332239156097368280383415337833623203846956122649136191732252\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    }
+   ]
+  },
+  {
+   "type": "shutdown",
+   "event_id": "80505",
+   "title": "US government shutdown Saturday?",
+   "event_volume": 157296576.448084,
+   "markets": [
+    {
+     "market_id": "680392",
+     "conditionId": "0x43ec78527bd98a0588dd9455685b2cc82f5743140cb3a154603dc03c02b57de5",
+     "question": "US government shutdown Saturday?",
+     "volume": 157296576.448084,
+     "endDate": "2026-01-31T00:00:00Z",
+     "closedTime": "2026-02-04 00:35:28+00",
+     "clobTokenIds": "[\"52607315900507156846622820770453728082833251091510131025984187712529448877245\", \"108988271800978168213949343685406694292284061166193819357568013088568150075789\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    }
+   ]
+  },
+  {
+   "type": "election",
+   "event_id": "21315",
+   "title": "Ireland Presidential Election",
+   "event_volume": 152026239.339043,
+   "markets": [
+    {
+     "market_id": "529278",
+     "conditionId": "0x4037ced85ebd734a30727e948abfe77b19fc2ce7ee0560a933d0c080fe076516",
+     "question": "Will Frances Fitzgerald win the Irish Presidential Election?",
+     "volume": 115067178.333268,
+     "endDate": "2025-11-11T12:00:00Z",
+     "closedTime": "2025-10-25 21:53:33+00",
+     "clobTokenIds": "[\"13178519333823993662934968430857776162550570445253471722003513716922201689105\", \"47113635093830865822807939725855960883737645711087828564134442752879834974569\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    },
+    {
+     "market_id": "529277",
+     "conditionId": "0xfc53b987bb73eea0705fd7b13dd4c61371953f992e1c10e3566479049fe8723b",
+     "question": "Will Peter Casey win the Irish Presidential Election?",
+     "volume": 9175537.640013,
+     "endDate": "2025-11-11T12:00:00Z",
+     "closedTime": "2025-10-25 21:42:41+00",
+     "clobTokenIds": "[\"30185988332903764680463534817166983030964216415209871054026821359944597935357\", \"109835705704543515421445341119505722385870499529597708335432561448731480977427\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    }
+   ]
+  },
+  {
+   "type": "strike_deal",
+   "event_id": "326314",
+   "title": "Russia x Ukraine ceasefire by May 31, 2026?",
+   "event_volume": 141250712.68070313,
+   "markets": [
+    {
+     "market_id": "1795527",
+     "conditionId": "0xa93b28a6384aefff4e7d5adb2061c444e4a0e95b8ad17755f9cee123c7099b35",
+     "question": "Russia x Ukraine ceasefire by May 31, 2026?",
+     "volume": 141250712.68070313,
+     "endDate": "2026-05-31T00:00:00Z",
+     "closedTime": "2026-05-09 19:52:26+00",
+     "clobTokenIds": "[\"79574854225464477884287524461980167393583915155475895540399834902850789709576\", \"50296805114160040515244790354604025333522925214556059510952704423495419940434\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    }
+   ]
+  },
+  {
+   "type": "election",
+   "event_id": "34587",
+   "title": "Portugal Presidential Election",
+   "event_volume": 136469386.189704,
+   "markets": [
+    {
+     "market_id": "569426",
+     "conditionId": "0xbcb33ad98c8141b10f2350ef687eddf0660484ecc15be42ecdae64339e64dce1",
+     "question": "Will Andr\u00e9 Ventura win the 2026 Portugal presidential election?",
+     "volume": 19399481.037677,
+     "endDate": "2026-01-25T14:00:00Z",
+     "closedTime": "2026-02-09 04:25:29+00",
+     "clobTokenIds": "[\"87048058140607839077917415447158941112086606824479198286281986963033007181784\", \"105108334823274411453837752322302146951506166827237470954759784982159162094956\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    },
+    {
+     "market_id": "569437",
+     "conditionId": "0x3b1a3232b14a029f96a3e1b04a5d8dde31575d74024389b53631e73b4a494480",
+     "question": "Will Raul Perestrello win the 2026 Portugal presidential election?",
+     "volume": 18905388.951092,
+     "endDate": "2026-01-25T14:00:00Z",
+     "closedTime": "2026-02-09 04:08:29+00",
+     "clobTokenIds": "[\"100873440839630488787675306991927169852104936846951905917156069066481005498699\", \"85845913338874356389169581070714431760388168444378600269400508336199873583319\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    }
+   ]
+  },
+  {
+   "type": "election",
+   "event_id": "14835",
+   "title": "Germany Parliamentary Election Winner",
+   "event_volume": 134617984.549357,
+   "markets": [
+    {
+     "market_id": "514165",
+     "conditionId": "0xba3e7e0ef13d5a888b976cf79a341620e5a59b120875ed28f87b6d0f2d6db7ff",
+     "question": "Will another party win the most seats in the next German election?",
+     "volume": 28301064.519864,
+     "endDate": "2025-02-23T12:00:00Z",
+     "closedTime": "2025-02-24 12:45:52+00",
+     "clobTokenIds": "[\"96656178045344637539721800812797460076273926889921701189421153260840359200516\", \"8972288672640435283442731460565050080154589412830184620500535415246091002154\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    },
+    {
+     "market_id": "515761",
+     "conditionId": "0xcce535ee3d3b54b4f67165ccfa0a60195ff155afdc51db66c6d5f7d4af0f29a8",
+     "question": "Will FDP win the most seats in the next German election?",
+     "volume": 21222938.680058,
+     "endDate": "2025-02-23T12:00:00Z",
+     "closedTime": "2025-02-24 12:45:58+00",
+     "clobTokenIds": "[\"58133844730076047070110973379344868761150347358500598838005887606220013934718\", \"14875660322078163696008576577608406432294409984642605754965521546683761493099\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    }
+   ]
+  },
+  {
+   "type": "election",
+   "event_id": "14874",
+   "title": "Poland Presidential Election",
+   "event_volume": 128972884.206035,
+   "markets": [
+    {
+     "market_id": "514139",
+     "conditionId": "0xd009ac14bccdd12925a2d9f8d910411556e4ed153337abb18a97b97fabcf7db0",
+     "question": "Will Rafa\u0142 Trzaskowski be the next President of Poland?",
+     "volume": 40863065.298881,
+     "endDate": "2025-05-18T12:00:00Z",
+     "closedTime": "2025-06-02 08:55:20+00",
+     "clobTokenIds": "[\"9985510571211594606436989364549728150268400968429116207816527248582274291346\", \"95044204495071447962354072933210357509612220350121617225795580441278155097858\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    },
+    {
+     "market_id": "514138",
+     "conditionId": "0x5ce0d897bd66142c43a38204a67ad85bc3e0643382258411a5aa58ca3e825082",
+     "question": "Will Karol Nawrocki be the next President of Poland?",
+     "volume": 31735999.949038,
+     "endDate": "2025-05-18T12:00:00Z",
+     "closedTime": "2025-06-02 08:55:12+00",
+     "clobTokenIds": "[\"52378310446953465163845338048369876961360578335284428810587513450420811578746\", \"12000674920991755992211074758866949296981843307621554385852540153569787669909\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    }
+   ]
+  },
+  {
+   "type": "election",
+   "event_id": "16125",
+   "title": "Next Prime Minister of Canada after the election?",
+   "event_volume": 120985208.028161,
+   "markets": [
+    {
+     "market_id": "516767",
+     "conditionId": "0x244c75b2c6095b2e67699c10d0c6548d757d58a1ffea32ad6882c9a389803bd4",
+     "question": "Will Pierre Poilievre be the next Canadian Prime Minister?",
+     "volume": 67376035.838465,
+     "endDate": "2025-04-28T12:00:00Z",
+     "closedTime": "2025-04-30 11:29:47+00",
+     "clobTokenIds": "[\"304223829867910478181460849192477530685410813637096841629263146254608207526\", \"107945661229032133314278422758316384974042957235190601935788628895276141846095\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    },
+    {
+     "market_id": "516769",
+     "conditionId": "0x87822b3d4ccba1835d698354b01c050b55f20c5f34b14908bff4ea5a6d58af4c",
+     "question": "Will Mark Carney be the next Canadian Prime Minister?",
+     "volume": 36416000.185007,
+     "endDate": "2025-04-28T12:00:00Z",
+     "closedTime": "2025-04-30 19:37:50+00",
+     "clobTokenIds": "[\"29677413448356631423250052573262008356913370083986817030510370064664558041792\", \"115500896288417093456030036113841947954779737078916313348905317033023580388531\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    }
+   ]
+  },
+  {
+   "type": "strike_deal",
+   "event_id": "242420",
+   "title": "Israel x Hezbollah ceasefire by...?",
+   "event_volume": 112638018.21840876,
+   "markets": [
+    {
+     "market_id": "1994007",
+     "conditionId": "0x9823d715687a0a82d2a03731792e83bf58a0409f10def1379e00e4d67a95ba69",
+     "question": "Israel x Hezbollah ceasefire by April 18, 2026?",
+     "volume": 98599882.2899258,
+     "endDate": "2026-04-15T00:00:00Z",
+     "closedTime": "2026-04-21 00:28:28+00",
+     "clobTokenIds": "[\"44311756652055588440685018443862158389922949244484310992758163450991876928963\", \"76961712494983889435156967321024449098092181934237646924796561109440405431229\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    },
+    {
+     "market_id": "1938984",
+     "conditionId": "0x894a26116ec1e467d89955a029545e090bbc38713351e21971da5c1572056c25",
+     "question": "Israel x Hezbollah ceasefire by April 15, 2026?",
+     "volume": 7833257.504384964,
+     "endDate": "2026-04-15T00:00:00Z",
+     "closedTime": "2026-04-16 06:39:12+00",
+     "clobTokenIds": "[\"36172824895065494892476382830390461688586069331066041394452647054163434117607\", \"115730163824884769511972888651034351716525759147508567371667416148347583323310\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    }
+   ]
+  },
+  {
+   "type": "election",
+   "event_id": "106520",
+   "title": "Peru Presidential Election Winner",
+   "event_volume": 107147311.76968883,
+   "markets": [
+    {
+     "market_id": "947289",
+     "conditionId": "0x2cd24d17f5680dc6e7b7d67c712a223ae85550745597e81bd2d2b8d073443951",
+     "question": "Will Roberto S\u00e1nchez Palomino win the 2026 Peruvian presidential election?",
+     "volume": 36601896.005035795,
+     "endDate": "2026-06-07T00:00:00Z",
+     "closedTime": "2026-07-06 13:42:37+00",
+     "clobTokenIds": "[\"40073700561695212653451049120779209383948898865772011302940523990213422296817\", \"46581835831525280126714747999686373127429627947256474439860896007472960168455\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    },
+    {
+     "market_id": "947269",
+     "conditionId": "0xc4c3dbcc37a957a817599b0bf9fb5bd6b62b19210b0f527fec57cb75c7ed150a",
+     "question": "Will Keiko Fujimori win the 2026 Peruvian presidential election?",
+     "volume": 21817048.613106236,
+     "endDate": "2026-06-07T00:00:00Z",
+     "closedTime": "2026-07-06 13:41:52+00",
+     "clobTokenIds": "[\"64703998724474008677827057135436893758254552168142785204605792475717308499827\", \"92827417009887627656279362525317849309821905918650547490799438436173703158107\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    }
+   ]
+  },
+  {
+   "type": "election",
+   "event_id": "34038",
+   "title": "Next Prime Minister of Hungary",
+   "event_volume": 101113709.73835205,
+   "markets": [
+    {
+     "market_id": "567560",
+     "conditionId": "0x5ec80dc407457301f282a2b44341947afc700dfaa7923d14c8894e04bc63b03f",
+     "question": "Will the next Prime Minister of Hungary be Viktor Orb\u00e1n?",
+     "volume": 25456113.707224935,
+     "endDate": "2026-04-12T00:00:00Z",
+     "closedTime": "2026-05-09 17:36:51+00",
+     "clobTokenIds": "[\"16894424691858208925745474726543713759924126381815674402361002638388880101929\", \"17928724382258631631719579012359945400865032871287932503640701089143599914494\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    },
+    {
+     "market_id": "567561",
+     "conditionId": "0x1480b819d03d4b6388d70e848b0384adf38c38d955cb783cdbcf6d4a436dee14",
+     "question": "Will the next Prime Minister of Hungary be P\u00e9ter Magyar?",
+     "volume": 24555476.477281053,
+     "endDate": "2026-04-12T00:00:00Z",
+     "closedTime": "2026-05-09 17:02:22+00",
+     "clobTokenIds": "[\"94192784911459194325909253314484842244405314804074606736702592885535642919725\", \"114802065330196313748583636362219556679241104184345158405411161275523811071216\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    }
+   ]
+  },
+  {
+   "type": "election",
+   "event_id": "23947",
+   "title": "Chile Presidential Election",
+   "event_volume": 86065815.388403,
+   "markets": [
+    {
+     "market_id": "541625",
+     "conditionId": "0xa908e77b6376510856d9a22e3f56cb99f7034681f3b0fba5376c19adc94523f2",
+     "question": "Will Ximena Rinc\u00f3n win the Chilean presidential election?",
+     "volume": 13270465.032302,
+     "endDate": "2025-11-16T12:00:00Z",
+     "closedTime": "2025-11-20 12:06:31+00",
+     "clobTokenIds": "[\"55955102725826905600098048877035381360969999023976947843041442762659192729359\", \"39287761802511103074827824083982116428520418301634809756274179651812638716843\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    },
+    {
+     "market_id": "541627",
+     "conditionId": "0xc68c21f8497c9f4edf6127e6215aa118fd753f8bef0f2f3dda469e6adad43b21",
+     "question": "Will Marco Enr\u00edquez-Ominami win the Chilean presidential election?",
+     "volume": 11376039.492757,
+     "endDate": "2025-11-16T12:00:00Z",
+     "closedTime": "2025-11-20 11:59:21+00",
+     "clobTokenIds": "[\"101690358768242113035511597288562173826537296165505308420504673877386572273884\", \"96263681097572681294494655260686622956714329117732485159440559549779730585711\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    }
+   ]
+  },
+  {
+   "type": "strike_deal",
+   "event_id": "16108",
+   "title": "Russia x Ukraine ceasefire in 2025?",
+   "event_volume": 73752993.267722,
+   "markets": [
+    {
+     "market_id": "516719",
+     "conditionId": "0x8ee2f1640386310eb5e7ffa596ba9335f2d324e303d21b0dfea6998874445791",
+     "question": "Russia x Ukraine ceasefire in 2025?",
+     "volume": 73752993.267722,
+     "endDate": "2025-12-31T12:00:00Z",
+     "closedTime": "2026-01-01 07:18:23+00",
+     "clobTokenIds": "[\"15974786252393396629980467963784550802583781222733347534844974829144359265969\", \"42351579455604873042957090441032286075880144797259231030267680078160718556927\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    }
+   ]
+  },
+  {
+   "type": "election",
+   "event_id": "106614",
+   "title": "Hungary Parliamentary Election Winner",
+   "event_volume": 63742491.247493066,
+   "markets": [
+    {
+     "market_id": "948045",
+     "conditionId": "0x4adf64232c8b91900e0b48a81d68b3f08c0e0c57da9bc575b890dee39df219ae",
+     "question": "Will Movement for a Better Hungary (Jobbik) win the most seats in the next Hungarian parliamentary election?",
+     "volume": 16550425.532013956,
+     "endDate": "2026-04-12T00:00:00Z",
+     "closedTime": "2026-04-13 00:59:55+00",
+     "clobTokenIds": "[\"30849933191316686435782664908401890804163810081470441695928144220535231269695\", \"52007040390240268041235785750806922647862387092936200192192228912357135484566\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    },
+    {
+     "market_id": "948046",
+     "conditionId": "0x13496fa2338f07e366c573f3e274ba4966fdffcb8dd76d5aea98d35ac36ae783",
+     "question": "Will LMP \u2013 Hungary\u2019s Green Party (LMP) win the most seats in the next Hungarian parliamentary election?",
+     "volume": 15379379.627399104,
+     "endDate": "2026-04-12T00:00:00Z",
+     "closedTime": "2026-04-13 00:58:51+00",
+     "clobTokenIds": "[\"70502362111037557690872376093830156080180966461780810463183055982822634657262\", \"75269111922284627734537279206896483540956683816637285619383407108550865234871\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    }
+   ]
+  },
+  {
+   "type": "strike_deal",
+   "event_id": "160707",
+   "title": "Russia x Ukraine ceasefire by June 30, 2026?",
+   "event_volume": 60668118.31172506,
+   "markets": [
+    {
+     "market_id": "1171663",
+     "conditionId": "0xe546672750517f62c45a5a00067481981e62b9c20fa8220203232c9dc8fd2093",
+     "question": "Russia x Ukraine ceasefire by June 30, 2026?",
+     "volume": 60668118.31172506,
+     "endDate": "2026-06-30T00:00:00Z",
+     "closedTime": "2026-05-09 19:45:22+00",
+     "clobTokenIds": "[\"92338023949892178944669766466918011858071833335063600591564160751176113496073\", \"93730658350732768649834008472861182019192630377489777653117511245710309885595\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    }
+   ]
+  },
+  {
+   "type": "strike_deal",
+   "event_id": "189845",
+   "title": "US next strikes Iran on...?",
+   "event_volume": 56607533.53030699,
+   "markets": [
+    {
+     "market_id": "1273937",
+     "conditionId": "0x8f48b7a8bca71c288587bc51c7ee67479422e90bdcbe868790215cec7887c468",
+     "question": "Will the US next strike Iran on February 28, 2026 (ET)?",
+     "volume": 5837356.570176992,
+     "endDate": "2026-02-28T00:00:00Z",
+     "closedTime": "2026-03-04 18:47:29+00",
+     "clobTokenIds": "[\"15052934213634595778860506780061300924840406606782657138856492802067972899387\", \"51790792179886886745885259679148257890852405548865028906603878715452099017962\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    },
+    {
+     "market_id": "1273936",
+     "conditionId": "0x627432726041308b873adac030c674542d1ce920bab336eb3ce83334c8324b4d",
+     "question": "Will the US next strike Iran on February 27, 2026 (ET)?",
+     "volume": 4604644.048422,
+     "endDate": "2026-02-28T00:00:00Z",
+     "closedTime": "2026-03-02 08:30:15+00",
+     "clobTokenIds": "[\"103241255058165102643825411501787969136236666540181824742551260204317143218760\", \"76132538938652227216493264551891229933074099657039583452630838226310060560313\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    }
+   ]
+  },
+  {
+   "type": "strike_deal",
+   "event_id": "27192",
+   "title": "Israel x Iran ceasefire before July? ",
+   "event_volume": 51779894.19503,
+   "markets": [
+    {
+     "market_id": "552649",
+     "conditionId": "0x3b2f19935f2a969634a7aca52b69cf653d957ec6243bdfcb97dd830003e90624",
+     "question": "Israel x Iran ceasefire before July? ",
+     "volume": 51779894.19503,
+     "endDate": "2025-06-30T23:55:00Z",
+     "closedTime": "2025-07-03 00:42:48+00",
+     "clobTokenIds": "[\"55954094346759063594882554456572178663387691206618113097510839560547795312182\", \"106802454252372647359585422974995064975803750651759225225383160391011881420316\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    }
+   ]
+  },
+  {
+   "type": "election",
+   "event_id": "34584",
+   "title": "Colombia Presidential Election",
+   "event_volume": 44384112.93921801,
+   "markets": [
+    {
+     "market_id": "569368",
+     "conditionId": "0x0fb006e0c06caa4db12f7e30ec8c2483d658f83eb57b2ee8eb478e39beca3dfd",
+     "question": "Will Ivan Cepeda Castro win the 2026 Colombian presidential election?",
+     "volume": 7331927.18613499,
+     "endDate": "2026-06-21T14:00:00Z",
+     "closedTime": "2026-06-24 19:52:41+00",
+     "clobTokenIds": "[\"62374557612691330043510053829591470998236327248924987579815802826988260253261\", \"45225184915026490412090111842887484470550126139644389135401954155408710524398\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    },
+    {
+     "market_id": "569366",
+     "conditionId": "0xfbe85201ab2b4acff01cd5a3639039fc813d3448c64db081f70926bd9b9e74e9",
+     "question": "Will Abelardo de la Espriella  win the 2026 Colombian presidential election?",
+     "volume": 6883971.476312924,
+     "endDate": "2026-06-21T14:00:00Z",
+     "closedTime": "2026-06-24 19:45:29+00",
+     "clobTokenIds": "[\"87037476560262355019736573472997730954875286944171789280729969665019434635807\", \"93119283163420984666329627600000273753909488383271496422725436610044958733622\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    }
+   ]
+  },
+  {
+   "type": "shutdown",
+   "event_id": "55056",
+   "title": "When will the Government shutdown end? ",
+   "event_volume": 40223767.36621,
+   "markets": [
+    {
+     "market_id": "623602",
+     "conditionId": "0xec21462ef58f792b5c1ff07bfdc66401b631c6fb42562ccceb2de279f0e73788",
+     "question": "Will the Government shutdown end November 8-11?",
+     "volume": 11773855.877798,
+     "endDate": "2025-11-15T00:00:00Z",
+     "closedTime": "2025-11-12 08:06:57+00",
+     "clobTokenIds": "[\"34124572068052077909406302056995239675264911172488920973407960367842984448300\", \"3716974226423390700790210212492901860018609875730142906816012571157208058298\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    },
+    {
+     "market_id": "623604",
+     "conditionId": "0x8f8783bdabdd500dc401caddd12fea4bfae91543a8ea4458fc38e0539ffd3cb9",
+     "question": "Will the Government shutdown end November 16 or later?",
+     "volume": 9839429.155274,
+     "endDate": "2025-11-15T00:00:00Z",
+     "closedTime": "2025-11-13 14:43:26+00",
+     "clobTokenIds": "[\"59964717011473581387089048234239097005165234934041431203725679550377112731340\", \"45454833176111044889005299006669454527335484928336914867380047418702350749712\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    }
+   ]
+  },
+  {
+   "type": "election",
+   "event_id": "25933",
+   "title": "Netherlands Parliamentary Election",
+   "event_volume": 32791392.842579,
+   "markets": [
+    {
+     "market_id": "549621",
+     "conditionId": "0x7d4d6916fa50ad0be01c1c065a6b3ad95f5d444c18fc6b766a99d31173469303",
+     "question": "Will the Party for Freedom win the most seats in the 2025 Netherlands parliamentary election?",
+     "volume": 10147546.752816,
+     "endDate": "2026-07-31T00:00:00Z",
+     "closedTime": "2025-11-02 16:26:01+00",
+     "clobTokenIds": "[\"105493243911415328186853135427180882742964878728761632341401884622809951441015\", \"61766305620946681246553254061857194829333587007134976387120667005989074667311\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    },
+    {
+     "market_id": "549625",
+     "conditionId": "0x17414b5654467cc23ac6e5cba7ecf87952ea12ea08a8e09fbfef5f3b218e2bab",
+     "question": "Will Democrats 66 win the most seats in the 2025 Netherlands parliamentary election?",
+     "volume": 5979751.010623,
+     "endDate": "2026-07-31T00:00:00Z",
+     "closedTime": "2025-11-02 18:34:27+00",
+     "clobTokenIds": "[\"41491748259665324426776679045538388626476403955988401104969021388788385722132\", \"16595040326488236606102291943741862047301228454704616106706216958029601877402\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    }
+   ]
+  },
+  {
+   "type": "election",
+   "event_id": "179295",
+   "title": "Next President of Vietnam",
+   "event_volume": 32018741.92803801,
+   "markets": [
+    {
+     "market_id": "1235517",
+     "conditionId": "0x3c48454b4c8fcbbbd85c2df47a12231965ac41c1a919e400fc019b46131f0c50",
+     "question": "Will Ph\u1ea1m Minh Ch\u00ednh be the next President of Vietnam?",
+     "volume": 15557300.26332597,
+     "endDate": "2026-01-25T00:00:00Z",
+     "closedTime": "2026-04-07 08:24:11+00",
+     "clobTokenIds": "[\"40143048263981796652696013147213585447022933832104405821510706617705632953700\", \"389196540537716346015010163954967650487130188294965877205328437145287613277\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    },
+    {
+     "market_id": "1235514",
+     "conditionId": "0xc470b43a8bf0a938e9b17d1ff01b5c52b1cfbc5c352ce96dded8b4e5d5e40997",
+     "question": "Will T\u00f4 L\u00e2m be the next President of Vietnam?",
+     "volume": 4348032.177655002,
+     "endDate": "2026-01-25T00:00:00Z",
+     "closedTime": "2026-04-07 08:24:13+00",
+     "clobTokenIds": "[\"113775767098321634901415655926387237741886967858756373256961045524152424332573\", \"65495021057576725387867491047169415099438906838157989123813367031580471204029\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    }
+   ]
+  },
+  {
+   "type": "shutdown",
+   "event_id": "77322",
+   "title": "What day will the Government Shutdown end?",
+   "event_volume": 30981681.626663,
+   "markets": [
+    {
+     "market_id": "673597",
+     "conditionId": "0x077fc0c447abfc7e094713e86d62acc20480560a6eb60bfbfc86a1c5f00b9339",
+     "question": "Will the government shutdown end November 12?",
+     "volume": 13086678.140873,
+     "endDate": "2025-11-21T00:00:00Z",
+     "closedTime": "2025-11-13 08:57:32+00",
+     "clobTokenIds": "[\"75569569834906571381645882316168516504337880234085605599894820215533033972960\", \"93079906896112684659101354592843713027808743576205196334207360836681720636909\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    },
+    {
+     "market_id": "673598",
+     "conditionId": "0xd7b39f912814f41c7edc9a7693d54487611f4abee1ae4ab6cdf1a704be8a33d4",
+     "question": "Will the government shutdown end November 13?",
+     "volume": 6006067.422007,
+     "endDate": "2025-11-21T00:00:00Z",
+     "closedTime": "2025-11-13 14:37:32+00",
+     "clobTokenIds": "[\"17398404674846042629532943087095452701069816613172119438788363956594269928381\", \"96670215656128004612874159427010821501384003820996662818081840020783814376894\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    }
+   ]
+  },
+  {
+   "type": "strike_deal",
+   "event_id": "159840",
+   "title": "US next strikes Iran on...?",
+   "event_volume": 28513814.891189,
+   "markets": [
+    {
+     "market_id": "1167607",
+     "conditionId": "0xaca2f1e173994a7b314a32e13db77fb5cd3b909ba15da5bfd159ba987ce06ff3",
+     "question": "Will the US not strike Iran by January 31, 2026?",
+     "volume": 3713061.192454,
+     "endDate": "2026-01-31T00:00:00Z",
+     "closedTime": "2026-02-03 08:32:26+00",
+     "clobTokenIds": "[\"93412763384956760609840008433641888134668300818027333882176986089385768496241\", \"70512875957023202712738126996808056222484875538507324005198764012839610890907\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    },
+    {
+     "market_id": "1167627",
+     "conditionId": "0xb232b902eb9d8aa18cd7923e1f35485711d9ee4434f41e99cf2380269bff0b7a",
+     "question": "Will the US next strike Iran on January 31, 2026 (ET)?",
+     "volume": 2620126.344634,
+     "endDate": "2026-01-31T00:00:00Z",
+     "closedTime": "2026-02-03 08:24:16+00",
+     "clobTokenIds": "[\"7231900895782133430449075141606467459522150509350417345000521320850095487936\", \"53025944075018224572159282082536450444138966484878321950051408862508144302671\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    }
+   ]
+  },
+  {
+   "type": "election",
+   "event_id": "24212",
+   "title": "Bolivia Presidential Election",
+   "event_volume": 28370984.579192,
+   "markets": [
+    {
+     "market_id": "543259",
+     "conditionId": "0xec0a4d2952cb62ca55e16a4ad879aae5c988309f71a8f16fc3c65fe0a8df52d4",
+     "question": "Will Andr\u00f3nico Rodr\u00edguez win the 2025 Bolivia presidential election?",
+     "volume": 7326758.679552,
+     "endDate": "2025-10-19T00:00:00Z",
+     "closedTime": "2025-10-20 05:14:17+00",
+     "clobTokenIds": "[\"21349083717605037525723335754807560771874175181325455859992777238860289139531\", \"83800005256015527477785648001008205129811919378219747447077115706438887498072\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    },
+    {
+     "market_id": "543265",
+     "conditionId": "0x27fa002bf1e91268fa0b4232b3d35892f15f7b6c26af17749a10ec3a8c218b53",
+     "question": "Will Rodrigo Paz win the 2025 Bolivia presidential election?",
+     "volume": 6918532.545232,
+     "endDate": "2025-10-19T00:00:00Z",
+     "closedTime": "2025-10-20 05:16:23+00",
+     "clobTokenIds": "[\"12159943998507911791501469395630882638732862580679052315228024189193333149988\", \"54655815987492624140785919900164269770103577840693066043173265358006461904000\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    }
+   ]
+  },
+  {
+   "type": "strike_deal",
+   "event_id": "90414",
+   "title": "Russia x Ukraine ceasefire by January 31, 2026?",
+   "event_volume": 26995077.577181,
+   "markets": [
+    {
+     "market_id": "704339",
+     "conditionId": "0xb8c1bd306a8a4cedfb280e114e655c5092b3f37edccae05cd877d7f21a5774ce",
+     "question": "Russia x Ukraine ceasefire by January 31, 2026?",
+     "volume": 26995077.577181,
+     "endDate": "2026-01-31T00:00:00Z",
+     "closedTime": "2026-02-01 07:27:48+00",
+     "clobTokenIds": "[\"14705029091296171110674089399091656949154521086160164017708184564241023149952\", \"28770223306876042609349339320023940766830944760118437790167392789285879039304\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    }
+   ]
+  },
+  {
+   "type": "shutdown",
+   "event_id": "186375",
+   "title": "How long will the Government Shutdown last?",
+   "event_volume": 23495073.993711,
+   "markets": [
+    {
+     "market_id": "1299962",
+     "conditionId": "0xd5a91c9ee50ba80385283714f2a66b1e16d544a682af2af06a8f57fcf1d0233d",
+     "question": "Will the government shutdown last 5 days or more?",
+     "volume": 6260855.937367,
+     "endDate": "2026-03-31T00:00:00Z",
+     "closedTime": "2026-02-03 23:45:28+00",
+     "clobTokenIds": "[\"8008742846391096366381429238657491392199916771102623264605530168655505543184\", \"8308141087851979794086428469041070341871911009861323299247196185500570892716\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    },
+    {
+     "market_id": "1299961",
+     "conditionId": "0x90d15ca9a35a0cef4d67b2e4ec79a77dc98621536af438bccc6f016a59eb0f39",
+     "question": "Will the government shutdown last 4 days or more?",
+     "volume": 4389035.691402,
+     "endDate": "2026-03-31T00:00:00Z",
+     "closedTime": "2026-02-03 07:18:36+00",
+     "clobTokenIds": "[\"65725371253697761962782192914659497151911283155170584494749509449973630951716\", \"90795003928079516235859079444877553202729720395078916533928922369423847876930\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    }
+   ]
+  },
+  {
+   "type": "election",
+   "event_id": "74717",
+   "title": "Honduras Presidential Election",
+   "event_volume": 23203405.289646,
+   "markets": [
+    {
+     "market_id": "668100",
+     "conditionId": "0xbf8d3c113339a9212ca0f263aede776db4a34762aedc006f70a8703215954863",
+     "question": "Will Salvador Nasralla win the 2025 Honduras presidential election?",
+     "volume": 8185435.249886,
+     "endDate": "2025-11-30T00:00:00Z",
+     "closedTime": "2025-12-25 03:51:51+00",
+     "clobTokenIds": "[\"61063847007915444342759642072603125875625873051163366008032163898248405257870\", \"112745644899642515565933075492233665819698065912909803989303988892788997831488\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    },
+    {
+     "market_id": "668101",
+     "conditionId": "0xaeb190c9a31c5e7f8ac193393ab05e55a9de86f0a945aac59feac0576aa86fc8",
+     "question": "Will Nasry Juan Asfura Zablah win the 2025 Honduras presidential election?",
+     "volume": 7902409.57029,
+     "endDate": "2025-11-30T00:00:00Z",
+     "closedTime": "2025-12-25 03:25:09+00",
+     "clobTokenIds": "[\"106707254226006199166558879859947769657148001774671911298412918303247198536745\", \"91322539618496462104602169253723306824929529431162103438316370898325120431628\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    }
+   ]
+  },
+  {
+   "type": "election",
+   "event_id": "119296",
+   "title": "Tamil Nadu Legislative Assembly Election Winner",
+   "event_volume": 22919235.691990867,
+   "markets": [
+    {
+     "market_id": "1003798",
+     "conditionId": "0xd49b9f68568892e828085f84a31e811a24f4481aea5cd08ab62261810ec0d402",
+     "question": "Will the Indian National Congress (INC) win the most seats in the 2026 Tamil Nadu Legislative Assembly election?",
+     "volume": 17877969.460003857,
+     "endDate": "2026-04-23T00:00:00Z",
+     "closedTime": "2026-05-04 20:27:32+00",
+     "clobTokenIds": "[\"3386970881734107644549907426169651426236762857671752966978225438133599751345\", \"107582119167710386025348846748281779471485760519743005735826362411427647983645\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    },
+    {
+     "market_id": "1003805",
+     "conditionId": "0x5c3e77051639ff3cc2cd1735d6667d15514da142558bc198bcd9e73d1feb2a7f",
+     "question": "Will Tamilaga Vettri Kazhagam (TVK) win the most seats in the 2026 Tamil Nadu Legislative Assembly election?",
+     "volume": 2275879.137773011,
+     "endDate": "2026-04-23T00:00:00Z",
+     "closedTime": "2026-05-04 20:21:28+00",
+     "clobTokenIds": "[\"34046761213036550598766888808546310806499558260044212225792421157241076151105\", \"39464750844708419211911843168766556696281098915649956618085241756070838623784\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    }
+   ]
+  },
+  {
+   "type": "election",
+   "event_id": "26004",
+   "title": "Next Prime Minister of the Netherlands",
+   "event_volume": 21921113.909002,
+   "markets": [
+    {
+     "market_id": "549876",
+     "conditionId": "0xc11dd6459a3a82ab0563a8fd7b76a5f2249c2607a9430ed66f8f2194c70a5982",
+     "question": "Will Ahmed Aboutaleb become the next Prime Minister of the Netherlands?",
+     "volume": 5824959.346241,
+     "endDate": "2026-12-31T00:00:00Z",
+     "closedTime": "2026-02-23 13:04:08+00",
+     "clobTokenIds": "[\"71992653716064305218343088246758449178206104436163446557032731171245131011109\", \"95194548995809196274014195518760784085659606154369705409679697710063148324000\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    },
+    {
+     "market_id": "549874",
+     "conditionId": "0xaf8805982bfa850ee297c49d93f8168d1a273ca73b252f3c588ac2fba6f0ae08",
+     "question": "Will Rob Jetten become the next Prime Minister of the Netherlands?",
+     "volume": 4314739.994005,
+     "endDate": "2026-12-31T00:00:00Z",
+     "closedTime": "2026-02-23 12:56:14+00",
+     "clobTokenIds": "[\"68340762143816399095520327696600305595541824139381182469383319268673352219749\", \"114239611691511021208443537216704441716668385504311894224288007804313757247036\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    }
+   ]
+  },
+  {
+   "type": "strike_deal",
+   "event_id": "585172",
+   "title": "US and Iran sign an agreement by...?",
+   "event_volume": 21392136.892514125,
+   "markets": [
+    {
+     "market_id": "2510937",
+     "conditionId": "0x2de8d7b9d103366e37f3a448db8289c5c571dec5c0b9eeddbc673546d4bd9322",
+     "question": "US and Iran sign an agreement by June 15, 2026?",
+     "volume": 20219693.965023123,
+     "endDate": "2026-06-16T03:59:00Z",
+     "closedTime": "2026-06-18 00:33:47+00",
+     "clobTokenIds": "[\"62615244151326502594357917056983333482460956596991248871413253808974023938686\", \"46136276713814472002436612459285949476365362139432132459812399861352189940499\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    },
+    {
+     "market_id": "2510939",
+     "conditionId": "0x2ed842de9399cf8cf28f757dcde39ba536fbeb6f8e284f2ed4079bf6c3f60261",
+     "question": "US and Iran sign an agreement by June 30, 2026?",
+     "volume": 486285.1478870001,
+     "endDate": "2026-07-01T03:59:00Z",
+     "closedTime": "2026-06-15 17:14:15+00",
+     "clobTokenIds": "[\"106100485971803737437773616379438968784471057016595892635748235294745441447742\", \"47954820117484777336042329081349953993960125773997586425709668502770283080497\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    }
+   ]
+  },
+  {
+   "type": "election",
+   "event_id": "21616",
+   "title": "Czech Republic Parliamentary Election Winner",
+   "event_volume": 20966540.015937,
+   "markets": [
+    {
+     "market_id": "530747",
+     "conditionId": "0x0041d01c1584d78d7eec83726e4a9895000ac039a9d31efab618124fa5085bf9",
+     "question": "Will Greens win the most seats in the next Czech parliamentary election?",
+     "volume": 3062128.863263,
+     "endDate": "2025-09-30T12:00:00Z",
+     "closedTime": "2025-10-05 09:40:08+00",
+     "clobTokenIds": "[\"99203353817422105525425644607632786945189130272607881016489139560403975441295\", \"112483990634782042557512410369493614785897436407611825378536727068380343988368\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    },
+    {
+     "market_id": "530746",
+     "conditionId": "0x760edb46478e9c9c9f77874229bdcfb4ced817a5284d5c2eecfeceb8f00f3972",
+     "question": "Will Sta\u010dilo! win the most seats in the next Czech parliamentary election?",
+     "volume": 3052147.835279,
+     "endDate": "2025-09-30T12:00:00Z",
+     "closedTime": "2025-10-05 03:05:58+00",
+     "clobTokenIds": "[\"34119374390638064095647488586524191449658987210460466210356606686364008054431\", \"76615137660262136096790331423138620630141587038592971264977799646040107427657\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    }
+   ]
+  },
+  {
+   "type": "strike_deal",
+   "event_id": "203488",
+   "title": "US next strikes Iran on...?",
+   "event_volume": 19084082.245205,
+   "markets": [
+    {
+     "market_id": "1359799",
+     "conditionId": "0x5354a2c31fb09cbd45d2ce6aba4d65c2b4fcb778e4702d8079025338f9ab3141",
+     "question": "Will the US next strike Iran on March 1, 2026 (ET)?",
+     "volume": 3313910.888552,
+     "endDate": "2026-03-31T00:00:00Z",
+     "closedTime": "2026-02-28 13:05:39+00",
+     "clobTokenIds": "[\"71317128433996376678711519788567770418021584474274172161934945795307476083227\", \"46201545194021389510070716820280983482415033931779021886516872269786663941157\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    },
+    {
+     "market_id": "1359800",
+     "conditionId": "0x5dd9b16786f9ae30e87d2b109a016cfd1741906c67659957d8034229d556de5c",
+     "question": "Will the US next strike Iran on March 2, 2026 (ET)?",
+     "volume": 1842438.459517,
+     "endDate": "2026-03-31T00:00:00Z",
+     "closedTime": "2026-02-28 13:04:21+00",
+     "clobTokenIds": "[\"11657732796292007366522786057064190989477130569955537495024442886571176337299\", \"30825839061444265528141841986520133750403282142317518742783270341596724637289\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    }
+   ]
+  },
+  {
+   "type": "strike_deal",
+   "event_id": "707496",
+   "title": "US x Iran Effective Ceasefire by...? (2 week pause)",
+   "event_volume": 17207741.355077002,
+   "markets": [
+    {
+     "market_id": "2937525",
+     "conditionId": "0x5a9395dae6c7643ea06e7a555580a5526e81073aea9c9306363529c5b76a8f8b",
+     "question": "US x Iran Effective Ceasefire by July 31?",
+     "volume": 8917606.208237005,
+     "endDate": "2026-07-31T23:59:00Z",
+     "closedTime": "2026-08-12 18:04:28+00",
+     "clobTokenIds": "[\"95577979648711137561778638101766617213130581085760544385254830392377913395624\", \"34707224416470630443022501916513884846577205082389077639001965749737041106571\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    },
+    {
+     "market_id": "2937524",
+     "conditionId": "0x58180f4a69651f67c23ac92845721b2320cc0c76effeb5e79db5288d8d8e6b28",
+     "question": "US x Iran Effective Ceasefire by July 24?",
+     "volume": 4291891.014142999,
+     "endDate": "2026-07-24T23:59:00Z",
+     "closedTime": "2026-07-30 02:41:08+00",
+     "clobTokenIds": "[\"113410960838036610177054042201506207817797370827970598802492258356512540837137\", \"86061825988167227130786985582830419834226509797189675226118388137342919202672\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    }
+   ]
+  },
+  {
+   "type": "strike_deal",
+   "event_id": "23873",
+   "title": "Pakistan military strike on India by Friday?",
+   "event_volume": 17133334.887141,
+   "markets": [
+    {
+     "market_id": "541099",
+     "conditionId": "0xb13e67e43f3ea7015f472f56660e58fb41e761c0dee63862b379feefafb6efbe",
+     "question": "Pakistan military strike on India by Friday?",
+     "volume": 17133334.887141,
+     "endDate": "2025-05-09T12:00:00Z",
+     "closedTime": "2025-05-10 00:47:01+00",
+     "clobTokenIds": "[\"112671469819328513099663634525888406173116551136514515556954992090635778059156\", \"87131883634563540067671221116339643844999308263887623932581338240758165480193\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    }
+   ]
+  },
+  {
+   "type": "strike_deal",
+   "event_id": "17088",
+   "title": "Russia x Ukraine ceasefire before July?",
+   "event_volume": 17125742.5248,
+   "markets": [
+    {
+     "market_id": "519628",
+     "conditionId": "0x5412ae25e97078f814157de948459d59c6221b4c4c495fdd57b536543ad36729",
+     "question": "Russia x Ukraine ceasefire before July?",
+     "volume": 17125742.5248,
+     "endDate": "2025-06-30T12:00:00Z",
+     "closedTime": "2025-07-01 08:18:21+00",
+     "clobTokenIds": "[\"39327269875426915204597944387916069897800289788920336317845465327697809453999\", \"37946704943888888914227612417452623974614267503719043957094985529354395995926\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    }
+   ]
+  },
+  {
+   "type": "election",
+   "event_id": "425728",
+   "title": "Israeli Legislative Election Winner",
+   "event_volume": 17048798.829529,
+   "markets": [
+    {
+     "market_id": "2100981",
+     "conditionId": "0xf77fa3e63014f1f76ea4433dac66b3860493ed7f1a9fee3dfbef9104d7f1eee3",
+     "question": "Will Likud win the most seats in the 2026 Israeli legislative election?",
+     "volume": 10080625.799564999,
+     "endDate": "2026-10-28T03:59:00Z",
+     "closedTime": "2026-10-31 17:19:27+00",
+     "clobTokenIds": "[\"40530616708770133196461535468385029946615148250396571867031554779644977064648\", \"112833774316104951988690985316609270957261648365641646812446420693891587882096\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    },
+    {
+     "market_id": "2100984",
+     "conditionId": "0xd05da9807740aa0f5bc9e9232daabe87a21e5012c19e283abf414f1c1651118b",
+     "question": "Will Yashar win the most seats in the 2026 Israeli legislative election?",
+     "volume": 4385679.261778999,
+     "endDate": "2026-10-28T03:59:00Z",
+     "closedTime": "2026-10-31 17:35:22.322177+00",
+     "clobTokenIds": "[\"9025448570994866714151390167666974197623007132973626623412960268955048642964\", \"63424755361185170901233281121558927457624032744827678779847584269740504139135\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    }
+   ]
+  },
+  {
+   "type": "strike_deal",
+   "event_id": "117606",
+   "title": "Israel strikes Iran by January 31, 2026?",
+   "event_volume": 16913391.371627,
+   "markets": [
+    {
+     "market_id": "994900",
+     "conditionId": "0x23fd2b26c4e095465ba0d2ebce8d5eda57009ddc59aad8b68ab19ca968b41eed",
+     "question": "Israel strikes Iran by January 31, 2026?",
+     "volume": 16913391.371627,
+     "endDate": "2026-01-31T00:00:00Z",
+     "closedTime": "2026-02-01 12:04:54+00",
+     "clobTokenIds": "[\"15091760884604171309203489618212539770109612407760305338364320626709285790409\", \"34465433013244737261777301958314575283534514587255327061285941306189159190135\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    }
+   ]
+  },
+  {
+   "type": "strike_deal",
+   "event_id": "527930",
+   "title": "Israel announces Lebanon ceasefire extension by...?",
+   "event_volume": 16905770.31740171,
+   "markets": [
+    {
+     "market_id": "2364342",
+     "conditionId": "0x42973552f8bcfc9269fba8492766f2c20a22243cbba154cf695acaff88ec96c7",
+     "question": "Israel announces Lebanon ceasefire extension by June 7?",
+     "volume": 16734226.137969712,
+     "endDate": "2026-06-07T00:00:00Z",
+     "closedTime": "2026-06-08 00:31:25+00",
+     "clobTokenIds": "[\"55729187700220621940979114092031096586154133673216433038757883725632922111626\", \"2049615116809785498037116915229927575556307359227515820401917172384861321364\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    }
+   ]
+  },
+  {
+   "type": "election",
+   "event_id": "175452",
+   "title": "Next Prime Minister of Vietnam",
+   "event_volume": 16666965.655430993,
+   "markets": [
+    {
+     "market_id": "1223258",
+     "conditionId": "0x2a74a7cd29971c3a320eec0595c20a07d9a2cbc501c99694d34963e38a196682",
+     "question": "Will Ph\u1ea1m Th\u1ecb Thanh Tr\u00e0 be the next Prime Minister of Vietnam?",
+     "volume": 6063918.863911996,
+     "endDate": "2026-01-25T00:00:00Z",
+     "closedTime": "2026-04-07 13:39:19+00",
+     "clobTokenIds": "[\"35311691331065078920223858384826797458646117898089239758404119138722819634257\", \"40042411695863369998216770625571070530892534611209558876495072542089465066752\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    },
+    {
+     "market_id": "1223261",
+     "conditionId": "0xae925d37e63269e3b10a21ca58a6e03603e9de7dd1ae2c1b6f3379ebf77cfc50",
+     "question": "Will Tran Luu Quang be the next Prime Minister of Vietnam?",
+     "volume": 4087576.3046360034,
+     "endDate": "2026-01-25T00:00:00Z",
+     "closedTime": "2026-04-07 14:49:41+00",
+     "clobTokenIds": "[\"41107976314485121994321761400219317582453901747367515447638741811108580580754\", \"42471589348548336640529426204102902817705544265820244720804890282342844524015\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    }
+   ]
+  },
+  {
+   "type": "strike_deal",
+   "event_id": "33991",
+   "title": "Thailand strikes Cambodia by Friday?",
+   "event_volume": 15037403.469426,
+   "markets": [
+    {
+     "market_id": "567470",
+     "conditionId": "0x35bc1bf05846a2d4a72ff03f1c93b8f41ec6a45241a2292ddbb2c919dd7a68f3",
+     "question": "Thailand strikes Cambodia by Friday?",
+     "volume": 15037403.469426,
+     "endDate": "2025-07-25T00:00:00Z",
+     "closedTime": "2025-07-31 02:13:07+00",
+     "clobTokenIds": "[\"47628942075360533490050615039336250156087545147291100999521864034949358169145\", \"40071752530157559827555998291628259550920590548686764928009527077702462652743\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    }
+   ]
+  },
+  {
+   "type": "election",
+   "event_id": "103730",
+   "title": "Thailand Legislative Election Winner",
+   "event_volume": 14899929.808466,
+   "markets": [
+    {
+     "market_id": "923041",
+     "conditionId": "0x6a79204ace08d896a72cac89c3c2b4c64b90218838c213e9377860596dc77ac5",
+     "question": "Will People\u2019s Party (PPLE) win the most seats in the 2026 Thai legislative election?",
+     "volume": 6981656.439055,
+     "endDate": "2026-02-08T00:00:00Z",
+     "closedTime": "2026-02-09 08:27:49+00",
+     "clobTokenIds": "[\"50178306595800060471430951874976657618055148106679384594654922816495456398170\", \"114665146755612568105376188460288931180214626216373863827528325594298433114727\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    },
+    {
+     "market_id": "923042",
+     "conditionId": "0x91fd3b7cf10e925f169ff49dd657baf9794025b241965fecd0c1b9cbd9c1e115",
+     "question": "Will Bhumjaithai Party (BJT) win the most seats in the 2026 Thai legislative election?",
+     "volume": 3057800.920596,
+     "endDate": "2026-02-08T00:00:00Z",
+     "closedTime": "2026-02-09 09:03:43+00",
+     "clobTokenIds": "[\"94912568711096777820489984696016798235367443551768917424847805010888215349861\", \"22926980609547969135527904525228886157524757300125230214542888682865237192341\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    }
+   ]
+  },
+  {
+   "type": "shutdown",
+   "event_id": "194637",
+   "title": "Government shutdown on Saturday?",
+   "event_volume": 13550398.086217,
+   "markets": [
+    {
+     "market_id": "1308327",
+     "conditionId": "0x4b78de44ea49d0eb8d5fee85352294b6f679a47c56944c6ad5c945e9a2ba7211",
+     "question": "Government shutdown on Saturday?",
+     "volume": 13550398.086217,
+     "endDate": "2026-02-14T00:00:00Z",
+     "closedTime": "2026-02-15 07:08:39+00",
+     "clobTokenIds": "[\"7648925155044397287047798308912067661131447591491670430094875295487039626662\", \"43946269812975261940442841140057396362355013850035195910637438338242851933505\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    }
+   ]
+  },
+  {
+   "type": "shutdown",
+   "event_id": "41136",
+   "title": "US government shutdown by October 1?",
+   "event_volume": 13491651.789377,
+   "markets": [
+    {
+     "market_id": "585592",
+     "conditionId": "0x09b3e4c716df2579afa0ede1bf00edd84f8cbe1e335785f90336e7a909c52f8e",
+     "question": "US government shutdown by October 1?",
+     "volume": 13491651.789377,
+     "endDate": "2025-10-01T00:00:00Z",
+     "closedTime": "2025-10-01 06:31:43+00",
+     "clobTokenIds": "[\"98045093822431547938365423095786421804452886266888528428746910959667685407691\", \"110500949843631792421317263677232122444185145323042117714367975265901872889274\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    }
+   ]
+  },
+  {
+   "type": "strike_deal",
+   "event_id": "33830",
+   "title": "Houthi strike on Israel by August 31?",
+   "event_volume": 13308140.845727,
+   "markets": [
+    {
+     "market_id": "567030",
+     "conditionId": "0x89f0c865380f678336c390ddc4fe63bd14b77852d8b84845b315715c73a41bd6",
+     "question": "Houthi strike on Israel by August 31?",
+     "volume": 13308140.845727,
+     "endDate": "2025-08-31T00:00:00Z",
+     "closedTime": "2025-08-28 00:27:37+00",
+     "clobTokenIds": "[\"104422628167008936761369987037644290616132270285833438344290407852434763283031\", \"60385022061841412048615231406032013649229550880717271812882347681968151170601\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    }
+   ]
+  },
+  {
+   "type": "shutdown",
+   "event_id": "61075",
+   "title": "Will the Government shutdown end by...?",
+   "event_volume": 12642578.2391,
+   "markets": [
+    {
+     "market_id": "638734",
+     "conditionId": "0x2a8972708633cbe7d79e6b66f14b6654bd72b4329abb82e28fd9a62e19662f16",
+     "question": "Will the Government shutdown end by November 15?",
+     "volume": 4194774.675777,
+     "endDate": "2025-12-31T00:00:00Z",
+     "closedTime": "2025-11-13 13:44:46+00",
+     "clobTokenIds": "[\"39915773731521537948114000644491548929308581016386236699032977684925966778417\", \"62965675620635248995303761565104707840599398510073972603134149407314297540451\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    },
+    {
+     "market_id": "638735",
+     "conditionId": "0x8195ceb3ab6fd94b2adf05993501a4ec9a95dd5eca2590ebf9dacbe200608718",
+     "question": "Will the Government shutdown end by November 30?",
+     "volume": 4131241.435567,
+     "endDate": "2025-12-31T00:00:00Z",
+     "closedTime": "2025-11-13 13:42:52+00",
+     "clobTokenIds": "[\"33863269898549252781275803678269200480782857182444175052616333799704258288948\", \"87619567402357953698530677582070603378003810965807378816593030714809400656142\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    }
+   ]
+  },
+  {
+   "type": "strike_deal",
+   "event_id": "17413",
+   "title": "Will China invade Taiwan in 2025?",
+   "event_volume": 12364377.621775,
+   "markets": [
+    {
+     "market_id": "520630",
+     "conditionId": "0xcb1531b00e984865530f13e4ce35bcbc7d71615af98827b5e9aee2ca2984b626",
+     "question": "Will China invade Taiwan in 2025?",
+     "volume": 12364377.621775,
+     "endDate": "2025-12-31T12:00:00Z",
+     "closedTime": "2026-01-01 08:24:49+00",
+     "clobTokenIds": "[\"31744904918540551255746477870591988696765533508454358136402838182759217759615\", \"49010495637862170738452849338203533534144987310283354999689656599763786454625\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    }
+   ]
+  },
+  {
+   "type": "strike_deal",
+   "event_id": "386788",
+   "title": "Israel x Iran permanent peace deal by...?",
+   "event_volume": 12174975.796945058,
+   "markets": [
+    {
+     "market_id": "2002564",
+     "conditionId": "0x5efa976ebe94080bbda7e45605333ff8f30156cc91604d66c41eb52fd3e25f3e",
+     "question": "Israel x Iran permanent peace deal by June 30, 2026?",
+     "volume": 8533780.847550053,
+     "endDate": "2026-06-30T00:00:00Z",
+     "closedTime": "2026-07-01 06:06:55+00",
+     "clobTokenIds": "[\"5052978505742109596729920389479817407677796482555237481771010048052329486595\", \"72918554574028548774915660517792871241427948855614765070193766173081772203065\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    },
+    {
+     "market_id": "2126515",
+     "conditionId": "0x4d1ee0c046938319f654f99c6aca2380c1f6d88a65887dd360fda3d0509eddb4",
+     "question": "Israel x Iran permanent peace deal by May 31, 2026?",
+     "volume": 2700981.7117390055,
+     "endDate": "2026-05-31T00:00:00Z",
+     "closedTime": "2026-06-01 06:31:40+00",
+     "clobTokenIds": "[\"42123205874485793091493660576732830237546808959520698285355812112517651399121\", \"1337374872777199077123947171333224634756716656760029948621511882931384997964\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    }
+   ]
+  },
+  {
+   "type": "strike_deal",
+   "event_id": "107726",
+   "title": "Will China invade Taiwan by June 30, 2026?",
+   "event_volume": 12006094.235334797,
+   "markets": [
+    {
+     "market_id": "956590",
+     "conditionId": "0xa0b56d7e621c7cbcfa47fe1a9c24f3409e189180fd6bda55b7a8113129839afc",
+     "question": "Will China invade Taiwan by June 30, 2026?",
+     "volume": 12006094.235334797,
+     "endDate": "2026-06-30T00:00:00Z",
+     "closedTime": "2026-07-01 06:03:23+00",
+     "clobTokenIds": "[\"19417265162808201523789648874586390360859187511220432732521613022479578431850\", \"52131203329998207510016525064140580388668921672474814275063839342530145683684\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    }
+   ]
+  },
+  {
+   "type": "election",
+   "event_id": "160345",
+   "title": "Vietnam Communist Party General Secretary Election",
+   "event_volume": 11834743.158616,
+   "markets": [
+    {
+     "market_id": "1170088",
+     "conditionId": "0xd8ac9f489f38e440a89c11fd0427057599ce7d2f7fe5bbc5f204ec47047ef60e",
+     "question": "Will To Lam be elected General Secretary of the Vietnamese Communist Party?",
+     "volume": 4586397.016879,
+     "endDate": "2026-01-25T00:00:00Z",
+     "closedTime": "2026-01-23 10:50:04+00",
+     "clobTokenIds": "[\"32502880350678995655372695756293563376414484296787693507155481019498489053168\", \"20779537810160131229669921935393424203168562482436325799803716160603270556992\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    },
+    {
+     "market_id": "1170090",
+     "conditionId": "0xefd8315957aee006f55959623d07c897f4511699988ffb276123b5e83c7ec806",
+     "question": "Will Luong Cuong be elected General Secretary of the Vietnamese Communist Party?",
+     "volume": 2532157.597505,
+     "endDate": "2026-01-25T00:00:00Z",
+     "closedTime": "2026-01-23 10:51:02+00",
+     "clobTokenIds": "[\"1930143762356332789739591094265957993799400451867714035178534881533461134914\", \"19773465193550709412593336098123191117870796508798669033257036910643420764427\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    }
+   ]
+  },
+  {
+   "type": "election",
+   "event_id": "1061332",
+   "title": "Serbia Parliamentary Election Winner",
+   "event_volume": 11325993.581469,
+   "markets": [
+    {
+     "market_id": "4824602",
+     "conditionId": "0x258ff19b4baff0ed24bc28f58e83c8be6f2f91d9134700703e0aa51810c51a63",
+     "question": "Will Student List \u2013 Students Win win the most seats in the 2026 Serbian parliamentary election?",
+     "volume": 6625643.616994,
+     "endDate": "2026-10-25T23:59:00Z",
+     "closedTime": "2026-10-26 05:18:37.927266+00",
+     "clobTokenIds": "[\"1689950543806317773337530280926430142670579667870391801780343754845480907767\", \"71659760023836608828189051368262623172491813904827045019785561054238970210854\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    },
+    {
+     "market_id": "4824600",
+     "conditionId": "0xda4a7d85a3c1abaf52bb4dd561d45c1cb33e7f76f76a21069a0d10d4668aefa6",
+     "question": "Will Aleksandar Vu\u010di\u0107 \u2013 United Serbia win the most seats in the 2026 Serbian parliamentary election?",
+     "volume": 4481773.564998,
+     "endDate": "2026-10-25T23:59:00Z",
+     "closedTime": "2026-10-26 05:19:22.143448+00",
+     "clobTokenIds": "[\"40220000390489237442666590685171156363211017606636287738930798027342360240862\", \"27580599101456904267590411630030264757609607532043711182842476051444173220871\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    }
+   ]
+  },
+  {
+   "type": "strike_deal",
+   "event_id": "108031",
+   "title": "US-Iran nuclear deal by June 30?",
+   "event_volume": 11324069.03899108,
+   "markets": [
+    {
+     "market_id": "957019",
+     "conditionId": "0xa70fc3695a65833b91b45df6db6015096f3e1471b70352ca411b4209010e7633",
+     "question": "US-Iran nuclear deal by June 30?",
+     "volume": 11324069.03899108,
+     "endDate": "2026-06-30T00:00:00Z",
+     "closedTime": "2026-06-15 04:49:27+00",
+     "clobTokenIds": "[\"68283792174293775430535402015214113701251372409839518501034763677920213819299\", \"10690391194840875541563517589463912963575786539307433160985752952931887140267\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    }
+   ]
+  },
+  {
+   "type": "strike_deal",
+   "event_id": "26470",
+   "title": "Israel x Hamas ceasefire before August?",
+   "event_volume": 11176262.09989,
+   "markets": [
+    {
+     "market_id": "551017",
+     "conditionId": "0x43a0e99dec7bb0c6ae5a9166cf6df932a36ca721eb62f673eda5ea87232bc8f2",
+     "question": "Israel x Hamas ceasefire before August?",
+     "volume": 11176262.09989,
+     "endDate": "2025-07-31T00:00:00Z",
+     "closedTime": "2025-08-01 06:11:24+00",
+     "clobTokenIds": "[\"31268176944017248400034672618368276182667666720465434550595395503469605004388\", \"58599436750050627130948618448170599589753960529605193325301487665324886220320\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    }
+   ]
+  },
+  {
+   "type": "strike_deal",
+   "event_id": "26899",
+   "title": "Israel strikes Iran on...?",
+   "event_volume": 10781618.013399,
+   "markets": [
+    {
+     "market_id": "553998",
+     "conditionId": "0xa1cea47a71a65f0880b1d2ba1892fa2f7b3d22c6142f7e83bba445e881e8a1e8",
+     "question": "Israel strike on Iran on June 22?",
+     "volume": 3651331.274238,
+     "endDate": "2025-06-23T00:00:00Z",
+     "closedTime": "2025-06-25 02:20:41+00",
+     "clobTokenIds": "[\"98056180612293323389598858457298426500067794787540262323337625607046451876471\", \"95890118928381042475183782416449834896600543551900420541219008388783450849256\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    },
+    {
+     "market_id": "554000",
+     "conditionId": "0xd2055601def8961bea2e6fc911538c64ee181e7ae944f67c78f395e39df43580",
+     "question": "Israel strike on Iran on June 24?",
+     "volume": 2042694.827628,
+     "endDate": "2025-06-25T00:00:00Z",
+     "closedTime": "2025-06-24 14:38:13+00",
+     "clobTokenIds": "[\"5038276513077417416821635908753659895927096424714689740691582804208822826649\", \"59091407278230004760241526202186181144571185403905737457870233218493241664835\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    }
+   ]
+  },
+  {
+   "type": "strike_deal",
+   "event_id": "89456",
+   "title": "Will China invade Taiwan by March 31, 2026?",
+   "event_volume": 10607442.318742946,
+   "markets": [
+    {
+     "market_id": "701290",
+     "conditionId": "0x2701e5a5b751418c5c5bf0faaafdea60ac9fc893eb75fd88e902cd97458d375b",
+     "question": "Will China invade Taiwan by March 31, 2026?",
+     "volume": 10607442.318742946,
+     "endDate": "2026-03-31T00:00:00Z",
+     "closedTime": "2026-04-01 07:49:15+00",
+     "clobTokenIds": "[\"106549993070946237758310281255754864390927967486677098278324584793561067743644\", \"45508526462946448093261964971924605068149154773851783510479883418527084296876\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    }
+   ]
+  },
+  {
+   "type": "strike_deal",
+   "event_id": "25036",
+   "title": "Will Russia capture Kostyantynivka by...?",
+   "event_volume": 10047953.06499,
+   "markets": [
+    {
+     "market_id": "677366",
+     "conditionId": "0x7e50b661a2bedc670bcf32fc9ece12616f6fc4fba5dbe8526292bf3447374009",
+     "question": "Will Russia capture Kostyantynivka by December 31, 2026?",
+     "volume": 2284319.6420300007,
+     "endDate": "2026-12-31T12:00:00Z",
+     "closedTime": "2026-08-19 21:32:13+00",
+     "clobTokenIds": "[\"83552904656813968939383082097054433404653657244784709614448703928529504455469\", \"47029152085101973226255505664149277121974669906212969183902148537312535402801\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    },
+    {
+     "market_id": "546806",
+     "conditionId": "0x1df6862b69a47872e75864cac21b9ae9ea0cb552884d38aea9170c5fe5321bc6",
+     "question": "Will Russia capture Kostyantynivka by December 31?",
+     "volume": 1307057.244169,
+     "endDate": "2025-12-31T12:00:00Z",
+     "closedTime": "2026-01-01 09:14:39+00",
+     "clobTokenIds": "[\"58798923314292213706108095296759377158063350000880445982478753522386393910973\", \"16759809660065614657316136762877254422251604138946045908613588571784925013992\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    }
+   ]
+  },
+  {
+   "type": "strike_deal",
+   "event_id": "386759",
+   "title": "Israel x Hezbollah permanent peace deal by...?",
+   "event_volume": 9986534.276046999,
+   "markets": [
+    {
+     "market_id": "2354012",
+     "conditionId": "0x86f43746cbd692719483aaeedc657eef89d9ffb91d6ffceacb1edf533e049516",
+     "question": "Israel x Hezbollah permanent peace deal by June 30, 2026?",
+     "volume": 3796433.3636269975,
+     "endDate": "2026-06-30T00:00:00Z",
+     "closedTime": "2026-07-01 08:09:35+00",
+     "clobTokenIds": "[\"104510220350712683638324057138337438666546691080996862248324351110206545999142\", \"101731075782883593599322095713849738799082926264175032319719261541409999735158\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    },
+    {
+     "market_id": "2354011",
+     "conditionId": "0x053d22e12bfe8dd73b12fc1cf89858ecc0de76aede10fea3eca5c7877d8db40c",
+     "question": "Israel x Hezbollah permanent peace deal by June 15, 2026?",
+     "volume": 3245622.014681998,
+     "endDate": "2026-06-15T00:00:00Z",
+     "closedTime": "2026-06-20 00:37:38+00",
+     "clobTokenIds": "[\"63073763662086612636405249367296500960550581639549005912496048924744046136400\", \"71644971566711936926997892102006099744330795022096955899392137437130082074610\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    }
+   ]
+  },
+  {
+   "type": "strike_deal",
+   "event_id": "230959",
+   "title": "Russia x Ukraine ceasefire by April 30, 2026?",
+   "event_volume": 9527883.414922891,
+   "markets": [
+    {
+     "market_id": "1439560",
+     "conditionId": "0x7434b22007745d99095c102119fdb6b975d34869212e9dda4c6c5c48db0683a7",
+     "question": "Russia x Ukraine ceasefire by April 30, 2026?",
+     "volume": 9527883.414922891,
+     "endDate": "2026-04-30T00:00:00Z",
+     "closedTime": "2026-05-01 06:54:52+00",
+     "clobTokenIds": "[\"49104850284632622899464724213962069238178748191343145680035482303540284145930\", \"32509811268907189614687992216888444066936299378006345784007012748724037421351\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    }
+   ]
+  },
+  {
+   "type": "election",
+   "event_id": "233322",
+   "title": "Next Prime Minister of Denmark?",
+   "event_volume": 9449584.755608998,
+   "markets": [
+    {
+     "market_id": "1451230",
+     "conditionId": "0x07bb575fb67b917d73b667ef6a6191b3ecedb13a339d92f853b666a03e51bada",
+     "question": "Will Morten Messerschmidt be the next prime minister of Denmark after the 2026 parliamentary elections?",
+     "volume": 2162785.926062998,
+     "endDate": "2026-03-24T00:00:00Z",
+     "closedTime": "2026-06-04 08:10:18+00",
+     "clobTokenIds": "[\"79549660635940263935682884864461954118683402650617017465044115822932167106642\", \"111723064620117130465232181608495097765225261154718536812733487880047835055104\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    },
+    {
+     "market_id": "1451225",
+     "conditionId": "0xf2f0cf8b7aa90c53fbd56439782d1828a2315c8d21890f4a2804a61720985cea",
+     "question": "Will Lars L\u00f8kke Rasmussen be the next prime minister of Denmark after the 2026 parliamentary elections?",
+     "volume": 2152298.1992710033,
+     "endDate": "2026-03-24T00:00:00Z",
+     "closedTime": "2026-06-04 08:13:33+00",
+     "clobTokenIds": "[\"47936607798800262383793705758843508317786133976381104379613286673461271156481\", \"5794041231421979120288257777654747368636703395018417951887879150824745121055\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    }
+   ]
+  },
+  {
+   "type": "strike_deal",
+   "event_id": "67423",
+   "title": "Will Israel strike Lebanon on...?",
+   "event_volume": 9121449.638826,
+   "markets": [
+    {
+     "market_id": "840727",
+     "conditionId": "0xb214c760a2ee006f66ab29c685b00982c10213dc70401fbb4152452e4b10b5f9",
+     "question": "Will Israel strike Lebanon on December 8?",
+     "volume": 4021934.522073,
+     "endDate": "2025-11-21T00:00:00Z",
+     "closedTime": "2025-12-12 00:38:52+00",
+     "clobTokenIds": "[\"66708449127205163895905714691226347000740223837659556194887036210715316720594\", \"86626493735105752970992465701255828659865600774236424526541334494054787908923\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    },
+    {
+     "market_id": "654655",
+     "conditionId": "0x178daa3428373da76550f98e22183c965dcc77cc3c9e95fa2534f45edf2d0c12",
+     "question": "Will Israel strike Lebanon on November 4?",
+     "volume": 728964.02343,
+     "endDate": "2025-11-05T00:00:00Z",
+     "closedTime": "2025-11-07 00:02:51+00",
+     "clobTokenIds": "[\"27984676137515265972123749134533218616306451254125935601389269554997176667696\", \"76201334366149941500765004495603652720181650114038085521209191969421894346543\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    }
+   ]
+  },
+  {
+   "type": "strike_deal",
+   "event_id": "22805",
+   "title": "Russia x Ukraine ceasefire before October?",
+   "event_volume": 8775890.64125,
+   "markets": [
+    {
+     "market_id": "537194",
+     "conditionId": "0x41eda073eeca4071d3a643a527bf8549851ff16c7e4b924a007671cb11920f98",
+     "question": "Russia x Ukraine ceasefire before October?",
+     "volume": 8775890.64125,
+     "endDate": "2025-09-30T12:00:00Z",
+     "closedTime": "2025-10-01 06:30:47+00",
+     "clobTokenIds": "[\"75808883562514695201169204487787555859570951708948163798444132865757266366758\", \"79733714773966769289571596081594645290144843853077301462790845252981871229351\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    }
+   ]
+  },
+  {
+   "type": "election",
+   "event_id": "16711",
+   "title": "Next Prime Minister of Australia?",
+   "event_volume": 8620988.639606,
+   "markets": [
+    {
+     "market_id": "518400",
+     "conditionId": "0xce5722bcbbd319dc03d4feb1e7ba563d1aaa2c9d7c286c44bdc93a96670e07ab",
+     "question": "Will Anthony Albanese be the next Prime Minister of Australia after the 2025 election?",
+     "volume": 4204557.171808,
+     "endDate": "2025-05-13T12:00:00Z",
+     "closedTime": "2025-05-05 03:16:24+00",
+     "clobTokenIds": "[\"71945447487908072913539944351108556445877630230054960874211366702658776786055\", \"104094217825243601318944078548579083817498745055367434143028512174813549803832\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    },
+    {
+     "market_id": "518396",
+     "conditionId": "0x50c4f5ba1ac8019947315a3cd7c667138381fea52fae9697b31a74e163ca6fc6",
+     "question": "Will Peter Dutton be the next Prime Minister of Australia after the 2025 election?",
+     "volume": 3353767.214573,
+     "endDate": "2025-05-13T12:00:00Z",
+     "closedTime": "2025-05-04 05:01:09+00",
+     "clobTokenIds": "[\"51671170099141846052387473511913218863994516812438373860271395611005479900093\", \"70801500481070560252971214293085968094648120084328946197110098570746177643859\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    }
+   ]
+  },
+  {
+   "type": "strike_deal",
+   "event_id": "39662",
+   "title": "Israel x Syria security agreement by...?",
+   "event_volume": 8543767.674802983,
+   "markets": [
+    {
+     "market_id": "1116646",
+     "conditionId": "0x9e0e621f21099a443d0deebbb624c8cf2e40ff0ebb51d67576e4fe7070974f3d",
+     "question": "Israel x Syria security agreement by June 30?",
+     "volume": 7961066.721005983,
+     "endDate": "2026-01-31T00:00:00Z",
+     "closedTime": "2026-07-01 06:05:28+00",
+     "clobTokenIds": "[\"84348038402659639941836209260221772039942739491890721010819630693075602597129\", \"35052799380906612241653419359721988743807116588205346860506039024527003073301\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    }
+   ]
+  },
+  {
+   "type": "court",
+   "event_id": "19807",
+   "title": "How many Constitutional Court justices will vote for Yoon's impeachment?",
+   "event_volume": 7650290.78848,
+   "markets": [
+    {
+     "market_id": "525829",
+     "conditionId": "0x06dcf640b5f29035442dfa0472b72a641df54b1e99e186368f3c6b16ecab3913",
+     "question": "Will 7-8 justices on South Korea's Constitutional Court vote for Yoon's impeachment before May?",
+     "volume": 2348501.645701,
+     "endDate": "2025-06-30T12:00:00Z",
+     "closedTime": "2025-04-04 06:27:43+00",
+     "clobTokenIds": "[\"26507775690959614490676547893388508305634698069038056656401986951767841450337\", \"78172155755964671767071246536118968231115518881831648364826570231686827206279\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    },
+    {
+     "market_id": "525825",
+     "conditionId": "0x0535280a26955abf733d04ec594789bb6deff15b54c96dc62e16f808a6cffde3",
+     "question": "Will 0 justices on South Korea's Constitutional Court vote for Yoon's impeachment before May?",
+     "volume": 1384877.284123,
+     "endDate": "2025-06-30T12:00:00Z",
+     "closedTime": "2025-04-04 06:32:31+00",
+     "clobTokenIds": "[\"10983895560660582331919890775991569898510813821062793122382334943154595494002\", \"106210384071709604993069810876790490230112589809231070167879618833755912054975\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    }
+   ]
+  },
+  {
+   "type": "shutdown",
+   "event_id": "52169",
+   "title": "When will the Government shutdown end?",
+   "event_volume": 6992733.953351,
+   "markets": [
+    {
+     "market_id": "618518",
+     "conditionId": "0xa9b4d63db8031fbc369d863e1e9dea77296ab49ddade6793f1938fe0c76e7d10",
+     "question": "Will the Government shutdown end October 15+?",
+     "volume": 2797439.29135,
+     "endDate": "2025-10-15T00:00:00Z",
+     "closedTime": "2025-10-15 07:07:31+00",
+     "clobTokenIds": "[\"63773334683820352784349536046848684795746271894742580290503889771875189995041\", \"15576666622588550581934394224697255142226884279745920205247760161003413323572\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    },
+    {
+     "market_id": "618516",
+     "conditionId": "0x2df0f9131944410c596a5ec62c3c19d2dde36d97002e9a236ea5323ffe1a9be4",
+     "question": "Will the Government shutdown end October 6-9?",
+     "volume": 1196432.865395,
+     "endDate": "2025-10-15T00:00:00Z",
+     "closedTime": "2025-10-10 07:41:35+00",
+     "clobTokenIds": "[\"102353409991138207236913342279665845978485795604419286786657142150963180132116\", \"58645066108179153821821527079842767328242879244948054511016536832758757908703\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    }
+   ]
+  },
+  {
+   "type": "court",
+   "event_id": "20810",
+   "title": "Wisconsin Supreme Court election: Susan Crawford vs. Brad Schimel ",
+   "event_volume": 3932762.973035,
+   "markets": [
+    {
+     "market_id": "527848",
+     "conditionId": "0x354ebe41d75446cd43eb2dbebacd344cfb9a8abe9b26ce39c5074e0841e5a885",
+     "question": "Wisconsin Supreme Court election: Susan Crawford vs. Brad Schimel ",
+     "volume": 3932762.973035,
+     "endDate": "2025-04-01T12:00:00Z",
+     "closedTime": "2025-04-02 05:09:00+00",
+     "clobTokenIds": "[\"88996768914755589030273472569780758869780921699118294118437910728260537946424\", \"8482778105598978702482860615499306660276940779107944683038963310770224106864\"]",
+     "outcomes": "[\"Crawford\", \"Schimel\"]"
+    }
+   ]
+  },
+  {
+   "type": "court",
+   "event_id": "21896",
+   "title": "Wisconsin Supreme Court election: Susan Crawford Margin of victory?",
+   "event_volume": 1165151.64024,
+   "markets": [
+    {
+     "market_id": "532723",
+     "conditionId": "0x953012cf73dce311197eae1e4ceda8cbec343a8512a7f1b4ad3d132f836c66f1",
+     "question": "Will Susan Crawford win by 10% or more?",
+     "volume": 510035.32212,
+     "endDate": "2025-04-01T12:00:00Z",
+     "closedTime": "2025-05-16 17:25:09+00",
+     "clobTokenIds": "[\"10840917088967408658646788997673705585382640270773724378840630302613676498121\", \"2767009051630678547598995875760770643868718528177013235431164763062897196224\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    }
+   ]
+  },
+  {
+   "type": "court",
+   "event_id": "21662",
+   "title": "BitBoy convicted?",
+   "event_volume": 836621.5937519977,
+   "markets": [
+    {
+     "market_id": "531202",
+     "conditionId": "0xb48621f7eba07b0a3eeabc6afb09ae42490239903997b9d412b0f69aeb040c8b",
+     "question": "BitBoy convicted?",
+     "volume": 836621.5937519977,
+     "endDate": "2026-03-31T12:00:00Z",
+     "closedTime": "2026-04-01 08:14:21+00",
+     "clobTokenIds": "[\"75467129615908319583031474642658885479135630431889036121812713428992454630178\", \"3842963720267267286970642336860752782302644680156535061700039388405652129691\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    }
+   ]
+  },
+  {
+   "type": "court",
+   "event_id": "154064",
+   "title": "Will the Supreme Court rule on Trump's tariffs by...?",
+   "event_volume": 831015.135047,
+   "markets": [
+    {
+     "market_id": "1146193",
+     "conditionId": "0xc65664bb3b4d9f97b9c3ca5a9b1eb424ea74608d7557e2152077f994af6b1607",
+     "question": "Will the Supreme Court rule on Trump's tarriffs by January 31?",
+     "volume": 560210.795883,
+     "endDate": "2026-01-31T00:00:00Z",
+     "closedTime": "2026-02-01 08:05:46+00",
+     "clobTokenIds": "[\"76279034067623475018326718966228942374377436097068164662372476482576625743260\", \"63601958081849186796643870325871507478671680997414112006495167416510227371797\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    }
+   ]
+  },
+  {
+   "type": "court",
+   "event_id": "23834",
+   "title": "Diddy found guilty of sex trafficking?",
+   "event_volume": 797960.797249,
+   "markets": [
+    {
+     "market_id": "541048",
+     "conditionId": "0x60d598861ef5b9ffca7681cfee6b124c0b995dc5e285e46046f06b28a1c85d4d",
+     "question": "Diddy found guilty of sex trafficking?",
+     "volume": 797960.797249,
+     "endDate": "2025-12-31T12:00:00Z",
+     "closedTime": "2025-07-02 16:54:01+00",
+     "clobTokenIds": "[\"29159486325151628777378461724298622966538451072099573019133938004783626449217\", \"56174682298772474798188815603323771657645401868103319489810960501423229117115\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    }
+   ]
+  },
+  {
+   "type": "court",
+   "event_id": "14230",
+   "title": "Sotomayor steps down from Supreme Court before inauguration?",
+   "event_volume": 482637.382581,
+   "markets": [
+    {
+     "market_id": "512345",
+     "conditionId": "0x62568d4e9884a3f8c3349f9ee8ef5da6a7477405a393166f68a5782a95a26f22",
+     "question": "Sotomayor steps down from Supreme Court before inauguration?",
+     "volume": 482637.382581,
+     "endDate": "2025-01-19T12:00:00Z",
+     "closedTime": "2025-01-20 07:07:40+00",
+     "clobTokenIds": "[\"115374854236443705858617050550250797722754736350254631797126798794716490582528\", \"100007408001752762007269576174978098214174725246563590572778689005881562998023\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    }
+   ]
+  },
+  {
+   "type": "court",
+   "event_id": "148424",
+   "title": "Will the Court Force Trump to Refund Tariffs?",
+   "event_volume": 466650.47508500074,
+   "markets": [
+    {
+     "market_id": "1126854",
+     "conditionId": "0xc451f03563e65567ee326fcaf2128915afa777cb31805c40ddae0a19cf1013f7",
+     "question": "Will the Court Force Trump to Refund Tariffs?",
+     "volume": 466650.47508500074,
+     "endDate": "2026-06-30T23:55:00Z",
+     "closedTime": "2026-05-12 22:37:28+00",
+     "clobTokenIds": "[\"72520696330536076360077946681862561628420801967580803171010889009730758559066\", \"12522399465485053436854565134102940007271969526119674646143207634472973813769\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    }
+   ]
+  },
+  {
+   "type": "court",
+   "event_id": "21313",
+   "title": "Any Tesla arsonist found guilty in 2025?",
+   "event_volume": 397658.286052,
+   "markets": [
+    {
+     "market_id": "529274",
+     "conditionId": "0xa3958a7207ea6ed2b47fc7e3b03943e9f3c4a745cb71d7515dc529dd91e102ae",
+     "question": "Any Tesla arsonist found guilty in 2025?",
+     "volume": 397658.286052,
+     "endDate": "2025-12-31T12:00:00Z",
+     "closedTime": "2025-08-14 09:33:28+00",
+     "clobTokenIds": "[\"71980770852925785955106665133810202590602706270202770304961217841220472794371\", \"99177904449357186390442503500620986926354444347142076861666117018326680436742\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    }
+   ]
+  },
+  {
+   "type": "court",
+   "event_id": "304787",
+   "title": "SCOTUS bars counting mail ballots after election day?",
+   "event_volume": 385840.050788,
+   "markets": [
+    {
+     "market_id": "1710036",
+     "conditionId": "0xd73237bb27cdc455578e9a0788c358bd79609d394f43a270bde10cde4788105f",
+     "question": "SCOTUS bars counting mail ballots after election day?",
+     "volume": 385840.050788,
+     "endDate": "2026-08-01T00:00:00Z",
+     "closedTime": "2026-06-29 23:47:53+00",
+     "clobTokenIds": "[\"76334566303045905277346867543119025886786840566287031705505440465553815904146\", \"29028241542801054087697605725255170369879269520694288383584807205600183427321\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    }
+   ]
+  },
+  {
+   "type": "court",
+   "event_id": "16552",
+   "title": "Will Supreme Court delay the Tiktok ban?",
+   "event_volume": 337644.36114,
+   "markets": [
+    {
+     "market_id": "518068",
+     "conditionId": "0x88dcca900dcc92e6f3bfb6fdefd366e5e6cc4ac715309e86884ebe2ad91d26eb",
+     "question": "Will Supreme Court delay the Tiktok ban?",
+     "volume": 337644.36114,
+     "endDate": "2025-01-19T12:00:00Z",
+     "closedTime": "2025-01-19 09:24:35+00",
+     "clobTokenIds": "[\"87663159764074291126484432051989103760606348332148045516643390838498125894612\", \"99207576101579366606324663040728406334515467572856103032008272020174801085803\"]",
+     "outcomes": "[\"Yes\", \"No\"]"
+    }
+   ]
+  }
+ ]
+}
