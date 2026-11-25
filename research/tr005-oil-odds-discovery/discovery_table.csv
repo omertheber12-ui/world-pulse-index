@@ -1,0 +1,49 @@
+event_id,event_title,market_id,question,window,n_up,median_level_up,modal_band_up,median_change_up,n_down,median_level_down,modal_band_down,median_change_down,n_ordinary,median_level_ordinary,modal_band_ordinary,median_change_ordinary,n_big_raw_in_slice,n_big_nonoverlap_in_slice,gap_up_vs_ordinary,gap_down_vs_ordinary,score,score_direction,n_big_used
+770450,Fed Decision in December?,3215008,Will the Fed increase interest rates by 25 bps after the December 2026 meeting?,day_before,0,,,,0,,,,0,,,,303,142,,,,,0
+770450,Fed Decision in December?,3215008,Will the Fed increase interest rates by 25 bps after the December 2026 meeting?,same_day,0,,,,0,,,,0,,,,303,142,,,,,0
+770450,Fed Decision in December?,3215008,Will the Fed increase interest rates by 25 bps after the December 2026 meeting?,week_before,0,,,,0,,,,0,,,,303,78,,,,,0
+770451,Fed Decision in January?,3215013,Will the Fed increase interest rates by 25 bps after the January 2027 meeting?,day_before,0,,,,0,,,,0,,,,303,142,,,,,0
+770451,Fed Decision in January?,3215013,Will the Fed increase interest rates by 25 bps after the January 2027 meeting?,same_day,0,,,,0,,,,0,,,,303,142,,,,,0
+770451,Fed Decision in January?,3215013,Will the Fed increase interest rates by 25 bps after the January 2027 meeting?,week_before,0,,,,0,,,,0,,,,303,78,,,,,0
+1025305,ECB Interest Rates: December 2026,4570943,Will the ECB announce a 50+ bps decrease at the December 2026 meeting?,day_before,0,,,,0,,,,0,,,,303,142,,,,,0
+1025305,ECB Interest Rates: December 2026,4570943,Will the ECB announce a 50+ bps decrease at the December 2026 meeting?,same_day,0,,,,0,,,,0,,,,303,142,,,,,0
+1025305,ECB Interest Rates: December 2026,4570943,Will the ECB announce a 50+ bps decrease at the December 2026 meeting?,week_before,0,,,,0,,,,0,,,,303,78,,,,,0
+1280521,ECB Interest Rates: February 2027,6404226,Will the ECB decrease the deposit facility rate by 50+ bps at the February meeting?,day_before,0,,,,0,,,,0,,,,303,142,,,,,0
+1280521,ECB Interest Rates: February 2027,6404226,Will the ECB decrease the deposit facility rate by 50+ bps at the February meeting?,same_day,0,,,,0,,,,0,,,,303,142,,,,,0
+1280521,ECB Interest Rates: February 2027,6404226,Will the ECB decrease the deposit facility rate by 50+ bps at the February meeting?,week_before,0,,,,0,,,,0,,,,303,78,,,,,0
+1123963,People's Bank of China rate change by December 31?,5230123,Will the People’s Bank of China not change rates by December 31?,day_before,0,,,,0,,,,0,,,,303,142,,,,,0
+1123963,People's Bank of China rate change by December 31?,5230123,Will the People’s Bank of China not change rates by December 31?,same_day,0,,,,0,,,,0,,,,303,142,,,,,0
+1123963,People's Bank of China rate change by December 31?,5230123,Will the People’s Bank of China not change rates by December 31?,week_before,0,,,,0,,,,0,,,,303,78,,,,,0
+1194143,Will NVIDIA (NVDA) Q3 Data Center Revenue be above __?,5730325,Will NVIDIA (NVDA) Q3 Data Center revenue be above $100B?,day_before,0,,,,0,,,,0,,,,303,142,,,,,0
+1194143,Will NVIDIA (NVDA) Q3 Data Center Revenue be above __?,5730325,Will NVIDIA (NVDA) Q3 Data Center revenue be above $100B?,same_day,0,,,,0,,,,0,,,,303,142,,,,,0
+1194143,Will NVIDIA (NVDA) Q3 Data Center Revenue be above __?,5730325,Will NVIDIA (NVDA) Q3 Data Center revenue be above $100B?,week_before,0,,,,0,,,,0,,,,303,78,,,,,0
+1194144,NVIDIA (NVDA) Q3 adjusted gross margin (non-GAAP)?,5730329,NVIDIA (NVDA) Q3 adjusted gross margin <71%?,day_before,0,,,,0,,,,0,,,,303,142,,,,,0
+1194144,NVIDIA (NVDA) Q3 adjusted gross margin (non-GAAP)?,5730329,NVIDIA (NVDA) Q3 adjusted gross margin <71%?,same_day,0,,,,0,,,,0,,,,303,142,,,,,0
+1194144,NVIDIA (NVDA) Q3 adjusted gross margin (non-GAAP)?,5730329,NVIDIA (NVDA) Q3 adjusted gross margin <71%?,week_before,0,,,,0,,,,0,,,,303,78,,,,,0
+800884,Nvidia’s Market Cap end of 2026?,3358974,Will Nvidia’s market capitalization be less than $4.00T at the end of 2026?,day_before,0,,,,0,,,,0,,,,303,142,,,,,0
+800884,Nvidia’s Market Cap end of 2026?,3358974,Will Nvidia’s market capitalization be less than $4.00T at the end of 2026?,same_day,0,,,,0,,,,0,,,,303,142,,,,,0
+800884,Nvidia’s Market Cap end of 2026?,3358974,Will Nvidia’s market capitalization be less than $4.00T at the end of 2026?,week_before,0,,,,0,,,,0,,,,303,78,,,,,0
+79987,Next French Presidential Election,679022,Will David Lisnard win the 2027 French presidential election?,day_before,10,2.65,0-5,-0.1,6,2.95,0-5,0.0,24,3.0,0-5,0.1825,303,142,-0.2825,-0.1825,0.2825,up,16
+79987,Next French Presidential Election,679022,Will David Lisnard win the 2027 French presidential election?,same_day,11,2.6,0-5,0.2,7,3.0,0-5,-0.2,25,2.9,0-5,-0.0,303,142,0.2,-0.2,0.2,up,18
+79987,Next French Presidential Election,679022,Will David Lisnard win the 2027 French presidential election?,week_before,3,3.1,0-5,0.3,5,3.0,0-5,-0.6,22,3.0,0-5,-0.0,303,78,0.3,-0.6,0.6,down,8
+81557,Prime Minister of Israel after the next election?,682705,Will Benjamin Netanyahu be the next Prime Minister of Israel?,day_before,12,53.5,50-55,0.0,8,52.5,50-55,0.3995,28,53.0,50-55,1.0,303,142,-1.0,-0.6005,1.0,up,20
+81557,Prime Minister of Israel after the next election?,682705,Will Benjamin Netanyahu be the next Prime Minister of Israel?,same_day,12,52.5,50-55,-1.0,8,49.5,45-50,-1.0,28,53.0,50-55,0.0,303,142,-1.0,-1.0,1.0,up,20
+81557,Prime Minister of Israel after the next election?,682705,Will Benjamin Netanyahu be the next Prime Minister of Israel?,week_before,3,53.0,50-55,-2.0,7,52.0,50-55,0.0,26,53.0,50-55,1.0,303,78,-3.0,-1.0,3.0,up,10
+31552,Presidential Election Winner 2028,561230,Will Gavin Newsom win the 2028 US Presidential Election?,day_before,21,19.0,15-20,0.0,21,19.0,15-20,-0.0,64,19.0,15-20,0.0,303,142,0.0,-0.0,0.0,up,42
+31552,Presidential Election Winner 2028,561230,Will Gavin Newsom win the 2028 US Presidential Election?,same_day,21,19.0,15-20,0.0,21,19.0,20-25,0.0,64,19.0,15-20,-0.0,303,142,0.0,0.0,0.0,up,42
+31552,Presidential Election Winner 2028,561230,Will Gavin Newsom win the 2028 US Presidential Election?,week_before,10,19.0,15-20,0.0,11,17.7,15-20,-0.0,63,19.0,15-20,-0.0,303,78,0.0,0.0,0.0,up,21
+711714,Israel x Iran ceasefire continues through...?,3399468,Israel x Iran ceasefire continues through December 31?,day_before,0,,,,0,,,,0,,,,303,142,,,,,0
+711714,Israel x Iran ceasefire continues through...?,3399468,Israel x Iran ceasefire continues through December 31?,same_day,0,,,,0,,,,0,,,,303,142,,,,,0
+711714,Israel x Iran ceasefire continues through...?,3399468,Israel x Iran ceasefire continues through December 31?,week_before,0,,,,0,,,,0,,,,303,78,,,,,0
+478472,Russia x Ukraine ceasefire agreement by...?,2243897,"Russia x Ukraine ceasefire agreement by December 31, 2026?",day_before,0,,,,0,,,,0,,,,303,142,,,,,0
+478472,Russia x Ukraine ceasefire agreement by...?,2243897,"Russia x Ukraine ceasefire agreement by December 31, 2026?",same_day,0,,,,0,,,,0,,,,303,142,,,,,0
+478472,Russia x Ukraine ceasefire agreement by...?,2243897,"Russia x Ukraine ceasefire agreement by December 31, 2026?",week_before,0,,,,0,,,,0,,,,303,78,,,,,0
+160366,Will the US officially declare war on Iran by...?,1170144,"Will the US officially declare war on Iran by December 31, 2026?",day_before,3,9.0,5-10,0.0,3,8.0,5-10,0.0,7,9.0,5-10,-0.0,303,142,0.0,0.0,0.0,up,6
+160366,Will the US officially declare war on Iran by...?,1170144,"Will the US officially declare war on Iran by December 31, 2026?",same_day,5,11.0,10-15,0.0,3,7.0,5-10,-1.0,9,9.0,5-10,-0.0,303,142,0.0,-1.0,1.0,down,8
+160366,Will the US officially declare war on Iran by...?,1170144,"Will the US officially declare war on Iran by December 31, 2026?",week_before,1,12.0,10-15,-1.0001,2,8.5,5-10,-0.0,7,9.0,5-10,1.0,303,78,-2.0001,-1.0,2.0000999999999998,up,3
+34044,Will China invade Taiwan by end of 2026?,567621,Will China invade Taiwan by end of 2026?,day_before,21,14.0,10-15,0.0,19,14.0,10-15,-0.0,63,15.0,15-20,-0.0,303,142,0.0,0.0,0.0,up,40
+34044,Will China invade Taiwan by end of 2026?,567621,Will China invade Taiwan by end of 2026?,same_day,21,14.0,10-15,0.0,20,14.5,10-15,0.0,63,15.0,15-20,0.0,303,142,0.0,0.0,0.0,up,41
+34044,Will China invade Taiwan by end of 2026?,567621,Will China invade Taiwan by end of 2026?,week_before,9,16.0,10-15,-1.0,11,13.0,10-15,0.0,63,15.0,15-20,-0.0,303,78,-1.0,0.0,1.0,up,20
+1337182,US x Iran Effective Ceasefire begins by...? (2 week pause),6831494,US x Iran Effective Ceasefire by November 15?,day_before,0,,,,0,,,,0,,,,303,142,,,,,0
+1337182,US x Iran Effective Ceasefire begins by...? (2 week pause),6831494,US x Iran Effective Ceasefire by November 15?,same_day,0,,,,0,,,,0,,,,303,142,,,,,0
+1337182,US x Iran Effective Ceasefire begins by...? (2 week pause),6831494,US x Iran Effective Ceasefire by November 15?,week_before,0,,,,0,,,,0,,,,303,78,,,,,0

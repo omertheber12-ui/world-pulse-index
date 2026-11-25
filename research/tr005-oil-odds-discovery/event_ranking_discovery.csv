@@ -1,0 +1,17 @@
+rank,event_id,event_title,market_id,question,window,score,score_direction,n_up,n_down,n_ordinary,median_change_up,median_change_down,median_change_ordinary,median_level_up,median_level_down,median_level_ordinary
+1,81557,Prime Minister of Israel after the next election?,682705,Will Benjamin Netanyahu be the next Prime Minister of Israel?,week_before,3.0,up,3,7,26,-2.0,0.0,1.0,53.0,52.0,53.0
+2,160366,Will the US officially declare war on Iran by...?,1170144,"Will the US officially declare war on Iran by December 31, 2026?",week_before,2.0000999999999998,up,1,2,7,-1.0001,-0.0,1.0,12.0,8.5,9.0
+3,34044,Will China invade Taiwan by end of 2026?,567621,Will China invade Taiwan by end of 2026?,week_before,1.0,up,9,11,63,-1.0,0.0,-0.0,16.0,13.0,15.0
+4,79987,Next French Presidential Election,679022,Will David Lisnard win the 2027 French presidential election?,week_before,0.6,down,3,5,22,0.3,-0.6,-0.0,3.1,3.0,3.0
+5,31552,Presidential Election Winner 2028,561230,Will Gavin Newsom win the 2028 US Presidential Election?,day_before,0.0,up,21,21,64,0.0,-0.0,0.0,19.0,19.0,19.0
+6,770450,Fed Decision in December?,3215008,Will the Fed increase interest rates by 25 bps after the December 2026 meeting?,(no scorable data in discovery range),,,0,0,0,,,,,,
+7,770451,Fed Decision in January?,3215013,Will the Fed increase interest rates by 25 bps after the January 2027 meeting?,(no scorable data in discovery range),,,0,0,0,,,,,,
+8,1025305,ECB Interest Rates: December 2026,4570943,Will the ECB announce a 50+ bps decrease at the December 2026 meeting?,(no scorable data in discovery range),,,0,0,0,,,,,,
+9,1280521,ECB Interest Rates: February 2027,6404226,Will the ECB decrease the deposit facility rate by 50+ bps at the February meeting?,(no scorable data in discovery range),,,0,0,0,,,,,,
+10,1123963,People's Bank of China rate change by December 31?,5230123,Will the People’s Bank of China not change rates by December 31?,(no scorable data in discovery range),,,0,0,0,,,,,,
+11,1194143,Will NVIDIA (NVDA) Q3 Data Center Revenue be above __?,5730325,Will NVIDIA (NVDA) Q3 Data Center revenue be above $100B?,(no scorable data in discovery range),,,0,0,0,,,,,,
+12,1194144,NVIDIA (NVDA) Q3 adjusted gross margin (non-GAAP)?,5730329,NVIDIA (NVDA) Q3 adjusted gross margin <71%?,(no scorable data in discovery range),,,0,0,0,,,,,,
+13,800884,Nvidia’s Market Cap end of 2026?,3358974,Will Nvidia’s market capitalization be less than $4.00T at the end of 2026?,(no scorable data in discovery range),,,0,0,0,,,,,,
+14,711714,Israel x Iran ceasefire continues through...?,3399468,Israel x Iran ceasefire continues through December 31?,(no scorable data in discovery range),,,0,0,0,,,,,,
+15,478472,Russia x Ukraine ceasefire agreement by...?,2243897,"Russia x Ukraine ceasefire agreement by December 31, 2026?",(no scorable data in discovery range),,,0,0,0,,,,,,
+16,1337182,US x Iran Effective Ceasefire begins by...? (2 week pause),6831494,US x Iran Effective Ceasefire by November 15?,(no scorable data in discovery range),,,0,0,0,,,,,,
