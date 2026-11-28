@@ -11,6 +11,7 @@ export function TodayScreen({ model }) {
         {model.dateLabel}
         {model.updatedLabel ? ' · Updated ' + model.updatedLabel + ' Israel time' : ''}
       </p>
+      {model.note ? <p className="today-follow">{model.note}</p> : null}
       <h1>{model.title}</h1>
       {model.pick ? (
         <section className="story today-card">
@@ -29,7 +30,7 @@ export function TodayScreen({ model }) {
       ) : null}
       {model.mode === 'no update' || model.mode === 'no baseline' ? (
         <section className="story today-card">
-          <p className="today-sentence">{model.message}</p>
+          {model.message ? <p className="today-sentence">{model.message}</p> : null}
           {model.lastGoodLabel ? <p className="today-follow">Last good day: {model.lastGoodLabel}.</p> : <p className="today-follow">No earlier saved day is on file.</p>}
         </section>
       ) : null}
